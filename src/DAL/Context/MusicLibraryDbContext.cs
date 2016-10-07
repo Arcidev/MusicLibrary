@@ -1,0 +1,20 @@
+﻿using DAL.Entities;
+using System.Data.Entity;
+
+namespace DAL.Context
+{
+    public class MusicLibraryDbContext : DbContext
+    {
+        public DbSet<Album> Albums { get; set; }
+
+        public DbSet<AlbumSong> AlbumSongs { get; set; }
+
+        public DbSet<Artist> Artists { get; set; }
+
+        public DbSet<Band> Bands { get; set; }
+
+        public DbSet<Song> Songs { get; set; }
+
+        public DbSet<User> Users { get; set; }
+    }
+}

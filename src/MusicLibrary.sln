@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicLibrary", "UI\MusicLibrary.csproj", "{1C7A9914-8CDC-4075-9422-37BD0E51C076}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5C957065-12EC-49B1-B47E-30178ADE540C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{E969BB73-B761-4780-98FE-CBB1B76DC91F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL.Tests", "Tests\BL.Tests.csproj", "{8A6C856E-1DBC-473F-B440-6CC314BF6E91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C7A9914-8CDC-4075-9422-37BD0E51C076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C7A9914-8CDC-4075-9422-37BD0E51C076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C7A9914-8CDC-4075-9422-37BD0E51C076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C7A9914-8CDC-4075-9422-37BD0E51C076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C957065-12EC-49B1-B47E-30178ADE540C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C957065-12EC-49B1-B47E-30178ADE540C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C957065-12EC-49B1-B47E-30178ADE540C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C957065-12EC-49B1-B47E-30178ADE540C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E969BB73-B761-4780-98FE-CBB1B76DC91F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E969BB73-B761-4780-98FE-CBB1B76DC91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E969BB73-B761-4780-98FE-CBB1B76DC91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E969BB73-B761-4780-98FE-CBB1B76DC91F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A6C856E-1DBC-473F-B440-6CC314BF6E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A6C856E-1DBC-473F-B440-6CC314BF6E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6C856E-1DBC-473F-B440-6CC314BF6E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A6C856E-1DBC-473F-B440-6CC314BF6E91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
