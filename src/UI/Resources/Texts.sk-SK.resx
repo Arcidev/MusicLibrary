@@ -106,4 +106,16 @@
   <data name="Bands" xml:space="preserve">
     <value>Skupiny</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategórie</value>
+  </data>
+  <data name="FeaturedAlbums" xml:space="preserve">
+    <value>Vybrané albumy</value>
+  </data>
+  <data name="RecentlyAdded" xml:space="preserve">
+    <value>Nedávno pridané</value>
+  </data>
+  <data name="Albums" xml:space="preserve">
+    <value>Albumy</value>
+  </data>
 </root>

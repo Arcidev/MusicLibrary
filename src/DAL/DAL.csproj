@@ -57,16 +57,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\AlbumReview.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\SongReview.cs" />
+    <Compile Include="Enums\Quality.cs" />
     <Compile Include="Migrations\201610081136011_AddedSliderImage.cs" />
     <Compile Include="Migrations\201610081136011_AddedSliderImage.Designer.cs">
       <DependentUpon>201610081136011_AddedSliderImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610081808511_MultipleEntitiesAdded.cs" />
+    <Compile Include="Migrations\201610081808511_MultipleEntitiesAdded.Designer.cs">
+      <DependentUpon>201610081808511_MultipleEntitiesAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Context\MusicLibraryDbContext.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
     <Compile Include="Entities\Band.cs" />
-    <Compile Include="Entities\AlbumSongs.cs" />
+    <Compile Include="Entities\AlbumSong.cs" />
     <Compile Include="Entities\SliderImage.cs" />
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\StorageFile.cs" />
@@ -81,6 +90,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610081136011_AddedSliderImage.resx">
       <DependentUpon>201610081136011_AddedSliderImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610081808511_MultipleEntitiesAdded.resx">
+      <DependentUpon>201610081808511_MultipleEntitiesAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

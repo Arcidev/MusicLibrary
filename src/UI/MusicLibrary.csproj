@@ -205,6 +205,12 @@
     <Content Include="Content\Scripts\index.js" />
     <Content Include="Content\Scripts\jquery.gallery.js" />
     <Content Include="Content\Scripts\modernizr.custom.53451.js" />
+    <Content Include="Content\Styles\index.css">
+      <DependentUpon>index.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\index.min.css">
+      <DependentUpon>index.css</DependentUpon>
+    </Content>
     <Content Include="Content\Styles\templateStyle.css" />
     <Content Include="Web.config" />
     <Content Include="Views\index.dothtml" />
@@ -212,6 +218,11 @@
     <Content Include="Views\masterPage.dotmaster" />
     <EmbeddedResource Include="Resources\Texts.cs-CZ.resx" />
     <EmbeddedResource Include="Resources\Texts.sk-SK.resx" />
+    <Content Include="Content\Styles\index.less" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -231,7 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Texts.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Texts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

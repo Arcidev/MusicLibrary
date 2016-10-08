@@ -9,6 +9,8 @@ namespace BL.DTO
 
         public int? ImageStorageFileId { get; set; }
 
+        public bool Approved { get; set; }
+
         public StorageFileDTO ImageStorageFile { get; set; }
     }
 }

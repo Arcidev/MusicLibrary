@@ -187,10 +187,14 @@
     <Compile Include="AppUnitOfWork.cs" />
     <Compile Include="AppUnitOfWorkProvider.cs" />
     <Compile Include="Configuration\AutoMapper.cs" />
+    <Compile Include="DTO\AlbumDTO.cs" />
+    <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\StorageFileDTO.cs" />
     <Compile Include="DTO\BandDTO.cs" />
     <Compile Include="DTO\SliderImageDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Facades\AlbumFacade.cs" />
+    <Compile Include="Facades\CategoryFacade.cs" />
     <Compile Include="Facades\SliderImageFacade.cs" />
     <Compile Include="Facades\BaseFacade.cs" />
     <Compile Include="Facades\StorageFileFacade.cs" />
@@ -200,6 +204,9 @@
     <Compile Include="Installers\ServicesInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\AppQuery.cs" />
+    <Compile Include="Queries\FeaturedAlbumsQuery.cs" />
+    <Compile Include="Queries\RecentAlbumsQuery.cs" />
+    <Compile Include="Queries\CategoriesQuery.cs" />
     <Compile Include="Queries\SliderImagesQuery.cs" />
     <Compile Include="Repositories\SliderImageRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />

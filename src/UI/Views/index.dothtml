@@ -1,8 +1,10 @@
 ﻿@viewModel MusicLibrary.ViewModels.IndexViewModel, MusicLibrary
 @masterPage Views/masterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
     <dot:RequiredResource Name="index" />
+    <dot:RequiredResource Name="index-css" />
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
@@ -18,6 +20,53 @@
                         </dot:Repeater>
                     </div>
                 </section>
+            </div>
+        </div>
+    </div>
+    <div class="content-bg">
+        <div class="wrap">
+            <div class="main">
+                <div class="content">
+                    <h2>{{resource: Resource.FeaturedAlbums}}</h2>
+                    <div class="section group">
+                        <dot:Repeater DataSource="{value: FeaturedAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                            <div class="grid_1_of_3 images_1_of_3">
+                                <dot:LinkButton DataContext="{value: ImageStorageFile}">
+                                    <img class="album-img" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"/>
+                                </dot:LinkButton>
+                                <dot:LinkButton>
+                                    <h3>{{value: Name}}</h3>
+                                </dot:LinkButton>
+                            </div>
+                        </dot:Repeater>
+                    </div>
+                    <h2 class="bg">{{resource: Resource.RecentlyAdded}}</h2>
+                    <div class="section group">
+                        <dot:Repeater DataSource="{value: RecentlyAddedAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                            <div class="grid_1_of_3 images_1_of_3">
+                                <dot:LinkButton DataContext="{value: ImageStorageFile}">
+                                    <img class="album-img" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
+                                </dot:LinkButton>
+                                <dot:LinkButton>
+                                    <h3>{{value: Name}}</h3>
+                                </dot:LinkButton>
+                            </div>
+                        </dot:Repeater>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <div class="sidebar-list">
+                        <h2>{{resource: Resource.Categories}}</h2>
+                        <ul>
+                            <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                                <li>
+                                    <dot:LinkButton Text="{value: NameLocalized}"/>
+                                </li>
+                            </dot:Repeater>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
             </div>
         </div>
     </div>

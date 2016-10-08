@@ -9,13 +9,10 @@ namespace DAL.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [Required, MaxLength(100)]
         public string DisplayName { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        [Index("IX_StorageFile_FileName", IsUnique = true)]
+        [Required, MaxLength(100), Index("IX_StorageFile_FileName", IsUnique = true)]
         public string FileName { get; set; }
     }
 }

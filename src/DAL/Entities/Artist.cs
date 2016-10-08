@@ -9,17 +9,17 @@ namespace DAL.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [Required, MaxLength(100)]
         public string FirstName { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        [Required, MaxLength(100)]
         public string LastName { get; set; }
 
         public int? ImageStorageFileId { get; set; }
 
         public int BandId { get; set; }
+
+        public bool Approved { get; set; }
 
         [ForeignKey(nameof(BandId))]
         public virtual Band Band { get; set; }

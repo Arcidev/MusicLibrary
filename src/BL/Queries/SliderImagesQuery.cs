@@ -12,7 +12,7 @@ namespace BL.Queries
 
         protected override IQueryable<SliderImageDTO> GetQueryable()
         {
-            return Context.SliderImages.Include(x => x.ImageStorageFile).ProjectTo<SliderImageDTO>();
+            return Context.SliderImages.ProjectTo<SliderImageDTO>();
         }
     }
 }

@@ -7,15 +7,21 @@ namespace DAL.Context
     {
         public DbSet<Album> Albums { get; set; }
 
+        public DbSet<AlbumReview> AlbumReview { get; set; }
+
         public DbSet<AlbumSong> AlbumSongs { get; set; }
 
         public DbSet<Artist> Artists { get; set; }
 
         public DbSet<Band> Bands { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         public DbSet<SliderImage> SliderImages { get; set; }
 
         public DbSet<Song> Songs { get; set; }
+
+        public DbSet<SongReview> SongReviews { get; set; }
 
         public DbSet<StorageFile> StorageFiles { get; set; }
 

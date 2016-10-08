@@ -126,4 +126,16 @@
   <data name="Bands" xml:space="preserve">
     <value>Bands</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="FeaturedAlbums" xml:space="preserve">
+    <value>Featured albums</value>
+  </data>
+  <data name="RecentlyAdded" xml:space="preserve">
+    <value>Recently added</value>
+  </data>
+  <data name="Albums" xml:space="preserve">
+    <value>Albums</value>
+  </data>
 </root>

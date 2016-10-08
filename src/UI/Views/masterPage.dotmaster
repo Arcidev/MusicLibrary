@@ -1,5 +1,6 @@
 ﻿@viewModel MusicLibrary.ViewModels.MasterPageViewModel, MusicLibrary
-@resourceType MusicLibrary.Resources.Texts, MusicLibrary
+@import Resource = MusicLibrary.Resources.Texts
+
 <!--A Design by W3layouts
 Author: W3layout
 Author URL: http://w3layouts.com
@@ -24,14 +25,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="menu">
                 <ul class="nav">
                     <li class="active">
-                        <dot:RouteLink RouteName="Index" Text="{resource: Home}" />
+                        <dot:RouteLink RouteName="Index" Text="{resource: Resource.Home}" />
                     </li>
-                    <li><a href="">{{resource: Bands}}</a></li>
+                    <li><a href="">{{resource: Resource.Bands}}</a></li>
+                    <li><a href="">{{resource: Resource.Albums}}</a></li>
                 </ul>
             </div>
             <div class="soc-icons">
                 <ul>
-                    <li><a href="">{{resource: SignIn}} &nbsp;</a></li>
+                    <li><a href="">{{resource: Resource.SignIn}} &nbsp;</a></li>
                     <li><a href=""><img src="/Content/Images/facebook.png" alt="" /></a></li>
                     <li><a href=""><img src="/Content/Images/twitter.png" alt="" /></a></li>
                     <li><a href=""><img src="/Content/Images/gplus.png" alt="" /></a></li>

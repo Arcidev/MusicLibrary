@@ -10,25 +10,19 @@ namespace DAL.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        [Index("IX_User_Email", IsUnique = true)]
+        [Required, StringLength(100), Index("IX_User_Email", IsUnique = true)]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required, StringLength(100)]
         public string FirstName { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required, StringLength(100)]
         public string LastName { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required, StringLength(100)]
         public string PasswordSalt { get; set; }
 
-        [Required]
-        [StringLength(100)]
+        [Required, StringLength(100)]
         public string PasswordHash { get; set; }
 
         public UserRole UserRole { get; set; }

@@ -32,6 +32,10 @@ namespace MusicLibrary
             {
                 Url = "~/Content/Styles/templateStyle.css"
             });
+            config.Resources.Register("index-css", new StylesheetResource()
+            {
+                Url = "~/Content/Styles/index.min.css"
+            });
             config.Resources.Register("modernizr", new ScriptResource()
             {
                 Url = "~/Content/Scripts/modernizr.custom.53451.js"
