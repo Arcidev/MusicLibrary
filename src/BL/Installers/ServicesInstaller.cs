@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using BL.Queries;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using DAL.Context;
@@ -18,7 +19,7 @@ namespace BL.Installers
                 Component.For<IUnitOfWorkProvider>().ImplementedBy<AppUnitOfWorkProvider>().LifestyleSingleton(),
                 Component.For<IUnitOfWorkRegistry>().Instance(new HttpContextUnitOfWorkRegistry(new ThreadLocalUnitOfWorkRegistry())).LifestyleSingleton(),
 
-                //Classes.FromAssemblyContaining<AppUnitOfWorkProvider>().BasedOn(typeof(AppQuery<>)).LifestyleTransient(),
+                Classes.FromAssemblyContaining<AppUnitOfWorkProvider>().BasedOn(typeof(AppQuery<>)).LifestyleTransient(),
                 Classes.FromAssemblyContaining<AppUnitOfWorkProvider>().BasedOn(typeof(IRepository<,>)).LifestyleTransient(),
 
                 Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EntityFrameworkRepository<,>)).LifestyleTransient()

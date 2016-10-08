@@ -189,7 +189,9 @@
     <Compile Include="Configuration\AutoMapper.cs" />
     <Compile Include="DTO\StorageFileDTO.cs" />
     <Compile Include="DTO\BandDTO.cs" />
+    <Compile Include="DTO\SliderImageDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Facades\SliderImageFacade.cs" />
     <Compile Include="Facades\BaseFacade.cs" />
     <Compile Include="Facades\StorageFileFacade.cs" />
     <Compile Include="Facades\BandFacade.cs" />
@@ -197,6 +199,9 @@
     <Compile Include="Installers\FacadeInstaller.cs" />
     <Compile Include="Installers\ServicesInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\AppQuery.cs" />
+    <Compile Include="Queries\SliderImagesQuery.cs" />
+    <Compile Include="Repositories\SliderImageRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\BandRepository.cs" />
     <Compile Include="Repositories\StorageFileRepository.cs" />

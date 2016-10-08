@@ -22,6 +22,8 @@ namespace BL.Configuration
                 config.CreateMap<Band, BandDTO>();
                 config.CreateMap<BandDTO, Band>()
                     .ForMember(target => target.ImageStorageFile, action => action.Ignore());
+
+                config.CreateMap<SliderImage, SliderImageDTO>();
             });
         }
     }

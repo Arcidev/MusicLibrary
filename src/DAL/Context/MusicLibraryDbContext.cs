@@ -13,7 +13,11 @@ namespace DAL.Context
 
         public DbSet<Band> Bands { get; set; }
 
+        public DbSet<SliderImage> SliderImages { get; set; }
+
         public DbSet<Song> Songs { get; set; }
+
+        public DbSet<StorageFile> StorageFiles { get; set; }
 
         public DbSet<User> Users { get; set; }
     }

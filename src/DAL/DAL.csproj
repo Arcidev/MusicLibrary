@@ -57,11 +57,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201610081136011_AddedSliderImage.cs" />
+    <Compile Include="Migrations\201610081136011_AddedSliderImage.Designer.cs">
+      <DependentUpon>201610081136011_AddedSliderImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Context\MusicLibraryDbContext.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\Artist.cs" />
     <Compile Include="Entities\Band.cs" />
     <Compile Include="Entities\AlbumSongs.cs" />
+    <Compile Include="Entities\SliderImage.cs" />
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\StorageFile.cs" />
     <Compile Include="Entities\User.cs" />
@@ -71,6 +77,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610081136011_AddedSliderImage.resx">
+      <DependentUpon>201610081136011_AddedSliderImage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
