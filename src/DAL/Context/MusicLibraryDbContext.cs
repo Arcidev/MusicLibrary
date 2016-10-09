@@ -15,6 +15,8 @@ namespace DAL.Context
 
         public DbSet<Band> Bands { get; set; }
 
+        public DbSet<BandMember> BandMembers { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<SliderImage> SliderImages { get; set; }

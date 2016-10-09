@@ -26,5 +26,7 @@ namespace DAL.Entities
         public virtual ICollection<SliderImage> SliderImages { get; set; }
 
         public virtual ICollection<Album> Albums { get; set; }
+
+        public virtual ICollection<BandMember> BandMembers { get; set; }
     }
 }

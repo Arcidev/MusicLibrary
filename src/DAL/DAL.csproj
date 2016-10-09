@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BandMember.cs" />
     <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\AlbumReview.cs" />
     <Compile Include="Entities\Category.cs" />
@@ -69,6 +70,10 @@
     <Compile Include="Migrations\201610081808511_MultipleEntitiesAdded.cs" />
     <Compile Include="Migrations\201610081808511_MultipleEntitiesAdded.Designer.cs">
       <DependentUpon>201610081808511_MultipleEntitiesAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610091854247_MinorEntityChanges.cs" />
+    <Compile Include="Migrations\201610091854247_MinorEntityChanges.Designer.cs">
+      <DependentUpon>201610091854247_MinorEntityChanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Context\MusicLibraryDbContext.cs" />
@@ -93,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610081808511_MultipleEntitiesAdded.resx">
       <DependentUpon>201610081808511_MultipleEntitiesAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610091854247_MinorEntityChanges.resx">
+      <DependentUpon>201610091854247_MinorEntityChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

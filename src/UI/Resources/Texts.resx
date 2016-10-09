@@ -138,4 +138,10 @@
   <data name="Albums" xml:space="preserve">
     <value>Albums</value>
   </data>
+  <data name="Album" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="MoreBandAlbums" xml:space="preserve">
+    <value>More albums of this band</value>
+  </data>
 </root>

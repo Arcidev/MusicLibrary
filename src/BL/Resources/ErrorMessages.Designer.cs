@@ -61,6 +61,15 @@ namespace BL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Album does not exist..
+        /// </summary>
+        internal static string AlbumNotExist {
+            get {
+                return ResourceManager.GetString("AlbumNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User does not exist..
         /// </summary>
         internal static string UserNotExist {

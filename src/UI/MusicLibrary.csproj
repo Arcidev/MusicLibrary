@@ -193,23 +193,28 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="DotvvmStartup.cs" />
+    <Compile Include="ViewModels\Album\DetailViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\MasterPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\btn.png" />
     <Content Include="Content\Images\facebook.png" />
     <Content Include="Content\Images\gplus.png" />
+    <Content Include="Content\Images\header.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\nav-bg.png" />
+    <Content Include="Content\Images\navButtons.png" />
     <Content Include="Content\Images\twitter.png" />
+    <Content Include="Content\Images\youtube_ico.png" />
     <Content Include="Content\Scripts\index.js" />
     <Content Include="Content\Scripts\jquery.gallery.js" />
     <Content Include="Content\Scripts\modernizr.custom.53451.js" />
-    <Content Include="Content\Styles\index.css">
-      <DependentUpon>index.less</DependentUpon>
+    <Content Include="Content\Styles\style.css">
+      <DependentUpon>style.less</DependentUpon>
     </Content>
-    <Content Include="Content\Styles\index.min.css">
-      <DependentUpon>index.css</DependentUpon>
+    <Content Include="Content\Styles\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
     </Content>
     <Content Include="Content\Styles\templateStyle.css" />
     <Content Include="Web.config" />
@@ -218,11 +223,12 @@
     <Content Include="Views\masterPage.dotmaster" />
     <EmbeddedResource Include="Resources\Texts.cs-CZ.resx" />
     <EmbeddedResource Include="Resources\Texts.sk-SK.resx" />
-    <Content Include="Content\Styles\index.less" />
+    <Content Include="Content\Styles\style.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="Views\Album\detail.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

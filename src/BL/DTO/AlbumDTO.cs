@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BL.DTO
 {
@@ -23,5 +24,12 @@ namespace BL.DTO
         public BandDTO Band { get; set; }
 
         public StorageFileDTO ImageStorageFile { get; set; }
+
+        public IList<SongDTO> Songs { get; set; }
+
+        public AlbumDTO()
+        {
+            Songs = new List<SongDTO>();
+        }
     }
 }

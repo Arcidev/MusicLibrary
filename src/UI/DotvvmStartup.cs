@@ -16,9 +16,7 @@ namespace MusicLibrary
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
             config.RouteTable.Add("Index", "", "Views/index.dothtml");
-
-            // Uncomment the following line to auto-register all dothtml files in the Views folder
-            // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
+            config.RouteTable.Add("AlbumDetail", "album/{AlbumId}/detail", "Views/Album/detail.dothtml");
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
@@ -32,9 +30,9 @@ namespace MusicLibrary
             {
                 Url = "~/Content/Styles/templateStyle.css"
             });
-            config.Resources.Register("index-css", new StylesheetResource()
+            config.Resources.Register("style-css", new StylesheetResource()
             {
-                Url = "~/Content/Styles/index.min.css"
+                Url = "~/Content/Styles/style.min.css"
             });
             config.Resources.Register("modernizr", new ScriptResource()
             {
@@ -44,6 +42,11 @@ namespace MusicLibrary
             {
                 Url = "~/Content/Scripts/jquery.gallery.js",
                 Dependencies = new[] { "jquery", "modernizr" }
+            });
+            config.Resources.Register("jquery-slider", new ScriptResource()
+            {
+                Url = "~/Content/Scripts/jquery-slider.js",
+                Dependencies = new[] { "jquery" }
             });
             config.Resources.Register("index", new ScriptResource()
             {

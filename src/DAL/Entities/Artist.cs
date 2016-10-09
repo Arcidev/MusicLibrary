@@ -1,6 +1,6 @@
 ﻿using Riganti.Utils.Infrastructure.Core;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Entities
 {
@@ -15,16 +15,8 @@ namespace DAL.Entities
         [Required, MaxLength(100)]
         public string LastName { get; set; }
 
-        public int? ImageStorageFileId { get; set; }
-
-        public int BandId { get; set; }
-
         public bool Approved { get; set; }
 
-        [ForeignKey(nameof(BandId))]
-        public virtual Band Band { get; set; }
-
-        [ForeignKey(nameof(ImageStorageFileId))]
-        public virtual StorageFile ImageStorageFile { get; set; }
+        public virtual ICollection<BandMember> BandsMember { get; set; }
     }
 }

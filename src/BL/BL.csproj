@@ -192,7 +192,9 @@
     <Compile Include="DTO\StorageFileDTO.cs" />
     <Compile Include="DTO\BandDTO.cs" />
     <Compile Include="DTO\SliderImageDTO.cs" />
+    <Compile Include="DTO\SongDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Extensions\IListExtensions.cs" />
     <Compile Include="Facades\AlbumFacade.cs" />
     <Compile Include="Facades\CategoryFacade.cs" />
     <Compile Include="Facades\SliderImageFacade.cs" />
@@ -204,10 +206,12 @@
     <Compile Include="Installers\ServicesInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\AppQuery.cs" />
+    <Compile Include="Queries\BandAlbumsQuery.cs" />
     <Compile Include="Queries\FeaturedAlbumsQuery.cs" />
     <Compile Include="Queries\RecentAlbumsQuery.cs" />
     <Compile Include="Queries\CategoriesQuery.cs" />
     <Compile Include="Queries\SliderImagesQuery.cs" />
+    <Compile Include="Repositories\AlbumRepository.cs" />
     <Compile Include="Repositories\SliderImageRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\BandRepository.cs" />

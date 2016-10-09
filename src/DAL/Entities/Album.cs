@@ -34,5 +34,7 @@ namespace DAL.Entities
         public virtual StorageFile ImageStorageFile { get; set; }
 
         public virtual ICollection<AlbumReview> Reviews { get; set; }
+
+        public virtual ICollection<AlbumSong> AlbumSongs { get; set; }
     }
 }

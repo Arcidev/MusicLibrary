@@ -1,0 +1,74 @@
+﻿@viewModel MusicLibrary.ViewModels.Album.DetailViewModel, MusicLibrary
+@masterPage Views/masterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+    <dot:RequiredResource Name="style-css" />
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="content-bg">
+        <div class="wrap">
+            <div class="main">
+                <div class="content">
+                    <h2>{{resource: Resource.Album}}</h2>
+                    <div class="section group">
+                        <div class="cont">
+                            <div class="single" DataContext="{value: Album}">
+                                <div class="grid-img1" DataContext="{value: ImageStorageFile}">
+                                    <img class="album-img" src="{value: "/SavedFiles/" + FileName}">
+                                </div>
+                                <div class="para">
+                                    <h4>{{value: Name}}</h4>
+                                    <h3 DataContext="{value: Band}">{{value: Name}}</h3>
+                                    <dot:GridView DataSource="{value: Songs}" style="width:100%">
+                                        <Columns>
+                                            <dot:GridViewTextColumn ValueBinding="{value: Name}" />
+                                            <dot:GridViewTemplateColumn>
+                                                <ContentTemplate>
+                                                    <dot:LinkButton Visible="{value: YoutubeUrlParam != null}" Click="{staticCommand: _root.YoutubeUrlParam = YoutubeUrlParam }">
+                                                        <img class="album-song-img" src="/Content/Images/youtube_ico.png"/>
+                                                    </dot:LinkButton>
+                                                </ContentTemplate>
+                                            </dot:GridViewTemplateColumn>
+                                        </Columns>
+                                    </dot:GridView>
+                                    <br />
+                                    <iframe Visible="{value: _root.YoutubeUrlParam != null}" width="853.33" height="480" src="{value: "https://www.youtube.com/embed/" + _root.YoutubeUrlParam}" />
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="text-h1 top">
+                                <h2>{{resource: Resource.MoreBandAlbums}}</h2>
+                            </div>
+                            <div class="div2">
+                                <div id="mcts1">
+                                    <dot:Repeater DataSource="{value: OtherBandAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                                        <div class="item">
+                                            <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
+                                                <img DataContext="{value: ImageStorageFile}" class="album-img" src="{value: "/SavedFiles/" + FileName}" />
+                                            </dot:RouteLink>
+                                        </div>
+                                    </dot:Repeater>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <div class="sidebar-list">
+                        <h2>{{resource: Resource.Categories}}</h2>
+                        <ul>
+                            <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                                <li>
+                                    <dot:LinkButton Text="{value: NameLocalized}"/>
+                                </li>
+                            </dot:Repeater>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</dot:Content>

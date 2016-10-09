@@ -123,4 +123,7 @@
   <data name="VerificationFailed" xml:space="preserve">
     <value>Invalid email or password.</value>
   </data>
+  <data name="AlbumNotExist" xml:space="preserve">
+    <value>Album does not exist.</value>
+  </data>
 </root>

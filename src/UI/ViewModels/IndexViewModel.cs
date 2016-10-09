@@ -3,6 +3,8 @@ using BL.Facades;
 using DotVVM.Framework.ViewModel;
 using BL.DTO;
 using System.Collections.Generic;
+using System;
+using BL.Extensions;
 
 namespace MusicLibrary.ViewModels
 {
@@ -27,10 +29,14 @@ namespace MusicLibrary.ViewModels
 
         public override Task PreRender()
         {
-            SliderImages = SliderImageFacade.GetImages();
-            Categories = CategoryFacade.GetCategories();
-            RecentlyAddedAlbums = AlbumFacade.GetRecentAlbums(5);
-            FeaturedAlbums = AlbumFacade.GetFeaturedAlbums(5);
+            if (!Context.IsPostBack)
+            {
+                SliderImages = SliderImageFacade.GetImages();
+                new Random().Shuffle(SliderImages);
+                Categories = CategoryFacade.GetCategories();
+                RecentlyAddedAlbums = AlbumFacade.GetRecentAlbums(5);
+                FeaturedAlbums = AlbumFacade.GetFeaturedAlbums(5);
+            }
 
             return base.PreRender();
         }

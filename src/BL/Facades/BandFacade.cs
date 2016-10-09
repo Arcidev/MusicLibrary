@@ -1,15 +1,19 @@
 ﻿using AutoMapper;
 using BL.DTO;
+using BL.Queries;
 using BL.Repositories;
 using DAL.Entities;
 using DotVVM.Framework.Storage;
 using System;
+using System.Collections.Generic;
 
 namespace BL.Facades
 {
     public class BandFacade : BaseFacade
     {
         public Func<BandRepository> BandRepositoryFunc { get; set; }
+
+        public Func<BandAlbumsQuery> BandAlbumsQueryFunc { get; set; }
 
         public StorageFileFacade StorageFileFacade { get; set; }
 
@@ -33,6 +37,20 @@ namespace BL.Facades
                 repo.Insert(entity);
 
                 uow.Commit();
+            }
+        }
+
+        public IList<AlbumDTO> GetBandAlbums(int bandId, int? excludeAlbumId = null, int? count = null, bool? approved = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = BandAlbumsQueryFunc();
+                query.BandId = bandId;
+                query.ExcludeAlbumId = excludeAlbumId;
+                query.Approved = approved;
+                query.Take = count;
+
+                return query.Execute();
             }
         }
     }

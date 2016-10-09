@@ -27,9 +27,13 @@ namespace BL.Configuration
 
                 config.CreateMap<Band, BandDTO>();
 
-                config.CreateMap<Album, AlbumDTO>();
+                config.CreateMap<Album, AlbumDTO>()
+                    .ForMember(target => target.Band, action => action.Ignore())
+                    .ForMember(target => target.Songs, action => action.Ignore());
 
                 config.CreateMap<Category, CategoryDTO>();
+
+                config.CreateMap<Song, SongDTO>();
             });
         }
     }

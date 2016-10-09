@@ -4,7 +4,7 @@
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
     <dot:RequiredResource Name="index" />
-    <dot:RequiredResource Name="index-css" />
+    <dot:RequiredResource Name="style-css" />
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
@@ -31,9 +31,9 @@
                     <div class="section group">
                         <dot:Repeater DataSource="{value: FeaturedAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                             <div class="grid_1_of_3 images_1_of_3">
-                                <dot:LinkButton DataContext="{value: ImageStorageFile}">
-                                    <img class="album-img" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"/>
-                                </dot:LinkButton>
+                                <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
+                                    <img class="album-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"/>
+                                </dot:RouteLink>
                                 <dot:LinkButton>
                                     <h3>{{value: Name}}</h3>
                                 </dot:LinkButton>
@@ -44,9 +44,9 @@
                     <div class="section group">
                         <dot:Repeater DataSource="{value: RecentlyAddedAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                             <div class="grid_1_of_3 images_1_of_3">
-                                <dot:LinkButton DataContext="{value: ImageStorageFile}">
-                                    <img class="album-img" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
-                                </dot:LinkButton>
+                                <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
+                                    <img class="album-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
+                                </dot:RouteLink>
                                 <dot:LinkButton>
                                     <h3>{{value: Name}}</h3>
                                 </dot:LinkButton>
