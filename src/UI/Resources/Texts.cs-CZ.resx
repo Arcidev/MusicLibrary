@@ -124,4 +124,7 @@
   <data name="MoreBandAlbums" xml:space="preserve">
     <value>Další alba této skupiny</value>
   </data>
+  <data name="AudioUnsupported" xml:space="preserve">
+    <value>Váš prohlížeč nepodporuje zvukový prvek.</value>
+  </data>
 </root>

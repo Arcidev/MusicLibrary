@@ -25,6 +25,8 @@ namespace MusicLibrary.ViewModels.Album
 
         public string YoutubeUrlParam { get; set; }
 
+        public string AudioFile { get; set; }
+
         public override Task PreRender()
         {
             if (!Context.IsPostBack)
@@ -36,6 +38,18 @@ namespace MusicLibrary.ViewModels.Album
             }
 
             return base.PreRender();
+        }
+
+        public void SetAudioFile(SongDTO song)
+        {
+            YoutubeUrlParam = null;
+            AudioFile = song.AudioStorageFile?.FileName;
+        }
+
+        public void SetYoutubeVideo(SongDTO song)
+        {
+            AudioFile = null;
+            YoutubeUrlParam = song.YoutubeUrlParam;
         }
     }
 }

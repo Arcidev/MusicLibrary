@@ -204,9 +204,9 @@
     <Content Include="Content\Images\header.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\nav-bg.png" />
-    <Content Include="Content\Images\navButtons.png" />
+    <Content Include="Content\Images\play.png" />
     <Content Include="Content\Images\twitter.png" />
-    <Content Include="Content\Images\youtube_ico.png" />
+    <Content Include="Content\Images\youtube.ico" />
     <Content Include="Content\Scripts\index.js" />
     <Content Include="Content\Scripts\jquery.gallery.js" />
     <Content Include="Content\Scripts\modernizr.custom.53451.js" />
@@ -216,7 +216,12 @@
     <Content Include="Content\Styles\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
-    <Content Include="Content\Styles\templateStyle.css" />
+    <Content Include="Content\Styles\templateStyle.css">
+      <DependentUpon>templateStyle.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Styles\templateStyle.min.css">
+      <DependentUpon>templateStyle.css</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Views\index.dothtml" />
     <Content Include="packages.config" />
@@ -229,6 +234,7 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <Content Include="Views\Album\detail.dothtml" />
+    <Content Include="Content\Styles\templateStyle.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -283,6 +289,15 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>If not exist "$(ProjectDir)\SavedFiles\andragona-fight-for-your-praise.mp3" (
+powershell -command "&amp; { (New-Object Net.WebClient).DownloadFile('http://bandzone.cz/track/download/588724', '$(ProjectDir)\SavedFiles\andragona-fight-for-your-praise.mp3') }"
+)
+
+If not exist "$(ProjectDir)\SavedFiles\andragona-miss-you.mp3" (
+powershell -command "&amp; { (New-Object Net.WebClient).DownloadFile('http://bandzone.cz/track/download/588725', '$(ProjectDir)\SavedFiles\andragona-miss-you.mp3') }"
+)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

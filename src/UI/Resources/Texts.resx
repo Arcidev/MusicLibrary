@@ -144,4 +144,7 @@
   <data name="MoreBandAlbums" xml:space="preserve">
     <value>More albums of this band</value>
   </data>
+  <data name="AudioUnsupported" xml:space="preserve">
+    <value>Your browser does not support the audio element.</value>
+  </data>
 </root>

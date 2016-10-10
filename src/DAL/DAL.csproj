@@ -61,6 +61,7 @@
     <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\AlbumReview.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\UserAlbum.cs" />
     <Compile Include="Entities\SongReview.cs" />
     <Compile Include="Enums\Quality.cs" />
     <Compile Include="Migrations\201610081136011_AddedSliderImage.cs" />
@@ -74,6 +75,10 @@
     <Compile Include="Migrations\201610091854247_MinorEntityChanges.cs" />
     <Compile Include="Migrations\201610091854247_MinorEntityChanges.Designer.cs">
       <DependentUpon>201610091854247_MinorEntityChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610101656149_UserAlbumAdded.cs" />
+    <Compile Include="Migrations\201610101656149_UserAlbumAdded.Designer.cs">
+      <DependentUpon>201610101656149_UserAlbumAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Context\MusicLibraryDbContext.cs" />
@@ -101,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610091854247_MinorEntityChanges.resx">
       <DependentUpon>201610091854247_MinorEntityChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610101656149_UserAlbumAdded.resx">
+      <DependentUpon>201610101656149_UserAlbumAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

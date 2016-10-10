@@ -28,7 +28,7 @@ namespace MusicLibrary
         {
             config.Resources.Register("templateStyle-css", new StylesheetResource()
             {
-                Url = "~/Content/Styles/templateStyle.css"
+                Url = "~/Content/Styles/templateStyle.min.css"
             });
             config.Resources.Register("style-css", new StylesheetResource()
             {

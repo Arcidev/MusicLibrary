@@ -17,6 +17,8 @@ namespace BL.Facades
 
         public Func<AlbumRepository> AlbumRepositoryFunc { get; set; }
 
+        public Func<AlbumSongsQuery> AlbumSongsQueryFunc { get; set; }
+
         public AlbumDTO GetAlbum(int id, bool includeBandInfo = true, bool includeSongs = true)
         {
             using (var uow = UowProviderFunc().Create())
@@ -30,7 +32,12 @@ namespace BL.Facades
                     dto.Band = Mapper.Map<BandDTO>(entity.Band);
 
                 if (includeSongs)
-                    dto.Songs = Mapper.Map<IList<SongDTO>>(entity.AlbumSongs.Select(x => x.Song).Where(x => x.Approved));
+                {
+                    var query = AlbumSongsQueryFunc();
+                    query.AlbumId = entity.Id;
+                    query.Approved = true;
+                    dto.Songs = query.Execute();
+                }
 
                 return dto;
             }

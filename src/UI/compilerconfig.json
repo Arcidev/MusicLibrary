@@ -2,5 +2,9 @@
   {
     "outputFile": "Content/Styles/style.css",
     "inputFile": "Content/Styles/style.less"
+  },
+  {
+    "outputFile": "Content/Styles/templateStyle.css",
+    "inputFile": "Content/Styles/templateStyle.less"
   }
 ]

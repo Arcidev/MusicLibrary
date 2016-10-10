@@ -17,7 +17,7 @@ namespace BL.Queries
 
         protected override IQueryable<AlbumDTO> GetQueryable()
         {
-            var query = Context.Albums.Where(x => x.Approved && x.BandId == BandId);
+            var query = Context.Albums.Where(x => x.BandId == BandId);
             if (ExcludeAlbumId.HasValue)
                 query = query.Where(x => x.Id != ExcludeAlbumId.Value);
             if (Approved.HasValue)

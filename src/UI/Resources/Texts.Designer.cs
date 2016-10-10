@@ -79,6 +79,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your browser does not support the audio element..
+        /// </summary>
+        public static string AudioUnsupported {
+            get {
+                return ResourceManager.GetString("AudioUnsupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bands.
         /// </summary>
         public static string Bands {

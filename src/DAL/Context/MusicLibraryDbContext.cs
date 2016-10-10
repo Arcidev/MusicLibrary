@@ -28,5 +28,7 @@ namespace DAL.Context
         public DbSet<StorageFile> StorageFiles { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<UserAlbum> UserAlbums { get; set; }
     }
 }

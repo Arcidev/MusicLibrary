@@ -27,6 +27,9 @@ namespace DAL.Migrations
             if (context.Categories.Any())
                 context.Categories.RemoveRange(context.Categories);
 
+            if (context.Songs.Any())
+                context.Songs.RemoveRange(context.Songs);
+
             var rock = new Category()
             {
                 Name = "Rock",
@@ -205,6 +208,65 @@ namespace DAL.Migrations
                 },
                 new Band()
                 {
+                    Name = "Andragona",
+                    Approved = true,
+                    CreateDate = DateTime.Now,
+                    Albums = new []
+                    {
+                        new Album()
+                        {
+                            Name = "End Of The Prophesied Dawn",
+                            Approved = true,
+                            CreateDate = DateTime.Now,
+                            ImageStorageFile = new StorageFile()
+                            {
+                                DisplayName = "EndOfTheProphesiedDawn.jpg",
+                                FileName = "EndOfTheProphesiedDawn.jpg"
+                            },
+                            Category = metal,
+                            AlbumSongs = new []
+                            {
+                                new AlbumSong()
+                                {
+                                    Song = new Song()
+                                    {
+                                        Approved = true,
+                                        CreateDate = DateTime.Now,
+                                        Name = "Fight for your praise",
+                                        YoutubeUrlParam = "oy7_bkN5eMU",
+                                        AudioStorageFile = new StorageFile()
+                                        {
+                                            DisplayName = "andragona-fight-for-your-praise.mp3",
+                                            FileName = "andragona-fight-for-your-praise.mp3"
+                                        }
+                                    }
+                                },
+                                new AlbumSong()
+                                {
+                                    Song = new Song()
+                                    {
+                                        Approved = true,
+                                        CreateDate = DateTime.Now,
+                                        Name = "Miss You",
+                                        YoutubeUrlParam = "b9-fzLvC-bY",
+                                        AudioStorageFile = new StorageFile()
+                                        {
+                                            DisplayName = "andragona-miss-you.mp3",
+                                            FileName = "andragona-miss-you.mp3"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    ImageStorageFile = new StorageFile()
+                    {
+                        DisplayName = "Andragona.jpg",
+                        FileName = "Andragona.jpg"
+                    }
+                },
+                new Band()
+                {
                     Name = "Lindemann",
                     Approved = true,
                     CreateDate = DateTime.Now,
@@ -327,6 +389,16 @@ namespace DAL.Migrations
                                         CreateDate = DateTime.Now,
                                         Name = "Psychosocial",
                                         YoutubeUrlParam = "eIf3b6meriM"
+                                    }
+                                },
+                                new AlbumSong()
+                                {
+                                    Song = new Song()
+                                    {
+                                        Approved = true,
+                                        CreateDate = DateTime.Now,
+                                        Name = "Snuff",
+                                        YoutubeUrlParam = "LXEKuttVRIo"
                                     }
                                 }
                             }
