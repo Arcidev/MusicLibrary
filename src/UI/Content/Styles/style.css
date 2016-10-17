@@ -5,3 +5,29 @@
 .album-song-img {
   width: 25px;
 }
+.login-form {
+  padding-top: 20px;
+  width: 500px;
+  margin: auto;
+  min-height: 743px;
+}
+.login-form tr {
+  line-height: 30px;
+}
+.login-form tr td {
+  width: 300px;
+}
+.login-form tr td input[type=text],
+.login-form tr td input[type=password] {
+  padding: 4px;
+  width: 100%;
+}
+.login-form tr td:first-child {
+  width: 200px;
+}
+.login-form tr:last-child td {
+  padding-top: 10px;
+}
+.error-message {
+  color: red;
+}

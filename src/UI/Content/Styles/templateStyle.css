@@ -301,7 +301,8 @@ body {
   background: #f7f7f9;
   color: #b0b0b2;
 }
-.foot-search input[type="submit"] {
+.foot-search input[type="submit"],
+.submit-button {
   font-family: 'Julius Sans One', sans-serif;
   background: url('../Images/btn.png') repeat-x 0 0 #10696E;
   border: none;
@@ -311,7 +312,8 @@ body {
   font-size: 0.98em;
   text-transform: capitalize;
 }
-.foot-search input[type="submit"]:hover {
+.foot-search input[type="submit"]:hover,
+.submit-button:hover {
   background-position: 0 -32px;
   text-decoration: none !important;
   -webkit-transition: background .2s ease;

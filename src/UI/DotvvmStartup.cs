@@ -17,6 +17,8 @@ namespace MusicLibrary
         {
             config.RouteTable.Add("Index", "", "Views/index.dothtml");
             config.RouteTable.Add("AlbumDetail", "album/{AlbumId}/detail", "Views/Album/detail.dothtml");
+            config.RouteTable.Add("Login", "login", "Views/Login/login.dothtml");
+            config.RouteTable.Add("Register", "register", "Views/Login/register.dothtml");
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)

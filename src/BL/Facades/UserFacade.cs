@@ -22,7 +22,7 @@ namespace BL.Facades
 
         public StorageFileFacade StorageFileFacade { get; set; }
 
-        public void AddUser(UserDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public UserDTO AddUser(UserDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -45,6 +45,8 @@ namespace BL.Facades
                 repo.Insert(entity);
 
                 uow.Commit();
+
+                return Mapper.Map<UserDTO>(entity);
             }
         }
 

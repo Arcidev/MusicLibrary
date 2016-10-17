@@ -23,5 +23,7 @@ namespace BL.DTO
         public int? ImageStorageFileId { get; set; }
 
         public StorageFileDTO ImageStorageFile { get; set; }
+
+        public string FullName { get { return $"{FirstName} {LastName}"; } }
     }
 }

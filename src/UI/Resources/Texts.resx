@@ -147,4 +147,43 @@
   <data name="AudioUnsupported" xml:space="preserve">
     <value>Your browser does not support the audio element.</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordAgain" xml:space="preserve">
+    <value>Password again</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>The email address is required!</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>First name is required!</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Last name is required!</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Invalid email address!</value>
+  </data>
+  <data name="WeakPassword" xml:space="preserve">
+    <value>The password must contain a number, small and big letter and be at least 6 characters long!</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Passwords do not match!</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
 </root>

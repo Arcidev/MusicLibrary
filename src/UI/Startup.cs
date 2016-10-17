@@ -11,6 +11,8 @@ using System;
 using System.IO;
 using System.Web.Hosting;
 using BL.Configuration;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.AspNet.Identity;
 
 [assembly: OwinStartup(typeof(MusicLibrary.Startup))]
 namespace MusicLibrary
@@ -28,6 +30,20 @@ namespace MusicLibrary
 
             //IoC/DI
             WindsorBootstrap.SetupContainer(app);
+
+            // use cookie authentication
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/login"),
+                Provider = new CookieAuthenticationProvider()
+                {
+                    OnApplyRedirect = context =>
+                    {
+                        DotvvmAuthenticationHelper.ApplyRedirectResponse(context.OwinContext, context.RedirectUri);
+                    }
+                }
+            });
 
             // use DotVVM
             var dotvvmConfiguration = InitDotvvm(app);

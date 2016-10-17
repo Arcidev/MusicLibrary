@@ -1,0 +1,75 @@
+﻿@viewModel MusicLibrary.ViewModels.Login.RegisterViewModel, MusicLibrary
+@masterPage Views/masterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+    <dot:RequiredResource Name="style-css" />
+</dot:Content>
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="login-form">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <dot:Literal Text="{resource: Resource.FirstName}" />
+                    </td>
+                    <td>
+                        <dot:TextBox Text="{value: FirstName}" />
+                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: FirstNameError != null}">
+                            <dot:Literal Text="{value: FirstNameError}"/>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <dot:Literal Text="{resource: Resource.LastName}" />
+                    </td>
+                    <td>
+                        <dot:TextBox Text="{value: LastName}" />
+                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: LastNameError != null}">
+                            <dot:Literal Text="{value: LastNameError}" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <dot:Literal Text="{resource: Resource.Email}" />
+                    </td>
+                    <td>
+                        <dot:TextBox Text="{value: Email}" />
+                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: EmailError != null}">
+                            <dot:Literal Text="{value: EmailError}" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <dot:Literal Text="{resource: Resource.Password}" />
+                    </td>
+                    <td>
+                        <dot:TextBox Text="{value: Password}" Type="Password" />
+                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: PasswordError != null}">
+                            <dot:Literal Text="{value: PasswordError}" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <dot:Literal Text="{resource: Resource.PasswordAgain}" />
+                    </td>
+                    <td>
+                        <dot:TextBox Text="{value: PasswordAgain}" Type="Password" />
+                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: PasswordAgainError != null}">
+                            <dot:Literal Text="{value: PasswordAgainError}" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <dot:Button class="submit-button" Text="{resource: Resource.Register}" Click="{command: Register()}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</dot:Content>

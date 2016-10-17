@@ -1,0 +1,12 @@
+﻿@viewModel MusicLibrary.ViewModels.Login.LoginViewModel, MusicLibrary
+@masterPage Views/masterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+<dot:Content ContentPlaceHolderID="PageContent">
+
+
+
+</dot:Content>
+
