@@ -126,4 +126,7 @@
   <data name="AlbumNotExist" xml:space="preserve">
     <value>Album neexistuje.</value>
   </data>
+  <data name="EmailAlreadyUsed" xml:space="preserve">
+    <value>E-mailová adresa, ktorú ste zadali, je už zaregistrovaná.</value>
+  </data>
 </root>

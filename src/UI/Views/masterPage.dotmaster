@@ -39,7 +39,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <li><a href=""><img src="/Content/Images/twitter.png" alt="" /></a></li>
                     <li><a href=""><img src="/Content/Images/gplus.png" alt="" /></a></li>
                 </ul>
-                <ul Visible="{value: IsUserLoggedIn}">
+                <ul class="sign-out" Visible="{value: IsUserLoggedIn}">
                     <li><dot:LinkButton Click="{command: SignOut()}" Text="{resource: Resource.SignOut}" class="header-item button-right" />  </li>
                 </ul>
             </div>

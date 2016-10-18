@@ -1,0 +1,13 @@
+﻿@viewModel System.Object, mscorlib
+@baseType UI.Controls.SpanUserControl, MusicLibrary
+
+<span class="loading-animation">
+    <span class="cs-loader-inner">
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+        <label>●</label>
+    </span>
+</span>

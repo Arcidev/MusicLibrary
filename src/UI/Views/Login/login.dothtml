@@ -3,10 +3,47 @@
 @import Resource = MusicLibrary.Resources.Texts
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
+    <dot:RequiredResource Name="style-css" />
 </dot:Content>
 <dot:Content ContentPlaceHolderID="PageContent">
-
-
-
+    <div class="login-form">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <dot:Literal Text="{resource: Resource.Email}" />
+                    </td>
+                    <td>
+                        <dot:TextBox Text="{value: Email}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <dot:Literal Text="{resource: Resource.Password}" />
+                    </td>
+                    <td>
+                        <dot:TextBox Text="{value: Password}" Type="Password" />
+                    </td>
+                </tr>
+                <tr Visible="{value: ErrorMessage != null}">
+                    <td class="error-message" colspan="2" align="right">
+                        {{value: ErrorMessage}}
+                    </td>
+                </tr>
+                <tr class="submit-row">
+                    <td colspan="2" align="center">
+                        <dot:Button class="submit-button" Text="{resource: Resource.SignIn}" Click="{command: SignIn()}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <dot:UpdateProgress>
+                            <cc:LoadingAnimation>
+                            </cc:LoadingAnimation>
+                        </dot:UpdateProgress>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </dot:Content>
-

@@ -64,9 +64,22 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
+                <tr Visible="{value: ErrorMessage != null}">
+                    <td class="error-message" colspan="2" align="right">
+                        {{value: ErrorMessage}}
+                    </td>
+                </tr>
+                <tr class="submit-row">
                     <td colspan="2" align="center">
                         <dot:Button class="submit-button" Text="{resource: Resource.Register}" Click="{command: Register()}" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <dot:UpdateProgress>
+                            <cc:LoadingAnimation>
+                            </cc:LoadingAnimation>
+                        </dot:UpdateProgress>
                     </td>
                 </tr>
             </tbody>

@@ -114,6 +114,10 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Riganti.Utils.Infrastructure.Core, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DAL\bin\Debug\Riganti.Utils.Infrastructure.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.1.0\lib\net46\System.AppContext.dll</HintPath>
@@ -201,6 +205,7 @@
     <Compile Include="AppStart\ViewModelInstaller.cs" />
     <Compile Include="AppStart\WindsorBootstrap.cs" />
     <Compile Include="AppStart\WindsorViewModelLoader.cs" />
+    <Compile Include="Controls\SpanUserControl.cs" />
     <Compile Include="Identity\UserIdentity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Texts.Designer.cs">
@@ -258,6 +263,7 @@
     <Content Include="Content\Styles\templateStyle.less" />
     <Content Include="Views\Login\login.dothtml" />
     <Content Include="Views\Login\register.dothtml" />
+    <Content Include="Controls\LoadingAnimation.dotcontrol" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

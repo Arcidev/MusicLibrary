@@ -126,4 +126,7 @@
   <data name="AlbumNotExist" xml:space="preserve">
     <value>Album does not exist.</value>
   </data>
+  <data name="EmailAlreadyUsed" xml:space="preserve">
+    <value>The email address you have entered is already registered.</value>
+  </data>
 </root>

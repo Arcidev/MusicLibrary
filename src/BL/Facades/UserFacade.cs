@@ -22,10 +22,13 @@ namespace BL.Facades
 
         public StorageFileFacade StorageFileFacade { get; set; }
 
-        public UserDTO AddUser(UserDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public async Task<UserDTO> AddUserAsync(UserDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
+                if (await GetUserByEmailAsync(user.Email) != null)
+                    throw new UIException(ErrorMessages.EmailAlreadyUsed);
+
                 var entity = Mapper.Map<User>(user);
                 var password = CreateHash(user.Password);
                 entity.PasswordHash = password.Item1;
@@ -61,38 +64,14 @@ namespace BL.Facades
             throw new UIException(ErrorMessages.VerificationFailed);
         }
 
-        public UserDTO VerifyAndGetUser(string email, string password)
-        {
-            var user = GetUserByEmail(email);
-            IsNotNull(user, ErrorMessages.VerificationFailed);
-
-            if (VerifyHashedPassword(user.PasswordHash, user.PasswordSalt, password))
-                return Mapper.Map<UserDTO>(user);
-
-            throw new UIException(ErrorMessages.VerificationFailed);
-        }
-
         public async Task<UserDTO> GetUserByEmailAsync(string email)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var repo = UserRepositoryFunc();
                 var user = await repo.GetByEmailAsync(email);
-                IsNotNull(user, ErrorMessages.UserNotExist);
 
-                return Mapper.Map<UserDTO>(user);
-            }
-        }
-
-        public UserDTO GetUserByEmail(string email)
-        {
-            using (var uow = UowProviderFunc().Create())
-            {
-                var repo = UserRepositoryFunc();
-                var user = repo.GetByEmail(email);
-                IsNotNull(user, ErrorMessages.UserNotExist);
-
-                return Mapper.Map<UserDTO>(user);
+                return user != null ? Mapper.Map<UserDTO>(user) : null;
             }
         }
 

@@ -1,21 +1,16 @@
 using BL.DTO;
-using BL.Facades;
 using DAL.Enums;
 using DotVVM.Framework.ViewModel;
 using MusicLibrary.Resources;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Login
 {
 	public class RegisterViewModel : BaseLoginViewModel
     {
-        [Bind(Direction.None)]
-        public UserFacade UserFacade { get; set; }
-
         [Bind(Direction.ServerToClient)]
         public RegisterErrorViewModel RegisterErrorViewModel { get; set; }
 
@@ -29,7 +24,7 @@ namespace MusicLibrary.ViewModels.Login
 
         public string PasswordAgain { get; set; }
 
-        public void Register()
+        public async Task Register()
         {
             RegisterErrorViewModel = new RegisterErrorViewModel();
 
@@ -65,17 +60,22 @@ namespace MusicLibrary.ViewModels.Login
             if (RegisterErrorViewModel.ContainsError)
                 return;
 
-            var user = UserFacade.AddUser(new UserDTO()
+            var success = await ExecuteSafelyAsync(async () =>
             {
-                FirstName = FirstName,
-                LastName = LastName,
-                Email = Email,
-                Password = Password,
-                UserRole = UserRole.User
-            });
+                var user = await UserFacade.AddUserAsync(new UserDTO()
+                {
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email,
+                    Password = Password,
+                    UserRole = UserRole.User
+                });
 
-            SignUserIn(user);
-            Context.RedirectToRoute("Index");
+                SignUserIn(user);
+            }, failureCallback: (ex) => ErrorMessage = ex.Message);
+
+            if (success)
+                Context.RedirectToRoute("Index");
         }
 
         private bool IsStrongPassword()

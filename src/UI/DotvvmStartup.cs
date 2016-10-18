@@ -23,7 +23,7 @@ namespace MusicLibrary
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
         {
-            // register code-only controls and markup controls
+            config.Markup.AddMarkupControl("cc", "LoadingAnimation", "Controls/LoadingAnimation.dotcontrol");
         }
 
         private void ConfigureResources(DotvvmConfiguration config, string applicationPath)
