@@ -17,7 +17,7 @@ namespace BL.Installers
             container.Register(
                 Component.For<Func<DbContext>>().Instance(() => new MusicLibraryDbContext()).LifestyleTransient(),
                 Component.For<IUnitOfWorkProvider>().ImplementedBy<AppUnitOfWorkProvider>().LifestyleSingleton(),
-                Component.For<IUnitOfWorkRegistry>().Instance(new HttpContextUnitOfWorkRegistry(new ThreadLocalUnitOfWorkRegistry())).LifestyleSingleton(),
+                Component.For<IUnitOfWorkRegistry>().Instance(new HttpContextUnitOfWorkRegistry(new AsyncLocalUnitOfWorkRegistry())).LifestyleSingleton(),
 
                 Classes.FromAssemblyContaining<AppUnitOfWorkProvider>().BasedOn(typeof(AppQuery<>)).LifestyleTransient(),
                 Classes.FromAssemblyContaining<AppUnitOfWorkProvider>().BasedOn(typeof(IRepository<,>)).LifestyleTransient(),
