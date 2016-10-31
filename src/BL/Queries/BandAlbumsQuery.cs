@@ -22,8 +22,6 @@ namespace BL.Queries
                 query = query.Where(x => x.Id != ExcludeAlbumId.Value);
             if (Approved.HasValue)
                 query = query.Where(x => x.Approved == Approved.Value);
-            if (Take.HasValue)
-                query = query.Take(Take.Value);
 
             return query.ProjectTo<AlbumDTO>();
         }

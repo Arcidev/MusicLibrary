@@ -1,7 +1,7 @@
 ﻿
 namespace BL.DTO
 {
-    public class BandDTO
+    public class BandCreateDTO
     {
         public int Id { get; set; }
 
@@ -10,7 +10,5 @@ namespace BL.DTO
         public int? ImageStorageFileId { get; set; }
 
         public bool Approved { get; set; }
-
-        public StorageFileDTO ImageStorageFile { get; set; }
     }
 }

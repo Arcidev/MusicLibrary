@@ -20,20 +20,21 @@ namespace BL.Configuration
                 config.CreateMap<StorageFile, StorageFileDTO>();
 
                 config.CreateMap<Band, BandDTO>();
-                config.CreateMap<BandDTO, Band>()
-                    .ForMember(target => target.ImageStorageFile, action => action.Ignore());
+                config.CreateMap<BandCreateDTO, Band>();
 
                 config.CreateMap<SliderImage, SliderImageDTO>();
 
-                config.CreateMap<Band, BandDTO>();
-
                 config.CreateMap<Album, AlbumDTO>()
-                    .ForMember(target => target.Band, action => action.Ignore())
-                    .ForMember(target => target.Songs, action => action.Ignore());
+                    .ForMember(target => target.Band, action => action.Ignore());
+                config.CreateMap<AlbumCreateDTO, Album>();
 
                 config.CreateMap<Category, CategoryDTO>();
+                config.CreateMap<CategoryDTO, Category>();
 
                 config.CreateMap<Song, SongDTO>();
+
+                config.CreateMap<AlbumReviewDTO, AlbumReview>()
+                    .ForMember(target => target.CreateDate, action => action.Ignore());
             });
         }
     }

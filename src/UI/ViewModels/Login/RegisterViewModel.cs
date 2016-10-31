@@ -1,7 +1,7 @@
 using BL.DTO;
-using DAL.Enums;
 using DotVVM.Framework.ViewModel;
 using MusicLibrary.Resources;
+using Shared.Enums;
 using System;
 using System.Net.Mail;
 using System.Text.RegularExpressions;

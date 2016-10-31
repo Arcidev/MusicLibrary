@@ -11,11 +11,7 @@ namespace BL.Queries
 
         protected override IQueryable<AlbumDTO> GetQueryable()
         {
-            var query = Context.Albums.Where(x => x.Approved).OrderByDescending(x => x.CreateDate);
-            if (Take.HasValue)
-                return query.Take(Take.Value).ProjectTo<AlbumDTO>();
-
-            return query.ProjectTo<AlbumDTO>();
+            return Context.Albums.Where(x => x.Approved).OrderByDescending(x => x.CreateDate).ProjectTo<AlbumDTO>();
         }
     }
 }

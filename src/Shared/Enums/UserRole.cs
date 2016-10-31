@@ -1,5 +1,5 @@
 ﻿
-namespace DAL.Enums
+namespace Shared.Enums
 {
     public enum UserRole
     {

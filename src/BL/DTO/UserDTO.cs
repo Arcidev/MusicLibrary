@@ -1,4 +1,4 @@
-﻿using DAL.Enums;
+﻿using Shared.Enums;
 
 namespace BL.DTO
 {

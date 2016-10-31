@@ -63,7 +63,6 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\UserAlbum.cs" />
     <Compile Include="Entities\SongReview.cs" />
-    <Compile Include="Enums\Quality.cs" />
     <Compile Include="Migrations\201610081136011_AddedSliderImage.cs" />
     <Compile Include="Migrations\201610081136011_AddedSliderImage.Designer.cs">
       <DependentUpon>201610081136011_AddedSliderImage.cs</DependentUpon>
@@ -80,6 +79,10 @@
     <Compile Include="Migrations\201610101656149_UserAlbumAdded.Designer.cs">
       <DependentUpon>201610101656149_UserAlbumAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610311258295_AlbumFixedName.cs" />
+    <Compile Include="Migrations\201610311258295_AlbumFixedName.Designer.cs">
+      <DependentUpon>201610311258295_AlbumFixedName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Context\MusicLibraryDbContext.cs" />
     <Compile Include="Entities\Album.cs" />
@@ -90,7 +93,6 @@
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\StorageFile.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -110,7 +112,11 @@
     <EmbeddedResource Include="Migrations\201610101656149_UserAlbumAdded.resx">
       <DependentUpon>201610101656149_UserAlbumAdded.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610311258295_AlbumFixedName.resx">
+      <DependentUpon>201610311258295_AlbumFixedName.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <Import Project="..\Shared\Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

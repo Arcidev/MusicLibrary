@@ -1,8 +1,7 @@
 ﻿using BL.DTO;
 using BL.Facades;
-using DAL.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Riganti.Utils.Infrastructure.Core;
+using Shared.Enums;
 using System.Threading.Tasks;
 
 namespace BL.Tests

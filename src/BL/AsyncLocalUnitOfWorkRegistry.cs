@@ -6,9 +6,7 @@ namespace BL
 {
     public class AsyncLocalUnitOfWorkRegistry : UnitOfWorkRegistryBase
     {
-
-        private readonly AsyncLocal<Stack<IUnitOfWork>> stack
-            = new AsyncLocal<Stack<IUnitOfWork>>();
+        private readonly AsyncLocal<Stack<IUnitOfWork>> stack = new AsyncLocal<Stack<IUnitOfWork>>();
 
         public AsyncLocalUnitOfWorkRegistry()
         {

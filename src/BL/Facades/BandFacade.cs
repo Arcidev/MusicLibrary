@@ -17,11 +17,12 @@ namespace BL.Facades
 
         public StorageFileFacade StorageFileFacade { get; set; }
 
-        public void AddBand(BandDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public BandDTO AddBand(BandCreateDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var entity = Mapper.Map<Band>(band);
+                entity.CreateDate = DateTime.Now;
 
                 if (file != null && storage != null)
                 {
@@ -37,6 +38,8 @@ namespace BL.Facades
                 repo.Insert(entity);
 
                 uow.Commit();
+
+                return Mapper.Map<BandDTO>(entity);
             }
         }
 

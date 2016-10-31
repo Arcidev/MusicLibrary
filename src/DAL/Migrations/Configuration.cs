@@ -208,6 +208,56 @@ namespace DAL.Migrations
                 },
                 new Band()
                 {
+                    Name = "Five Finger Death Punch",
+                    ImageStorageFile = new StorageFile()
+                    {
+                        DisplayName = "finger_death_punch_logo_1.gif",
+                        FileName = "finger_death_punch_logo_1.gif"
+                    },
+                    SliderImages = new []
+                    {
+                        new SliderImage()
+                        {
+                            ImageStorageFile = new StorageFile()
+                            {
+                                DisplayName = "finger_death_punch.jpg",
+                                FileName = "finger_death_punch.jpg"
+                            }
+                        }
+                    },
+                    Approved = true,
+                    Albums = new []
+                    {
+                        new Album()
+                        {
+                            Approved = true,
+                            CreateDate = DateTime.Now,
+                            Name = "GOT YOUR SIX",
+                            ImageStorageFile = new StorageFile()
+                            {
+                                DisplayName = "FFDP-Got-Your-Six-Album-Cover.jpg",
+                                FileName = "FFDP-Got-Your-Six-Album-Cover.jpg"
+                            },
+                            Category = metal,
+                            AlbumSongs = new []
+                            {
+                                new AlbumSong()
+                                {
+                                    Song = new Song()
+                                    {
+                                        Approved = true,
+                                        CreateDate = DateTime.Now,
+                                        Name = "Jekyll And Hyde",
+                                        YoutubeUrlParam = "HCBPmxiVMKk"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    CreateDate = DateTime.Now
+                },
+                new Band()
+                {
                     Name = "Andragona",
                     Approved = true,
                     CreateDate = DateTime.Now,

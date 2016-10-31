@@ -50,7 +50,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="wrap">
             <div class="header">
                 <div class="logo">
-                    <a href="index.html"><img src="/Content/Images/logo.png" alt="" title="logo"></a>
+                    <dot:RouteLink RouteName="Index"><img src="/Content/Images/logo.png" alt="" title="logo"></dot:RouteLink>
+                    <a href="index.html"></a>
                 </div>
                 <div class="foot-search">
                     <form>

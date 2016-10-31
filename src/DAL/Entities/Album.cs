@@ -22,9 +22,9 @@ namespace DAL.Entities
 
         public DateTime CreateDate { get; set; }
 
-        public int CateogoryId { get; set; }
+        public int CategoryId { get; set; }
 
-        [ForeignKey(nameof(CateogoryId))]
+        [ForeignKey(nameof(CategoryId))]
         public virtual Category Category { get; set; }
 
         [ForeignKey(nameof(BandId))]

@@ -188,10 +188,14 @@
     <Compile Include="AppUnitOfWork.cs" />
     <Compile Include="AppUnitOfWorkProvider.cs" />
     <Compile Include="Configuration\AutoMapper.cs" />
-    <Compile Include="DTO\AlbumDTO.cs" />
+    <Compile Include="DTO\Album\AlbumCreateDTO.cs" />
+    <Compile Include="DTO\Album\AlbumDTO.cs" />
+    <Compile Include="DTO\Band\BandCreateDTO.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
+    <Compile Include="DTO\Album\AlbumReviewDTO.cs" />
+    <Compile Include="DTO\ReviewDTO.cs" />
     <Compile Include="DTO\StorageFileDTO.cs" />
-    <Compile Include="DTO\BandDTO.cs" />
+    <Compile Include="DTO\Band\BandDTO.cs" />
     <Compile Include="DTO\SliderImageDTO.cs" />
     <Compile Include="DTO\SongDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
@@ -213,6 +217,8 @@
     <Compile Include="Queries\RecentAlbumsQuery.cs" />
     <Compile Include="Queries\CategoriesQuery.cs" />
     <Compile Include="Queries\SliderImagesQuery.cs" />
+    <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\ReviewRepository.cs" />
     <Compile Include="Repositories\AlbumRepository.cs" />
     <Compile Include="Repositories\SliderImageRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />

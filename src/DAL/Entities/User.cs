@@ -1,5 +1,5 @@
-﻿using DAL.Enums;
-using Riganti.Utils.Infrastructure.Core;
+﻿using Riganti.Utils.Infrastructure.Core;
+using Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
