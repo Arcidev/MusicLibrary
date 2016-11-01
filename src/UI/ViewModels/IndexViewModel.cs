@@ -5,6 +5,7 @@ using BL.DTO;
 using System.Collections.Generic;
 using System;
 using BL.Extensions;
+using System.Linq;
 
 namespace MusicLibrary.ViewModels
 {
@@ -21,17 +22,18 @@ namespace MusicLibrary.ViewModels
 
         public IList<SliderImageDTO> SliderImages { get; set; }
 
-        public IList<CategoryDTO> Categories { get; set; }
+        public IEnumerable<CategoryDTO> Categories { get; set; }
 
-        public IList<AlbumDTO> RecentlyAddedAlbums { get; set; }
+        public IEnumerable<AlbumDTO> RecentlyAddedAlbums { get; set; }
 
-        public IList<AlbumDTO> FeaturedAlbums { get; set; }
+        public IEnumerable<AlbumDTO> FeaturedAlbums { get; set; }
 
         public override Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                SliderImages = SliderImageFacade.GetImages();
+                ActivePage = "Index";
+                SliderImages = SliderImageFacade.GetImages().ToList();
                 new Random().Shuffle(SliderImages);
                 Categories = CategoryFacade.GetCategories();
                 RecentlyAddedAlbums = AlbumFacade.GetRecentAlbums(5);

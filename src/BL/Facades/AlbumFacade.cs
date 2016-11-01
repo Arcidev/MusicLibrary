@@ -87,7 +87,7 @@ namespace BL.Facades
             }
         }
 
-        public IList<AlbumDTO> GetRecentAlbums(int count)
+        public IEnumerable<AlbumDTO> GetRecentAlbums(int count)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -98,7 +98,7 @@ namespace BL.Facades
             }
         }
 
-        public IList<AlbumDTO> GetFeaturedAlbums(int count)
+        public IEnumerable<AlbumDTO> GetFeaturedAlbums(int count)
         {
             using (var uow = UowProviderFunc().Create())
             {

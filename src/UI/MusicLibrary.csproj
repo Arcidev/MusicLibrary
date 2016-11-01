@@ -216,6 +216,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="DotvvmStartup.cs" />
     <Compile Include="ViewModels\Album\DetailViewModel.cs" />
+    <Compile Include="ViewModels\BandViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="ViewModels\Login\BaseLoginViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
@@ -264,6 +265,7 @@
     <Content Include="Views\Login\login.dothtml" />
     <Content Include="Views\Login\register.dothtml" />
     <Content Include="Controls\LoadingAnimation.dotcontrol" />
+    <Content Include="Views\bands.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

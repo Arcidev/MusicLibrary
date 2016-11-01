@@ -204,7 +204,8 @@ namespace DAL.Migrations
                                 Approved = true
                             }
                         }
-                    }
+                    },
+                    Description = "Industrial metal"
                 },
                 new Band()
                 {
@@ -254,7 +255,8 @@ namespace DAL.Migrations
                             }
                         }
                     },
-                    CreateDate = DateTime.Now
+                    CreateDate = DateTime.Now,
+                    Description = "Heavy metal"
                 },
                 new Band()
                 {
@@ -313,7 +315,8 @@ namespace DAL.Migrations
                     {
                         DisplayName = "Andragona.jpg",
                         FileName = "Andragona.jpg"
-                    }
+                    },
+                    Description = "Power metal"
                 },
                 new Band()
                 {
@@ -358,6 +361,7 @@ namespace DAL.Migrations
                             }
                         }
                     },
+                    Description = "Industrial metal",
                     ImageStorageFile = new StorageFile()
                     {
                         DisplayName = "Lindemann_logo.jpg",
@@ -563,7 +567,8 @@ namespace DAL.Migrations
                                 Approved = true
                             }
                         }
-                    }
+                    },
+                    Description = "Heavy metal"
                 },
                 new Band()
                 {
@@ -679,7 +684,8 @@ namespace DAL.Migrations
                                 FileName = "OB-UL405_ikorn_G_20120906052811.jpg"
                             }
                         }
-                    }
+                    },
+                    Description = "Nu Metal"
                 }
             });
         }

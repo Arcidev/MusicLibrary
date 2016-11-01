@@ -13,6 +13,8 @@ namespace BL.Facades
     {
         public Func<BandRepository> BandRepositoryFunc { get; set; }
 
+        public Func<BandsQuery> BandsQueryFunc { get; set; }
+
         public Func<BandAlbumsQuery> BandAlbumsQueryFunc { get; set; }
 
         public StorageFileFacade StorageFileFacade { get; set; }
@@ -43,7 +45,7 @@ namespace BL.Facades
             }
         }
 
-        public IList<AlbumDTO> GetBandAlbums(int bandId, int? excludeAlbumId = null, int? count = null, bool? approved = null)
+        public IEnumerable<AlbumDTO> GetBandAlbums(int bandId, int? excludeAlbumId = null, int? count = null, bool? approved = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -53,6 +55,15 @@ namespace BL.Facades
                 query.Approved = approved;
                 query.Take = count;
 
+                return query.Execute();
+            }
+        }
+
+        public IEnumerable<BandDTO> GetBands()
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = BandsQueryFunc();
                 return query.Execute();
             }
         }

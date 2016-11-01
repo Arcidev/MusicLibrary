@@ -16,7 +16,7 @@
                         <div class="cont">
                             <div class="single" DataContext="{value: Album}">
                                 <div class="grid-img1" DataContext="{value: ImageStorageFile}">
-                                    <img class="album-img" src="{value: "/SavedFiles/" + FileName}">
+                                    <img class="logo-img" src="{value: "/SavedFiles/" + FileName}">
                                 </div>
                                 <div class="para">
                                     <h4>{{value: Name}}</h4>
@@ -52,7 +52,7 @@
                                     <dot:Repeater DataSource="{value: OtherBandAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                                         <div class="item">
                                             <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
-                                                <img DataContext="{value: ImageStorageFile}" class="album-img" src="{value: "/SavedFiles/" + FileName}" />
+                                                <img DataContext="{value: ImageStorageFile}" class="logo-img" src="{value: "/SavedFiles/" + FileName}" />
                                             </dot:RouteLink>
                                         </div>
                                     </dot:Repeater>

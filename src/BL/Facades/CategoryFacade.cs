@@ -27,7 +27,7 @@ namespace BL.Facades
             }
         }
 
-        public IList<CategoryDTO> GetCategories()
+        public IEnumerable<CategoryDTO> GetCategories()
         {
             using (var uow = UowProviderFunc().Create())
             {

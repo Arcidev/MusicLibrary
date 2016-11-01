@@ -14,6 +14,9 @@ namespace DAL.Entities
         [Required, MaxLength(100)]
         public string Name { get; set; }
 
+        [Required, MaxLength(255)]
+        public string Description { get; set; }
+
         public int? ImageStorageFileId { get; set; }
 
         public bool Approved { get; set; }

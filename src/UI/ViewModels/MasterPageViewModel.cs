@@ -7,6 +7,9 @@ namespace MusicLibrary.ViewModels
 {
 	public class MasterPageViewModel : DotvvmViewModelBase
 	{
+        [Bind(Direction.ServerToClient)]
+        public string ActivePage { get; protected set; }
+
         public bool IsUserLoggedIn { get { return Context.OwinContext.Authentication.User.Identity.IsAuthenticated; } }
 
         public void SignOut()

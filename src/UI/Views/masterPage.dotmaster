@@ -23,12 +23,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="menu-bg">
         <div class="wrap">
             <div class="menu">
-                <ul class="nav">
-                    <li class="active">
+                <ul class="nav" RenderSettings.Mode="Server">
+                    <li class="{value: ActivePage == "Index" ? "active" : ""}">
                         <dot:RouteLink RouteName="Index" Text="{resource: Resource.Home}" />
                     </li>
-                    <li><a href="">{{resource: Resource.Bands}}</a></li>
-                    <li><a href="">{{resource: Resource.Albums}}</a></li>
+                    <li class="{value: ActivePage == "Bands" ? "active" : ""}"><dot:RouteLink RouteName="Bands">{{resource: Resource.Bands}}</dot:RouteLink></li>
+                    <li class="{value: ActivePage == "Albums" ? "active" : ""}"><a href="">{{resource: Resource.Albums}}</a></li>
                 </ul>
             </div>
             <div class="soc-icons">

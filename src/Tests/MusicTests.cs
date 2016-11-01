@@ -20,18 +20,23 @@ namespace BL.Tests
         [TestInitialize]
         public void Init()
         {
-            var albumFacade = AlbumFacade;
-
             var band = BandFacade.AddBand(new BandCreateDTO()
             {
-                Name = "Test Band"
+                Name = "Test Band",
+                Description = "Test Description"
             });
 
-            var category = CategoryFacade.AddCategory(new CategoryDTO()
+
+            var category = CategoryFacade.GetCategories().FirstOrDefault();
+            if (category == null)
             {
-                Name = "Test Category"
-            });
+                category = CategoryFacade.AddCategory(new CategoryDTO()
+                {
+                    Name = "Test Category"
+                });
+            }
 
+            var albumFacade = AlbumFacade;
             var album1 = albumFacade.AddAlbum(new AlbumCreateDTO()
             {
                 Approved = true,
@@ -47,13 +52,17 @@ namespace BL.Tests
                 Name = "Test album 2"
             });
 
-            var user = UserFacade.AddUserAsync(new UserDTO()
+            var user = UserFacade.GetUserByEmailAsync("albumtest@mail.sk").Result;
+            if (user == null)
             {
-                Email = "albumtest@mail.sk",
-                FirstName = "test",
-                LastName = "test",
-                Password = "abcd"
-            }).Result;
+                user = UserFacade.AddUserAsync(new UserDTO()
+                {
+                    Email = "albumtest@mail.sk",
+                    FirstName = "test",
+                    LastName = "test",
+                    Password = "abcd"
+                }).Result;
+            }
 
             var positiveReview = new AlbumReviewDTO()
             {
@@ -80,9 +89,22 @@ namespace BL.Tests
         public void TestFeaturedAlbums()
         {
             var albums = AlbumFacade.GetFeaturedAlbums(2);
-            Assert.AreEqual(2, albums.Count);
+            Assert.AreEqual(2, albums.Count());
             Assert.AreEqual("Test album 2", albums.First().Name);
-            Assert.AreEqual("Test album 1", albums.Last().Name);
+        }
+
+        [TestMethod]
+        public void TestGetBands()
+        {
+            var bands = BandFacade.GetBands();
+            Assert.IsTrue(bands.Any(x => x.Name == "Test Band"));
+        }
+
+        [TestMethod]
+        public void TestGetCategories()
+        {
+            var categories = CategoryFacade.GetCategories();
+            Assert.IsTrue(categories.Any(x => x.Name == "Test Category"));
         }
     }
 }

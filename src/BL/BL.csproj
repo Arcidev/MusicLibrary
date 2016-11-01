@@ -212,6 +212,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\AppQuery.cs" />
     <Compile Include="Queries\AlbumSongsQuery.cs" />
+    <Compile Include="Queries\BandsQuery.cs" />
     <Compile Include="Queries\BandAlbumsQuery.cs" />
     <Compile Include="Queries\FeaturedAlbumsQuery.cs" />
     <Compile Include="Queries\RecentAlbumsQuery.cs" />

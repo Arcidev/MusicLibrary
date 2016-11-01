@@ -9,7 +9,7 @@ namespace BL.Facades
     {
         public Func<SliderImagesQuery> SliderImageQueryFunc { get; set; }
 
-        public IList<SliderImageDTO> GetImages()
+        public IEnumerable<SliderImageDTO> GetImages()
         {
             using (var uow = UowProviderFunc().Create())
             {

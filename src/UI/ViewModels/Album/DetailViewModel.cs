@@ -17,11 +17,11 @@ namespace MusicLibrary.ViewModels.Album
         [Bind(Direction.None)]
         public BandFacade BandFacade { get; set; }
 
-        public IList<CategoryDTO> Categories { get; set; }
+        public IEnumerable<CategoryDTO> Categories { get; set; }
 
         public AlbumDTO Album { get; set; }
 
-        public IList<AlbumDTO> OtherBandAlbums { get; set; }
+        public IEnumerable<AlbumDTO> OtherBandAlbums { get; set; }
 
         public string YoutubeUrlParam { get; set; }
 

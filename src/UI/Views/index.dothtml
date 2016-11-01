@@ -32,7 +32,7 @@
                         <dot:Repeater DataSource="{value: FeaturedAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                             <div class="grid_1_of_3 images_1_of_3">
                                 <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
-                                    <img class="album-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"/>
+                                    <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"/>
                                 </dot:RouteLink>
                                 <dot:LinkButton>
                                     <h3>{{value: Name}}</h3>
@@ -45,7 +45,7 @@
                         <dot:Repeater DataSource="{value: RecentlyAddedAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                             <div class="grid_1_of_3 images_1_of_3">
                                 <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
-                                    <img class="album-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
+                                    <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
                                 </dot:RouteLink>
                                 <dot:LinkButton>
                                     <h3>{{value: Name}}</h3>
