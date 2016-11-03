@@ -7,7 +7,7 @@ namespace DAL.Context
     {
         public DbSet<Album> Albums { get; set; }
 
-        public DbSet<AlbumReview> AlbumReview { get; set; }
+        public DbSet<AlbumReview> AlbumReviews { get; set; }
 
         public DbSet<AlbumSong> AlbumSongs { get; set; }
 

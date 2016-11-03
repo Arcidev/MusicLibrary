@@ -3,6 +3,7 @@ using BL.Facades;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared.Enums;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BL.Tests
 {
@@ -105,6 +106,44 @@ namespace BL.Tests
         {
             var categories = CategoryFacade.GetCategories();
             Assert.IsTrue(categories.Any(x => x.Name == "Test Category"));
+        }
+
+        [TestMethod]
+        public async Task TestGetReviews()
+        {
+            var albumFacade = AlbumFacade;
+            var album = albumFacade.GetFeaturedAlbums(1).First();
+            var user = await UserFacade.GetUserByEmailAsync("albumtest@mail.sk");
+            Assert.IsNotNull(user);
+
+            var reviews = albumFacade.GetReviews();
+            var reviews2 = albumFacade.GetReviews(album.Id);
+            var reviews3 = albumFacade.GetReviews(userId: user.Id);
+            var reviews4 = albumFacade.GetReviews(album.Id, user.Id);
+
+            Assert.IsTrue(reviews.Any());
+            Assert.IsTrue(reviews2.Any());
+            Assert.IsTrue(reviews3.Any());
+            Assert.IsTrue(reviews4.Any());
+
+            Assert.AreNotEqual(reviews.Count(), reviews2.Count());
+            Assert.AreEqual(reviews.Count(), reviews3.Count());
+            Assert.AreNotEqual(reviews.Count(), reviews4.Count());
+
+            Assert.IsTrue(reviews4.All(x => x.CreatedById == user.Id && x.AlbumId == album.Id));
+        }
+
+        [TestMethod]
+        public async Task TestUserCollections()
+        {
+            var albumFacade = AlbumFacade;
+            var album = albumFacade.GetFeaturedAlbums(1).First();
+            var user = await UserFacade.GetUserByEmailAsync("albumtest@mail.sk");
+
+            albumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO() { AlbumId = album.Id, UserId = user.Id });
+            var collection = albumFacade.GetUserAlbums(user.Id);
+            Assert.AreEqual(1, collection.Count());
+            Assert.AreEqual(album.Id, collection.First().Id);
         }
     }
 }

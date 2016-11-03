@@ -22,6 +22,12 @@ namespace BL.Facades
 
         public Func<AlbumReviewRepository> AlbumReviewRepositoryFunc { get; set; }
 
+        public Func<AlbumReviewsQuery> AlbumReviewsQueryFunc { get; set; }
+
+        public Func<UserAlbumRepository> UserAlbumRepositoryFunc { get; set; }
+
+        public Func<UserAlbumsQuery> UserAlbumsQueryFunc { get; set; }
+
         public StorageFileFacade StorageFileFacade { get; set; }
 
         public AlbumDTO AddAlbum(AlbumCreateDTO album, UploadedFile file = null, IUploadedFileStorage storage = null)
@@ -87,6 +93,18 @@ namespace BL.Facades
             }
         }
 
+        public IEnumerable<AlbumReviewDTO> GetReviews(int? albumId = null, int? userId = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = AlbumReviewsQueryFunc();
+                query.AlbumId = albumId;
+                query.UserId = userId;
+
+                return query.Execute();
+            }
+        }
+
         public IEnumerable<AlbumDTO> GetRecentAlbums(int count)
         {
             using (var uow = UowProviderFunc().Create())
@@ -104,6 +122,29 @@ namespace BL.Facades
             {
                 var query = FeaturedAlbumsQueryFunc();
                 query.Take = count;
+
+                return query.Execute();
+            }
+        }
+
+        public void AddAlbumToUserCollection(UserAlbumCreateDTO userAlbum)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = UserAlbumRepositoryFunc();
+                var entity = Mapper.Map<UserAlbum>(userAlbum);
+                repo.Insert(entity);
+
+                uow.Commit();
+            }
+        }
+
+        public IEnumerable<AlbumDTO> GetUserAlbums(int userId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = UserAlbumsQueryFunc();
+                query.UserId = userId;
 
                 return query.Execute();
             }

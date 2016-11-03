@@ -5,6 +5,8 @@ namespace BL.DTO
 {
     public class AlbumDTO : AlbumCreateDTO
     {
+        public int Id { get; set; }
+
         public DateTime CreateDate { get; set; }
 
         public CategoryDTO Category { get; set; }
