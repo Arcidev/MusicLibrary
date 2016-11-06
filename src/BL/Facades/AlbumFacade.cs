@@ -20,6 +20,8 @@ namespace BL.Facades
 
         public Func<AlbumSongsQuery> AlbumSongsQueryFunc { get; set; }
 
+        public Func<AlbumsQuery> AlbumsQueryFunc { get; set; }
+
         public Func<AlbumReviewRepository> AlbumReviewRepositoryFunc { get; set; }
 
         public Func<AlbumReviewsQuery> AlbumReviewsQueryFunc { get; set; }
@@ -76,6 +78,15 @@ namespace BL.Facades
                 }
 
                 return dto;
+            }
+        }
+
+        public IEnumerable<AlbumDTO> GetAlbums()
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = AlbumsQueryFunc();
+                return query.Execute();
             }
         }
 

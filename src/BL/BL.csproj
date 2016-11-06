@@ -200,6 +200,7 @@
     <Compile Include="DTO\SliderImageDTO.cs" />
     <Compile Include="DTO\SongDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\IListExtensions.cs" />
     <Compile Include="Facades\AlbumFacade.cs" />
     <Compile Include="Facades\CategoryFacade.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Installers\FacadeInstaller.cs" />
     <Compile Include="Installers\ServicesInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\AlbumsQuery.cs" />
     <Compile Include="Queries\AppQuery.cs" />
     <Compile Include="Queries\AlbumSongsQuery.cs" />
     <Compile Include="Queries\BandsQuery.cs" />

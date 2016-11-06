@@ -28,7 +28,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <dot:RouteLink RouteName="Index" Text="{resource: Resource.Home}" />
                     </li>
                     <li class="{value: ActivePage == "Bands" ? "active" : ""}"><dot:RouteLink RouteName="Bands">{{resource: Resource.Bands}}</dot:RouteLink></li>
-                    <li class="{value: ActivePage == "Albums" ? "active" : ""}"><a href="">{{resource: Resource.Albums}}</a></li>
+                    <li class="{value: ActivePage == "Albums" ? "active" : ""}"><dot:RouteLink RouteName="Albums">{{resource: Resource.Albums}}</dot:RouteLink></li>
                 </ul>
             </div>
             <div class="soc-icons">

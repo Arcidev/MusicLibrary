@@ -12,7 +12,7 @@
             <div class="main">
                 <div class="content">
                     <h2>{{resource: Resource.Bands}}</h2>
-                    <dot:Repeater DataSource="{{value: Bands}}" RenderWrapperTag="false">
+                    <dot:Repeater DataSource="{{value: Bands}}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                         <div class="image group">
                             <div class="grid images_3_of_1">
                                 <a href=""><img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"></a>

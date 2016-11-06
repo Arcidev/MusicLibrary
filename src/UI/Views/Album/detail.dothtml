@@ -18,7 +18,7 @@
                                 <div class="grid-img1" DataContext="{value: ImageStorageFile}">
                                     <img class="logo-img" src="{value: "/SavedFiles/" + FileName}">
                                 </div>
-                                <div class="para">
+                                <div class="para" RenderSettings.Mode="Server">
                                     <h4>{{value: Name}}</h4>
                                     <h3 DataContext="{value: Band}">{{value: Name}}</h3>
                                     <dot:GridView DataSource="{value: Songs}" style="width:100%">

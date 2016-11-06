@@ -24,7 +24,8 @@ namespace BL.Tests
             var band = BandFacade.AddBand(new BandCreateDTO()
             {
                 Name = "Test Band",
-                Description = "Test Description"
+                Description = "Test Description",
+                Approved = true
             });
 
 
@@ -144,6 +145,13 @@ namespace BL.Tests
             var collection = albumFacade.GetUserAlbums(user.Id);
             Assert.AreEqual(1, collection.Count());
             Assert.AreEqual(album.Id, collection.First().Id);
+        }
+
+        [TestMethod]
+        public void TestGetAlbums()
+        {
+            var albums = AlbumFacade.GetAlbums();
+            Assert.IsTrue(albums.Any(x => x.Name == "Test album 1"));
         }
     }
 }
