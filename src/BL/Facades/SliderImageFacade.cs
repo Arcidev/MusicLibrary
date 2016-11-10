@@ -1,5 +1,9 @@
-﻿using BL.DTO;
+﻿using AutoMapper;
+using BL.DTO;
 using BL.Queries;
+using BL.Repositories;
+using DAL.Entities;
+using DotVVM.Framework.Storage;
 using System;
 using System.Collections.Generic;
 
@@ -9,12 +13,29 @@ namespace BL.Facades
     {
         public Func<SliderImagesQuery> SliderImageQueryFunc { get; set; }
 
+        public Func<SliderImageRepository> SliderImageRepositoryFunc { get; set; }
+
         public IEnumerable<SliderImageDTO> GetImages()
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var query = SliderImageQueryFunc();
                 return query.Execute();
+            }
+        }
+
+        public SliderImageDTO AddSliderImage(SliderImageEditDTO sliderImage, UploadedFile file, IUploadedFileStorage storage)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var entity = Mapper.Map<SliderImage>(sliderImage);
+                SetFile(entity, file, storage);
+
+                var repo = SliderImageRepositoryFunc();
+                repo.Insert(entity);
+
+                uow.Commit();
+                return Mapper.Map<SliderImageDTO>(entity);
             }
         }
     }

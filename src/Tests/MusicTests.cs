@@ -16,6 +16,8 @@ namespace BL.Tests
 
         public BandFacade BandFacade { get { return Container.Resolve<BandFacade>(); } }
 
+        public SongFacade SongFacade { get { return Container.Resolve<SongFacade>(); } }
+
         public CategoryFacade CategoryFacade { get { return Container.Resolve<CategoryFacade>(); } }
 
         [TestInitialize]
@@ -27,7 +29,6 @@ namespace BL.Tests
                 Description = "Test Description",
                 Approved = true
             });
-
 
             var category = CategoryFacade.GetCategories().FirstOrDefault();
             if (category == null)
@@ -57,7 +58,7 @@ namespace BL.Tests
             var user = UserFacade.GetUserByEmailAsync("albumtest@mail.sk").Result;
             if (user == null)
             {
-                user = UserFacade.AddUserAsync(new UserDTO()
+                user = UserFacade.AddUserAsync(new UserCreateDTO()
                 {
                     Email = "albumtest@mail.sk",
                     FirstName = "test",
@@ -152,6 +153,68 @@ namespace BL.Tests
         {
             var albums = AlbumFacade.GetAlbums();
             Assert.IsTrue(albums.Any(x => x.Name == "Test album 1"));
+        }
+
+        [TestMethod]
+        public void TestGetBandAlbums()
+        {
+            var bandFacade = BandFacade;
+            var band = bandFacade.GetBands().Last();
+            var albums = BandFacade.GetBandAlbums(band.Id);
+            Assert.IsTrue(albums.All(x => x.BandId == band.Id));
+        }
+
+        [TestMethod]
+        public void TestSongs()
+        {
+            var songFacade = SongFacade;
+            var song = songFacade.AddSong(new SongCreateDTO()
+            {
+                Approved = true,
+                Name = "test song"
+            });
+
+            var song2 = songFacade.AddSong(new SongCreateDTO()
+            {
+                Approved = true,
+                Name = "test song2"
+            });
+
+            var albumFacade = AlbumFacade;
+            var album = albumFacade.GetAlbums().First();
+            albumFacade.AddSongToAlbum(album.Id, song.Id);
+            albumFacade.AddSongToAlbum(album.Id, song2.Id);
+            album = albumFacade.GetAlbum(album.Id, includeSongs: true);
+
+            Assert.AreEqual(2, album.Songs.Count);
+            songFacade.DeleteSong(song.Id);
+            songFacade.DeleteSong(song2.Id);
+
+            album = albumFacade.GetAlbum(album.Id, includeSongs: true);
+            Assert.AreEqual(0, album.Songs.Count);
+        }
+
+        [TestMethod]
+        public void TestCategories()
+        {
+            var categoryFacade = CategoryFacade;
+            var category = categoryFacade.AddCategory(new CategoryDTO()
+            {
+                Name = "Another test category"
+            });
+
+            var categories = categoryFacade.GetCategories();
+            Assert.IsTrue(categories.Any(x => x.Name == "Another test category"));
+
+            category.Name = "Another test category 2";
+            category = categoryFacade.EditCategory(category);
+            categories = categoryFacade.GetCategories();
+            Assert.IsFalse(categories.Any(x => x.Name == "Another test category"));
+            Assert.IsTrue(categories.Any(x => x.Name == "Another test category 2"));
+
+            categoryFacade.DeleteCategory(category.Id);
+            categories = categoryFacade.GetCategories();
+            Assert.IsFalse(categories.Any(x => x.Name == "Another test category 2"));
         }
     }
 }

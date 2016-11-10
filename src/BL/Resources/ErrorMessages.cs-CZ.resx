@@ -129,4 +129,7 @@
   <data name="EmailAlreadyUsed" xml:space="preserve">
     <value>E-mailová adresa, kterou jste zadali, je již zaregistrována.</value>
   </data>
+  <data name="FileNotExist" xml:space="preserve">
+    <value>Soubor neexistuje.</value>
+  </data>
 </root>

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BL.DTO;
 using BL.Repositories;
+using BL.Resources;
 using DAL.Entities;
 using DotVVM.Framework.Storage;
+using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.IO;
 using System.Web.Hosting;
@@ -29,6 +31,24 @@ namespace BL.Facades
                 uow.Commit();
 
                 return Mapper.Map<StorageFileDTO>(entity);
+            }
+        }
+
+        public void DeleteFile(int fileId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = StorageFileRepositoryFunc();
+                var storageFile = repo.GetById(fileId);
+                if (storageFile == null)
+                    throw new UIException(ErrorMessages.FileNotExist);
+
+                var targetPath = Path.Combine(GetUploadPath(), storageFile.FileName);
+                if (File.Exists(targetPath))
+                    File.Delete(targetPath);
+
+                repo.Delete(storageFile);
+                uow.Commit();
             }
         }
 

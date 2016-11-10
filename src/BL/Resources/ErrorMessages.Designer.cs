@@ -79,6 +79,15 @@ namespace BL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File does not exist..
+        /// </summary>
+        internal static string FileNotExist {
+            get {
+                return ResourceManager.GetString("FileNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User does not exist..
         /// </summary>
         internal static string UserNotExist {

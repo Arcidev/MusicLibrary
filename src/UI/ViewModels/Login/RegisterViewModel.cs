@@ -62,7 +62,7 @@ namespace MusicLibrary.ViewModels.Login
 
             var success = await ExecuteSafelyAsync(async () =>
             {
-                var user = await UserFacade.AddUserAsync(new UserDTO()
+                var user = await UserFacade.AddUserAsync(new UserCreateDTO()
                 {
                     FirstName = FirstName,
                     LastName = LastName,

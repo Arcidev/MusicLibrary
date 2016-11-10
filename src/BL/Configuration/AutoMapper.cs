@@ -10,12 +10,9 @@ namespace BL.Configuration
         {
             Mapper.Initialize(config =>
             {
-                config.CreateMap<User, UserDTO>()
-                    .ForMember(target => target.Password, action => action.Ignore());
-                config.CreateMap<UserDTO, User>()
-                    .ForMember(target => target.ImageStorageFile, action => action.Ignore())
-                    .ForMember(target => target.PasswordHash, action => action.Ignore())
-                    .ForMember(target => target.PasswordSalt, action => action.Ignore());
+                config.CreateMap<User, UserDTO>();
+                config.CreateMap<UserCreateDTO, User>();
+                config.CreateMap<UserEditDTO, User>();
 
                 config.CreateMap<StorageFile, StorageFileDTO>();
 
@@ -23,6 +20,7 @@ namespace BL.Configuration
                 config.CreateMap<BandCreateDTO, Band>();
 
                 config.CreateMap<SliderImage, SliderImageDTO>();
+                config.CreateMap<SliderImageEditDTO, SliderImage>();
 
                 config.CreateMap<Album, AlbumDTO>()
                     .ForMember(target => target.Band, action => action.Ignore());
@@ -32,6 +30,7 @@ namespace BL.Configuration
                 config.CreateMap<CategoryDTO, Category>();
 
                 config.CreateMap<Song, SongDTO>();
+                config.CreateMap<SongCreateDTO, Song>();
 
                 config.CreateMap<AlbumReview, AlbumReviewDTO>();
                 config.CreateMap<AlbumReviewDTO, AlbumReview>()

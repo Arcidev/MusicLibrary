@@ -129,4 +129,7 @@
   <data name="EmailAlreadyUsed" xml:space="preserve">
     <value>The email address you have entered is already registered.</value>
   </data>
+  <data name="FileNotExist" xml:space="preserve">
+    <value>File does not exist.</value>
+  </data>
 </root>

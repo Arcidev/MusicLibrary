@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\BandMember.cs" />
+    <Compile Include="Entities\IImageFileEntity.cs" />
     <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\AlbumReview.cs" />
     <Compile Include="Entities\Category.cs" />

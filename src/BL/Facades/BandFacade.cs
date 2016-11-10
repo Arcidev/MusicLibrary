@@ -17,30 +17,18 @@ namespace BL.Facades
 
         public Func<BandAlbumsQuery> BandAlbumsQueryFunc { get; set; }
 
-        public StorageFileFacade StorageFileFacade { get; set; }
-
         public BandDTO AddBand(BandCreateDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var entity = Mapper.Map<Band>(band);
                 entity.CreateDate = DateTime.Now;
-
-                if (file != null && storage != null)
-                {
-                    var fileName = StorageFileFacade.SaveFile(file, storage);
-                    entity.ImageStorageFile = new StorageFile()
-                    {
-                        DisplayName = file.FileName,
-                        FileName = fileName
-                    };
-                }
+                SetFile(entity, file, storage);
 
                 var repo = BandRepositoryFunc();
                 repo.Insert(entity);
 
                 uow.Commit();
-
                 return Mapper.Map<BandDTO>(entity);
             }
         }

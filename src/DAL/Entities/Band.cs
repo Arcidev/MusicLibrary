@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Entities
 {
-    public class Band : IEntity<int>
+    public class Band : IEntity<int>, IImageFileEntity
     {
         [Key]
         public int Id { get; set; }

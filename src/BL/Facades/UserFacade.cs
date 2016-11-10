@@ -20,9 +20,7 @@ namespace BL.Facades
 
         public Func<UserRepository> UserRepositoryFunc { get; set; }
 
-        public StorageFileFacade StorageFileFacade { get; set; }
-
-        public async Task<UserDTO> AddUserAsync(UserDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public async Task<UserDTO> AddUserAsync(UserCreateDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -33,16 +31,7 @@ namespace BL.Facades
                 var password = CreateHash(user.Password);
                 entity.PasswordHash = password.Item1;
                 entity.PasswordSalt = password.Item2;
-
-                if (file != null && storage != null)
-                {
-                    var fileName = StorageFileFacade.SaveFile(file, storage);
-                    entity.ImageStorageFile = new StorageFile()
-                    {
-                        DisplayName = file.FileName,
-                        FileName = fileName
-                    };
-                }
+                SetFile(entity, file, storage);
 
                 var repo = UserRepositoryFunc();
                 repo.Insert(entity);
@@ -72,6 +61,30 @@ namespace BL.Facades
                 var user = await repo.GetByEmailAsync(email);
 
                 return user != null ? Mapper.Map<UserDTO>(user) : null;
+            }
+        }
+
+        public UserDTO EditUser(UserEditDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = UserRepositoryFunc();
+                var entity = repo.GetById(user.Id);
+                if (entity == null)
+                    throw new UIException(ErrorMessages.UserNotExist);
+
+                if (file != null && storage != null)
+                {
+                    if (entity.ImageStorageFileId.HasValue)
+                        StorageFileFacade.Value.DeleteFile(entity.ImageStorageFileId.Value);
+
+                    SetFile(entity, file, storage);
+                }
+
+                Mapper.Map(user, entity);
+                uow.Commit();
+
+                return Mapper.Map<UserDTO>(entity);
             }
         }
 

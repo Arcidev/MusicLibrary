@@ -26,11 +26,11 @@ namespace BL.Facades
 
         public Func<AlbumReviewsQuery> AlbumReviewsQueryFunc { get; set; }
 
+        public Func<AlbumSongRepository> AlbumSongRepositoryFunc { get; set; }
+
         public Func<UserAlbumRepository> UserAlbumRepositoryFunc { get; set; }
 
         public Func<UserAlbumsQuery> UserAlbumsQueryFunc { get; set; }
-
-        public StorageFileFacade StorageFileFacade { get; set; }
 
         public AlbumDTO AddAlbum(AlbumCreateDTO album, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
@@ -38,16 +38,7 @@ namespace BL.Facades
             {
                 var entity = Mapper.Map<Album>(album);
                 entity.CreateDate = DateTime.Now;
-
-                if (file != null && storage != null)
-                {
-                    var fileName = StorageFileFacade.SaveFile(file, storage);
-                    entity.ImageStorageFile = new StorageFile()
-                    {
-                        DisplayName = file.FileName,
-                        FileName = fileName
-                    };
-                }
+                SetFile(entity, file, storage);
 
                 var repo = AlbumRepositoryFunc();
                 repo.Insert(entity);
@@ -113,6 +104,21 @@ namespace BL.Facades
                 query.UserId = userId;
 
                 return query.Execute();
+            }
+        }
+
+        public void AddSongToAlbum(int albumId, int songId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = AlbumSongRepositoryFunc();
+                repo.Insert(new AlbumSong()
+                {
+                    AlbumId = albumId,
+                    SongId = songId
+                });
+
+                uow.Commit();
             }
         }
 

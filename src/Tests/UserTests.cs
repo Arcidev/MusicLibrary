@@ -12,10 +12,10 @@ namespace BL.Tests
         public UserFacade UserFacade { get { return Container.Resolve<UserFacade>(); } }
 
         [TestMethod]
-        public async Task TestUserCreation()
+        public async Task TestCRUDOperations()
         {
             var userFacade = UserFacade;
-            var user = new UserDTO()
+            var user = new UserCreateDTO()
             {
                 Email = "test@mail.sk",
                 FirstName = "Test",
@@ -25,7 +25,13 @@ namespace BL.Tests
             };
 
             await userFacade.AddUserAsync(user);
-            userFacade.DeleteUser((await userFacade.VerifyAndGetUserAsync("test@mail.sk", "123")).Id);
+
+            var dto = await userFacade.VerifyAndGetUserAsync("test@mail.sk", "123");
+            dto.Email = "test2@mail.sk";
+            userFacade.EditUser(dto);
+
+            await userFacade.VerifyAndGetUserAsync("test2@mail.sk", "123");
+            userFacade.DeleteUser(dto.Id);
         }
 
         [TestMethod]

@@ -35,5 +35,29 @@ namespace BL.Facades
                 return query.Execute();
             }
         }
+
+        public CategoryDTO EditCategory(CategoryDTO category)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = CategoryRepositoryFunc();
+                var entity = repo.GetById(category.Id);
+                Mapper.Map(category, entity);
+
+                uow.Commit();
+                return Mapper.Map<CategoryDTO>(entity); 
+            }
+        }
+
+        public void DeleteCategory(int id)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = CategoryRepositoryFunc();
+                repo.Delete(id);
+
+                uow.Commit();
+            }
+        }
     }
 }
