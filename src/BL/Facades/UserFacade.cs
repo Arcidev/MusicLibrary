@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BL.Facades
 {
-    public class UserFacade : BaseFacade
+    public class UserFacade : ImageStorableFacade
     {
         private const int PBKDF2IterCount = 100000;
         private const int PBKDF2SubkeyLength = 160 / 8;
@@ -31,7 +31,7 @@ namespace BL.Facades
                 var password = CreateHash(user.Password);
                 entity.PasswordHash = password.Item1;
                 entity.PasswordSalt = password.Item2;
-                SetFile(entity, file, storage);
+                SetImageFile(entity, file, storage);
 
                 var repo = UserRepositoryFunc();
                 repo.Insert(entity);
@@ -78,7 +78,7 @@ namespace BL.Facades
                     if (entity.ImageStorageFileId.HasValue)
                         StorageFileFacade.Value.DeleteFile(entity.ImageStorageFileId.Value);
 
-                    SetFile(entity, file, storage);
+                    SetImageFile(entity, file, storage);
                 }
 
                 Mapper.Map(user, entity);

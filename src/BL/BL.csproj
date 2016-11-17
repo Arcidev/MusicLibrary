@@ -208,6 +208,7 @@
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\IListExtensions.cs" />
     <Compile Include="Facades\AlbumFacade.cs" />
+    <Compile Include="Facades\ImageStorableFacade.cs" />
     <Compile Include="Facades\SongFacade.cs" />
     <Compile Include="Facades\CategoryFacade.cs" />
     <Compile Include="Facades\SliderImageFacade.cs" />

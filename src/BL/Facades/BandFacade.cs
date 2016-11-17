@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace BL.Facades
 {
-    public class BandFacade : BaseFacade
+    public class BandFacade : ImageStorableFacade
     {
         public Func<BandRepository> BandRepositoryFunc { get; set; }
 
@@ -23,7 +23,7 @@ namespace BL.Facades
             {
                 var entity = Mapper.Map<Band>(band);
                 entity.CreateDate = DateTime.Now;
-                SetFile(entity, file, storage);
+                SetImageFile(entity, file, storage);
 
                 var repo = BandRepositoryFunc();
                 repo.Insert(entity);

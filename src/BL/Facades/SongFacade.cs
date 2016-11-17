@@ -7,7 +7,7 @@ using System;
 
 namespace BL.Facades
 {
-    public class SongFacade : BaseFacade
+    public class SongFacade : ImageStorableFacade
     {
         public Func<SongRepository> SongRepositoryFunc { get; set; }
 

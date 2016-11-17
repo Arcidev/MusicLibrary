@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace BL.Facades
 {
-    public class AlbumFacade : BaseFacade
+    public class AlbumFacade : ImageStorableFacade
     {
         public Func<RecentAlbumsQuery> RecentlyAddedAlbumsQueryFunc { get; set; }
 
@@ -38,7 +38,7 @@ namespace BL.Facades
             {
                 var entity = Mapper.Map<Album>(album);
                 entity.CreateDate = DateTime.Now;
-                SetFile(entity, file, storage);
+                SetImageFile(entity, file, storage);
 
                 var repo = AlbumRepositoryFunc();
                 repo.Insert(entity);

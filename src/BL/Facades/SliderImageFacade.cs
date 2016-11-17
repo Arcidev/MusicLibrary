@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace BL.Facades
 {
-    public class SliderImageFacade : BaseFacade
+    public class SliderImageFacade : ImageStorableFacade
     {
         public Func<SliderImagesQuery> SliderImageQueryFunc { get; set; }
 
@@ -29,7 +29,7 @@ namespace BL.Facades
             using (var uow = UowProviderFunc().Create())
             {
                 var entity = Mapper.Map<SliderImage>(sliderImage);
-                SetFile(entity, file, storage);
+                SetImageFile(entity, file, storage);
 
                 var repo = SliderImageRepositoryFunc();
                 repo.Insert(entity);
