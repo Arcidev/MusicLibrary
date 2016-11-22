@@ -1,18 +1,22 @@
+using BL.Configuration;
+using Castle.Windsor;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel.Serialization;
 using DotVVM.Framework.Storage;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
+using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.StaticFiles;
 using MusicLibrary.AppStart;
 using Owin;
 using System;
 using System.IO;
 using System.Web.Hosting;
-using BL.Configuration;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.AspNet.Identity;
+using System.Web.Http;
+using System.Web.Http.Dispatcher;
+using System.Web.Routing;
 
 [assembly: OwinStartup(typeof(MusicLibrary.Startup))]
 namespace MusicLibrary
@@ -25,11 +29,22 @@ namespace MusicLibrary
         {
             var applicationPhysicalPath = HostingEnvironment.ApplicationPhysicalPath;
 
-            // Automapper
+            // automapper
             AutoMapper.Init();
 
-            //IoC/DI
+            // IoC/DI
             WindsorBootstrap.SetupContainer(app);
+
+            // register WebApi Factory
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new WindsorWebApiComposer(WindsorBootstrap.container));
+            GlobalConfiguration.Configure(config =>
+            {
+                config.MapHttpAttributeRoutes();
+                config.Formatters.Remove(config.Formatters.XmlFormatter);
+            });
+
+            // routes registration
+            RouteTable.Routes.MapHttpRoute("WebApiControllers", "api/{controller}/{action}/{id}", new { id = RouteParameter.Optional });
 
             // use cookie authentication
             app.UseCookieAuthentication(new CookieAuthenticationOptions()

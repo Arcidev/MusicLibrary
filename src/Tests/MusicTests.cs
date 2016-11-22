@@ -186,12 +186,12 @@ namespace BL.Tests
             albumFacade.AddSongToAlbum(album.Id, song2.Id);
             album = albumFacade.GetAlbum(album.Id, includeSongs: true);
 
-            Assert.AreEqual(2, album.Songs.Count);
+            Assert.AreEqual(2, album.Songs.Count());
             songFacade.DeleteSong(song.Id);
             songFacade.DeleteSong(song2.Id);
 
             album = albumFacade.GetAlbum(album.Id, includeSongs: true);
-            Assert.AreEqual(0, album.Songs.Count);
+            Assert.AreEqual(0, album.Songs.Count());
         }
 
         [TestMethod]

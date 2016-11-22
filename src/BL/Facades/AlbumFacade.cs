@@ -48,6 +48,17 @@ namespace BL.Facades
             }
         }
 
+        public IEnumerable<SongDTO> GetAlbumSongs(int albumId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = AlbumSongsQueryFunc();
+                query.AlbumId = albumId;
+                query.Approved = true;
+                return query.Execute();
+            }
+        }
+
         public AlbumDTO GetAlbum(int id, bool includeBandInfo = true, bool includeSongs = true)
         {
             using (var uow = UowProviderFunc().Create())
@@ -61,12 +72,7 @@ namespace BL.Facades
                     dto.Band = Mapper.Map<BandDTO>(entity.Band);
 
                 if (includeSongs)
-                {
-                    var query = AlbumSongsQueryFunc();
-                    query.AlbumId = entity.Id;
-                    query.Approved = true;
-                    dto.Songs = query.Execute();
-                }
+                    dto.Songs = GetAlbumSongs(entity.Id);
 
                 return dto;
             }

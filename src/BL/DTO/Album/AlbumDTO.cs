@@ -15,7 +15,7 @@ namespace BL.DTO
 
         public StorageFileDTO ImageStorageFile { get; set; }
 
-        public IList<SongDTO> Songs { get; set; }
+        public IEnumerable<SongDTO> Songs { get; set; }
 
         public AlbumDTO()
         {

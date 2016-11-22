@@ -3,6 +3,7 @@ using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using MusicLibrary.Installers;
 using Owin;
 
 namespace MusicLibrary.AppStart
@@ -20,6 +21,7 @@ namespace MusicLibrary.AppStart
 
             container.Install(new FacadesInstaller());
             container.Install(new ServicesInstaller());
+            container.Install(new WebApiInstaller());
         }
 
         internal static T Resolve<T>()
