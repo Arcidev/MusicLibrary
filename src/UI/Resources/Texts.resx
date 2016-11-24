@@ -186,4 +186,10 @@
   <data name="SignOut" xml:space="preserve">
     <value>Sign out</value>
   </data>
+  <data name="Band" xml:space="preserve">
+    <value>Band</value>
+  </data>
+  <data name="BandAlbums" xml:space="preserve">
+    <value>Band albums</value>
+  </data>
 </root>

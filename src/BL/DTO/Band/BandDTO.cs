@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BL.DTO
 {
@@ -9,5 +10,7 @@ namespace BL.DTO
         public DateTime CreateDate { get; set; }
 
         public StorageFileDTO ImageStorageFile { get; set; }
+
+        public IEnumerable<AlbumDTO> Albums { get; set; }
     }
 }

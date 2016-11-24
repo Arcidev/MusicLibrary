@@ -34,6 +34,12 @@
 .error-message {
   color: red;
 }
+.content-bg-detail {
+  min-height: 648px;
+}
+.single h3 a {
+  color: #10696e;
+}
 .loading-animation {
   width: 100%;
   position: relative;

@@ -88,6 +88,24 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Band.
+        /// </summary>
+        public static string Band {
+            get {
+                return ResourceManager.GetString("Band", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Band albums.
+        /// </summary>
+        public static string BandAlbums {
+            get {
+                return ResourceManager.GetString("BandAlbums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bands.
         /// </summary>
         public static string Bands {

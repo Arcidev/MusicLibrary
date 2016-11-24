@@ -166,4 +166,10 @@
   <data name="SignOut" xml:space="preserve">
     <value>Odhlásiť sa</value>
   </data>
+  <data name="Band" xml:space="preserve">
+    <value>Skupina</value>
+  </data>
+  <data name="BandAlbums" xml:space="preserve">
+    <value>Albumy skupiny</value>
+  </data>
 </root>

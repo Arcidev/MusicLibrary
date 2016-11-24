@@ -15,10 +15,14 @@
                     <dot:Repeater DataSource="{{value: Bands}}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                         <div class="image group">
                             <div class="grid images_3_of_1">
-                                <a href=""><img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"></a>
+                                <dot:RouteLink RouteName="BandDetail" Param-BandId="{value: Id}">
+                                    <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}">
+                                </dot:RouteLink>
                             </div>
                             <div class="grid span_2_of_3">
-                                <a href=""><h3>{{value: Name}}</h3></a>
+                                <dot:RouteLink RouteName="BandDetail" Param-BandId="{value: Id}">
+                                    <h3>{{value: Name}}</h3>
+                                </dot:RouteLink>
                                 <p>{{value: Description}}</p>
                             </div>
                         </div>

@@ -3,6 +3,7 @@ using BL.Facades;
 using DotVVM.Framework.ViewModel;
 using BL.DTO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MusicLibrary.ViewModels.Album
 {
@@ -27,6 +28,8 @@ namespace MusicLibrary.ViewModels.Album
 
         public string AudioFile { get; set; }
 
+        public bool HasOtherBandAlbums { get; set; }
+
         public override Task PreRender()
         {
             if (!Context.IsPostBack)
@@ -35,6 +38,7 @@ namespace MusicLibrary.ViewModels.Album
                 Categories = CategoryFacade.GetCategories();
                 Album = AlbumFacade.GetAlbum(albumId);
                 OtherBandAlbums = BandFacade.GetBandAlbums(Album.BandId, Album.Id, 6, true);
+                HasOtherBandAlbums = OtherBandAlbums.Any();
             }
 
             return base.PreRender();

@@ -7,7 +7,7 @@
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
-    <div class="content-bg">
+    <div class="content-bg content-bg-detail">
         <div class="wrap">
             <div class="main">
                 <div class="content">
@@ -20,7 +20,11 @@
                                 </div>
                                 <div class="para" RenderSettings.Mode="Server">
                                     <h4>{{value: Name}}</h4>
-                                    <h3 DataContext="{value: Band}">{{value: Name}}</h3>
+                                    <h3 DataContext="{value: Band}">
+                                        <dot:RouteLink RouteName="BandDetail" param-BandId="{value: Id}">
+                                            {{value: Name}}
+                                        </dot:RouteLink>
+                                    </h3>
                                     <dot:GridView DataSource="{value: Songs}" style="width:100%">
                                         <Columns>
                                             <dot:GridViewTextColumn ValueBinding="{value: Name}" Width="400px"/>
@@ -45,14 +49,17 @@
                                 <div class="clear"></div>
                             </div>
                             <div class="text-h1 top">
-                                <h2>{{resource: Resource.MoreBandAlbums}}</h2>
+                                <h2 Visible="{value: HasOtherBandAlbums}">{{resource: Resource.MoreBandAlbums}}</h2>
                             </div>
                             <div class="div2">
-                                <div id="mcts1">
+                                <div id="section group">
                                     <dot:Repeater DataSource="{value: OtherBandAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-                                        <div class="item">
+                                        <div class="grid_1_of_3 images_1_of_3">
                                             <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
-                                                <img DataContext="{value: ImageStorageFile}" class="logo-img" src="{value: "/SavedFiles/" + FileName}" />
+                                                <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
+                                            </dot:RouteLink>
+                                            <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
+                                                <h3>{{value: Name}}</h3>
                                             </dot:RouteLink>
                                         </div>
                                     </dot:Repeater>

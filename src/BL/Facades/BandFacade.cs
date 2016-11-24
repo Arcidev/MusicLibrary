@@ -57,7 +57,7 @@ namespace BL.Facades
             }
         }
 
-        public BandDTO GetBand(int id)
+        public BandDTO GetBand(int id, bool includeAlbums = true)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -65,7 +65,11 @@ namespace BL.Facades
                 var entity = repo.GetById(id);
                 IsNotNull(entity, ErrorMessages.BandNotExist);
 
-                return Mapper.Map<BandDTO>(entity);
+                var dto = Mapper.Map<BandDTO>(entity);
+                if (includeAlbums)
+                    dto.Albums = Mapper.Map<IEnumerable<AlbumDTO>>(entity.Albums);
+
+                return dto;
             }
         }
     }

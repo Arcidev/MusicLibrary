@@ -14,9 +14,9 @@
                 <section id="dg-container" class="dg-container">
                     <div class="dg-wrapper">
                         <dot:Repeater RenderWrapperTag="false" DataSource="{value: SliderImages}" RenderSettings.Mode="Server">
-                            <dot:LinkButton DataContext="{value: ImageStorageFile}">
-                                <img src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"/>
-                            </dot:LinkButton>
+                            <dot:RouteLink RouteName="BandDetail" Param-BandId="{value: BandId}">
+                                <img DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"/>
+                            </dot:RouteLink>
                         </dot:Repeater>
                     </div>
                 </section>
@@ -34,9 +34,9 @@
                                 <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
                                     <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}"/>
                                 </dot:RouteLink>
-                                <dot:LinkButton>
+                                <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
                                     <h3>{{value: Name}}</h3>
-                                </dot:LinkButton>
+                                </dot:RouteLink>
                             </div>
                         </dot:Repeater>
                     </div>
@@ -47,9 +47,9 @@
                                 <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
                                     <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
                                 </dot:RouteLink>
-                                <dot:LinkButton>
+                                <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
                                     <h3>{{value: Name}}</h3>
-                                </dot:LinkButton>
+                                </dot:RouteLink>
                             </div>
                         </dot:Repeater>
                     </div>

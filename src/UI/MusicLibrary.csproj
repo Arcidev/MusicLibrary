@@ -230,6 +230,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="DotvvmStartup.cs" />
+    <Compile Include="ViewModels\Band\DetailViewModel.cs" />
     <Compile Include="ViewModels\Album\DetailViewModel.cs" />
     <Compile Include="ViewModels\AlbumsViewModel.cs" />
     <Compile Include="ViewModels\BandsViewModel.cs" />
@@ -285,6 +286,7 @@
     <Content Include="Controls\LoadingAnimation.dotcontrol" />
     <Content Include="Views\bands.dothtml" />
     <Content Include="Views\albums.dothtml" />
+    <Content Include="Views\Band\detail.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
