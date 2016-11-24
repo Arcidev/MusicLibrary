@@ -3,13 +3,18 @@ using BL.DTO;
 using BL.Repositories;
 using DAL.Entities;
 using DotVVM.Framework.Storage;
+using BL.Queries;
 using System;
+using System.Collections.Generic;
+using BL.Resources;
 
 namespace BL.Facades
 {
     public class SongFacade : ImageStorableFacade
     {
         public Func<SongRepository> SongRepositoryFunc { get; set; }
+
+        public Func<SongsQuery> SongsQueryFunc { get; set; }
 
         public SongDTO AddSong(SongCreateDTO song, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
@@ -44,6 +49,26 @@ namespace BL.Facades
                 repo.Delete(id);
 
                 uow.Commit();
+            }
+        }
+
+        public IEnumerable<SongDTO> GetSongs()
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = SongsQueryFunc();
+                return query.Execute();
+            }
+        }
+
+        public SongDTO GetSong(int id)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = SongRepositoryFunc();
+                var entity = repo.GetById(id);
+                IsNotNull(entity, ErrorMessages.SongNotExist);
+                return Mapper.Map<SongDTO>(entity);
             }
         }
     }

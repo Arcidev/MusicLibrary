@@ -1,9 +1,8 @@
-﻿using BL.DTO;
-using BL.Facades;
+﻿using BL.Facades;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 using WebApi.Models;
+using WebApi.Models.Extensions;
 
 namespace MusicLibrary.WebApi
 {
@@ -11,40 +10,25 @@ namespace MusicLibrary.WebApi
     {
         public AlbumFacade AlbumFacade { get; set; }
 
-        public SongFacade SongFacade { get; set; }
-
         [HttpGet]
-        [ActionName("albumSongs")]
+        [ActionName("songs")]
         public IEnumerable<SongViewModel> GetAlbumSongs(int id)
         {
-            return AlbumFacade.GetAlbumSongs(id).Select(x => new SongViewModel()
-            {
-                AudioStorageFileId = x.AudioStorageFileId,
-                CreateDate = x.CreateDate,
-                Id = x.Id,
-                Name = x.Name,
-                YoutubeUrlParam = x.YoutubeUrlParam
-            });
+            return AlbumFacade.GetAlbumSongs(id).ToSongViewModel();
         }
 
         [HttpGet]
         [ActionName("list")]
         public IEnumerable<AlbumViewModel> GetAlbums()
         {
-            return AlbumFacade.GetAlbums().Select(ToAlbumViewmModel);
+            return AlbumFacade.GetAlbums().ToAlbumViewModel();
         }
 
-        private AlbumViewModel ToAlbumViewmModel(AlbumDTO dto)
+        [HttpGet]
+        [ActionName("get")]
+        public AlbumViewModel GetAlbum(int id)
         {
-            return new AlbumViewModel()
-            {
-                BandId = dto.BandId,
-                CategoryId = dto.CategoryId,
-                CreateDate = dto.CreateDate,
-                Id = dto.Id,
-                ImageStorageFileId = dto.ImageStorageFileId,
-                Name = dto.Name
-            };
+            return AlbumFacade.GetAlbum(id, false, false).ToAlbumViewModel();
         }
     }
 }

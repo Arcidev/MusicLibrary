@@ -132,4 +132,13 @@
   <data name="FileNotExist" xml:space="preserve">
     <value>Súbor neexistuje.</value>
   </data>
+  <data name="SongNotExist" xml:space="preserve">
+    <value>Pieseň neexistuje.</value>
+  </data>
+  <data name="BandNotExist" xml:space="preserve">
+    <value>Skupina neexistuje.</value>
+  </data>
+  <data name="CategoryNotExist" xml:space="preserve">
+    <value>Kategória neexistuje.</value>
+  </data>
 </root>

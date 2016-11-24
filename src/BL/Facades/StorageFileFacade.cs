@@ -40,8 +40,7 @@ namespace BL.Facades
             {
                 var repo = StorageFileRepositoryFunc();
                 var storageFile = repo.GetById(fileId);
-                if (storageFile == null)
-                    throw new UIException(ErrorMessages.FileNotExist);
+                IsNotNull(storageFile, ErrorMessages.FileNotExist);
 
                 var targetPath = Path.Combine(GetUploadPath(), storageFile.FileName);
                 if (File.Exists(targetPath))
@@ -62,7 +61,19 @@ namespace BL.Facades
             return fileName;
         }
 
-        private string GetUploadPath()
+        public StorageFileDTO GetFile(int id)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = StorageFileRepositoryFunc();
+                var storageFile = repo.GetById(id);
+                IsNotNull(storageFile, ErrorMessages.FileNotExist);
+
+                return Mapper.Map<StorageFileDTO>(storageFile);
+            }
+        }
+
+        public string GetUploadPath()
         {
             var uploadPath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "SavedFiles");
             if (!Directory.Exists(uploadPath))

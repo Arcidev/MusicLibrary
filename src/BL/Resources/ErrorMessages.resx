@@ -132,4 +132,13 @@
   <data name="FileNotExist" xml:space="preserve">
     <value>File does not exist.</value>
   </data>
+  <data name="SongNotExist" xml:space="preserve">
+    <value>Song does not exist.</value>
+  </data>
+  <data name="BandNotExist" xml:space="preserve">
+    <value>Band does not exist.</value>
+  </data>
+  <data name="CategoryNotExist" xml:space="preserve">
+    <value>Category does not exist.</value>
+  </data>
 </root>

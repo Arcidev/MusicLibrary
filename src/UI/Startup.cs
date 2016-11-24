@@ -43,9 +43,10 @@ namespace MusicLibrary
                 config.Formatters.Remove(config.Formatters.XmlFormatter);
             });
 
-            // routes registration
-            RouteTable.Routes.MapHttpRoute("WebApiControllers", "api/{controller}/{action}/{id}", new { id = RouteParameter.Optional });
-
+            // api routes registration
+            RouteTable.Routes.MapHttpRoute("WebApiControllers", "api/{controller}/{action}");
+            RouteTable.Routes.MapHttpRoute("WebApiControllersId", "api/{controller}/{id}/{action}");
+            
             // use cookie authentication
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {

@@ -40,10 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryViewModel.cs" />
     <Compile Include="AlbumViewModel.cs" />
+    <Compile Include="BandViewModel.cs" />
+    <Compile Include="Extensions\BLExtensions.cs" />
     <Compile Include="SongViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{E969BB73-B761-4780-98FE-CBB1B76DC91F}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

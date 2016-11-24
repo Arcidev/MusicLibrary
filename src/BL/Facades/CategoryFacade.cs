@@ -2,6 +2,7 @@
 using BL.DTO;
 using BL.Queries;
 using BL.Repositories;
+using BL.Resources;
 using DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace BL.Facades
     public class CategoryFacade : BaseFacade
     {
         public Func<CategoriesQuery> CategoriesQueryFunc { get; set; }
+
+        public Func<CategoryAlbumsQuery> CategoryAlbumsQueryFunc { get; set; }
 
         public Func<CategoryRepository> CategoryRepositoryFunc { get; set; }
 
@@ -36,6 +39,18 @@ namespace BL.Facades
             }
         }
 
+        public CategoryDTO GetCategory(int id)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = CategoryRepositoryFunc();
+                var entity = repo.GetById(id);
+                IsNotNull(entity, ErrorMessages.CategoryNotExist);
+
+                return Mapper.Map<CategoryDTO>(entity);
+            }
+        }
+
         public CategoryDTO EditCategory(CategoryDTO category)
         {
             using (var uow = UowProviderFunc().Create())
@@ -57,6 +72,17 @@ namespace BL.Facades
                 repo.Delete(id);
 
                 uow.Commit();
+            }
+        }
+
+        public IEnumerable<AlbumDTO> GetAlbumsByCategory(int categoryId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = CategoryAlbumsQueryFunc();
+                query.CategoryId = categoryId;
+
+                return query.Execute();
             }
         }
     }

@@ -7,7 +7,7 @@ namespace BL.Facades
     {
         public Func<IUnitOfWorkProvider> UowProviderFunc { get; set; }
 
-        public void IsNotNull(object obj, string errorMessage)
+        protected void IsNotNull(object obj, string errorMessage)
         {
             if (obj == null)
                 throw new UIException(errorMessage);

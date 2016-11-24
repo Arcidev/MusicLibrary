@@ -2,6 +2,7 @@
 using BL.DTO;
 using BL.Queries;
 using BL.Repositories;
+using BL.Resources;
 using DAL.Entities;
 using DotVVM.Framework.Storage;
 using System;
@@ -53,6 +54,18 @@ namespace BL.Facades
             {
                 var query = BandsQueryFunc();
                 return query.Execute();
+            }
+        }
+
+        public BandDTO GetBand(int id)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = BandRepositoryFunc();
+                var entity = repo.GetById(id);
+                IsNotNull(entity, ErrorMessages.BandNotExist);
+
+                return Mapper.Map<BandDTO>(entity);
             }
         }
     }

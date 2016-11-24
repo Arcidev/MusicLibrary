@@ -70,6 +70,24 @@ namespace BL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Band does not exist..
+        /// </summary>
+        internal static string BandNotExist {
+            get {
+                return ResourceManager.GetString("BandNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category does not exist..
+        /// </summary>
+        internal static string CategoryNotExist {
+            get {
+                return ResourceManager.GetString("CategoryNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The email address you have entered is already registered..
         /// </summary>
         internal static string EmailAlreadyUsed {
@@ -84,6 +102,15 @@ namespace BL.Resources {
         internal static string FileNotExist {
             get {
                 return ResourceManager.GetString("FileNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Song does not exist..
+        /// </summary>
+        internal static string SongNotExist {
+            get {
+                return ResourceManager.GetString("SongNotExist", resourceCulture);
             }
         }
         
