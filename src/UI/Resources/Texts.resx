@@ -192,4 +192,10 @@
   <data name="BandAlbums" xml:space="preserve">
     <value>Band albums</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="UserCollection" xml:space="preserve">
+    <value>My collection</value>
+  </data>
 </root>

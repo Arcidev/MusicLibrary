@@ -34,7 +34,7 @@
                         <ul>
                             <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                                 <li>
-                                    <dot:LinkButton Text="{value: NameLocalized}" />
+                                    <dot:RouteLink Text="{value: NameLocalized}" RouteName="AlbumsByCategory" Param-CategoryId="{value: Id}" />
                                 </li>
                             </dot:Repeater>
                         </ul>

@@ -7,7 +7,7 @@
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
-    <div class="content-bg content-bg-detail">
+    <div class="content-bg">
         <div class="wrap">
             <div class="main">
                 <div class="content">
@@ -52,7 +52,7 @@
                         <ul>
                             <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                                 <li>
-                                    <dot:LinkButton Text="{value: NameLocalized}"/>
+                                    <dot:RouteLink Text="{value: NameLocalized}" RouteName="AlbumsByCategory" Param-CategoryId="{value: Id}" />
                                 </li>
                             </dot:Repeater>
                         </ul>

@@ -259,6 +259,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign in.
         /// </summary>
         public static string SignIn {
@@ -273,6 +282,15 @@ namespace MusicLibrary.Resources {
         public static string SignOut {
             get {
                 return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My collection.
+        /// </summary>
+        public static string UserCollection {
+            get {
+                return ResourceManager.GetString("UserCollection", resourceCulture);
             }
         }
         

@@ -172,4 +172,10 @@
   <data name="BandAlbums" xml:space="preserve">
     <value>Albumy skupiny</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Hľadať</value>
+  </data>
+  <data name="UserCollection" xml:space="preserve">
+    <value>Moja kolekcia</value>
+  </data>
 </root>

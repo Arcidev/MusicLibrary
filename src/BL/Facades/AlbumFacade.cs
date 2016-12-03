@@ -78,11 +78,14 @@ namespace BL.Facades
             }
         }
 
-        public IEnumerable<AlbumDTO> GetAlbums()
+        public IEnumerable<AlbumDTO> GetAlbums(int? categoryId = null, string filter = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var query = AlbumsQueryFunc();
+                query.CategoryId = categoryId;
+                query.Filter = filter;
+
                 return query.Execute();
             }
         }

@@ -1,4 +1,4 @@
-﻿@viewModel MusicLibrary.ViewModels.AlbumsViewModel, MusicLibrary
+﻿@viewModel MusicLibrary.ViewModels.UserCollectionViewModel, MusicLibrary
 @masterPage Views/masterPage.dotmaster
 @import Resource = MusicLibrary.Resources.Texts
 

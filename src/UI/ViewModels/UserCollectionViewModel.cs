@@ -4,10 +4,11 @@ using DotVVM.Framework.ViewModel;
 using BL.DTO;
 using System.Collections.Generic;
 using BL.Extensions;
+using System.Web;
 
 namespace MusicLibrary.ViewModels
 {
-    public class AlbumsViewModel : MasterPageViewModel
+    public class UserCollectionViewModel : MasterPageViewModel
     {
         [Bind(Direction.None)]
         public CategoryFacade CategoryFacade { get; set; }
@@ -23,16 +24,13 @@ namespace MusicLibrary.ViewModels
         {
             if (!Context.IsPostBack)
             {
-                int? categoryId = null;
-                if (Context.Parameters.ContainsKey("Filter"))
-                    SearchString = Context.Parameters["Filter"].ToString();
+                int userId;
+                if (!int.TryParse(UserId, out userId))
+                    throw new HttpException(401, "Access Denied");
 
-                if (Context.Parameters.ContainsKey("CategoryId"))
-                    categoryId = int.Parse(Context.Parameters["CategoryId"].ToString());
-
-                ActivePage = "Albums";
+                ActivePage = "UserCollection";
                 Categories = CategoryFacade.GetCategories();
-                Albums = AlbumFacade.GetAlbums(categoryId, SearchString).Chunk(5);
+                Albums = AlbumFacade.GetAlbums().Chunk(5);
             }
 
             return base.PreRender();

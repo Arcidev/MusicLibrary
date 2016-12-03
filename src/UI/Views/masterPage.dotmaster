@@ -29,6 +29,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </li>
                     <li class="{value: ActivePage == "Bands" ? "active" : ""}"><dot:RouteLink RouteName="Bands">{{resource: Resource.Bands}}</dot:RouteLink></li>
                     <li class="{value: ActivePage == "Albums" ? "active" : ""}"><dot:RouteLink RouteName="Albums">{{resource: Resource.Albums}}</dot:RouteLink></li>
+                    <li Visible="{value: IsUserLoggedIn}" class="{value: ActivePage == "UserCollection" ? "active" : ""}"><dot:RouteLink RouteName="UserCollection">{{resource: Resource.UserCollection}}</dot:RouteLink></li>
                 </ul>
             </div>
             <div class="soc-icons">
@@ -51,10 +52,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <a href="index.html"></a>
                 </div>
                 <div class="foot-search">
-                    <form>
-                        <input type="text" value="keyword here" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'keyword here';}">
-                        <input type="submit" value="Search">
-                    </form>
+                    <dot:TextBox placeholder="{resource: Resource.Search + "..."}" Text="{value: SearchString}" />
+                    <dot:RouteLink class="submit-button" Text="{resource: Resource.Search}" RouteName="AlbumsFiltered" param-Filter="{value: SearchString}" />
                 </div>
                 <div class="clear"></div>
             </div>

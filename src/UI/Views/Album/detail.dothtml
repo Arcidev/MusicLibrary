@@ -7,7 +7,7 @@
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
-    <div class="content-bg content-bg-detail">
+    <div class="content-bg">
         <div class="wrap">
             <div class="main">
                 <div class="content">
@@ -44,7 +44,7 @@
                                     <audio src="{value: _root.AudioFile != null ? "/SavedFiles/" + _root.AudioFile : ""}" type="audio/mpeg" id="audioElementId" controls Visible="{value: _root.AudioFile != null}">
                                         {{resource: Resource.AudioUnsupported}}
                                     </audio>
-                                    <iframe Visible="{value: _root.YoutubeUrlParam != null}" width="853.33" height="480" src="{value: "https://www.youtube.com/embed/" + _root.YoutubeUrlParam}" />
+                                    <iframe Visible="{value: _root.YoutubeUrlParam != null}" width="853.33" height="480" src="{value: "https://www.youtube.com/embed/" + _root.YoutubeUrlParam}" allowfullscreen />
                                 </div>
                                 <div class="clear"></div>
                             </div>
@@ -74,7 +74,7 @@
                         <ul>
                             <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false" RenderSettings.Mode="Server">
                                 <li>
-                                    <dot:LinkButton Text="{value: NameLocalized}"/>
+                                    <dot:RouteLink Text="{value: NameLocalized}" RouteName="AlbumsByCategory" Param-CategoryId="{value: Id}" />
                                 </li>
                             </dot:Repeater>
                         </ul>

@@ -9,7 +9,6 @@
   padding-top: 20px;
   width: 400px;
   margin: auto;
-  min-height: 743px;
 }
 .login-form tr {
   line-height: 30px;
@@ -33,9 +32,6 @@
 }
 .error-message {
   color: red;
-}
-.content-bg-detail {
-  min-height: 648px;
 }
 .single h3 a {
   color: #10696e;
