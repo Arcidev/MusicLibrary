@@ -1,0 +1,31 @@
+﻿@viewModel MusicLibrary.ViewModels.ContentMasterPageViewModel, MusicLibrary
+@masterPage Views/masterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+    <dot:ContentPlaceHolder ID="HeaderContent" />
+</dot:Content>
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="content-bg">
+        <div class="wrap">
+            <div class="main">
+                <div class="content">
+                    <dot:ContentPlaceHolder ID="PageContent" />
+                </div>
+                <div class="sidebar">
+                    <div class="sidebar-list">
+                        <h2>{{resource: Resource.Categories}}</h2>
+                        <ul>
+                            <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                                <li>
+                                    <dot:RouteLink Text="{value: NameLocalized}" RouteName="AlbumsByCategory" Param-CategoryId="{value: Id}" />
+                                </li>
+                            </dot:Repeater>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</dot:Content>

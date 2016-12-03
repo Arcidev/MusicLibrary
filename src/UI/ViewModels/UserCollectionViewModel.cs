@@ -8,15 +8,10 @@ using System.Web;
 
 namespace MusicLibrary.ViewModels
 {
-    public class UserCollectionViewModel : MasterPageViewModel
+    public class UserCollectionViewModel : ContentMasterPageViewModel
     {
         [Bind(Direction.None)]
-        public CategoryFacade CategoryFacade { get; set; }
-
-        [Bind(Direction.None)]
         public AlbumFacade AlbumFacade { get; set; }
-
-        public IEnumerable<CategoryDTO> Categories { get; set; }
 
         public IEnumerable<IEnumerable<AlbumDTO>> Albums { get; set; }
 
@@ -29,7 +24,6 @@ namespace MusicLibrary.ViewModels
                     throw new HttpException(401, "Access Denied");
 
                 ActivePage = "UserCollection";
-                Categories = CategoryFacade.GetCategories();
                 Albums = AlbumFacade.GetAlbums().Chunk(5);
             }
 

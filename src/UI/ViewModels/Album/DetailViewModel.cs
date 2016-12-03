@@ -7,18 +7,13 @@ using System.Linq;
 
 namespace MusicLibrary.ViewModels.Album
 {
-    public class DetailViewModel : MasterPageViewModel
+    public class DetailViewModel : ContentMasterPageViewModel
     {
-        [Bind(Direction.None)]
-        public CategoryFacade CategoryFacade { get; set; }
-
         [Bind(Direction.None)]
         public AlbumFacade AlbumFacade { get; set; }
 
         [Bind(Direction.None)]
         public BandFacade BandFacade { get; set; }
-
-        public IEnumerable<CategoryDTO> Categories { get; set; }
 
         public AlbumDTO Album { get; set; }
 
@@ -35,7 +30,6 @@ namespace MusicLibrary.ViewModels.Album
             if (!Context.IsPostBack)
             {
                 int albumId = int.Parse(Context.Parameters["AlbumId"].ToString());
-                Categories = CategoryFacade.GetCategories();
                 Album = AlbumFacade.GetAlbum(albumId);
                 OtherBandAlbums = BandFacade.GetBandAlbums(Album.BandId, Album.Id, 6, true);
                 HasOtherBandAlbums = OtherBandAlbums.Any();

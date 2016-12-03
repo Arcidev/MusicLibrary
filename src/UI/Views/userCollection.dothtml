@@ -1,5 +1,5 @@
 ﻿@viewModel MusicLibrary.ViewModels.UserCollectionViewModel, MusicLibrary
-@masterPage Views/masterPage.dotmaster
+@masterPage Views/contentMasterPage.dotmaster
 @import Resource = MusicLibrary.Resources.Texts
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
@@ -7,40 +7,19 @@
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
-    <div class="content-bg">
-        <div class="wrap">
-            <div class="main">
-                <div class="content">
-                    <h2>{{resource: Resource.Albums}}</h2>
-                    <div class="select">
-                        <dot:Repeater DataSource="{value: Albums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-                            <dot:Repeater DataSource="{value: _this}" WrapperTagName="div" class="section group">
-                                <div class="grid_1_of_2 images_1_of_2">
-                                    <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: Id}">
-                                        <img DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: FileName}" />
-                                    </dot:RouteLink>
-                                    <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: Id}">
-                                        <h3>{{value: Name}}</h3>
-                                    </dot:RouteLink>
-                                </div>
-                            </dot:Repeater>
-                        </dot:Repeater>
-                    </div>
+    <h2>{{resource: Resource.Albums}}</h2>
+    <div class="select">
+        <dot:Repeater DataSource="{value: Albums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+            <dot:Repeater DataSource="{value: _this}" WrapperTagName="div" class="section group">
+                <div class="grid_1_of_2 images_1_of_2">
+                    <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: Id}">
+                        <img DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: FileName}" />
+                    </dot:RouteLink>
+                    <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: Id}">
+                        <h3>{{value: Name}}</h3>
+                    </dot:RouteLink>
                 </div>
-                <div class="sidebar">
-                    <div class="sidebar-list">
-                        <h2>{{resource: Resource.Categories}}</h2>
-                        <ul>
-                            <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-                                <li>
-                                    <dot:RouteLink Text="{value: NameLocalized}" RouteName="AlbumsByCategory" Param-CategoryId="{value: Id}" />
-                                </li>
-                            </dot:Repeater>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-        </div>
+            </dot:Repeater>
+        </dot:Repeater>
     </div>
 </dot:Content>

@@ -1,5 +1,5 @@
 ﻿@viewModel MusicLibrary.ViewModels.BandsViewModel, MusicLibrary
-@masterPage Views/masterPage.dotmaster
+@masterPage Views/contentMasterPage.dotmaster
 @import Resource = MusicLibrary.Resources.Texts
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
@@ -7,41 +7,20 @@
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
-    <div class="content-bg">
-        <div class="wrap">
-            <div class="main">
-                <div class="content">
-                    <h2>{{resource: Resource.Bands}}</h2>
-                    <dot:Repeater DataSource="{{value: Bands}}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-                        <div class="image group">
-                            <div class="grid images_3_of_1">
-                                <dot:RouteLink RouteName="BandDetail" Param-BandId="{value: Id}">
-                                    <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}">
-                                </dot:RouteLink>
-                            </div>
-                            <div class="grid span_2_of_3">
-                                <dot:RouteLink RouteName="BandDetail" Param-BandId="{value: Id}">
-                                    <h3>{{value: Name}}</h3>
-                                </dot:RouteLink>
-                                <p>{{value: Description}}</p>
-                            </div>
-                        </div>
-                    </dot:Repeater>
-                </div>
-                <div class="sidebar">
-                    <div class="sidebar-list">
-                        <h2>{{resource: Resource.Categories}}</h2>
-                        <ul>
-                            <dot:Repeater DataSource="{value: Categories}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-                                <li>
-                                    <dot:RouteLink Text="{value: NameLocalized}" RouteName="AlbumsByCategory" Param-CategoryId="{value: Id}" />
-                                </li>
-                            </dot:Repeater>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clear"></div>
+    <h2>{{resource: Resource.Bands}}</h2>
+    <dot:Repeater DataSource="{{value: Bands}}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+        <div class="image group">
+            <div class="grid images_3_of_1">
+                <dot:RouteLink RouteName="BandDetail" Param-BandId="{value: Id}">
+                    <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}">
+                </dot:RouteLink>
+            </div>
+            <div class="grid span_2_of_3">
+                <dot:RouteLink RouteName="BandDetail" Param-BandId="{value: Id}">
+                    <h3>{{value: Name}}</h3>
+                </dot:RouteLink>
+                <p>{{value: Description}}</p>
             </div>
         </div>
-    </div>
+    </dot:Repeater>
 </dot:Content>

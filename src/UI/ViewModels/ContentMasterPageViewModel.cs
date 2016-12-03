@@ -1,24 +1,23 @@
-using System.Threading.Tasks;
+using BL.DTO;
 using BL.Facades;
 using DotVVM.Framework.ViewModel;
-using BL.DTO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels
 {
-    public class BandsViewModel : ContentMasterPageViewModel
+	public class ContentMasterPageViewModel : MasterPageViewModel
     {
         [Bind(Direction.None)]
-        public BandFacade BandFacade { get; set; }
+        public CategoryFacade CategoryFacade { get; set; }
 
-        public IEnumerable<BandDTO> Bands { get; set; }
+        public IEnumerable<CategoryDTO> Categories { get; set; }
 
         public override Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                ActivePage = "Bands";
-                Bands = BandFacade.GetBands();
+                Categories = CategoryFacade.GetCategories();
             }
 
             return base.PreRender();

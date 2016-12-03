@@ -16,8 +16,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <title>Music Library</title>
     <dot:RequiredResource Name="templateStyle-css" />
     <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
-    <dot:ContentPlaceHolder ID="HeaderContent">
-    </dot:ContentPlaceHolder>
+    <dot:ContentPlaceHolder ID="HeaderContent" />
 </head>
 <body>
     <div class="menu-bg">
@@ -60,8 +59,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
     </div>
 
-    <dot:ContentPlaceHolder ID="PageContent">
-    </dot:ContentPlaceHolder>
+    <dot:ContentPlaceHolder ID="PageContent" />
 
     <div class="footer1-bg">
         <div class="wrap">
