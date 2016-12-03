@@ -15,7 +15,13 @@
                     <img class="logo-img" src="{value: "/SavedFiles/" + FileName}">
                 </div>
                 <div class="para" RenderSettings.Mode="Server">
-                    <h4>{{value: Name}}</h4>
+                    <h4>
+                        {{value: Name}}
+                        <span Visible="{value: _root.IsUserLoggedIn}">
+                            <dot:LinkButton title="{resource: Resource.AddToCollection}" Visible="{value: !_root.HasInCollection}" Click="{command: _root.AddToCollection(_this.Id)}" class="collection-icon"><img src="/Content/Images/plus.png" /></dot:LinkButton>
+                            <dot:LinkButton title="{resource: Resource.RemoveFromCollection}" Visible="{value: _root.HasInCollection}" Click="{command: _root.RemoveFromCollection(_this.Id)}" class="collection-icon"><img src="/Content/Images/minus.png" /></dot:LinkButton>
+                        </span>
+                    </h4>
                     <h3 DataContext="{value: Band}">
                         <dot:RouteLink RouteName="BandDetail" param-BandId="{value: Id}">
                             {{value: Name}}
@@ -37,7 +43,7 @@
                         </Columns>
                     </dot:GridView>
                     <br />
-                    <audio src="{value: _root.AudioFile != null ? "/SavedFiles/" + _root.AudioFile : ""}" type="audio/mpeg" id="audioElementId" controls Visible="{value: _root.AudioFile != null}">
+                    <audio autoplay class="audio-player" src="{value: _root.AudioFile != null ? "/SavedFiles/" + _root.AudioFile : ""}" type="audio/mpeg" id="audioElementId" controls Visible="{value: _root.AudioFile != null}">
                         {{resource: Resource.AudioUnsupported}}
                     </audio>
                     <iframe Visible="{value: _root.YoutubeUrlParam != null}" width="853.33" height="480" src="{value: "https://www.youtube.com/embed/" + _root.YoutubeUrlParam}" allowfullscreen />

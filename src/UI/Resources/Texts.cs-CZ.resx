@@ -178,4 +178,13 @@
   <data name="UserCollection" xml:space="preserve">
     <value>Moje kolekce</value>
   </data>
+  <data name="UserCollectionEmpty" xml:space="preserve">
+    <value>Momentálně nemáte přiřazenou žádnou hudbu ve vaší sbírce.</value>
+  </data>
+  <data name="AddToCollection" xml:space="preserve">
+    <value>Přidat do mé sbírky</value>
+  </data>
+  <data name="RemoveFromCollection" xml:space="preserve">
+    <value>Odebrat z mé sbírky</value>
+  </data>
 </root>

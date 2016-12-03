@@ -27,14 +27,19 @@
 .login-form .submit-row td {
   padding-top: 10px;
 }
-.sign-out {
-  padding-top: 10px;
-}
 .error-message {
   color: red;
 }
 .single h3 a {
   color: #10696e;
+}
+.collection-icon img {
+  padding-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+.audio-player {
+  width: 457px;
 }
 .loading-animation {
   width: 100%;

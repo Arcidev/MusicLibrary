@@ -10,16 +10,21 @@
     <h2>{{resource: Resource.Albums}}</h2>
     <div class="select">
         <dot:Repeater DataSource="{value: Albums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-            <dot:Repeater DataSource="{value: _this}" WrapperTagName="div" class="section group">
-                <div class="grid_1_of_2 images_1_of_2">
-                    <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: Id}">
-                        <img DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: FileName}" />
-                    </dot:RouteLink>
-                    <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: Id}">
-                        <h3>{{value: Name}}</h3>
-                    </dot:RouteLink>
-                </div>
-            </dot:Repeater>
+            <ItemTemplate>
+                <dot:Repeater DataSource="{value: _this}" WrapperTagName="div" class="section group">
+                    <div class="grid_1_of_2 images_1_of_2">
+                        <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: Id}">
+                            <img DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: FileName}" />
+                        </dot:RouteLink>
+                        <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: Id}">
+                            <h3>{{value: Name}}</h3>
+                        </dot:RouteLink>
+                    </div>
+                </dot:Repeater>
+            </ItemTemplate>
+            <EmptyDataTemplate>
+                {{resource: Resource.UserCollectionEmpty}}
+            </EmptyDataTemplate>
         </dot:Repeater>
     </div>
 </dot:Content>

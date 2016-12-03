@@ -198,4 +198,13 @@
   <data name="UserCollection" xml:space="preserve">
     <value>My collection</value>
   </data>
+  <data name="UserCollectionEmpty" xml:space="preserve">
+    <value>You haven't added any music to your collection.</value>
+  </data>
+  <data name="AddToCollection" xml:space="preserve">
+    <value>Add to my collection</value>
+  </data>
+  <data name="RemoveFromCollection" xml:space="preserve">
+    <value>Remove from my collection</value>
+  </data>
 </root>

@@ -17,7 +17,15 @@ namespace MusicLibrary.ViewModels.Login
             }, failureCallback: (ex) => ErrorMessage = ex.Message);
 
             if (success)
+            {
+                object returnUrl;
+                if (Context.Query.TryGetValue("ReturnUrl", out returnUrl))
+                {
+                    Context.RedirectToUrl(returnUrl.ToString());
+                    return;
+                }
                 Context.RedirectToRoute("Index");
+            }
         }
 	}
 }

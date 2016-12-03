@@ -25,7 +25,9 @@ namespace MusicLibrary.ViewModels.Album
 
         public bool HasOtherBandAlbums { get; set; }
 
-        public override Task PreRender()
+        public bool HasInCollection { get; set; }
+
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
@@ -33,9 +35,13 @@ namespace MusicLibrary.ViewModels.Album
                 Album = AlbumFacade.GetAlbum(albumId);
                 OtherBandAlbums = BandFacade.GetBandAlbums(Album.BandId, Album.Id, 6, true);
                 HasOtherBandAlbums = OtherBandAlbums.Any();
+
+                int userId;
+                if (int.TryParse(UserId, out userId))
+                    HasInCollection = await AlbumFacade.HasUserInCollection(userId, albumId);
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
 
         public void SetAudioFile(SongDTO song)
@@ -48,6 +54,30 @@ namespace MusicLibrary.ViewModels.Album
         {
             AudioFile = null;
             YoutubeUrlParam = song.YoutubeUrlParam;
+        }
+
+        public void AddToCollection(int id)
+        {
+            ExecuteSafely(() =>
+            {
+                AlbumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO()
+                {
+                    AlbumId = id,
+                    UserId = int.Parse(UserId)
+                });
+
+                HasInCollection = true;
+            });
+        }
+
+        public async Task RemoveFromCollection(int id)
+        {
+            await ExecuteSafelyAsync(async () =>
+            {
+                await AlbumFacade.RemoveAlbumFromUserCollection(int.Parse(UserId), id);
+
+                HasInCollection = false;
+            });
         }
     }
 }

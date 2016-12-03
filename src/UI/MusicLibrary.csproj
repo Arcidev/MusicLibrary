@@ -252,8 +252,10 @@
     <Content Include="Content\Images\btn.png" />
     <Content Include="Content\Images\header.png" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\minus.png" />
     <Content Include="Content\Images\nav-bg.png" />
     <Content Include="Content\Images\play.png" />
+    <Content Include="Content\Images\plus.png" />
     <Content Include="Content\Images\youtube.ico" />
     <Content Include="Content\Scripts\index.js" />
     <Content Include="Content\Scripts\jquery.gallery.js" />

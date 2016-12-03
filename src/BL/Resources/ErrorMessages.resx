@@ -141,4 +141,7 @@
   <data name="CategoryNotExist" xml:space="preserve">
     <value>Category does not exist.</value>
   </data>
+  <data name="UserAlbumNotExist" xml:space="preserve">
+    <value>User does not have this album in his collection.</value>
+  </data>
 </root>

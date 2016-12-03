@@ -7,6 +7,7 @@ using DAL.Entities;
 using DotVVM.Framework.Storage;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BL.Facades
 {
@@ -162,6 +163,30 @@ namespace BL.Facades
                 repo.Insert(entity);
 
                 uow.Commit();
+            }
+        }
+
+        public async Task RemoveAlbumFromUserCollection(int userId, int albumId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = UserAlbumRepositoryFunc();
+                var entity = await repo.GetUserAlbum(userId, albumId);
+                IsNotNull(entity, ErrorMessages.UserAlbumNotExist);
+
+                repo.Delete(entity);
+                uow.Commit();
+            }
+        }
+
+        public async Task<bool> HasUserInCollection(int userId, int albumId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = UserAlbumRepositoryFunc();
+                var entity = await repo.GetUserAlbum(userId, albumId);
+
+                return entity != null;
             }
         }
 

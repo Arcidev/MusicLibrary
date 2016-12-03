@@ -61,6 +61,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add to my collection.
+        /// </summary>
+        public static string AddToCollection {
+            get {
+                return ResourceManager.GetString("AddToCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Album.
         /// </summary>
         public static string Album {
@@ -259,6 +268,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove from my collection.
+        /// </summary>
+        public static string RemoveFromCollection {
+            get {
+                return ResourceManager.GetString("RemoveFromCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Search {
@@ -291,6 +309,15 @@ namespace MusicLibrary.Resources {
         public static string UserCollection {
             get {
                 return ResourceManager.GetString("UserCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You haven&apos;t added any music to your collection..
+        /// </summary>
+        public static string UserCollectionEmpty {
+            get {
+                return ResourceManager.GetString("UserCollectionEmpty", resourceCulture);
             }
         }
         
