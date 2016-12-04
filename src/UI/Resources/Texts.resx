@@ -207,4 +207,7 @@
   <data name="RemoveFromCollection" xml:space="preserve">
     <value>Remove from my collection</value>
   </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
 </root>

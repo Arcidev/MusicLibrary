@@ -4,6 +4,7 @@
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
     <dot:RequiredResource Name="style-css" />
+    <dot:RequiredResource Name="stars" />
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
@@ -63,6 +64,31 @@
                             <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
                                 <h3>{{value: Name}}</h3>
                             </dot:RouteLink>
+                        </div>
+                    </dot:Repeater>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="text-h1 top">
+                <h2 Visible="{value: HasReviews}">{{resource: Resource.Reviews}}</h2>
+            </div>
+            <div class="div2">
+                <div id="section group">
+                    <dot:Repeater DataSource="{value: Reviews}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                        <div class="image group">
+                            <div class="grid-img1 review-img">
+                                <img class="logo-img" src="{value: CreatedByImageStorageFileName != null ? "/SavedFiles/" + CreatedByImageStorageFileName : "" }" alt="{value: CreatedByFullName}" />
+                            </div>
+                            <div class="para review">
+                                <p>
+                                    <dot:Literal Text="{value: Text}" />
+                                </p>
+                                <ul>
+                                    <li><span class="stars">{{value: QualityInt}}</span></li>
+                                    <li><dot:Literal Text="{value: CreatedByFullName}" /></li>
+                                    <li><dot:Literal Text="{value: EditDate}" /></li>
+                                </ul>
+                            </div>
                         </div>
                     </dot:Repeater>
                 </div>

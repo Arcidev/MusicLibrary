@@ -5,8 +5,6 @@ namespace BL.DTO
     {
         public string Name { get; set; }
 
-        public int? ImageStorageFileId { get; set; }
-
         public int BandId { get; set; }
 
         public bool Approved { get; set; }

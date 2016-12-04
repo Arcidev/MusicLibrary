@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201611012138355_BandAddedDescription.Designer.cs">
       <DependentUpon>201611012138355_BandAddedDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612041717401_ReviewAddedEditDate.cs" />
+    <Compile Include="Migrations\201612041717401_ReviewAddedEditDate.Designer.cs">
+      <DependentUpon>201612041717401_ReviewAddedEditDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Context\MusicLibraryDbContext.cs" />
     <Compile Include="Entities\Album.cs" />
@@ -122,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611012138355_BandAddedDescription.resx">
       <DependentUpon>201611012138355_BandAddedDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612041717401_ReviewAddedEditDate.resx">
+      <DependentUpon>201612041717401_ReviewAddedEditDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />

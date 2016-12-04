@@ -7,8 +7,6 @@ namespace BL.DTO
 
         public string Description { get; set; }
 
-        public int? ImageStorageFileId { get; set; }
-
         public bool Approved { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace BL.DTO
 
         public DateTime CreateDate { get; set; }
 
+        public int? ImageStorageFileId { get; set; }
+
         public StorageFileDTO ImageStorageFile { get; set; }
 
         public IEnumerable<AlbumDTO> Albums { get; set; }

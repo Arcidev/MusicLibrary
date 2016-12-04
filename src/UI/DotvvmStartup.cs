@@ -61,6 +61,11 @@ namespace MusicLibrary
                 Url = "~/Content/Scripts/index.js",
                 Dependencies = new[] { "jquery-gallery" }
             });
+            config.Resources.Register("stars", new ScriptResource()
+            {
+                Url = "~/Content/Scripts/stars.js",
+                Dependencies = new[] { "jquery" }
+            });
         }
     }
 }

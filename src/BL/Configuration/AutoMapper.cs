@@ -33,8 +33,12 @@ namespace BL.Configuration
                 config.CreateMap<Song, SongDTO>();
                 config.CreateMap<SongCreateDTO, Song>();
 
-                config.CreateMap<AlbumReview, AlbumReviewDTO>();
+                config.CreateMap<AlbumReview, AlbumReviewDTO>()
+                    .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
+                    .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
+                    .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
                 config.CreateMap<AlbumReviewDTO, AlbumReview>()
+                    .ForMember(target => target.EditDate, action => action.Ignore())
                     .ForMember(target => target.CreateDate, action => action.Ignore());
 
                 config.CreateMap<UserAlbumCreateDTO, UserAlbum>();

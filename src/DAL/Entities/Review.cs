@@ -16,6 +16,8 @@ namespace DAL.Entities
 
         public DateTime CreateDate { get; set; }
 
+        public DateTime EditDate { get; set; }
+
         public int CreatedById { get; set; }
 
         public Quality Quality { get; set; }

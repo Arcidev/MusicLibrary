@@ -19,6 +19,8 @@ namespace MusicLibrary.ViewModels.Album
 
         public IEnumerable<AlbumDTO> OtherBandAlbums { get; set; }
 
+        public IEnumerable<AlbumReviewDTO> Reviews { get; set; }
+
         public string YoutubeUrlParam { get; set; }
 
         public string AudioFile { get; set; }
@@ -26,6 +28,8 @@ namespace MusicLibrary.ViewModels.Album
         public bool HasOtherBandAlbums { get; set; }
 
         public bool HasInCollection { get; set; }
+
+        public bool HasReviews { get; set; }
 
         public override async Task PreRender()
         {
@@ -35,6 +39,9 @@ namespace MusicLibrary.ViewModels.Album
                 Album = AlbumFacade.GetAlbum(albumId);
                 OtherBandAlbums = BandFacade.GetBandAlbums(Album.BandId, Album.Id, 6, true);
                 HasOtherBandAlbums = OtherBandAlbums.Any();
+
+                Reviews = AlbumFacade.GetReviews(albumId);
+                HasReviews = Reviews.Any();
 
                 int userId;
                 if (int.TryParse(UserId, out userId))

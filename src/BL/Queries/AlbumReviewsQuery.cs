@@ -22,7 +22,7 @@ namespace BL.Queries
             if (AlbumId.HasValue)
                 query = query.Where(x => x.AlbumId == AlbumId.Value);
 
-            return query.ProjectTo<AlbumReviewDTO>();
+            return query.OrderByDescending(x => x.EditDate).ProjectTo<AlbumReviewDTO>();
         }
     }
 }

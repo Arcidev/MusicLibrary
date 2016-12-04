@@ -97,6 +97,7 @@ namespace BL.Facades
             {
                 var entity = Mapper.Map<AlbumReview>(review);
                 entity.CreateDate = DateTime.Now;
+                entity.EditDate = DateTime.Now;
 
                 var repo = AlbumReviewRepositoryFunc();
                 repo.Insert(entity);

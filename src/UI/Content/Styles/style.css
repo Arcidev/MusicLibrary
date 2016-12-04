@@ -41,6 +41,40 @@
 .audio-player {
   width: 457px;
 }
+span.stars,
+span.stars span {
+  display: inline-block;
+  background: url(/Content/Images/stars.png) 0 -16px repeat-x;
+  width: 80px;
+}
+span.stars span {
+  background-position: 0 0;
+}
+.review ul {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid gray;
+}
+.review ul li {
+  display: inline-block;
+  border-right: 1px solid gray;
+  padding-right: 5px;
+  height: 20px;
+}
+.review ul li span {
+  font-size: .8425em;
+  height: 16px;
+}
+.review ul li:last-child {
+  border-right: none;
+}
+div .review-img {
+  margin-right: 20px;
+}
+div .review-img img {
+  height: 80px;
+  width: 80px;
+}
 .loading-animation {
   width: 100%;
   position: relative;

@@ -187,4 +187,7 @@
   <data name="RemoveFromCollection" xml:space="preserve">
     <value>Odebrat z mé sbírky</value>
   </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Recenze</value>
+  </data>
 </root>

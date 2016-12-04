@@ -13,6 +13,8 @@ namespace BL.DTO
 
         public BandDTO Band { get; set; }
 
+        public int? ImageStorageFileId { get; set; }
+
         public StorageFileDTO ImageStorageFile { get; set; }
 
         public IEnumerable<SongDTO> Songs { get; set; }
