@@ -14,9 +14,15 @@ namespace BL.Facades
     {
         public Func<BandRepository> BandRepositoryFunc { get; set; }
 
+        public Func<BandReviewRepository> BandReviewRepositoryFunc { get; set; }
+
         public Func<BandsQuery> BandsQueryFunc { get; set; }
 
         public Func<BandAlbumsQuery> BandAlbumsQueryFunc { get; set; }
+
+        public Func<BandReviewsQuery> BandReviewsQueryFunc { get; set; }
+
+        public Func<BandMembersQuery> BandMembersQueryFunc { get; set; }
 
         public BandDTO AddBand(BandCreateDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
@@ -57,7 +63,7 @@ namespace BL.Facades
             }
         }
 
-        public BandDTO GetBand(int id, bool includeAlbums = true)
+        public BandDTO GetBand(int id, bool includeAlbums = true, bool includeMembers = true)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -69,7 +75,49 @@ namespace BL.Facades
                 if (includeAlbums)
                     dto.Albums = Mapper.Map<IEnumerable<AlbumDTO>>(entity.Albums);
 
+                if (includeMembers)
+                    dto.Members = GetBandMembers(entity.Id);
+
                 return dto;
+            }
+        }
+
+        public IEnumerable<ArtistDTO> GetBandMembers(int bandId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = BandMembersQueryFunc();
+                query.BandId = bandId;
+                query.Approved = true;
+
+                return query.Execute();
+            }
+        }
+
+        public IEnumerable<BandReviewDTO> GetReviews(int? bandId = null, int? userId = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = BandReviewsQueryFunc();
+                query.BandId = bandId;
+                query.UserId = userId;
+
+                return query.Execute();
+            }
+        }
+
+        public void AddReview(BandReviewCreateDTO review)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var entity = Mapper.Map<BandReview>(review);
+                entity.CreateDate = DateTime.Now;
+                entity.EditDate = DateTime.Now;
+
+                var repo = BandReviewRepositoryFunc();
+                repo.Insert(entity);
+
+                uow.Commit();
             }
         }
     }

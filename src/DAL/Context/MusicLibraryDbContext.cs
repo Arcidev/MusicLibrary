@@ -15,6 +15,8 @@ namespace DAL.Context
 
         public DbSet<Band> Bands { get; set; }
 
+        public DbSet<BandReview> BandReviews { get; set; }
+
         public DbSet<BandMember> BandMembers { get; set; }
 
         public DbSet<Category> Categories { get; set; }
@@ -22,8 +24,6 @@ namespace DAL.Context
         public DbSet<SliderImage> SliderImages { get; set; }
 
         public DbSet<Song> Songs { get; set; }
-
-        public DbSet<SongReview> SongReviews { get; set; }
 
         public DbSet<StorageFile> StorageFiles { get; set; }
 

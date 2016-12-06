@@ -1,19 +1,14 @@
-﻿using Shared.Enums;
-using System;
+﻿using System;
 
 namespace BL.DTO
 {
-    public abstract class ReviewDTO
+    public abstract class ReviewDTO : ReviewCreateDTO
     {
         public int Id { get; set; }
-
-        public string Text { get; set; }
 
         public DateTime CreateDate { get; set; }
 
         public DateTime EditDate { get; set; }
-
-        public int CreatedById { get; set; }
 
         public string CreatedByFirstName { get; set; }
 
@@ -22,8 +17,6 @@ namespace BL.DTO
         public string CreatedByFullName { get { return $"{CreatedByFirstName} {CreatedByLastName}"; } }
 
         public string CreatedByImageStorageFileName { get; set; }
-
-        public Quality Quality { get; set; }
 
         public int QualityInt { get { return (int)Quality; } }
     }

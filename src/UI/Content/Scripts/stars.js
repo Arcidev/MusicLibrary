@@ -13,4 +13,6 @@
 
 $(function () {
     $('span.stars').stars();
+
+    dotvvm.events.afterPostback.subscribe(function () { $('span.stars').stars() });
 });

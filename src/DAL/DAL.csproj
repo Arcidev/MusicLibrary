@@ -63,7 +63,7 @@
     <Compile Include="Entities\AlbumReview.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\UserAlbum.cs" />
-    <Compile Include="Entities\SongReview.cs" />
+    <Compile Include="Entities\BandReview.cs" />
     <Compile Include="Migrations\201610081136011_AddedSliderImage.cs" />
     <Compile Include="Migrations\201610081136011_AddedSliderImage.Designer.cs">
       <DependentUpon>201610081136011_AddedSliderImage.cs</DependentUpon>
@@ -91,6 +91,10 @@
     <Compile Include="Migrations\201612041717401_ReviewAddedEditDate.cs" />
     <Compile Include="Migrations\201612041717401_ReviewAddedEditDate.Designer.cs">
       <DependentUpon>201612041717401_ReviewAddedEditDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612060002528_SongReviewToBandReview.cs" />
+    <Compile Include="Migrations\201612060002528_SongReviewToBandReview.Designer.cs">
+      <DependentUpon>201612060002528_SongReviewToBandReview.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Context\MusicLibraryDbContext.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612041717401_ReviewAddedEditDate.resx">
       <DependentUpon>201612041717401_ReviewAddedEditDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612060002528_SongReviewToBandReview.resx">
+      <DependentUpon>201612060002528_SongReviewToBandReview.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />

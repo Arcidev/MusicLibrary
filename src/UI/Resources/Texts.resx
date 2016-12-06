@@ -210,4 +210,22 @@
   <data name="Reviews" xml:space="preserve">
     <value>Reviews</value>
   </data>
+  <data name="AddReview" xml:space="preserve">
+    <value>Add review</value>
+  </data>
+  <data name="ReviewQualityRequired" xml:space="preserve">
+    <value>Album rating is required!</value>
+  </data>
+  <data name="ReviewTextRequired" xml:space="preserve">
+    <value>Review text is required!</value>
+  </data>
+  <data name="UserNotLoggedIn" xml:space="preserve">
+    <value>You need to be logged in to perform this action!</value>
+  </data>
+  <data name="SubmitReview" xml:space="preserve">
+    <value>Submit review</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Members</value>
+  </data>
 </root>

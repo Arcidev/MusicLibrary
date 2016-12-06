@@ -28,7 +28,7 @@ namespace MusicLibrary.WebApi
         [ActionName("get")]
         public BandViewModel GetBand(int id)
         {
-            return BandFacade.GetBand(id, false).ToBandViewModel();
+            return BandFacade.GetBand(id, false, false).ToBandViewModel();
         }
     }
 }

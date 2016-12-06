@@ -50,23 +50,56 @@ span.stars span {
 span.stars span {
   background-position: 0 0;
 }
-.review ul {
+.review ul,
+.review-comment ul {
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid gray;
 }
-.review ul li {
+.review ul li,
+.review-comment ul li {
   display: inline-block;
-  border-right: 1px solid gray;
-  padding-right: 5px;
   height: 20px;
 }
-.review ul li span {
+.review ul li span,
+.review-comment ul li span {
   font-size: .8425em;
   height: 16px;
 }
-.review ul li:last-child {
+.review ul li > span,
+.review-comment ul li > span {
+  border-right: 1px solid gray;
+  padding-right: 5px;
+}
+.review ul li:last-child > span,
+.review-comment ul li:last-child > span {
   border-right: none;
+}
+.review-comment textarea {
+  resize: vertical;
+  width: 775px;
+  height: 105px;
+}
+.review-comment input[type="button"] {
+  padding: 5px;
+}
+.review-comment li {
+  padding-right: 5px;
+}
+.review-comment li .error-message {
+  padding-left: 5px;
+  border-right: none;
+  border-left: 1px solid gray;
+}
+.review-comment li:last-child {
+  float: right;
+}
+.review-comment-add {
+  margin: 20px 0px 20px 20px;
+}
+.right-border {
+  border-right: 1px solid gray;
+  padding-right: 5px;
 }
 div .review-img {
   margin-right: 20px;
@@ -74,6 +107,15 @@ div .review-img {
 div .review-img img {
   height: 80px;
   width: 80px;
+}
+.comma:not(:first-child) {
+  margin-left: -0.3em;
+}
+.comma:empty {
+  display: none;
+}
+.comma:not(:first-child):before {
+  content: ", ";
 }
 .loading-animation {
   width: 100%;

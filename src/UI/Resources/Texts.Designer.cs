@@ -61,6 +61,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add review.
+        /// </summary>
+        public static string AddReview {
+            get {
+                return ResourceManager.GetString("AddReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add to my collection.
         /// </summary>
         public static string AddToCollection {
@@ -214,6 +223,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Members.
+        /// </summary>
+        public static string Members {
+            get {
+                return ResourceManager.GetString("Members", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to More albums of this band.
         /// </summary>
         public static string MoreBandAlbums {
@@ -277,11 +295,29 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Album rating is required!.
+        /// </summary>
+        public static string ReviewQualityRequired {
+            get {
+                return ResourceManager.GetString("ReviewQualityRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reviews.
         /// </summary>
         public static string Reviews {
             get {
                 return ResourceManager.GetString("Reviews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review text is required!.
+        /// </summary>
+        public static string ReviewTextRequired {
+            get {
+                return ResourceManager.GetString("ReviewTextRequired", resourceCulture);
             }
         }
         
@@ -313,6 +349,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submit review.
+        /// </summary>
+        public static string SubmitReview {
+            get {
+                return ResourceManager.GetString("SubmitReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My collection.
         /// </summary>
         public static string UserCollection {
@@ -327,6 +372,15 @@ namespace MusicLibrary.Resources {
         public static string UserCollectionEmpty {
             get {
                 return ResourceManager.GetString("UserCollectionEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to be logged in to perform this action!.
+        /// </summary>
+        public static string UserNotLoggedIn {
+            get {
+                return ResourceManager.GetString("UserNotLoggedIn", resourceCulture);
             }
         }
         

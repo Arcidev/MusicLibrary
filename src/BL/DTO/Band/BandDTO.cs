@@ -14,5 +14,13 @@ namespace BL.DTO
         public StorageFileDTO ImageStorageFile { get; set; }
 
         public IEnumerable<AlbumDTO> Albums { get; set; }
+
+        public IEnumerable<ArtistDTO> Members { get;set; }
+
+        public BandDTO()
+        {
+            Albums = new List<AlbumDTO>();
+            Members = new List<ArtistDTO>();
+        }
     }
 }

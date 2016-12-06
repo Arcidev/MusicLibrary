@@ -1,44 +1,46 @@
 ﻿@viewModel MusicLibrary.ViewModels.Band.DetailViewModel, MusicLibrary
-@masterPage Views/contentMasterPage.dotmaster
+@masterPage Views/detailMasterPage.dotmaster
 @import Resource = MusicLibrary.Resources.Texts
 
-<dot:Content ContentPlaceHolderID="HeaderContent">
-    <dot:RequiredResource Name="style-css" />
-</dot:Content>
-
-<dot:Content ContentPlaceHolderID="PageContent">
+<dot:Content ContentPlaceHolderID="DetailHeaderContent">
     <h2>{{resource: Resource.Band}}</h2>
-    <div class="section group">
-        <div class="cont" DataContext="{value: Band}">
-            <div class="single">
-                <div class="grid-img1" DataContext="{value: ImageStorageFile}">
-                    <img class="logo-img" src="{value: "/SavedFiles/" + FileName}">
-                </div>
-                <div class="para" RenderSettings.Mode="Server">
-                    <h4>{{value: Name}}</h4>
-                    <dot:Literal Text="{value: Description}" />
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="text-h1 top">
-                <h2 Visible="{value: _root.HasAlbums}">{{resource: Resource.BandAlbums}}</h2>
-            </div>
-            <div class="div2">
-                <div id="section group">
-                    <dot:Repeater DataSource="{value: Albums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-                        <div class="item">
-                            <div class="grid_1_of_3 images_1_of_3">
-                                <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
-                                    <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
-                                </dot:RouteLink>
-                                <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
-                                    <h3>{{value: Name}}</h3>
-                                </dot:RouteLink>
-                            </div>
-                        </div>
-                    </dot:Repeater>
-                </div>
-            </div>
+</dot:Content>
+<dot:Content ContentPlaceHolderID="DetailContent">
+    <div class="single" DataContext="{value: Band}">
+        <div class="grid-img1" DataContext="{value: ImageStorageFile}">
+            <img class="logo-img" src="{value: "/SavedFiles/" + FileName}">
         </div>
+        <div class="para" RenderSettings.Mode="Server">
+            <h4>{{value: Name}}</h4>
+            <p Visible="{value: _root.HasMembers}">
+                <b>{{resource: Resource.Members}}: </b>
+                <dot:Repeater RenderWrapperTag="true" WrapperTagName="span" DataSource="{value: Members}">
+                    <dot:Literal class="comma" Text="{value: FullName}" />
+                </dot:Repeater>
+                <br />
+            </p>
+            <dot:Literal Text="{value: Description}" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="text-h1 top">
+        <h2 Visible="{value: _root.HasAlbums}">{{resource: Resource.BandAlbums}}</h2>
+    </div>
+    <div class="div2" DataContext="{value: Band}">
+        <div id="section group">
+            <dot:Repeater DataSource="{value: Albums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                <div class="item">
+                    <div class="grid_1_of_3 images_1_of_3">
+                        <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
+                            <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
+                        </dot:RouteLink>
+                        <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
+                            <h3>{{value: Name}}</h3>
+                        </dot:RouteLink>
+                    </div>
+                </div>
+            </dot:Repeater>
+        </div>
+        <div class="clear"></div>
     </div>
 </dot:Content>

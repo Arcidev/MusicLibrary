@@ -68,7 +68,7 @@ span.stars span {
     background-position: 0 0;
 }
 
-.review {
+.review, .review-comment {
     ul {
         margin-top: 10px;
         padding-top: 10px;
@@ -76,20 +76,57 @@ span.stars span {
 
         li {
             display: inline-block;
-            border-right: 1px solid gray;
-            padding-right: 5px;
             height: 20px;
 
             span {
                 font-size: .8425em;
                 height: 16px;
             }
+
+            > span {
+                border-right: 1px solid gray;
+                padding-right: 5px;
+            }
         }
 
-        li:last-child {
+        li:last-child > span {
             border-right: none;
         }
     }
+}
+
+.review-comment {
+    textarea {
+        resize: vertical;
+        width: 775px;
+        height: 105px;
+    }
+
+    input[type="button"] {
+        padding: 5px;
+    }
+
+    li {
+        padding-right: 5px;
+        .error-message {
+            padding-left: 5px;
+            border-right: none;
+            border-left: 1px solid gray;
+        }
+    }
+
+    li:last-child {
+        float:right;
+    }
+}
+
+.review-comment-add {
+    margin: 20px 0px 20px 20px
+}
+
+.right-border {
+    border-right: 1px solid gray;
+    padding-right: 5px;
 }
 
 div .review-img {
@@ -99,6 +136,18 @@ div .review-img {
         height: 80px;
         width: 80px;
     }
+}
+
+.comma:not(:first-child) {
+  margin-left: -.3em;  
+}
+
+.comma:empty {
+  display: none;
+}
+
+.comma:not(:first-child):before {
+  content: ", ";
 }
 
 @activeButtonBackground: #10696e;

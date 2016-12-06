@@ -1,98 +1,67 @@
 ﻿@viewModel MusicLibrary.ViewModels.Album.DetailViewModel, MusicLibrary
-@masterPage Views/contentMasterPage.dotmaster
+@masterPage Views/detailMasterPage.dotmaster
 @import Resource = MusicLibrary.Resources.Texts
 
-<dot:Content ContentPlaceHolderID="HeaderContent">
-    <dot:RequiredResource Name="style-css" />
-    <dot:RequiredResource Name="stars" />
-</dot:Content>
-
-<dot:Content ContentPlaceHolderID="PageContent">
+<dot:Content ContentPlaceHolderID="DetailHeaderContent">
     <h2>{{resource: Resource.Album}}</h2>
-    <div class="section group">
-        <div class="cont">
-            <div class="single" DataContext="{value: Album}">
-                <div class="grid-img1" DataContext="{value: ImageStorageFile}">
-                    <img class="logo-img" src="{value: "/SavedFiles/" + FileName}">
-                </div>
-                <div class="para" RenderSettings.Mode="Server">
-                    <h4>
-                        {{value: Name}}
-                        <span Visible="{value: _root.IsUserLoggedIn}">
-                            <dot:LinkButton title="{resource: Resource.AddToCollection}" Visible="{value: !_root.HasInCollection}" Click="{command: _root.AddToCollection(_this.Id)}" class="collection-icon"><img src="/Content/Images/plus.png" /></dot:LinkButton>
-                            <dot:LinkButton title="{resource: Resource.RemoveFromCollection}" Visible="{value: _root.HasInCollection}" Click="{command: _root.RemoveFromCollection(_this.Id)}" class="collection-icon"><img src="/Content/Images/minus.png" /></dot:LinkButton>
-                        </span>
-                    </h4>
-                    <h3 DataContext="{value: Band}">
-                        <dot:RouteLink RouteName="BandDetail" param-BandId="{value: Id}">
-                            {{value: Name}}
-                        </dot:RouteLink>
-                    </h3>
-                    <dot:GridView DataSource="{value: Songs}" style="width:100%">
-                        <Columns>
-                            <dot:GridViewTextColumn ValueBinding="{value: Name}" Width="400px"/>
-                            <dot:GridViewTemplateColumn>
-                                <ContentTemplate>
-                                    <dot:LinkButton Visible="{value: AudioStorageFile != null}" Click="{command: _root.SetAudioFile(_this)}">
-                                        <img class="album-song-img" src="/Content/Images/play.png" />
-                                    </dot:LinkButton>
-                                    <dot:LinkButton Visible="{value: YoutubeUrlParam != null}" Click="{command: _root.SetYoutubeVideo(_this)}">
-                                        <img class="album-song-img" src="/Content/Images/youtube.ico"/>
-                                    </dot:LinkButton>
-                                </ContentTemplate>
-                            </dot:GridViewTemplateColumn>
-                        </Columns>
-                    </dot:GridView>
-                    <br />
-                    <audio autoplay class="audio-player" src="{value: _root.AudioFile != null ? "/SavedFiles/" + _root.AudioFile : ""}" type="audio/mpeg" id="audioElementId" controls Visible="{value: _root.AudioFile != null}">
-                        {{resource: Resource.AudioUnsupported}}
-                    </audio>
-                    <iframe Visible="{value: _root.YoutubeUrlParam != null}" width="853.33" height="480" src="{value: "https://www.youtube.com/embed/" + _root.YoutubeUrlParam}" allowfullscreen />
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="text-h1 top">
-                <h2 Visible="{value: HasOtherBandAlbums}">{{resource: Resource.MoreBandAlbums}}</h2>
-            </div>
-            <div class="div2">
-                <div id="section group">
-                    <dot:Repeater DataSource="{value: OtherBandAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-                        <div class="grid_1_of_3 images_1_of_3">
-                            <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
-                                <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
-                            </dot:RouteLink>
-                            <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
-                                <h3>{{value: Name}}</h3>
-                            </dot:RouteLink>
-                        </div>
-                    </dot:Repeater>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="text-h1 top">
-                <h2 Visible="{value: HasReviews}">{{resource: Resource.Reviews}}</h2>
-            </div>
-            <div class="div2">
-                <div id="section group">
-                    <dot:Repeater DataSource="{value: Reviews}" RenderWrapperTag="false" RenderSettings.Mode="Server">
-                        <div class="image group">
-                            <div class="grid-img1 review-img">
-                                <img class="logo-img" src="{value: CreatedByImageStorageFileName != null ? "/SavedFiles/" + CreatedByImageStorageFileName : "" }" alt="{value: CreatedByFullName}" />
-                            </div>
-                            <div class="para review">
-                                <p>
-                                    <dot:Literal Text="{value: Text}" />
-                                </p>
-                                <ul>
-                                    <li><span class="stars">{{value: QualityInt}}</span></li>
-                                    <li><dot:Literal Text="{value: CreatedByFullName}" /></li>
-                                    <li><dot:Literal Text="{value: EditDate}" /></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </dot:Repeater>
-                </div>
-            </div>
+</dot:Content>
+<dot:Content ContentPlaceHolderID="DetailContent">
+    <div class="single" DataContext="{value: Album}">
+        <div class="grid-img1" DataContext="{value: ImageStorageFile}">
+            <img class="logo-img" src="{value: "/SavedFiles/" + FileName}">
         </div>
+        <div class="para" RenderSettings.Mode="Server">
+            <h4>
+                {{value: Name}}
+                <span Visible="{value: _root.IsUserLoggedIn}">
+                    <dot:LinkButton title="{resource: Resource.AddToCollection}" Visible="{value: !_root.HasInCollection}" Click="{command: _root.AddToCollection(_this.Id)}" class="collection-icon"><img src="/Content/Images/plus.png" /></dot:LinkButton>
+                    <dot:LinkButton title="{resource: Resource.RemoveFromCollection}" Visible="{value: _root.HasInCollection}" Click="{command: _root.RemoveFromCollection(_this.Id)}" class="collection-icon"><img src="/Content/Images/minus.png" /></dot:LinkButton>
+                </span>
+            </h4>
+            <h3 DataContext="{value: Band}">
+                <dot:RouteLink RouteName="BandDetail" param-BandId="{value: Id}">
+                    {{value: Name}}
+                </dot:RouteLink>
+            </h3>
+            <dot:GridView DataSource="{value: Songs}" style="width:100%">
+                <Columns>
+                    <dot:GridViewTextColumn ValueBinding="{value: Name}" Width="400px" />
+                    <dot:GridViewTemplateColumn>
+                        <ContentTemplate>
+                            <dot:LinkButton Visible="{value: AudioStorageFile != null}" Click="{command: _root.SetAudioFile(_this)}">
+                                <img class="album-song-img" src="/Content/Images/play.png" />
+                            </dot:LinkButton>
+                            <dot:LinkButton Visible="{value: YoutubeUrlParam != null}" Click="{command: _root.SetYoutubeVideo(_this)}">
+                                <img class="album-song-img" src="/Content/Images/youtube.ico" />
+                            </dot:LinkButton>
+                        </ContentTemplate>
+                    </dot:GridViewTemplateColumn>
+                </Columns>
+            </dot:GridView>
+            <br />
+            <audio autoplay class="audio-player" src="{value: _root.AudioFile != null ? "/SavedFiles/" + _root.AudioFile : ""}" type="audio/mpeg" id="audioElementId" controls Visible="{value: _root.AudioFile != null}">
+                {{resource: Resource.AudioUnsupported}}
+            </audio>
+            <iframe Visible="{value: _root.YoutubeUrlParam != null}" width="853.33" height="480" src="{value: "https://www.youtube.com/embed/" + _root.YoutubeUrlParam}" allowfullscreen />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="text-h1 top">
+        <h2 Visible="{value: HasOtherBandAlbums}">{{resource: Resource.MoreBandAlbums}}</h2>
+    </div>
+    <div class="div2">
+        <div id="section group">
+            <dot:Repeater DataSource="{value: OtherBandAlbums}" RenderWrapperTag="false" RenderSettings.Mode="Server">
+                <div class="grid_1_of_3 images_1_of_3">
+                    <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
+                        <img class="logo-img" DataContext="{value: ImageStorageFile}" src="{value: "/SavedFiles/" + FileName}" alt="{value: DisplayName}" />
+                    </dot:RouteLink>
+                    <dot:RouteLink RouteName="AlbumDetail" param-AlbumId="{value: Id}">
+                        <h3>{{value: Name}}</h3>
+                    </dot:RouteLink>
+                </div>
+            </dot:Repeater>
+        </div>
+        <div class="clear"></div>
     </div>
 </dot:Content>

@@ -67,7 +67,7 @@ namespace BL.Tests
                 }).Result;
             }
 
-            var positiveReview = new AlbumReviewDTO()
+            var positiveReview = new AlbumReviewCreateDTO()
             {
                 Text = "Positive review",
                 Quality = Quality.Awesome,
@@ -79,7 +79,7 @@ namespace BL.Tests
 
             positiveReview.AlbumId = album2.Id;
             albumFacade.AddReview(positiveReview);
-            albumFacade.AddReview(new AlbumReviewDTO()
+            albumFacade.AddReview(new AlbumReviewCreateDTO()
             {
                 AlbumId = album1.Id,
                 Quality = Quality.Trash,

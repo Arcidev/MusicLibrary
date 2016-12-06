@@ -20,6 +20,8 @@ namespace BL.Configuration
                     .ForMember(target => target.Albums, action => action.Ignore());
                 config.CreateMap<BandCreateDTO, Band>();
 
+                config.CreateMap<Artist, ArtistDTO>();
+
                 config.CreateMap<SliderImage, SliderImageDTO>();
                 config.CreateMap<SliderImageEditDTO, SliderImage>();
 
@@ -37,9 +39,13 @@ namespace BL.Configuration
                     .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
                     .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
                     .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
-                config.CreateMap<AlbumReviewDTO, AlbumReview>()
-                    .ForMember(target => target.EditDate, action => action.Ignore())
-                    .ForMember(target => target.CreateDate, action => action.Ignore());
+                config.CreateMap<AlbumReviewCreateDTO, AlbumReview>();
+
+                config.CreateMap<BandReview, BandReviewDTO>()
+                    .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
+                    .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
+                    .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
+                config.CreateMap<BandReviewCreateDTO, BandReview>();
 
                 config.CreateMap<UserAlbumCreateDTO, UserAlbum>();
             });

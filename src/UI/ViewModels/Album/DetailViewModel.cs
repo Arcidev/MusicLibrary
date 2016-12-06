@@ -4,10 +4,11 @@ using DotVVM.Framework.ViewModel;
 using BL.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using Shared.Enums;
 
 namespace MusicLibrary.ViewModels.Album
 {
-    public class DetailViewModel : ContentMasterPageViewModel
+    public class DetailViewModel : DetailMasterPageViewModel
     {
         [Bind(Direction.None)]
         public AlbumFacade AlbumFacade { get; set; }
@@ -19,8 +20,6 @@ namespace MusicLibrary.ViewModels.Album
 
         public IEnumerable<AlbumDTO> OtherBandAlbums { get; set; }
 
-        public IEnumerable<AlbumReviewDTO> Reviews { get; set; }
-
         public string YoutubeUrlParam { get; set; }
 
         public string AudioFile { get; set; }
@@ -28,8 +27,6 @@ namespace MusicLibrary.ViewModels.Album
         public bool HasOtherBandAlbums { get; set; }
 
         public bool HasInCollection { get; set; }
-
-        public bool HasReviews { get; set; }
 
         public override async Task PreRender()
         {
@@ -39,9 +36,6 @@ namespace MusicLibrary.ViewModels.Album
                 Album = AlbumFacade.GetAlbum(albumId);
                 OtherBandAlbums = BandFacade.GetBandAlbums(Album.BandId, Album.Id, 6, true);
                 HasOtherBandAlbums = OtherBandAlbums.Any();
-
-                Reviews = AlbumFacade.GetReviews(albumId);
-                HasReviews = Reviews.Any();
 
                 int userId;
                 if (int.TryParse(UserId, out userId))
@@ -85,6 +79,32 @@ namespace MusicLibrary.ViewModels.Album
 
                 HasInCollection = false;
             });
+        }
+
+        public override void AddReview()
+        {
+            if (!ValidateReview())
+                return;
+
+            ExecuteSafely(() =>
+            {
+                var albumId = int.Parse(Context.Parameters["AlbumId"].ToString());
+                AlbumFacade.AddReview(new AlbumReviewCreateDTO()
+                {
+                    AlbumId = albumId,
+                    CreatedById = int.Parse(UserId),
+                    Quality = (Quality)ReviewQuality.Value,
+                    Text = ReviewText
+                });
+
+                Reviews = AlbumFacade.GetReviews(albumId);
+                InitReviewValues();
+            }, failureCallback: (ex) => AddReviewErrorMessage = ex.Message);
+        }
+
+        protected override void LoadReviews()
+        {
+            Reviews = AlbumFacade.GetReviews(int.Parse(Context.Parameters["AlbumId"].ToString()));
         }
     }
 }

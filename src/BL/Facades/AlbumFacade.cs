@@ -56,6 +56,7 @@ namespace BL.Facades
                 var query = AlbumSongsQueryFunc();
                 query.AlbumId = albumId;
                 query.Approved = true;
+
                 return query.Execute();
             }
         }
@@ -91,7 +92,7 @@ namespace BL.Facades
             }
         }
 
-        public void AddReview(AlbumReviewDTO review)
+        public void AddReview(AlbumReviewCreateDTO review)
         {
             using (var uow = UowProviderFunc().Create())
             {

@@ -190,4 +190,22 @@
   <data name="Reviews" xml:space="preserve">
     <value>Recenzie</value>
   </data>
+  <data name="AddReview" xml:space="preserve">
+    <value>Pridať recenziu</value>
+  </data>
+  <data name="ReviewTextRequired" xml:space="preserve">
+    <value>Text recenzie je povinný!</value>
+  </data>
+  <data name="ReviewQualityRequired" xml:space="preserve">
+    <value>Hodnotenie albumu je povinné!</value>
+  </data>
+  <data name="UserNotLoggedIn" xml:space="preserve">
+    <value>Na vykonanie tejto akcie sa musíte prihlásiť!</value>
+  </data>
+  <data name="SubmitReview" xml:space="preserve">
+    <value>Odoslať recenziu</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Členovia</value>
+  </data>
 </root>
