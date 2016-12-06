@@ -24,7 +24,7 @@
 .login-form tr td:first-child {
   width: 150px;
 }
-.login-form .submit-row td {
+.submit-row td {
   padding-top: 10px;
 }
 .error-message {
@@ -116,6 +116,35 @@ div .review-img img {
 }
 .comma:not(:first-child):before {
   content: ", ";
+}
+.admin-sidebar {
+  float: left;
+  text-align: center;
+  width: 18%;
+}
+.admin-sidebar h2 {
+  text-align: center;
+}
+.sidebar-active a,
+.sidebar-active a:hover {
+  color: #fefefe !important;
+  background: url('../Images/nav-bg.png') !important;
+  cursor: default;
+}
+.user-profile {
+  width: 100%;
+  margin: 10px;
+}
+.user-profile tr {
+  line-height: 30px;
+}
+.user-profile tr td {
+  width: 25%;
+}
+.user-profile tr td input[type=text],
+.user-profile tr td input[type=password] {
+  padding: 4px;
+  width: 200px;
 }
 .loading-animation {
   width: 100%;

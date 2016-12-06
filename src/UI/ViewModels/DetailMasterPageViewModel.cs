@@ -1,5 +1,4 @@
 using BL.DTO;
-using DotVVM.Framework.ViewModel;
 using MusicLibrary.Resources;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +7,6 @@ namespace MusicLibrary.ViewModels
 {
 	public abstract class DetailMasterPageViewModel : ContentMasterPageViewModel
     {
-        [Bind(Direction.ServerToClient)]
         public IEnumerable<ReviewDTO> Reviews { get; set; }
 
         public int? ReviewQuality { get; set; }

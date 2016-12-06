@@ -593,7 +593,6 @@ body {
   padding: 8px;
   color: #fff;
   cursor: pointer;
-  text-transform: capitalize;
 }
 .btn a:hover,
 .btn1 a:hover,
@@ -631,7 +630,6 @@ body {
   display: block;
   font-size: 0.9em;
   color: #555;
-  text-transform: capitalize;
   border-bottom: 1px solid #ededed;
 }
 .sidebar-list ul li a:hover {

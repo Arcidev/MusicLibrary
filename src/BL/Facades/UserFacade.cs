@@ -20,7 +20,7 @@ namespace BL.Facades
 
         public Func<UserRepository> UserRepositoryFunc { get; set; }
 
-        public async Task<UserDTO> AddUserAsync(UserCreateDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public async Task<UserDTO> AddUserAsync(UserCreateDTO user)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -31,7 +31,6 @@ namespace BL.Facades
                 var password = CreateHash(user.Password);
                 entity.PasswordHash = password.Item1;
                 entity.PasswordSalt = password.Item2;
-                SetImageFile(entity, file, storage);
 
                 var repo = UserRepositoryFunc();
                 repo.Insert(entity);
@@ -64,6 +63,18 @@ namespace BL.Facades
             }
         }
 
+        public UserDTO GetUser(int id)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = UserRepositoryFunc();
+                var user = repo.GetById(id);
+                IsNotNull(user, ErrorMessages.UserNotExist);
+
+                return Mapper.Map<UserDTO>(user);
+            }
+        }
+
         public UserDTO EditUser(UserEditDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
@@ -82,6 +93,13 @@ namespace BL.Facades
                 }
 
                 Mapper.Map(user, entity);
+                if (!string.IsNullOrEmpty(user.Password))
+                {
+                    var password = CreateHash(user.Password);
+                    entity.PasswordHash = password.Item1;
+                    entity.PasswordSalt = password.Item2;
+                }
+
                 uow.Commit();
 
                 return Mapper.Map<UserDTO>(entity);

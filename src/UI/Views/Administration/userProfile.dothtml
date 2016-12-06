@@ -1,0 +1,45 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.UserProfileViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <table class="user-profile" DataContext="{value: User}">
+        <tr>
+            <td><dot:Literal Text="{resource: Resource.FirstName}" /></td>
+            <td><dot:TextBox Text="{value: FirstName}" /></td>
+            <td><dot:Literal Text="{resource: Resource.Password}" /></td>
+            <td><dot:TextBox Type="Password" Text="{value: _root.Password}" /></td>
+        </tr>
+        <tr class="error-message" DataContext="{value: _root.UserProfileErrorViewModel}" Visible="{value: FirstNameError != null || PasswordError != null}">
+            <td colspan="2">{{value: FirstNameError}}</td>
+            <td colspan="2">{{value: PasswordError}}</td>
+        </tr>
+        <tr>
+            <td><dot:Literal Text="{resource: Resource.LastName}" /></td>
+            <td><dot:TextBox Text="{value: LastName}" /></td>
+            <td><dot:Literal Text="{resource: Resource.PasswordAgain}" /></td>
+            <td><dot:TextBox Type="Password" Text="{value: _root.PasswordAgain}" /></td>
+        </tr>
+        <tr class="error-message" DataContext="{value: _root.UserProfileErrorViewModel}" Visible="{value: LastNameError != null || PasswordAgainError != null}">
+            <td colspan="2">{{value: LastNameError}}</td>
+            <td colspan="2">{{value: PasswordAgainError}}</td>
+        </tr>
+        <tr>
+            <td><dot:Literal Text="{resource: Resource.Email}" /></td>
+            <td><dot:TextBox Enabled="false" Text="{value: Email}" /></td>
+        </tr>
+        <tr class="submit-row">
+            <td colspan="4" align="center">
+                <dot:Button class="submit-button" Text="{resource: Resource.SaveChanges}" Click="{command: _root.SaveChanges()}" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center">
+                <dot:UpdateProgress>
+                    <cc:LoadingAnimation>
+                    </cc:LoadingAnimation>
+                </dot:UpdateProgress>
+            </td>
+        </tr>
+    </table>
+</dot:Content>

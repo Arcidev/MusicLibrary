@@ -34,9 +34,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="soc-icons">
                 <ul Visible="{value: !IsUserLoggedIn}">
                     <li><dot:RouteLink RouteName="Register">{{resource: Resource.Register}} &nbsp;</dot:RouteLink></li>
-                    <li><dot:RouteLink RouteName="Login">{{resource: Resource.SignIn}} &nbsp;</dot:RouteLink></li>
+                    <li><dot:RouteLink RouteName="Login">{{resource: Resource.SignIn}}</dot:RouteLink></li>
                 </ul>
                 <ul Visible="{value: IsUserLoggedIn}">
+                    <li><dot:RouteLink RouteName="UserProfile">{{resource: Resource.Administration}} &nbsp;</dot:RouteLink></li>
                     <li><dot:LinkButton Click="{command: SignOut()}" Text="{resource: Resource.SignOut}" class="header-item button-right" />  </li>
                 </ul>
             </div>

@@ -11,7 +11,6 @@ namespace MusicLibrary.ViewModels.Login
 {
 	public class RegisterViewModel : BaseLoginViewModel
     {
-        [Bind(Direction.ServerToClient)]
         public RegisterErrorViewModel RegisterErrorViewModel { get; set; }
 
         public string FirstName { get; set; }

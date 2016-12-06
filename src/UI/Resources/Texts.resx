@@ -228,4 +228,16 @@
   <data name="Members" xml:space="preserve">
     <value>Members</value>
   </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="MyReviews" xml:space="preserve">
+    <value>My reviews</value>
+  </data>
 </root>

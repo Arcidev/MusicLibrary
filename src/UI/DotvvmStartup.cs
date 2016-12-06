@@ -25,6 +25,7 @@ namespace MusicLibrary
             config.RouteTable.Add("AlbumsFiltered", "albums/{Filter}", "Views/albums.dothtml");
             config.RouteTable.Add("AlbumsByCategory", "albums/cateogry/{CategoryId}", "Views/albums.dothtml");
             config.RouteTable.Add("UserCollection", "collection", "Views/userCollection.dothtml");
+            config.RouteTable.Add("UserProfile", "administration/profile", "Views/Administration/userProfile.dothtml");
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)

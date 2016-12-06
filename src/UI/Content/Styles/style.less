@@ -28,11 +28,11 @@
             width: 150px;
         }
     }
+}
 
-    .submit-row {
-        td {
-            padding-top: 10px;
-        }
+.submit-row {
+    td {
+        padding-top: 10px;
     }
 }
 
@@ -148,6 +148,41 @@ div .review-img {
 
 .comma:not(:first-child):before {
   content: ", ";
+}
+
+.admin-sidebar {
+	float: left;
+    text-align: center;
+    width: 18%;
+
+    h2 {
+        text-align: center;
+    }
+}
+
+.sidebar-active {
+    a, a:hover {
+        color: #fefefe !important;
+        background: url('../Images/nav-bg.png') !important;
+        cursor: default;
+    }
+}
+
+.user-profile {
+    width: 100%;
+    margin: 10px;
+
+    tr {
+        line-height: 30px;
+
+        td {
+            width: 25%;
+            input[type=text], input[type=password] {
+                padding: 4px;
+                width: 200px
+            }
+        }
+    }
 }
 
 @activeButtonBackground: #10696e;

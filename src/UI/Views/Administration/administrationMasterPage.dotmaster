@@ -1,0 +1,36 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.AdministrationMasterPageViewModel, MusicLibrary
+@masterPage Views/masterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+    <dot:RequiredResource Name="style-css" />
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="content-bg">
+        <div class="wrap">
+            <div class="main">
+                <div class="sidebar admin-sidebar">
+                    <div class="sidebar-list">
+                        <h2>{{resource: Resource.Administration}}</h2>
+                        <ul RenderSettings.Mode="Server">
+                            <li class="{value: ActiveAdminPage == "UserProfile" ? "sidebar-active" : ""}">
+                                <dot:RouteLink Enabled="{value: ActiveAdminPage != "UserProfile"}" Text="{resource: Resource.MyProfile}" RouteName="UserProfile" />
+                            </li>
+                            <li>
+                                <dot:RouteLink Text="{resource: Resource.MyReviews}" RouteName="UserProfile" />
+                            </li>
+                            <li>
+                                <dot:RouteLink Text="{resource: Resource.UserCollection}" RouteName="UserProfile" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content">
+                    <dot:ContentPlaceHolder ID="PageContent" />
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</dot:Content>

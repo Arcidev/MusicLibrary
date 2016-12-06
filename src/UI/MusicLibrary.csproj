@@ -230,6 +230,9 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="DotvvmStartup.cs" />
+    <Compile Include="ViewModels\Administration\AdministrationMasterPageViewModel.cs" />
+    <Compile Include="ViewModels\Administration\UserProfileErrorViewModel.cs" />
+    <Compile Include="ViewModels\Administration\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\ContentMasterPageViewModel.cs" />
     <Compile Include="ViewModels\DetailMasterPageViewModel.cs" />
     <Compile Include="ViewModels\ReviewBaseViewModel.cs" />
@@ -298,6 +301,8 @@
     <Content Include="Views\userCollection.dothtml" />
     <Content Include="Views\contentMasterPage.dotmaster" />
     <Content Include="Views\detailMasterPage.dotmaster" />
+    <Content Include="Views\Administration\userProfile.dothtml" />
+    <Content Include="Views\Administration\administrationMasterPage.dotmaster" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

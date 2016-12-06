@@ -22,7 +22,7 @@ namespace MusicLibrary.ViewModels
             Context.RedirectToRoute("Index");
         }
 
-        public bool ExecuteSafely(Action action, Action successCallback = null, Action<UIException> failureCallback = null, Action<Exception> totalFailureCallback = null)
+        protected bool ExecuteSafely(Action action, Action successCallback = null, Action<UIException> failureCallback = null, Action<Exception> totalFailureCallback = null)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace MusicLibrary.ViewModels
             return false;
         }
 
-        public async Task<bool> ExecuteSafelyAsync(Func<Task> action, Action successCallback = null, Action<UIException> failureCallback = null, Action<Exception> totalFailureCallback = null)
+        protected async Task<bool> ExecuteSafelyAsync(Func<Task> action, Action successCallback = null, Action<UIException> failureCallback = null, Action<Exception> totalFailureCallback = null)
         {
             try
             {

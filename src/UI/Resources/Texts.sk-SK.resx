@@ -208,4 +208,16 @@
   <data name="Members" xml:space="preserve">
     <value>Členovia</value>
   </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administrácia</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>Môj profil</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Uložiť zmeny</value>
+  </data>
+  <data name="MyReviews" xml:space="preserve">
+    <value>Moje recenzie</value>
+  </data>
 </root>
