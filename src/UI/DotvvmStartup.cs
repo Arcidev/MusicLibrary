@@ -1,5 +1,7 @@
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.ResourceManagement;
+using MusicLibrary.AppStart;
+using MusicLibrary.Presenters;
 
 namespace MusicLibrary
 {
@@ -26,6 +28,7 @@ namespace MusicLibrary
             config.RouteTable.Add("AlbumsByCategory", "albums/cateogry/{CategoryId}", "Views/albums.dothtml");
             config.RouteTable.Add("UserCollection", "collection", "Views/userCollection.dothtml");
             config.RouteTable.Add("UserProfile", "administration/profile", "Views/Administration/userProfile.dothtml");
+            config.RouteTable.Add("TempFilePresenter", "files/{FileId}/{FileExtension}", null, null, WindsorBootstrap.Resolve<TempFilePresenter>);
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)

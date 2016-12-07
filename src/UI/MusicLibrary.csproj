@@ -222,6 +222,7 @@
     <Compile Include="Controls\SpanUserControl.cs" />
     <Compile Include="Identity\UserIdentity.cs" />
     <Compile Include="AppStart\WindsorWebApiComposer.cs" />
+    <Compile Include="Presenters\TempFilePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Texts.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -235,7 +236,6 @@
     <Compile Include="ViewModels\Administration\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\ContentMasterPageViewModel.cs" />
     <Compile Include="ViewModels\DetailMasterPageViewModel.cs" />
-    <Compile Include="ViewModels\ReviewBaseViewModel.cs" />
     <Compile Include="ViewModels\UserCollectionViewModel.cs" />
     <Compile Include="ViewModels\Band\DetailViewModel.cs" />
     <Compile Include="ViewModels\Album\DetailViewModel.cs" />

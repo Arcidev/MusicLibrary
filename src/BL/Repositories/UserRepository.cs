@@ -1,7 +1,6 @@
 ﻿using DAL.Entities;
 using Riganti.Utils.Infrastructure.Core;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BL.Repositories
@@ -15,9 +14,9 @@ namespace BL.Repositories
             return await Context.Users.FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        public User GetByEmail(string email)
+        public async Task<User> GetByIdAsync(int id)
         {
-            return Context.Users.FirstOrDefault(x => x.Email == email);
+            return await Context.Users.Include(x => x.ImageStorageFile).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

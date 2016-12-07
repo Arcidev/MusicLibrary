@@ -240,4 +240,10 @@
   <data name="MyReviews" xml:space="preserve">
     <value>My reviews</value>
   </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
 </root>

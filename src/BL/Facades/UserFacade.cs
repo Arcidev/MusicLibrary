@@ -63,19 +63,19 @@ namespace BL.Facades
             }
         }
 
-        public UserDTO GetUser(int id)
+        public async Task<UserDTO> GetUser(int id)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var repo = UserRepositoryFunc();
-                var user = repo.GetById(id);
+                var user = await repo.GetByIdAsync(id);
                 IsNotNull(user, ErrorMessages.UserNotExist);
 
                 return Mapper.Map<UserDTO>(user);
             }
         }
 
-        public UserDTO EditUser(UserEditDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public void EditUser(UserEditDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -101,8 +101,6 @@ namespace BL.Facades
                 }
 
                 uow.Commit();
-
-                return Mapper.Map<UserDTO>(entity);
             }
         }
 

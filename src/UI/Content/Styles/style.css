@@ -131,20 +131,40 @@ div .review-img img {
   background: url('../Images/nav-bg.png') !important;
   cursor: default;
 }
-.user-profile {
+.user-profile table {
   width: 100%;
   margin: 10px;
+  vertical-align: middle !important;
 }
-.user-profile tr {
+.user-profile table tr {
   line-height: 30px;
 }
-.user-profile tr td {
-  width: 25%;
+.user-profile table tr td {
+  width: 20%;
 }
-.user-profile tr td input[type=text],
-.user-profile tr td input[type=password] {
+.user-profile table tr td input[type=text],
+.user-profile table tr td input[type=password] {
   padding: 4px;
   width: 200px;
+}
+.user-profile .avatar {
+  margin: 10px;
+}
+.user-profile .avatar > div {
+  margin-right: 10px;
+}
+.user-profile .avatar > div img {
+  height: 80px;
+  width: 80px;
+}
+.user-profile .avatar .action-buttons {
+  float: left;
+}
+.user-profile .avatar .action-buttons :first-child {
+  margin-top: 25px;
+}
+.user-profile .avatar .action-buttons a {
+  color: black;
 }
 .loading-animation {
   width: 100%;

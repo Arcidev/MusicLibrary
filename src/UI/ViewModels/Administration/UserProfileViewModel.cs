@@ -1,8 +1,12 @@
 using BL.DTO;
 using BL.Facades;
+using DotVVM.Framework.Controls;
 using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Storage;
 using DotVVM.Framework.ViewModel;
 using MusicLibrary.Resources;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -11,6 +15,8 @@ namespace MusicLibrary.ViewModels.Administration
     [Authorize]
     public class UserProfileViewModel : AdministrationMasterPageViewModel
     {
+        private IUploadedFileStorage FileStorage { get { return Context.Configuration.ServiceLocator.GetService<IUploadedFileStorage>(); } }
+
         [Bind(Direction.None)]
         public UserFacade UserFacade { get; set; }
 
@@ -22,18 +28,22 @@ namespace MusicLibrary.ViewModels.Administration
 
         public string PasswordAgain { get; set; }
 
-        public override Task PreRender()
+        public UploadedFilesCollection Files { get; set; } = new UploadedFilesCollection();
+
+        public string ImageFileName { get; set; }
+
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
                 ActiveAdminPage = "UserProfile";
-                User = UserFacade.GetUser(int.Parse(UserId));
+                await LoadUser();
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
             UserProfileErrorViewModel = new UserProfileErrorViewModel();
 
@@ -55,11 +65,28 @@ namespace MusicLibrary.ViewModels.Administration
             if (UserProfileErrorViewModel.ContainsError)
                 return;
 
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
                 User.Password = Password;
-                UserFacade.EditUser(User);
+                UserFacade.EditUser(User, Files.Files.LastOrDefault(), FileStorage);
+                await LoadUser();
+                Files.Clear();
             });
+        }
+
+        public void UploadedImage()
+        {
+            var file = Files.Files.LastOrDefault();
+            if (file == null)
+                return;
+
+            ImageFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName).Substring(1)}";
+        }
+
+        public void ResetImage()
+        {
+            ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : "";
+            Files.Clear();
         }
 
         private bool IsStrongPassword()
@@ -68,6 +95,12 @@ namespace MusicLibrary.ViewModels.Administration
                 return false;
 
             return Regex.Match(Password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$").Success;
+        }
+
+        private async Task LoadUser()
+        {
+            User = await UserFacade.GetUser(int.Parse(UserId));
+            ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : "";
         }
     }
 }

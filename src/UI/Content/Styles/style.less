@@ -169,17 +169,44 @@ div .review-img {
 }
 
 .user-profile {
+    table {
     width: 100%;
     margin: 10px;
+    vertical-align: middle !important;
 
-    tr {
-        line-height: 30px;
+        tr {
+            line-height: 30px;
 
-        td {
-            width: 25%;
-            input[type=text], input[type=password] {
-                padding: 4px;
-                width: 200px
+            td {
+                width: 20%;
+                input[type=text], input[type=password] {
+                    padding: 4px;
+                    width: 200px
+                }
+            }
+        }
+    }
+
+    .avatar {
+        margin: 10px;
+
+        > div {
+            margin-right: 10px;
+
+            img {
+                height: 80px;
+                width: 80px;
+            }
+        }
+
+        .action-buttons {
+            float: left;
+            :first-child {
+                margin-top: 25px;
+            }
+
+            a {
+                color: black;
             }
         }
     }

@@ -322,6 +322,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Album rating is required!.
         /// </summary>
         public static string ReviewQualityRequired {
@@ -390,6 +399,15 @@ namespace MusicLibrary.Resources {
         public static string SubmitReview {
             get {
                 return ResourceManager.GetString("SubmitReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
             }
         }
         

@@ -220,4 +220,10 @@
   <data name="MyReviews" xml:space="preserve">
     <value>Moje recenze</value>
   </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Nahrát</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Resetovat</value>
+  </data>
 </root>
