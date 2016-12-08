@@ -98,14 +98,13 @@ namespace MusicLibrary.ViewModels.Album
                     Text = ReviewText
                 });
 
-                Reviews = AlbumFacade.GetReviews(albumId);
                 InitReviewValues();
             }, failureCallback: (ex) => ReviewErrorMessage = ex.Message);
         }
 
         protected override void LoadReviews()
         {
-            Reviews = AlbumFacade.GetReviews(int.Parse(Context.Parameters["AlbumId"].ToString()));
+            AlbumFacade.LoadReviews(int.Parse(Context.Parameters["AlbumId"].ToString()), Reviews);
         }
 
         protected override Action<int, ReviewEditDTO> GetEditReviewAction()

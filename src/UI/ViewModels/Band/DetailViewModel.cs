@@ -48,14 +48,13 @@ namespace MusicLibrary.ViewModels.Band
                     Text = ReviewText
                 });
 
-                Reviews = BandFacade.GetReviews(bandId);
                 InitReviewValues();
             }, failureCallback: (ex) => ReviewErrorMessage = ex.Message);
         }
 
         protected override void LoadReviews()
         {
-            Reviews = BandFacade.GetReviews(int.Parse(Context.Parameters["BandId"].ToString()));
+            BandFacade.LoadReviews(int.Parse(Context.Parameters["BandId"].ToString()), Reviews);
         }
 
         protected override Action<int, ReviewEditDTO> GetEditReviewAction()

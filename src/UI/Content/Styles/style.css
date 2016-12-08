@@ -188,25 +188,28 @@ div .review-img img {
 .user-reviews .grid-img1 img {
   cursor: pointer;
 }
-.user-reviews .pager li {
+.pager {
+  text-align: center;
+}
+.pager li {
   display: inline-block;
   background-color: #f8f8f8;
   margin: 3px;
 }
-.user-reviews .pager li a,
-.user-reviews .pager li span {
+.pager li a,
+.pager li span {
   display: block;
   padding: 10px;
   min-width: 24px;
   text-align: center;
 }
-.user-reviews .pager li a {
+.pager li a {
   color: black;
 }
-.user-reviews .pager li span {
+.pager li span {
   color: grey;
 }
-.user-reviews .pager .disabled a {
+.pager .disabled a {
   cursor: default;
   color: gray;
 }

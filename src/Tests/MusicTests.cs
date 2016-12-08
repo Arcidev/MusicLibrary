@@ -111,20 +111,6 @@ namespace BL.Tests
         }
 
         [TestMethod]
-        public async Task TestGetReviews()
-        {
-            var albumFacade = AlbumFacade;
-            var album = albumFacade.GetFeaturedAlbums(1).First();
-            var user = await UserFacade.GetUserByEmailAsync("albumtest@mail.sk");
-            Assert.IsNotNull(user);
-
-            var reviews = albumFacade.GetReviews(album.Id);
-
-            Assert.IsTrue(reviews.Any());
-            Assert.IsTrue(reviews.All(x => x.AlbumId == album.Id));
-        }
-
-        [TestMethod]
         public async Task TestUserCollections()
         {
             var albumFacade = AlbumFacade;

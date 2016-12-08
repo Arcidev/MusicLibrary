@@ -81,6 +81,7 @@
                                     </div>
                                 </div>
                             </dot:Repeater>
+                            <dot:DataPager DataSet="{value: Reviews}" class="pager" />
                         </div>
                     </div>
                 </div>

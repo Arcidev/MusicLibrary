@@ -1,15 +1,15 @@
 using BL.DTO;
+using DotVVM.Framework.Controls;
 using MusicLibrary.Resources;
 using Shared.Enums;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels
 {
 	public abstract class DetailMasterPageViewModel : ContentMasterPageViewModel
     {
-        public IEnumerable<ReviewDTO> Reviews { get; set; }
+        public GridViewDataSet<ReviewDTO> Reviews { get; set; }
 
         public string ReviewQuality { get; set; }
 
@@ -21,12 +21,19 @@ namespace MusicLibrary.ViewModels
 
         public int? ReviewEditId { get; set; }
 
+        protected DetailMasterPageViewModel()
+        {
+            Reviews = new GridViewDataSet<ReviewDTO>()
+            {
+                PageSize = 10,
+                SortDescending = true,
+                SortExpression = nameof(ReviewDTO.EditDate)
+            };
+        }
+
         public override Task PreRender()
         {
-            if (!Context.IsPostBack)
-            {
-                LoadReviews();
-            }
+            LoadReviews();
 
             return base.PreRender();
         }

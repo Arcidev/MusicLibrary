@@ -18,8 +18,12 @@ namespace BL.Facades
         {
             query.Skip = dataSet.PageIndex * dataSet.PageSize;
             query.Take = dataSet.PageSize;
-            query.SortCriteria.Clear();
-            query.AddSortCriteria(dataSet.SortExpression, dataSet.SortDescending ? SortDirection.Descending : SortDirection.Ascending);
+
+            if (!string.IsNullOrEmpty(dataSet.SortExpression))
+            {
+                query.SortCriteria.Clear();
+                query.AddSortCriteria(dataSet.SortExpression, dataSet.SortDescending ? SortDirection.Descending : SortDirection.Ascending);
+            }
 
             dataSet.TotalItemsCount = query.GetTotalRowCount();
             dataSet.Items = query.Execute();

@@ -98,14 +98,14 @@ namespace BL.Facades
             }
         }
 
-        public IEnumerable<BandReviewDTO> GetReviews(int bandId)
+        public void LoadReviews(int bandId, GridViewDataSet<ReviewDTO> dataSet)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var query = BandReviewsQueryFunc();
                 query.BandId = bandId;
 
-                return query.Execute();
+                FillDataSet(dataSet, query);
             }
         }
 

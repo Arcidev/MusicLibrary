@@ -111,14 +111,14 @@ namespace BL.Facades
             }
         }
 
-        public IEnumerable<AlbumReviewDTO> GetReviews(int albumId)
+        public void LoadReviews(int albumId, GridViewDataSet<ReviewDTO> dataSet)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var query = AlbumReviewsQueryFunc();
                 query.AlbumId = albumId;
 
-                return query.Execute();
+                FillDataSet(dataSet, query);
             }
         }
 
