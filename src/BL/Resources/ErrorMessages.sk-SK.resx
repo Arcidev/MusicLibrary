@@ -144,4 +144,10 @@
   <data name="UserAlbumNotExist" xml:space="preserve">
     <value>Užívateľ nemá priradený daný album vo svojej zbierke.</value>
   </data>
+  <data name="ReviewNotExist" xml:space="preserve">
+    <value>Recenzia neexistuje.</value>
+  </data>
+  <data name="NotUserReview" xml:space="preserve">
+    <value>Recenzia nepatrí danému užívateľovi.</value>
+  </data>
 </root>

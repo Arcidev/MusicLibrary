@@ -226,4 +226,10 @@
   <data name="Reset" xml:space="preserve">
     <value>Resetovať</value>
   </data>
+  <data name="BandReviews" xml:space="preserve">
+    <value>Recenzie skupín</value>
+  </data>
+  <data name="AlbumReviews" xml:space="preserve">
+    <value>Recenzie albumov</value>
+  </data>
 </root>

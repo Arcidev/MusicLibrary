@@ -118,21 +118,10 @@ namespace BL.Tests
             var user = await UserFacade.GetUserByEmailAsync("albumtest@mail.sk");
             Assert.IsNotNull(user);
 
-            var reviews = albumFacade.GetReviews();
-            var reviews2 = albumFacade.GetReviews(album.Id);
-            var reviews3 = albumFacade.GetReviews(userId: user.Id);
-            var reviews4 = albumFacade.GetReviews(album.Id, user.Id);
+            var reviews = albumFacade.GetReviews(album.Id);
 
             Assert.IsTrue(reviews.Any());
-            Assert.IsTrue(reviews2.Any());
-            Assert.IsTrue(reviews3.Any());
-            Assert.IsTrue(reviews4.Any());
-
-            Assert.AreNotEqual(reviews.Count(), reviews2.Count());
-            Assert.AreEqual(reviews.Count(), reviews3.Count());
-            Assert.AreNotEqual(reviews.Count(), reviews4.Count());
-
-            Assert.IsTrue(reviews4.All(x => x.CreatedById == user.Id && x.AlbumId == album.Id));
+            Assert.IsTrue(reviews.All(x => x.AlbumId == album.Id));
         }
 
         [TestMethod]

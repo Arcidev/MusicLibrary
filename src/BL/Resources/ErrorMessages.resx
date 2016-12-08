@@ -144,4 +144,10 @@
   <data name="UserAlbumNotExist" xml:space="preserve">
     <value>User does not have this album in his collection.</value>
   </data>
+  <data name="ReviewNotExist" xml:space="preserve">
+    <value>Review does not exist.</value>
+  </data>
+  <data name="NotUserReview" xml:space="preserve">
+    <value>Review does not belong to specified user.</value>
+  </data>
 </root>

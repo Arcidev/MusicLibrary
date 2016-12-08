@@ -5,6 +5,7 @@ using BL.DTO;
 using System.Collections.Generic;
 using System.Linq;
 using Shared.Enums;
+using System;
 
 namespace MusicLibrary.ViewModels.Album
 {
@@ -93,18 +94,23 @@ namespace MusicLibrary.ViewModels.Album
                 {
                     AlbumId = albumId,
                     CreatedById = int.Parse(UserId),
-                    Quality = (Quality)ReviewQuality.Value,
+                    Quality = (Quality)int.Parse(ReviewQuality),
                     Text = ReviewText
                 });
 
                 Reviews = AlbumFacade.GetReviews(albumId);
                 InitReviewValues();
-            }, failureCallback: (ex) => AddReviewErrorMessage = ex.Message);
+            }, failureCallback: (ex) => ReviewErrorMessage = ex.Message);
         }
 
         protected override void LoadReviews()
         {
             Reviews = AlbumFacade.GetReviews(int.Parse(Context.Parameters["AlbumId"].ToString()));
+        }
+
+        protected override Action<int, ReviewEditDTO> GetEditReviewAction()
+        {
+            return AlbumFacade.EditUserReview;
         }
     }
 }

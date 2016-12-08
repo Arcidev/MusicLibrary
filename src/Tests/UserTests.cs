@@ -27,10 +27,13 @@ namespace BL.Tests
             await userFacade.AddUserAsync(user);
 
             var dto = await userFacade.VerifyAndGetUserAsync("test@mail.sk", "123");
-            dto.Email = "test2@mail.sk";
+            Assert.AreEqual("Test", dto.FirstName);
+
+            dto.FirstName = "Test2";
             userFacade.EditUser(dto);
 
-            await userFacade.VerifyAndGetUserAsync("test2@mail.sk", "123");
+            dto = await userFacade.VerifyAndGetUserAsync("test@mail.sk", "123");
+            Assert.AreEqual("Test2", dto.FirstName);
             userFacade.DeleteUser(dto.Id);
         }
 

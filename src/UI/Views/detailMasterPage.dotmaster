@@ -17,7 +17,7 @@
 
                     <div class="text-h1 top">
                         <h2>{{resource: Resource.Reviews}}</h2>
-                        <dot:Button class="submit-button review-comment-add" Visible="{value: IsUserLoggedIn}" Text="{resource: Resource.AddReview}" Click="{staticCommand: AddReviewVisible = true }" />
+                        <dot:Button class="submit-button review-comment-add" Visible="{value: IsUserLoggedIn}" Text="{resource: Resource.AddReview}" Click="{command: ShowAddReview()}" />
                     </div>
                     <div class="div2">
                         <div id="section group">
@@ -26,9 +26,7 @@
                                     <img class="logo-img" />
                                 </div>
                                 <div class="para review-comment">
-                                    <p>
-                                        <dot:TextBox Type="MultiLine" Text="{value: ReviewText}" />
-                                    </p>
+                                    <dot:TextBox Type="MultiLine" Text="{value: ReviewText}" />
                                     <ul>
                                         <li>
                                             <dot:RadioButton CheckedItem="{value: ReviewQuality}" CheckedValue="0" Text="0" />
@@ -38,8 +36,8 @@
                                             <dot:RadioButton CheckedItem="{value: ReviewQuality}" CheckedValue="4" Text="4" />
                                             <dot:RadioButton CheckedItem="{value: ReviewQuality}" CheckedValue="5" Text="5" />
                                         </li>
-                                        <li Visible="{value: AddReviewErrorMessage != null}">
-                                            <dot:Literal class="error-message" Text="{value: AddReviewErrorMessage}" />
+                                        <li Visible="{value: ReviewErrorMessage != null}">
+                                            <dot:Literal class="error-message" Text="{value: ReviewErrorMessage}" />
                                         </li>
                                         <li>
                                             <dot:Button Click="{command: AddReview()}" class="submit-button" Text="{resource: Resource.SubmitReview}" />
@@ -53,16 +51,31 @@
                                         <img class="logo-img" src="{value: CreatedByImageStorageFileName != null ? "/SavedFiles/" + CreatedByImageStorageFileName : "" }" alt="{value: CreatedByFullName}" />
                                     </div>
                                     <div class="para review">
-                                        <p>
-                                            <dot:Literal Text="{value: Text}" />
-                                        </p>
+                                        <dot:Literal Visible="{value: _root.ReviewEditId != Id}" Text="{value: Text}" />
+                                        <dot:TextBox Visible="{value: _root.ReviewEditId == Id}" Type="MultiLine" Text="{value: _root.ReviewText}" />
                                         <ul>
-                                            <li><span><span class="stars">{{value: QualityInt}}</span></span></li>
+                                            <li Visible="{value: _root.ReviewEditId != Id}"><span><span class="stars">{{value: QualityInt}}</span></span></li>
+                                            <li Visible="{value: _root.ReviewEditId == Id}">
+                                                <dot:RadioButton CheckedItem="{value: _root.ReviewQuality}" CheckedValue="0" Text="0" />
+                                                <dot:RadioButton CheckedItem="{value: _root.ReviewQuality}" CheckedValue="1" Text="1" />
+                                                <dot:RadioButton CheckedItem="{value: _root.ReviewQuality}" CheckedValue="2" Text="2" />
+                                                <dot:RadioButton CheckedItem="{value: _root.ReviewQuality}" CheckedValue="3" Text="3" />
+                                                <dot:RadioButton CheckedItem="{value: _root.ReviewQuality}" CheckedValue="4" Text="4" />
+                                                <dot:RadioButton CheckedItem="{value: _root.ReviewQuality}" CheckedValue="5" Text="5" />
+                                            </li>
                                             <li>
                                                 <dot:Literal Text="{value: CreatedByFullName}" />
                                             </li>
                                             <li>
                                                 <dot:Literal Text="{value: EditDate}" FormatString="g" />
+                                            </li>
+                                            <li Visible="{value: _root.ReviewErrorMessage != null && _root.ReviewEditId == Id}">
+                                                <dot:Literal class="error-message" Text="{value: _root.ReviewErrorMessage}" />
+                                            </li>
+                                            <li>
+                                                <dot:LinkButton Visible="{value: _root.ReviewEditId != Id && _root.UserId == CreatedById.ToString()}" Text="Edit" Click="{command: _root.Edit(_this)}" />
+                                                <dot:LinkButton Visible="{value: _root.ReviewEditId == Id}" Text="Save" Click="{command: _root.EditReview()}" />
+                                                <dot:LinkButton Visible="{value: _root.ReviewEditId == Id}" Text="Cancel" Click="{command: _root.CancelEdit()}" />
                                             </li>
                                         </ul>
                                     </div>

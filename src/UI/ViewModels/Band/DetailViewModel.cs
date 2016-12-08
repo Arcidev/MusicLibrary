@@ -4,6 +4,7 @@ using DotVVM.Framework.ViewModel;
 using BL.DTO;
 using System.Linq;
 using Shared.Enums;
+using System;
 
 namespace MusicLibrary.ViewModels.Band
 {
@@ -43,18 +44,23 @@ namespace MusicLibrary.ViewModels.Band
                 {
                     BandId = bandId,
                     CreatedById = int.Parse(UserId),
-                    Quality = (Quality)ReviewQuality.Value,
+                    Quality = (Quality)int.Parse(ReviewQuality),
                     Text = ReviewText
                 });
 
                 Reviews = BandFacade.GetReviews(bandId);
                 InitReviewValues();
-            }, failureCallback: (ex) => AddReviewErrorMessage = ex.Message);
+            }, failureCallback: (ex) => ReviewErrorMessage = ex.Message);
         }
 
         protected override void LoadReviews()
         {
             Reviews = BandFacade.GetReviews(int.Parse(Context.Parameters["BandId"].ToString()));
+        }
+
+        protected override Action<int, ReviewEditDTO> GetEditReviewAction()
+        {
+            return BandFacade.EditUserReview;
         }
     }
 }

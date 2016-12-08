@@ -4,7 +4,9 @@ using BL.Queries;
 using BL.Repositories;
 using BL.Resources;
 using DAL.Entities;
+using DotVVM.Framework.Controls;
 using DotVVM.Framework.Storage;
+using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
 
@@ -21,6 +23,8 @@ namespace BL.Facades
         public Func<BandAlbumsQuery> BandAlbumsQueryFunc { get; set; }
 
         public Func<BandReviewsQuery> BandReviewsQueryFunc { get; set; }
+
+        public Func<UserBandReviewsQuery> UserBandReviewsQueryFunc { get; set; }
 
         public Func<BandMembersQuery> BandMembersQueryFunc { get; set; }
 
@@ -94,15 +98,43 @@ namespace BL.Facades
             }
         }
 
-        public IEnumerable<BandReviewDTO> GetReviews(int? bandId = null, int? userId = null)
+        public IEnumerable<BandReviewDTO> GetReviews(int bandId)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var query = BandReviewsQueryFunc();
                 query.BandId = bandId;
-                query.UserId = userId;
 
                 return query.Execute();
+            }
+        }
+
+        public void LoadUserReviews(int userId, GridViewDataSet<UserBandReviewDTO> dataSet)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = UserBandReviewsQueryFunc();
+                query.UserId = userId;
+
+                FillDataSet(dataSet, query);
+            }
+        }
+
+        public void EditUserReview(int reviewId, ReviewEditDTO editedReview)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = BandReviewRepositoryFunc();
+                var entity = repo.GetById(reviewId);
+                IsNotNull(entity, ErrorMessages.ReviewNotExist);
+
+                if (entity.CreatedById != editedReview.CreatedById)
+                    throw new UIException(ErrorMessages.NotUserReview);
+
+                Mapper.Map(editedReview, entity);
+                entity.EditDate = DateTime.Now;
+
+                uow.Commit();
             }
         }
 

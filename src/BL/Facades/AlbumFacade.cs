@@ -4,7 +4,9 @@ using BL.Queries;
 using BL.Repositories;
 using BL.Resources;
 using DAL.Entities;
+using DotVVM.Framework.Controls;
 using DotVVM.Framework.Storage;
+using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -26,6 +28,8 @@ namespace BL.Facades
         public Func<AlbumReviewRepository> AlbumReviewRepositoryFunc { get; set; }
 
         public Func<AlbumReviewsQuery> AlbumReviewsQueryFunc { get; set; }
+
+        public Func<UserAlbumReviewsQuery> UserAlbumReviewsQueryFunc { get; set; }
 
         public Func<AlbumSongRepository> AlbumSongRepositoryFunc { get; set; }
 
@@ -107,15 +111,43 @@ namespace BL.Facades
             }
         }
 
-        public IEnumerable<AlbumReviewDTO> GetReviews(int? albumId = null, int? userId = null)
+        public IEnumerable<AlbumReviewDTO> GetReviews(int albumId)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var query = AlbumReviewsQueryFunc();
                 query.AlbumId = albumId;
-                query.UserId = userId;
 
                 return query.Execute();
+            }
+        }
+
+        public void EditUserReview(int reviewId, ReviewEditDTO editedReview)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = AlbumReviewRepositoryFunc();
+                var entity = repo.GetById(reviewId);
+                IsNotNull(entity, ErrorMessages.ReviewNotExist);
+
+                if (entity.CreatedById != editedReview.CreatedById)
+                    throw new UIException(ErrorMessages.NotUserReview);
+
+                Mapper.Map(editedReview, entity);
+                entity.EditDate = DateTime.Now;
+
+                uow.Commit();
+            }
+        }
+
+        public void LoadUserReviews(int userId, GridViewDataSet<UserAlbumReviewDTO> dataSet)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = UserAlbumReviewsQueryFunc();
+                query.UserId = userId;
+
+                FillDataSet(dataSet, query);
             }
         }
 

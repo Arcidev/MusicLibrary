@@ -198,14 +198,16 @@
     <Compile Include="DTO\Band\BandCreateDTO.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\Album\AlbumReviewDTO.cs" />
-    <Compile Include="DTO\ReviewCreateDTO.cs" />
-    <Compile Include="DTO\ReviewDTO.cs" />
+    <Compile Include="DTO\Reviews\ReviewEditDTO.cs" />
+    <Compile Include="DTO\Reviews\ReviewDTO.cs" />
     <Compile Include="DTO\SliderImage\SliderImageEditDTO.cs" />
     <Compile Include="DTO\Song\SongCreateDTO.cs" />
     <Compile Include="DTO\StorageFileDTO.cs" />
     <Compile Include="DTO\Band\BandDTO.cs" />
     <Compile Include="DTO\SliderImage\SliderImageDTO.cs" />
     <Compile Include="DTO\Song\SongDTO.cs" />
+    <Compile Include="DTO\User\UserBandReviewDTO.cs" />
+    <Compile Include="DTO\User\UserAlbumReviewDTO.cs" />
     <Compile Include="DTO\User\UserCreateDTO.cs" />
     <Compile Include="DTO\User\UserBaseDTO.cs" />
     <Compile Include="DTO\User\UserEditDTO.cs" />
@@ -224,6 +226,8 @@
     <Compile Include="Installers\FacadesInstaller.cs" />
     <Compile Include="Installers\ServicesInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\UserBandReviewsQuery.cs" />
+    <Compile Include="Queries\UserAlbumReviewsQuery.cs" />
     <Compile Include="Queries\BandMembersQuery.cs" />
     <Compile Include="Queries\BandReviewsQuery.cs" />
     <Compile Include="Queries\CategoryAlbumsQuery.cs" />

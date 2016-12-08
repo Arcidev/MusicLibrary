@@ -8,7 +8,7 @@ namespace MusicLibrary.ViewModels
 {
 	public abstract class MasterPageViewModel : DotvvmViewModelBase
 	{
-        protected string UserId { get { return Context.OwinContext.Authentication.User.Identity.GetUserId(); } }
+        public string UserId { get { return Context.OwinContext.Authentication.User.Identity.GetUserId(); } }
 
         public string ActivePage { get; protected set; }
 

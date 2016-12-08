@@ -4,6 +4,7 @@
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
     <dot:RequiredResource Name="style-css" />
+    <dot:ContentPlaceHolder ID="HeaderContent" />
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
@@ -17,8 +18,8 @@
                             <li class="{value: ActiveAdminPage == "UserProfile" ? "sidebar-active" : ""}">
                                 <dot:RouteLink Enabled="{value: ActiveAdminPage != "UserProfile"}" Text="{resource: Resource.MyProfile}" RouteName="UserProfile" />
                             </li>
-                            <li>
-                                <dot:RouteLink Text="{resource: Resource.MyReviews}" RouteName="UserProfile" />
+                            <li class="{value: ActiveAdminPage == "UserReviews" ? "sidebar-active" : ""}">
+                                <dot:RouteLink Enabled="{value: ActiveAdminPage != "UserReviews"}" Text="{resource: Resource.MyReviews}" RouteName="UserReviews" />
                             </li>
                             <li>
                                 <dot:RouteLink Text="{resource: Resource.UserCollection}" RouteName="UserProfile" />
@@ -26,7 +27,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="content">
+                <div class="content admin-content">
                     <dot:ContentPlaceHolder ID="PageContent" />
                 </div>
                 <div class="clear"></div>

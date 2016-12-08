@@ -7,22 +7,13 @@ namespace BL.Queries
 {
     public class AlbumReviewsQuery : AppQuery<AlbumReviewDTO>
     {
-        public int? UserId { get; set; }
-
-        public int? AlbumId { get; set; }
+        public int AlbumId { get; set; }
 
         public AlbumReviewsQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
         protected override IQueryable<AlbumReviewDTO> GetQueryable()
         {
-            var query = Context.AlbumReviews.AsQueryable();
-            if (UserId.HasValue)
-                query = query.Where(x => x.CreatedById == UserId.Value);
-
-            if (AlbumId.HasValue)
-                query = query.Where(x => x.AlbumId == AlbumId.Value);
-
-            return query.OrderByDescending(x => x.EditDate).ProjectTo<AlbumReviewDTO>();
+            return Context.AlbumReviews.Where(x => x.AlbumId == AlbumId).OrderByDescending(x => x.EditDate).ProjectTo<AlbumReviewDTO>();
         }
     }
 }

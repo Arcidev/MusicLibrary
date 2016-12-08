@@ -51,37 +51,59 @@ span.stars span {
   background-position: 0 0;
 }
 .review ul,
-.review-comment ul {
+.review-comment ul,
+.admin-review ul {
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid gray;
 }
 .review ul li,
-.review-comment ul li {
+.review-comment ul li,
+.admin-review ul li {
   display: inline-block;
   height: 20px;
 }
 .review ul li span,
-.review-comment ul li span {
+.review-comment ul li span,
+.admin-review ul li span,
+.review ul li a,
+.review-comment ul li a,
+.admin-review ul li a {
   font-size: .8425em;
   height: 16px;
 }
 .review ul li > span,
-.review-comment ul li > span {
-  border-right: 1px solid gray;
-  padding-right: 5px;
+.review-comment ul li > span,
+.admin-review ul li > span {
+  border-left: 1px solid gray;
+  padding-left: 5px;
 }
-.review ul li:last-child > span,
-.review-comment ul li:last-child > span {
+.review ul li a,
+.review-comment ul li a,
+.admin-review ul li a {
+  border-left: 1px solid gray;
+  padding-left: 5px;
+  color: black;
+}
+.review ul li:first-child > a,
+.review-comment ul li:first-child > a,
+.admin-review ul li:first-child > a {
   border-right: none;
 }
-.review-comment textarea {
+.review ul li:first-child > span,
+.review-comment ul li:first-child > span,
+.admin-review ul li:first-child > span {
+  border-left: none;
+}
+.review textarea,
+.review-comment textarea,
+.admin-review textarea {
   resize: vertical;
   width: 775px;
   height: 105px;
 }
-.review-comment input[type="button"] {
-  padding: 5px;
+.review-comment li:last-child {
+  float: right;
 }
 .review-comment li {
   padding-right: 5px;
@@ -91,15 +113,11 @@ span.stars span {
   border-right: none;
   border-left: 1px solid gray;
 }
-.review-comment li:last-child {
-  float: right;
+.review-comment input[type="button"] {
+  padding: 5px;
 }
 .review-comment-add {
   margin: 20px 0px 20px 20px;
-}
-.right-border {
-  border-right: 1px solid gray;
-  padding-right: 5px;
 }
 div .review-img {
   margin-right: 20px;
@@ -120,7 +138,8 @@ div .review-img img {
 .admin-sidebar {
   float: left;
   text-align: center;
-  width: 18%;
+  width: 20%;
+  min-width: 200px;
 }
 .admin-sidebar h2 {
   text-align: center;
@@ -165,6 +184,35 @@ div .review-img img {
 }
 .user-profile .avatar .action-buttons a {
   color: black;
+}
+.user-reviews .grid-img1 img {
+  cursor: pointer;
+}
+.user-reviews .pager li {
+  display: inline-block;
+  background-color: #f8f8f8;
+  margin: 3px;
+}
+.user-reviews .pager li a,
+.user-reviews .pager li span {
+  display: block;
+  padding: 10px;
+  min-width: 24px;
+  text-align: center;
+}
+.user-reviews .pager li a {
+  color: black;
+}
+.user-reviews .pager li span {
+  color: grey;
+}
+.user-reviews .pager .disabled a {
+  cursor: default;
+  color: gray;
+}
+.admin-content {
+  width: 80%;
+  margin: 0;
 }
 .loading-animation {
   width: 100%;

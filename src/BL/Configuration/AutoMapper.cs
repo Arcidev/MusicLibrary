@@ -48,6 +48,12 @@ namespace BL.Configuration
                 config.CreateMap<BandReviewCreateDTO, BandReview>();
 
                 config.CreateMap<UserAlbumCreateDTO, UserAlbum>();
+
+                config.CreateMap<AlbumReview, UserAlbumReviewDTO>();
+                config.CreateMap<BandReview, UserBandReviewDTO>();
+
+                config.CreateMap<ReviewEditDTO, BandReview>();
+                config.CreateMap<ReviewEditDTO, AlbumReview>();
             });
         }
     }

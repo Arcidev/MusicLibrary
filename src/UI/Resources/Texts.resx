@@ -246,4 +246,10 @@
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
   </data>
+  <data name="BandReviews" xml:space="preserve">
+    <value>Band reviews</value>
+  </data>
+  <data name="AlbumReviews" xml:space="preserve">
+    <value>Album reviews</value>
+  </data>
 </root>

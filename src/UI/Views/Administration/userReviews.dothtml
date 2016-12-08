@@ -1,0 +1,98 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.UserReviewsViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+    <dot:RequiredResource Name="stars" />
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="user-reviews">
+        <div class="section group">
+            <div class="cont">
+                <div class="text-h1">
+                    <h2>{{resource: Resource.BandReviews}}</h2>
+                </div>
+                <div class="div2">
+                    <div id="section group">
+                        <dot:Repeater DataSource="{value: BandReviews}" RenderWrapperTag="true" WrapperTagName="div" RenderSettings.Mode="Server" PostBack.Update="true">
+                            <div class="image group">
+                                <div class="grid-img1 review-img">
+                                    <dot:RouteLink RouteName="BandDetail" Param-BandId="{value: BandId}">
+                                        <img class="logo-img" src="{value: Band.ImageStorageFile!= null ? "/SavedFiles/" + Band.ImageStorageFile.FileName: "" }" alt="{value: Band.Name}" />
+                                    </dot:RouteLink>
+                                </div>
+                                <div class="para admin-review">
+                                    <dot:Literal Visible="{value: _root.BandReviewEditId != Id}" Text="{value: Text}" />
+                                    <dot:TextBox Visible="{value: _root.BandReviewEditId == Id}" Type="MultiLine" Text="{value: _root.EditReviewText}" />
+                                    <ul>
+                                        <li Visible="{value: _root.BandReviewEditId != Id}"><span><span class="stars">{{value: QualityInt}}</span></span></li>
+                                        <li Visible="{value: _root.BandReviewEditId == Id}">
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="0" Text="0" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="1" Text="1" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="2" Text="2" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="3" Text="3" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="4" Text="4" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="5" Text="5" />
+                                        </li>
+                                        <li><dot:Literal Text="{value: EditDate}" FormatString="g" /></li>
+                                        <li Visible="{value: _root.ErrorMessage != null && _root.BandReviewEditId == Id}"><dot:Literal class="error-message" Text="{value: _root.ErrorMessage}" /></li>
+                                        <li>
+                                            <dot:LinkButton Visible="{value: _root.BandReviewEditId != Id}" Text="Edit" Click="{command: _root.Edit(_this)}"/>
+                                            <dot:LinkButton Visible="{value: _root.BandReviewEditId == Id}" Text="Save" Click="{command: _root.EditBandReview()}" />
+                                            <dot:LinkButton Visible="{value: _root.BandReviewEditId == Id}" Text="Cancel" Click="{command: _root.CancelEdit()}" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </dot:Repeater>
+                        <dot:DataPager DataSet="{value: BandReviews}" class="pager" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section group">
+            <div class="cont">
+                <div class="text-h1 top">
+                    <h2>{{resource: Resource.AlbumReviews}}</h2>
+                </div>
+                <div class="div2">
+                    <div id="section group">
+                        <dot:Repeater DataSource="{value: AlbumReviews}" RenderWrapperTag="true" WrapperTagName="div" RenderSettings.Mode="Server" PostBack.Update="true">
+                            <div class="image group">
+                                <div class="grid-img1 review-img">
+                                    <dot:RouteLink RouteName="AlbumDetail" Param-AlbumId="{value: AlbumId}">
+                                        <img class="logo-img" src="{value: Album.ImageStorageFile != null ? "/SavedFiles/" + Album.ImageStorageFile.FileName: "" }" alt="{value: Album.Name}" />
+                                    </dot:RouteLink>
+                                </div>
+                                <div class="para admin-review">
+                                    <dot:Literal Visible="{value: _root.AlbumReviewEditId != Id}" Text="{value: Text}" />
+                                    <dot:TextBox Visible="{value: _root.AlbumReviewEditId == Id}" Type="MultiLine" Text="{value: _root.EditReviewText}" />
+                                    <ul>
+                                        <li Visible="{value: _root.AlbumReviewEditId != Id}"><span><span class="stars">{{value: QualityInt}}</span></span></li>
+                                        <li Visible="{value: _root.AlbumReviewEditId == Id}">
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="0" Text="0" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="1" Text="1" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="2" Text="2" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="3" Text="3" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="4" Text="4" />
+                                            <dot:RadioButton CheckedItem="{value: _root.EditReviewQuality}" CheckedValue="5" Text="5" />
+                                        </li>
+                                        <li><dot:Literal Text="{value: EditDate}" FormatString="g" /></li>
+                                        <li Visible="{value: _root.ErrorMessage != null && _root.AlbumReviewEditId == Id}"><dot:Literal class="error-message" Text="{value: _root.ErrorMessage}" /></li>
+                                        <li>
+                                            <dot:LinkButton Visible="{value: _root.AlbumReviewEditId != Id}" Text="Edit" Click="{command: _root.Edit(_this)}" />
+                                            <dot:LinkButton Visible="{value: _root.AlbumReviewEditId == Id}" Text="Save" Click="{command: _root.EditAlbumReview()}" />
+                                            <dot:LinkButton Visible="{value: _root.AlbumReviewEditId == Id}" Text="Cancel" Click="{command: _root.CancelEdit()}" />
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </dot:Repeater>
+                        <dot:DataPager DataSet="{value: AlbumReviews}" class="pager" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</dot:Content>

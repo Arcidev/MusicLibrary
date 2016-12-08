@@ -28,6 +28,7 @@ namespace MusicLibrary
             config.RouteTable.Add("AlbumsByCategory", "albums/cateogry/{CategoryId}", "Views/albums.dothtml");
             config.RouteTable.Add("UserCollection", "collection", "Views/userCollection.dothtml");
             config.RouteTable.Add("UserProfile", "administration/profile", "Views/Administration/userProfile.dothtml");
+            config.RouteTable.Add("UserReviews", "administration/reviews", "Views/Administration/userReviews.dothtml");
             config.RouteTable.Add("TempFilePresenter", "files/{FileId}/{FileExtension}", null, null, WindsorBootstrap.Resolve<TempFilePresenter>);
         }
 

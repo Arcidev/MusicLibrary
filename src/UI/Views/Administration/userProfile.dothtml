@@ -2,6 +2,9 @@
 @masterPage Views/Administration/administrationMasterPage.dotmaster
 @import Resource = MusicLibrary.Resources.Texts
 
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+
 <dot:Content ContentPlaceHolderID="PageContent">
     <div class="user-profile">
         <div class="avatar">

@@ -106,6 +106,24 @@ namespace BL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Review does not belong to specified user..
+        /// </summary>
+        internal static string NotUserReview {
+            get {
+                return ResourceManager.GetString("NotUserReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review does not exist..
+        /// </summary>
+        internal static string ReviewNotExist {
+            get {
+                return ResourceManager.GetString("ReviewNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Song does not exist..
         /// </summary>
         internal static string SongNotExist {

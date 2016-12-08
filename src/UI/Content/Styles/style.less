@@ -68,7 +68,7 @@ span.stars span {
     background-position: 0 0;
 }
 
-.review, .review-comment {
+.review, .review-comment, .admin-review {
     ul {
         margin-top: 10px;
         padding-top: 10px;
@@ -78,32 +78,42 @@ span.stars span {
             display: inline-block;
             height: 20px;
 
-            span {
+            span, a {
                 font-size: .8425em;
                 height: 16px;
             }
 
             > span {
-                border-right: 1px solid gray;
-                padding-right: 5px;
+                border-left: 1px solid gray;
+                padding-left: 5px;
+            }
+
+            a {
+                border-left: 1px solid gray;
+                padding-left: 5px;
+                color: black;
             }
         }
 
-        li:last-child > span {
+        li:first-child > a {
             border-right: none;
         }
-    }
-}
 
-.review-comment {
+        li:first-child > span {
+            border-left: none;
+        }
+    }
+
     textarea {
         resize: vertical;
         width: 775px;
         height: 105px;
     }
+}
 
-    input[type="button"] {
-        padding: 5px;
+.review-comment {
+    li:last-child {
+        float:right;
     }
 
     li {
@@ -115,18 +125,13 @@ span.stars span {
         }
     }
 
-    li:last-child {
-        float:right;
+    input[type="button"] {
+        padding: 5px;
     }
 }
 
 .review-comment-add {
     margin: 20px 0px 20px 20px
-}
-
-.right-border {
-    border-right: 1px solid gray;
-    padding-right: 5px;
 }
 
 div .review-img {
@@ -153,7 +158,8 @@ div .review-img {
 .admin-sidebar {
 	float: left;
     text-align: center;
-    width: 18%;
+    width: 20%;
+    min-width: 200px;
 
     h2 {
         text-align: center;
@@ -210,6 +216,49 @@ div .review-img {
             }
         }
     }
+}
+
+.user-reviews {
+    .grid-img1 {
+        img {
+            cursor: pointer;
+        }
+    }
+
+    .pager {
+        li {
+            display: inline-block;
+            background-color: #f8f8f8;
+            margin: 3px;
+
+            a, span {
+                display: block;
+                padding: 10px;
+                min-width: 24px;
+                text-align: center;
+            }
+
+            a {
+                color: black;
+            }
+
+            span {
+                color: grey;
+            }
+        }
+
+        .disabled {
+            a {
+                cursor: default;
+                color: gray;
+            }
+        }
+    }
+}
+
+.admin-content {
+    width: 80%;
+    margin: 0;
 }
 
 @activeButtonBackground: #10696e;

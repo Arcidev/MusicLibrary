@@ -97,6 +97,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Album reviews.
+        /// </summary>
+        public static string AlbumReviews {
+            get {
+                return ResourceManager.GetString("AlbumReviews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Albums.
         /// </summary>
         public static string Albums {
@@ -129,6 +138,15 @@ namespace MusicLibrary.Resources {
         public static string BandAlbums {
             get {
                 return ResourceManager.GetString("BandAlbums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Band reviews.
+        /// </summary>
+        public static string BandReviews {
+            get {
+                return ResourceManager.GetString("BandReviews", resourceCulture);
             }
         }
         

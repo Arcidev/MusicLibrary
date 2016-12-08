@@ -2,7 +2,7 @@
 
 namespace BL.DTO
 {
-    public abstract class ReviewCreateDTO
+    public class ReviewEditDTO
     {
         public string Text { get; set; }
 
