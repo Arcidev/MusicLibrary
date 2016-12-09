@@ -97,6 +97,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Album.
+        /// </summary>
+        public static string AlbumName {
+            get {
+                return ResourceManager.GetString("AlbumName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Album reviews.
         /// </summary>
         public static string AlbumReviews {
@@ -142,6 +151,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Band.
+        /// </summary>
+        public static string BandName {
+            get {
+                return ResourceManager.GetString("BandName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Band reviews.
         /// </summary>
         public static string BandReviews {
@@ -165,6 +183,15 @@ namespace MusicLibrary.Resources {
         public static string Categories {
             get {
                 return ResourceManager.GetString("Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string CategoryName {
+            get {
+                return ResourceManager.GetString("CategoryName", resourceCulture);
             }
         }
         
@@ -210,6 +237,15 @@ namespace MusicLibrary.Resources {
         public static string FirstNameRequired {
             get {
                 return ResourceManager.GetString("FirstNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In collection.
+        /// </summary>
+        public static string HasInCollection {
+            get {
+                return ResourceManager.GetString("HasInCollection", resourceCulture);
             }
         }
         

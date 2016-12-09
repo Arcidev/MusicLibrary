@@ -141,9 +141,6 @@
   <data name="CategoryNotExist" xml:space="preserve">
     <value>Kategorie neexistuje.</value>
   </data>
-  <data name="UserAlbumNotExist" xml:space="preserve">
-    <value>Uživatel nemá přiřazen daný album ve své sbírce.</value>
-  </data>
   <data name="ReviewNotExist" xml:space="preserve">
     <value>Recenze neexistuje.</value>
   </data>

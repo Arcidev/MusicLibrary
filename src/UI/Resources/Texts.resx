@@ -252,4 +252,16 @@
   <data name="AlbumReviews" xml:space="preserve">
     <value>Album reviews</value>
   </data>
+  <data name="AlbumName" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="BandName" xml:space="preserve">
+    <value>Band</value>
+  </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="HasInCollection" xml:space="preserve">
+    <value>In collection</value>
+  </data>
 </root>

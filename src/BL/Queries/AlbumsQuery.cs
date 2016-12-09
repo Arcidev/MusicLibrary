@@ -1,11 +1,10 @@
 ﻿using AutoMapper.QueryableExtensions;
-using BL.DTO;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
 namespace BL.Queries
 {
-    public class AlbumsQuery : AppQuery<AlbumDTO>
+    public class AlbumsQuery<T> : AppQuery<T>
     {
         public AlbumsQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
@@ -13,7 +12,7 @@ namespace BL.Queries
 
         public string Filter { get; set; }
 
-        protected override IQueryable<AlbumDTO> GetQueryable()
+        protected override IQueryable<T> GetQueryable()
         {
             var query = Context.Albums.Where(x => x.Approved);
             if (CategoryId.HasValue)
@@ -22,7 +21,7 @@ namespace BL.Queries
             if (!string.IsNullOrEmpty(Filter))
                 query = query.Where(x => x.Name.Contains(Filter) || x.Band.Name.Contains(Filter));
 
-            return query.ProjectTo<AlbumDTO>();
+            return query.ProjectTo<T>();
         }
     }
 }

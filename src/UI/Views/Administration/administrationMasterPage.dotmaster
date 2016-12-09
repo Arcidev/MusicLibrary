@@ -21,8 +21,8 @@
                             <li class="{value: ActiveAdminPage == "UserReviews" ? "sidebar-active" : ""}">
                                 <dot:RouteLink Enabled="{value: ActiveAdminPage != "UserReviews"}" Text="{resource: Resource.MyReviews}" RouteName="UserReviews" />
                             </li>
-                            <li>
-                                <dot:RouteLink Text="{resource: Resource.UserCollection}" RouteName="UserProfile" />
+                            <li class="{value: ActiveAdminPage == "UserCollection" ? "sidebar-active" : ""}">
+                                <dot:RouteLink Text="{resource: Resource.UserCollection}" RouteName="UserCollectionAdmin" />
                             </li>
                         </ul>
                     </div>

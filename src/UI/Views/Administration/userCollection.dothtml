@@ -1,0 +1,27 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.UserCollectionViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <dot:GridView class="user-collection" DataSource="{value: UserCollection}" InlineEditing="true">
+        <Columns>
+            <dot:GridViewTextColumn Width="300px" IsEditable="false" ValueBinding="{value: AlbumName}" HeaderText="{resource: Resource.AlbumName}" AllowSorting="true" />
+            <dot:GridViewTextColumn Width="250px" IsEditable="false" ValueBinding="{value: BandName}" HeaderText="{resource: Resource.BandName}" AllowSorting="true" />
+            <dot:GridViewTextColumn Width="130px" IsEditable="false" ValueBinding="{value: Category.NameLocalized}" HeaderText="{resource: Resource.CategoryName}" />
+            <dot:GridViewCheckBoxColumn ValueBinding="{value: HasInCollection}" HeaderText="{resource: Resource.HasInCollection}" />
+            <dot:GridViewTemplateColumn>
+                <ContentTemplate>
+                    <dot:LinkButton Text="Edit" Click="{command: _root.Edit(AlbumId)}" />
+                </ContentTemplate>
+                <EditTemplate>
+                    <dot:LinkButton Text="Save" Click="{command: _root.Update(_this)}" />
+                    <dot:LinkButton Text="Cancel" Click="{command: _root.CancelEdit()}" />
+                </EditTemplate>
+            </dot:GridViewTemplateColumn>
+        </Columns>
+    </dot:GridView>
+    <dot:DataPager DataSet="{value: UserCollection}" class="pager" />
+</dot:Content>

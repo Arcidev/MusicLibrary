@@ -117,7 +117,7 @@ namespace BL.Tests
             var album = albumFacade.GetFeaturedAlbums(1).First();
             var user = await UserFacade.GetUserByEmailAsync("albumtest@mail.sk");
 
-            albumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO() { AlbumId = album.Id, UserId = user.Id });
+            await albumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO() { AlbumId = album.Id, UserId = user.Id });
             var collection = albumFacade.GetUserAlbums(user.Id);
             Assert.AreEqual(1, collection.Count());
             Assert.AreEqual(album.Id, collection.First().Id);

@@ -258,6 +258,38 @@ div .review-img {
     }
 }
 
+.user-collection {
+    margin: 10px;
+
+    border-collapse: collapse;
+    th {
+        background-color: #b0b0b0;
+        text-align: left;
+        height: 25px;
+        
+    }
+
+    th:first-child, td:first-child {
+        padding-left: 5px;
+    }
+
+    th:last-child, td:last-child {
+        padding-right: 5px;
+    }
+
+    a {
+        color: black;
+    }
+
+    .sort-asc:after {
+        content: "\2193";
+    }
+
+    .sort-desc:after {
+        content: "\2191";
+    }
+}
+
 .admin-content {
     width: 80%;
     margin: 0;

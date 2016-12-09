@@ -9,6 +9,7 @@ using DotVVM.Framework.Storage;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BL.Facades
@@ -23,7 +24,9 @@ namespace BL.Facades
 
         public Func<AlbumSongsQuery> AlbumSongsQueryFunc { get; set; }
 
-        public Func<AlbumsQuery> AlbumsQueryFunc { get; set; }
+        public Func<AlbumsQuery<AlbumDTO>> AlbumsQueryAlbumFunc { get; set; }
+
+        public Func<AlbumsQuery<UserAlbumDTO>> AlbumsQueryUserAlbumFunc { get; set; }
 
         public Func<AlbumReviewRepository> AlbumReviewRepositoryFunc { get; set; }
 
@@ -36,6 +39,8 @@ namespace BL.Facades
         public Func<UserAlbumRepository> UserAlbumRepositoryFunc { get; set; }
 
         public Func<UserAlbumsQuery> UserAlbumsQueryFunc { get; set; }
+
+        public Func<IsInUserAlbumCollectionQuery> IsInUserAlbumCollectionQueryFunc { get; set; }
 
         public AlbumDTO AddAlbum(AlbumCreateDTO album, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
@@ -88,11 +93,33 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var query = AlbumsQueryFunc();
+                var query = AlbumsQueryAlbumFunc();
                 query.CategoryId = categoryId;
                 query.Filter = filter;
 
                 return query.Execute();
+            }
+        }
+
+        public void LoadUserAlbumsCollection(int userId, GridViewDataSet<UserAlbumDTO> dataSet, string filter = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = AlbumsQueryUserAlbumFunc();
+                query.Filter = filter;
+
+                FillDataSet(dataSet, query);
+
+                var collectionQuery = IsInUserAlbumCollectionQueryFunc();
+                collectionQuery.UserId = userId;
+                collectionQuery.AlbumIds = dataSet.Items.Select(x => x.AlbumId);
+                var collection = collectionQuery.Execute();
+
+                foreach(var album in dataSet.Items)
+                {
+                    if (collection.Contains(album.AlbumId))
+                        album.HasInCollection = true;
+                }
             }
         }
 
@@ -188,11 +215,14 @@ namespace BL.Facades
             }
         }
 
-        public void AddAlbumToUserCollection(UserAlbumCreateDTO userAlbum)
+        public async Task AddAlbumToUserCollection(UserAlbumCreateDTO userAlbum)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var repo = UserAlbumRepositoryFunc();
+                if (await repo.GetUserAlbum(userAlbum.UserId, userAlbum.AlbumId) != null)
+                    return;
+
                 var entity = Mapper.Map<UserAlbum>(userAlbum);
                 repo.Insert(entity);
 
@@ -206,7 +236,8 @@ namespace BL.Facades
             {
                 var repo = UserAlbumRepositoryFunc();
                 var entity = await repo.GetUserAlbum(userId, albumId);
-                IsNotNull(entity, ErrorMessages.UserAlbumNotExist);
+                if (entity == null)
+                    return;
 
                 repo.Delete(entity);
                 uow.Commit();

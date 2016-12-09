@@ -213,6 +213,32 @@ div .review-img img {
   cursor: default;
   color: gray;
 }
+.user-collection {
+  margin: 10px;
+  border-collapse: collapse;
+}
+.user-collection th {
+  background-color: #b0b0b0;
+  text-align: left;
+  height: 25px;
+}
+.user-collection th:first-child,
+.user-collection td:first-child {
+  padding-left: 5px;
+}
+.user-collection th:last-child,
+.user-collection td:last-child {
+  padding-right: 5px;
+}
+.user-collection a {
+  color: black;
+}
+.user-collection .sort-asc:after {
+  content: "\2193";
+}
+.user-collection .sort-desc:after {
+  content: "\2191";
+}
 .admin-content {
   width: 80%;
   margin: 0;

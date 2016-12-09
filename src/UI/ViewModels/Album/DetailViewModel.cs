@@ -58,11 +58,11 @@ namespace MusicLibrary.ViewModels.Album
             YoutubeUrlParam = song.YoutubeUrlParam;
         }
 
-        public void AddToCollection(int id)
+        public async Task AddToCollection(int id)
         {
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
-                AlbumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO()
+                await AlbumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO()
                 {
                     AlbumId = id,
                     UserId = int.Parse(UserId)

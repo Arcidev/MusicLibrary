@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BL.DTO;
 using DAL.Entities;
+using System.Linq;
 
 namespace BL.Configuration
 {
@@ -25,6 +26,11 @@ namespace BL.Configuration
                 config.CreateMap<SliderImage, SliderImageDTO>();
                 config.CreateMap<SliderImageEditDTO, SliderImage>();
 
+                config.CreateMap<Album, UserAlbumDTO>()
+                    .ForMember(target => target.AlbumId, action => action.MapFrom(source => source.Id))
+                    .ForMember(target => target.BandName, action => action.MapFrom(source => source.Band.Name))
+                    .ForMember(target => target.Category, action => action.MapFrom(source => source.Category))
+                    .ForMember(target => target.AlbumName, action => action.MapFrom(source => source.Name));
                 config.CreateMap<Album, AlbumDTO>()
                     .ForMember(target => target.Band, action => action.Ignore());
                 config.CreateMap<AlbumCreateDTO, Album>();
