@@ -1,6 +1,7 @@
 ﻿@viewModel MusicLibrary.ViewModels.Administration.AdministrationMasterPageViewModel, MusicLibrary
 @masterPage Views/masterPage.dotmaster
 @import Resource = MusicLibrary.Resources.Texts
+@import Roles = Shared.Enums.UserRole
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
     <dot:RequiredResource Name="style-css" />
@@ -22,7 +23,11 @@
                                 <dot:RouteLink Enabled="{value: ActiveAdminPage != "UserReviews"}" Text="{resource: Resource.MyReviews}" RouteName="UserReviews" />
                             </li>
                             <li class="{value: ActiveAdminPage == "UserCollection" ? "sidebar-active" : ""}">
-                                <dot:RouteLink Text="{resource: Resource.UserCollection}" RouteName="UserCollectionAdmin" />
+                                <dot:RouteLink Enabled="{value: ActiveAdminPage != "UserCollection"}" Text="{resource: Resource.UserCollection}" RouteName="UserCollectionAdmin" />
+                            </li>
+                            <li class="{value: ActiveAdminPage == "Albums" ? "sidebar-active" : ""}">
+                                <dot:RouteLink Visible="{value: UserRole == "SuperUser" || UserRole == "Admin"}" Enabled="{value: ActiveAdminPage != "Albums"}" Text="{resource: Resource.Albums}" RouteName="AlbumsAdmin" />
+                                <dot:RouteLink Visible="{value: UserRole == "User"}" Enabled="{value: ActiveAdminPage != "Albums"}" Text="{resource: Resource.CreateAlbum}" RouteName="AlbumCreate" />
                             </li>
                         </ul>
                     </div>

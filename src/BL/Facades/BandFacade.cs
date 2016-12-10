@@ -28,6 +28,17 @@ namespace BL.Facades
 
         public Func<BandMembersQuery> BandMembersQueryFunc { get; set; }
 
+        public Func<BandInfoesQuery> BandInfoesQueryFunc { get; set; }
+
+        public IEnumerable<BandInfoDTO> GetBandInfoes()
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = BandInfoesQueryFunc();
+                return query.Execute();
+            }
+        }
+
         public BandDTO AddBand(BandCreateDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())

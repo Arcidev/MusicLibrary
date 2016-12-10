@@ -6,23 +6,21 @@
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
-    <div class="user-profile">
+    <div class="admin-edit">
         <div class="avatar">
             <div class="grid-img1">
-                <img class="logo-img" src="{value: _root.ImageFileName}" alt="{value: User.FullName}" />
+                <img class="logo-img" src="{value: ImageFileName}" alt="{value: User.FullName}" />
             </div>
             <div class="action-buttons">
-                <dot:FileUpload AllowMultipleFiles="false" UploadedFiles="{value: _root.Files}" SuccessMessageText="" NumberOfFilesIndicatorText="" UploadButtonText="{resource: Resource.Upload}" UploadCompleted="{command: UploadedImage()}" />
+                <dot:FileUpload AllowMultipleFiles="false" UploadedFiles="{value: Files}" SuccessMessageText="" NumberOfFilesIndicatorText="" UploadButtonText="{resource: Resource.Upload}" UploadCompleted="{command: UploadedImage()}" />
                 <dot:LinkButton Text="{resource: Resource.Reset}" Click="{command: ResetImage()}" />
             </div>
         </div>
         <table DataContext="{value: User}">
             <tr>
-                <td>
-                <dot:Literal Text="{resource: Resource.FirstName}" /></td>
+                <td><dot:Literal Text="{resource: Resource.FirstName}" /></td>
                 <td><dot:TextBox Text="{value: FirstName}" /></td>
-                <td>
-                <dot:Literal Text="{resource: Resource.Password}" /></td>
+                <td><dot:Literal Text="{resource: Resource.Password}" /></td>
                 <td><dot:TextBox Type="Password" Text="{value: _root.Password}" /></td>
             </tr>
             <tr class="error-message" DataContext="{value: _root.UserProfileErrorViewModel}" Visible="{value: FirstNameError != null || PasswordError != null}">
@@ -30,11 +28,9 @@
                 <td colspan="2">{{value: PasswordError}}</td>
             </tr>
             <tr>
-                <td>
-                <dot:Literal Text="{resource: Resource.LastName}" /></td>
+                <td><dot:Literal Text="{resource: Resource.LastName}" /></td>
                 <td><dot:TextBox Text="{value: LastName}" /></td>
-                <td>
-                <dot:Literal Text="{resource: Resource.PasswordAgain}" /></td>
+                <td><dot:Literal Text="{resource: Resource.PasswordAgain}" /></td>
                 <td><dot:TextBox Type="Password" Text="{value: _root.PasswordAgain}" /></td>
             </tr>
             <tr class="error-message" DataContext="{value: _root.UserProfileErrorViewModel}" Visible="{value: LastNameError != null || PasswordAgainError != null}">
@@ -42,8 +38,7 @@
                 <td colspan="2">{{value: PasswordAgainError}}</td>
             </tr>
             <tr>
-                <td>
-                <dot:Literal Text="{resource: Resource.Email}" /></td>
+                <td><dot:Literal Text="{resource: Resource.Email}" /></td>
                 <td colspan="3"><dot:TextBox Enabled="false" Text="{value: Email}" /></td>
             </tr>
             <tr class="submit-row">

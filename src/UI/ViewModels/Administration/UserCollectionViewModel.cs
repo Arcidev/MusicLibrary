@@ -13,13 +13,13 @@ namespace MusicLibrary.ViewModels.Administration
         [Bind(Direction.None)]
         public AlbumFacade AlbumFacade { get; set; }
 
-        public GridViewDataSet<UserAlbumDTO> UserCollection { get; set; }
+        public GridViewDataSet<AlbumInfoDTO> UserCollection { get; set; }
 
         public string Filter { get; set; }
 
         public UserCollectionViewModel()
         {
-            UserCollection = new GridViewDataSet<UserAlbumDTO>() { PageSize = 20, SortExpression = nameof(UserAlbumDTO.AlbumName), PrimaryKeyPropertyName = nameof(UserAlbumDTO.AlbumId) };
+            UserCollection = new GridViewDataSet<AlbumInfoDTO>() { PageSize = 20, SortExpression = nameof(AlbumInfoDTO.AlbumName), PrimaryKeyPropertyName = nameof(AlbumInfoDTO.AlbumId) };
         }
 
         public override async Task PreRender()
@@ -40,7 +40,7 @@ namespace MusicLibrary.ViewModels.Administration
             UserCollection.EditRowId = id;
         }
 
-        public async Task Update(UserAlbumDTO userAlbum)
+        public async Task Update(AlbumInfoDTO userAlbum)
         {
             await ExecuteSafelyAsync(async () =>
             {

@@ -17,6 +17,7 @@ namespace BL.Configuration
 
                 config.CreateMap<StorageFile, StorageFileDTO>();
 
+                config.CreateMap<Band, BandInfoDTO>();
                 config.CreateMap<Band, BandDTO>()
                     .ForMember(target => target.Albums, action => action.Ignore());
                 config.CreateMap<BandCreateDTO, Band>();
@@ -26,7 +27,7 @@ namespace BL.Configuration
                 config.CreateMap<SliderImage, SliderImageDTO>();
                 config.CreateMap<SliderImageEditDTO, SliderImage>();
 
-                config.CreateMap<Album, UserAlbumDTO>()
+                config.CreateMap<Album, AlbumInfoDTO>()
                     .ForMember(target => target.AlbumId, action => action.MapFrom(source => source.Id))
                     .ForMember(target => target.BandName, action => action.MapFrom(source => source.Band.Name))
                     .ForMember(target => target.Category, action => action.MapFrom(source => source.Category))
@@ -34,6 +35,7 @@ namespace BL.Configuration
                 config.CreateMap<Album, AlbumDTO>()
                     .ForMember(target => target.Band, action => action.Ignore());
                 config.CreateMap<AlbumCreateDTO, Album>();
+                config.CreateMap<AlbumEditDTO, Album>();
 
                 config.CreateMap<Category, CategoryDTO>();
                 config.CreateMap<CategoryDTO, Category>();

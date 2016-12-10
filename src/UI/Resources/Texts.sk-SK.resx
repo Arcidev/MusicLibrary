@@ -244,4 +244,37 @@
   <data name="HasInCollection" xml:space="preserve">
     <value>V kolekcii</value>
   </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Schválené</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editovať</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Uložiť</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušiť</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Názov</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Pole názov je povinné!</value>
+  </data>
+  <data name="BandRequired" xml:space="preserve">
+    <value>Je potrebné zvoliť kapelu!</value>
+  </data>
+  <data name="CategoryRequired" xml:space="preserve">
+    <value>Je potrebné zvoliť kategóriu!</value>
+  </data>
+  <data name="CreateAlbum" xml:space="preserve">
+    <value>Vytvoriť album</value>
+  </data>
+  <data name="ApproveSelected" xml:space="preserve">
+    <value>Schváliť vybrané</value>
+  </data>
+  <data name="DisapproveSelected" xml:space="preserve">
+    <value>Zamietnuť vybrané</value>
+  </data>
 </root>

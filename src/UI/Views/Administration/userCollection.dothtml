@@ -6,7 +6,7 @@
 </dot:Content>
 
 <dot:Content ContentPlaceHolderID="PageContent">
-    <dot:GridView class="user-collection" DataSource="{value: UserCollection}" InlineEditing="true">
+    <dot:GridView class="admin-table" DataSource="{value: UserCollection}" InlineEditing="true">
         <Columns>
             <dot:GridViewTextColumn Width="300px" IsEditable="false" ValueBinding="{value: AlbumName}" HeaderText="{resource: Resource.AlbumName}" AllowSorting="true" />
             <dot:GridViewTextColumn Width="250px" IsEditable="false" ValueBinding="{value: BandName}" HeaderText="{resource: Resource.BandName}" AllowSorting="true" />
@@ -14,11 +14,11 @@
             <dot:GridViewCheckBoxColumn ValueBinding="{value: HasInCollection}" HeaderText="{resource: Resource.HasInCollection}" />
             <dot:GridViewTemplateColumn>
                 <ContentTemplate>
-                    <dot:LinkButton Text="Edit" Click="{command: _root.Edit(AlbumId)}" />
+                    <dot:LinkButton Text="{resource: Resource.Edit}" Click="{command: _root.Edit(AlbumId)}" />
                 </ContentTemplate>
                 <EditTemplate>
-                    <dot:LinkButton Text="Save" Click="{command: _root.Update(_this)}" />
-                    <dot:LinkButton Text="Cancel" Click="{command: _root.CancelEdit()}" />
+                    <dot:LinkButton Text="{resource: Resource.Save}" Click="{command: _root.Update(_this)}" />
+                    <dot:LinkButton Text="{resource: Resource.Cancel}" Click="{command: _root.CancelEdit()}" />
                 </EditTemplate>
             </dot:GridViewTemplateColumn>
         </Columns>

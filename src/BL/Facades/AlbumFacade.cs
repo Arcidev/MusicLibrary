@@ -26,7 +26,7 @@ namespace BL.Facades
 
         public Func<AlbumsQuery<AlbumDTO>> AlbumsQueryAlbumFunc { get; set; }
 
-        public Func<AlbumsQuery<UserAlbumDTO>> AlbumsQueryUserAlbumFunc { get; set; }
+        public Func<AlbumsQuery<AlbumInfoDTO>> AlbumsQueryUserAlbumFunc { get; set; }
 
         public Func<AlbumReviewRepository> AlbumReviewRepositoryFunc { get; set; }
 
@@ -50,11 +50,60 @@ namespace BL.Facades
                 entity.CreateDate = DateTime.Now;
                 SetImageFile(entity, file, storage);
 
+                if (album.AddedSongs != null)
+                {
+                    entity.AlbumSongs = album.AddedSongs.Select(songId => new AlbumSong()
+                    {
+                        SongId = songId
+                    }).ToList();
+                }
+
                 var repo = AlbumRepositoryFunc();
                 repo.Insert(entity);
 
                 uow.Commit();
                 return Mapper.Map<AlbumDTO>(entity);
+            }
+        }
+
+        public void ApproveAlbums(IEnumerable<int> albumIds, bool approved)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = AlbumRepositoryFunc();
+                var albums = repo.GetByIds(albumIds);
+                foreach (var album in albums)
+                    album.Approved = approved;
+
+                uow.Commit();
+            }
+        }
+
+        public void EditAlbum(AlbumEditDTO album, UploadedFile imageFile = null, IUploadedFileStorage storage = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = AlbumRepositoryFunc();
+                var entity = repo.GetById(album.Id);
+                IsNotNull(entity, ErrorMessages.AlbumNotExist);
+
+                Mapper.Map(album, entity);
+                SetImageFile(entity, imageFile, storage);
+
+                var albumSongsRepo = AlbumSongRepositoryFunc();
+                if (album.RemovedSongs != null)
+                    albumSongsRepo.Delete(album.RemovedSongs);
+
+                if (album.AddedSongs != null)
+                {
+                    albumSongsRepo.Insert(album.AddedSongs.Select(songId => new AlbumSong()
+                    {
+                        AlbumId = album.Id,
+                        SongId = songId
+                    }));
+                }
+
+                uow.Commit();
             }
         }
 
@@ -101,15 +150,23 @@ namespace BL.Facades
             }
         }
 
-        public void LoadUserAlbumsCollection(int userId, GridViewDataSet<UserAlbumDTO> dataSet, string filter = null)
+        public void LoadAlbums(GridViewDataSet<AlbumInfoDTO> dataSet, string filter = null, bool? approved = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var query = AlbumsQueryUserAlbumFunc();
                 query.Filter = filter;
+                query.Approved = approved;
 
                 FillDataSet(dataSet, query);
+            }
+        }
 
+        public void LoadUserAlbumsCollection(int userId, GridViewDataSet<AlbumInfoDTO> dataSet, string filter = null)
+        {
+            LoadAlbums(dataSet, filter, true);
+            using (var uow = UowProviderFunc().Create())
+            {
                 var collectionQuery = IsInUserAlbumCollectionQueryFunc();
                 collectionQuery.UserId = userId;
                 collectionQuery.AlbumIds = dataSet.Items.Select(x => x.AlbumId);

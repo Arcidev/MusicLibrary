@@ -42,7 +42,7 @@
             <audio autoplay class="audio-player" src="{value: _root.AudioFile != null ? "/SavedFiles/" + _root.AudioFile : ""}" type="audio/mpeg" id="audioElementId" controls Visible="{value: _root.AudioFile != null}">
                 {{resource: Resource.AudioUnsupported}}
             </audio>
-            <iframe Visible="{value: _root.YoutubeUrlParam != null}" width="853.33" height="480" src="{value: "https://www.youtube.com/embed/" + _root.YoutubeUrlParam}" allowfullscreen />
+            <iframe Visible="{value: _root.YoutubeUrlParam != null}" width="480" height="360" src="{value: _root.YoutubeUrlParam }" allowfullscreen />
         </div>
         <div class="clear"></div>
     </div>

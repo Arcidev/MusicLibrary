@@ -150,39 +150,40 @@ div .review-img img {
   background: url('../Images/nav-bg.png') !important;
   cursor: default;
 }
-.user-profile table {
+.admin-edit table {
   width: 100%;
   margin: 10px;
   vertical-align: middle !important;
 }
-.user-profile table tr {
+.admin-edit table tr {
   line-height: 30px;
 }
-.user-profile table tr td {
+.admin-edit table tr td {
   width: 20%;
 }
-.user-profile table tr td input[type=text],
-.user-profile table tr td input[type=password] {
+.admin-edit table tr td input[type=text],
+.admin-edit table tr td input[type=password],
+.admin-edit table tr td select {
   padding: 4px;
   width: 200px;
 }
-.user-profile .avatar {
+.admin-edit .avatar {
   margin: 10px;
 }
-.user-profile .avatar > div {
+.admin-edit .avatar > div {
   margin-right: 10px;
 }
-.user-profile .avatar > div img {
+.admin-edit .avatar > div img {
   height: 80px;
   width: 80px;
 }
-.user-profile .avatar .action-buttons {
+.admin-edit .avatar .action-buttons {
   float: left;
 }
-.user-profile .avatar .action-buttons :first-child {
+.admin-edit .avatar .action-buttons :first-child {
   margin-top: 25px;
 }
-.user-profile .avatar .action-buttons a {
+.admin-edit .avatar .action-buttons a {
   color: black;
 }
 .user-reviews .grid-img1 img {
@@ -213,35 +214,38 @@ div .review-img img {
   cursor: default;
   color: gray;
 }
-.user-collection {
+.admin-table {
   margin: 10px;
   border-collapse: collapse;
 }
-.user-collection th {
+.admin-table th {
   background-color: #b0b0b0;
   text-align: left;
   height: 25px;
 }
-.user-collection th:first-child,
-.user-collection td:first-child {
+.admin-table th:first-child,
+.admin-table td:first-child {
   padding-left: 5px;
 }
-.user-collection th:last-child,
-.user-collection td:last-child {
+.admin-table th:last-child,
+.admin-table td:last-child {
   padding-right: 5px;
 }
-.user-collection a {
+.admin-table a {
   color: black;
 }
-.user-collection .sort-asc:after {
+.admin-table .sort-asc:after {
   content: "\2193";
 }
-.user-collection .sort-desc:after {
+.admin-table .sort-desc:after {
   content: "\2191";
 }
 .admin-content {
   width: 80%;
   margin: 0;
+}
+.admin-buttons {
+  margin: 20px;
 }
 .loading-animation {
   width: 100%;

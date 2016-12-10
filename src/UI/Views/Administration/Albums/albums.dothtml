@@ -1,0 +1,33 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.AlbumsViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="admin-buttons">
+        <dot:RouteLink class="submit-button" RouteName="AlbumCreate" Text="{resource: Resource.CreateAlbum}" />
+        <dot:Button class="submit-button" Click="{command: ApproveSelected()}" Text="{resource: Resource.ApproveSelected}" />
+        <dot:Button class="submit-button" Click="{command: DisapproveSelected()}" Text="{resource: Resource.DisapproveSelected}" />
+    </div>
+    <dot:GridView class="admin-table" DataSource="{value: Albums}">
+        <Columns>
+            <dot:GridViewTemplateColumn>
+                <ContentTemplate>
+                    <dot:CheckBox CheckedItems="{value: _root.SelectedAlbumIds}" CheckedValue="{value: AlbumId}" />
+                </ContentTemplate>
+            </dot:GridViewTemplateColumn>
+            <dot:GridViewTextColumn Width="300px" ValueBinding="{value: AlbumName}" HeaderText="{resource: Resource.AlbumName}" AllowSorting="true" />
+            <dot:GridViewTextColumn Width="250px" ValueBinding="{value: BandName}" HeaderText="{resource: Resource.BandName}" AllowSorting="true" />
+            <dot:GridViewTextColumn Width="130px" ValueBinding="{value: Category.NameLocalized}" HeaderText="{resource: Resource.CategoryName}" />
+            <dot:GridViewCheckBoxColumn SortExpression="Approved" ValueBinding="{value: Approved}" HeaderText="{resource: Resource.Approved}" AllowSorting="true" />
+            <dot:GridViewTemplateColumn>
+                <ContentTemplate>
+                    <dot:RouteLink Text="{resource: Resource.Edit}" RouteName="AlbumEdit" Param-AlbumId="{value: AlbumId}"/>
+                </ContentTemplate>
+            </dot:GridViewTemplateColumn>
+        </Columns>
+    </dot:GridView>
+    <dot:DataPager DataSet="{value: Albums}" class="pager" />
+</dot:Content>

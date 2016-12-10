@@ -55,7 +55,7 @@ namespace MusicLibrary.ViewModels.Album
         public void SetYoutubeVideo(SongDTO song)
         {
             AudioFile = null;
-            YoutubeUrlParam = song.YoutubeUrlParam;
+            YoutubeUrlParam = song.YoutubeUrlParam != null ? $"https://www.youtube.com/embed/{song.YoutubeUrlParam}" : null;
         }
 
         public async Task AddToCollection(int id)

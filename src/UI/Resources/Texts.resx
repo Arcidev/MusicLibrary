@@ -264,4 +264,37 @@
   <data name="HasInCollection" xml:space="preserve">
     <value>In collection</value>
   </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Name is required!</value>
+  </data>
+  <data name="BandRequired" xml:space="preserve">
+    <value>Band is required!</value>
+  </data>
+  <data name="CategoryRequired" xml:space="preserve">
+    <value>Category is required!</value>
+  </data>
+  <data name="CreateAlbum" xml:space="preserve">
+    <value>Create album</value>
+  </data>
+  <data name="ApproveSelected" xml:space="preserve">
+    <value>Approve selected</value>
+  </data>
+  <data name="DisapproveSelected" xml:space="preserve">
+    <value>Disapprove selected</value>
+  </data>
 </root>

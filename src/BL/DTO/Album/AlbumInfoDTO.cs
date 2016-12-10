@@ -1,7 +1,7 @@
 ﻿
 namespace BL.DTO
 {
-    public class UserAlbumDTO
+    public class AlbumInfoDTO
     {
         public int AlbumId { get; set; }
 
@@ -12,5 +12,7 @@ namespace BL.DTO
         public string BandName { get; set; }
 
         public bool HasInCollection { get; set; }
+
+        public bool Approved { get; set; }
     }
 }

@@ -12,9 +12,14 @@ namespace BL.Queries
 
         public string Filter { get; set; }
 
+        public bool? Approved { get; set; }
+
         protected override IQueryable<T> GetQueryable()
         {
-            var query = Context.Albums.Where(x => x.Approved);
+            var query = Context.Albums.AsQueryable();
+            if (Approved.HasValue)
+                query = query.Where(x => x.Approved == Approved.Value);
+
             if (CategoryId.HasValue)
                 query = query.Where(x => x.CategoryId == CategoryId.Value);
 

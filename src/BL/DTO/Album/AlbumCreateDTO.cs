@@ -1,14 +1,9 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace BL.DTO
 {
-    public class AlbumCreateDTO
+    public class AlbumCreateDTO : AlbumBaseDTO
     {
-        public string Name { get; set; }
-
-        public int BandId { get; set; }
-
-        public bool Approved { get; set; }
-
-        public int CategoryId { get; set; }
+        public IEnumerable<int> AddedSongs { get; set; }
     }
 }

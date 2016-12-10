@@ -1,0 +1,59 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.AlbumManagementMasterPageViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="admin-edit">
+        <div class="avatar">
+            <div class="grid-img1">
+                <img class="logo-img" src="{value: ImageFileName}" alt="{value: Album.Name}" />
+            </div>
+            <div class="action-buttons">
+                <dot:FileUpload AllowMultipleFiles="false" UploadedFiles="{value: Files}" SuccessMessageText="" NumberOfFilesIndicatorText="" UploadButtonText="{resource: Resource.Upload}" UploadCompleted="{command: UploadedImage()}" />
+                <dot:LinkButton Text="{resource: Resource.Reset}" Click="{command: ResetImage()}" />
+            </div>
+        </div>
+        <table DataContext="{value: Album}">
+            <tr>
+                <td><dot:Literal Text="{resource: Resource.Name}" /></td>
+                <td><dot:TextBox Text="{value: Name}" /></td>
+                <td><dot:Literal Text="{resource: Resource.BandName}" /></td>
+                <td>
+                    <dot:ComboBox DisplayMember="Name" ValueMember="Id" DataSource="{value: _root.BandInfoes}" SelectedValue="{value: _root.SelectedBandId}"  />
+                </td>
+            </tr>
+            <tr class="error-message" DataContext="{value: _root.AlbumManagementErrorViewModel}" Visible="{value: NameError != null || BandError != null}">
+                <td colspan="2">{{value: NameError}}</td>
+                <td colspan="2">{{value: BandError}}</td>
+            </tr>
+            <tr>
+                <td><dot:Literal Text="{resource: Resource.Approved}" /></td>
+                <td><dot:CheckBox Enabled="{value: _root.UserRole != "User"}" Checked="{value: Approved}" /></td>
+                <td><dot:Literal Text="{resource: Resource.CategoryName}" /></td>
+                <td>
+                    <dot:ComboBox DisplayMember="NameLocalized" ValueMember="Id" DataSource="{value: _root.Categories}" SelectedValue="{value: _root.SelectedCategoryId}" />
+                </td>
+            </tr>
+            <tr class="error-message" DataContext="{value: _root.AlbumManagementErrorViewModel}" Visible="{value: CategoryError != null}">
+                <td colspan="2"></td>
+                <td colspan="2">{{value: CategoryError}}</td>
+            </tr>
+            <tr class="submit-row">
+                <td colspan="4" align="center">
+                    <dot:Button class="submit-button" Text="{resource: Resource.SaveChanges}" Click="{command: _root.SaveChanges()}" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <dot:UpdateProgress>
+                        <cc:LoadingAnimation>
+                        </cc:LoadingAnimation>
+                    </dot:UpdateProgress>
+                </td>
+            </tr>
+        </table>
+    </div>
+</dot:Content>

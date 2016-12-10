@@ -232,6 +232,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="DotvvmStartup.cs" />
     <Compile Include="ViewModels\Administration\AdministrationMasterPageViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Albums\AlbumCreateViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Albums\AlbumManagementMasterPageViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Albums\AlbumEditViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Albums\AlbumsViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Albums\AlbumManagementErrorViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserProfileErrorViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserCollectionViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserReviewsViewModel.cs" />
@@ -307,6 +312,10 @@
     <Content Include="Views\Administration\administrationMasterPage.dotmaster" />
     <Content Include="Views\Administration\userReviews.dothtml" />
     <Content Include="Views\Administration\userCollection.dothtml" />
+    <Content Include="Views\Administration\Albums\albums.dothtml" />
+    <Content Include="Views\Administration\Albums\albumCreate.dothtml" />
+    <None Include="Views\Administration\Albums\albumEdit.dothtml" />
+    <None Include="Views\Administration\Albums\albumManagementMasterPage.dotmaster" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
