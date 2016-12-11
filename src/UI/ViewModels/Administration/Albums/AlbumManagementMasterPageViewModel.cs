@@ -24,15 +24,22 @@ namespace MusicLibrary.ViewModels.Administration
         [Bind(Direction.None)]
         public CategoryFacade CategoryFacade { get; set; }
 
+        [Bind(Direction.None)]
+        public SongFacade SongFacade { get; set; }
+
         public AlbumBaseDTO Album { get; set; }
 
         public UploadedFilesCollection Files { get; set; } = new UploadedFilesCollection();
 
         public AlbumManagementErrorViewModel AlbumManagementErrorViewModel { get; set; }
 
+        public IList<SongInfoDTO> AddedSongs { get; set; } = new List<SongInfoDTO>();
+
         public IEnumerable<BandInfoDTO> BandInfoes { get; set; }
 
         public IEnumerable<CategoryDTO> Categories { get; set; }
+
+        public IList<SongInfoDTO> SongInfoes { get; set; }
 
         public string ImageFileName { get; set; }
 
@@ -40,15 +47,46 @@ namespace MusicLibrary.ViewModels.Administration
 
         public int? SelectedBandId  { get; set; }
 
+        public int? SelectedSongId { get; set; }
+
         public override Task PreRender()
         {
             if (!Context.IsPostBack)
             {
+                ActiveAdminPage = "Albums";
                 BandInfoes = BandFacade.GetBandInfoes();
                 Categories = CategoryFacade.GetCategories();
+                SongInfoes = SongFacade.GetSongInfoes().ToList();
+                OnSongsLoaded();
             }
             
             return base.PreRender();
+        }
+
+        public void AddSong()
+        {
+            if (!SelectedSongId.HasValue)
+                return;
+
+            if (AddedSongs.Any(x => x.Id == SelectedSongId.Value))
+                return;
+
+            var song = SongInfoes.FirstOrDefault(x => x.Id == SelectedSongId.Value);
+            if (song == null)
+                return;
+
+            AddedSongs.Add(song);
+            SongInfoes.Remove(song);
+        }
+
+        public void RemoveAddedSong(int id)
+        {
+            var song = AddedSongs.FirstOrDefault(x => x.Id == id);
+            if (song == null)
+                return;
+
+            AddedSongs.Remove(song);
+            SongInfoes.Add(song);
         }
 
         public void UploadedImage()
@@ -67,6 +105,8 @@ namespace MusicLibrary.ViewModels.Administration
         }
 
         public abstract void SaveChanges();
+
+        protected virtual void OnSongsLoaded() { }
 
         protected bool ValidateAlbum()
         {

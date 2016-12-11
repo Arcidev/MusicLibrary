@@ -277,4 +277,16 @@
   <data name="DisapproveSelected" xml:space="preserve">
     <value>Zamietnuť vybrané</value>
   </data>
+  <data name="CreateBand" xml:space="preserve">
+    <value>Vytvoriť kapelu</value>
+  </data>
+  <data name="DescriptionRequired" xml:space="preserve">
+    <value>Pole popis je povinné!</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Pridať</value>
+  </data>
 </root>

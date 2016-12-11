@@ -1,3 +1,6 @@
 ﻿@viewModel MusicLibrary.ViewModels.Administration.AlbumCreateViewModel, MusicLibrary
 @masterPage Views/Administration/Albums/albumManagementMasterPage.dotmaster
 @import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="SongsContent">
+</dot:Content>

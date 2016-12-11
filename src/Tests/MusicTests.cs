@@ -23,7 +23,7 @@ namespace BL.Tests
         [TestInitialize]
         public void Init()
         {
-            var band = BandFacade.AddBand(new BandCreateDTO()
+            var band = BandFacade.AddBand(new BandBaseDTO()
             {
                 Name = "Test Band",
                 Description = "Test Description",

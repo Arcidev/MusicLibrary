@@ -14,6 +14,8 @@ namespace BL.Queries
 
         public bool? Approved { get; set; }
 
+        public bool IncludeBandFilter { get; set; }
+
         protected override IQueryable<T> GetQueryable()
         {
             var query = Context.Albums.AsQueryable();
@@ -24,7 +26,11 @@ namespace BL.Queries
                 query = query.Where(x => x.CategoryId == CategoryId.Value);
 
             if (!string.IsNullOrEmpty(Filter))
-                query = query.Where(x => x.Name.Contains(Filter) || x.Band.Name.Contains(Filter));
+            {
+                query = query.Where(x => x.Name.Contains(Filter));
+                if (IncludeBandFilter)
+                    query = query.Where(x => x.Band.Name.Contains(Filter));
+            }
 
             return query.ProjectTo<T>();
         }

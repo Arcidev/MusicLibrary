@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BL.DTO;
 using DAL.Entities;
-using System.Linq;
 
 namespace BL.Configuration
 {
@@ -20,7 +19,7 @@ namespace BL.Configuration
                 config.CreateMap<Band, BandInfoDTO>();
                 config.CreateMap<Band, BandDTO>()
                     .ForMember(target => target.Albums, action => action.Ignore());
-                config.CreateMap<BandCreateDTO, Band>();
+                config.CreateMap<BandBaseDTO, Band>();
 
                 config.CreateMap<Artist, ArtistDTO>();
 
@@ -41,6 +40,7 @@ namespace BL.Configuration
                 config.CreateMap<CategoryDTO, Category>();
 
                 config.CreateMap<Song, SongDTO>();
+                config.CreateMap<Song, SongInfoDTO>();
                 config.CreateMap<SongCreateDTO, Song>();
 
                 config.CreateMap<AlbumReview, ReviewDTO>()

@@ -1,17 +1,27 @@
 ﻿using AutoMapper.QueryableExtensions;
-using BL.DTO;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
 namespace BL.Queries
 {
-    public class BandsQuery : AppQuery<BandDTO>
+    public class BandsQuery<T> : AppQuery<T>
     {
         public BandsQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
-        protected override IQueryable<BandDTO> GetQueryable()
+        public bool? Approved { get; set; }
+
+        public string Filter { get; set; }
+
+        protected override IQueryable<T> GetQueryable()
         {
-            return Context.Bands.Where(x => x.Approved).ProjectTo<BandDTO>();
+            var query = Context.Bands.AsQueryable();
+            if (Approved.HasValue)
+                query = query.Where(x => x.Approved == Approved.Value);
+
+            if (!string.IsNullOrEmpty(Filter))
+                query = query.Where(x => x.Name.Contains(Filter));
+
+            return query.ProjectTo<T>();
         }
     }
 }

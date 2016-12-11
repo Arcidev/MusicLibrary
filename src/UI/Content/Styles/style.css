@@ -160,12 +160,21 @@ div .review-img img {
 }
 .admin-edit table tr td {
   width: 20%;
+  vertical-align: top;
 }
 .admin-edit table tr td input[type=text],
 .admin-edit table tr td input[type=password],
 .admin-edit table tr td select {
   padding: 4px;
   width: 200px;
+}
+.admin-edit table tr td textarea {
+  width: 100%;
+  resize: vertical;
+  height: 100px;
+}
+.admin-edit a {
+  color: black;
 }
 .admin-edit .avatar {
   margin: 10px;
@@ -183,8 +192,8 @@ div .review-img img {
 .admin-edit .avatar .action-buttons :first-child {
   margin-top: 25px;
 }
-.admin-edit .avatar .action-buttons a {
-  color: black;
+.item-removed {
+  text-decoration: line-through;
 }
 .user-reviews .grid-img1 img {
   cursor: pointer;

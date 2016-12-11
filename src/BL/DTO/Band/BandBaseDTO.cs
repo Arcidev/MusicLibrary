@@ -1,7 +1,7 @@
 ﻿
 namespace BL.DTO
 {
-    public class BandCreateDTO
+    public class BandBaseDTO
     {
         public string Name { get; set; }
 

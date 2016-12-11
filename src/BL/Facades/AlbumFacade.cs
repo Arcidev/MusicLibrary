@@ -22,11 +22,13 @@ namespace BL.Facades
 
         public Func<AlbumRepository> AlbumRepositoryFunc { get; set; }
 
-        public Func<AlbumSongsQuery> AlbumSongsQueryFunc { get; set; }
+        public Func<AlbumSongsQuery<SongDTO>> AlbumSongsQuerySongFunc { get; set; }
+
+        public Func<AlbumSongsQuery<SongInfoDTO>> AlbumSongsQuerySongInfoFunc { get; set; }
 
         public Func<AlbumsQuery<AlbumDTO>> AlbumsQueryAlbumFunc { get; set; }
 
-        public Func<AlbumsQuery<AlbumInfoDTO>> AlbumsQueryUserAlbumFunc { get; set; }
+        public Func<AlbumsQuery<AlbumInfoDTO>> AlbumsQueryAlbumInfoFunc { get; set; }
 
         public Func<AlbumReviewRepository> AlbumReviewRepositoryFunc { get; set; }
 
@@ -89,18 +91,22 @@ namespace BL.Facades
 
                 Mapper.Map(album, entity);
                 SetImageFile(entity, imageFile, storage);
-
-                var albumSongsRepo = AlbumSongRepositoryFunc();
+                
                 if (album.RemovedSongs != null)
-                    albumSongsRepo.Delete(album.RemovedSongs);
+                {
+                    var toRemove = entity.AlbumSongs.Where(x => album.RemovedSongs.Contains(x.SongId)).ToList();
+                    var albumSongRepo = AlbumSongRepositoryFunc();
+                    foreach (var albumSong in toRemove)
+                    {
+                        entity.AlbumSongs.Remove(albumSong);
+                        albumSongRepo.Delete(albumSong);
+                    }
+                }
 
                 if (album.AddedSongs != null)
                 {
-                    albumSongsRepo.Insert(album.AddedSongs.Select(songId => new AlbumSong()
-                    {
-                        AlbumId = album.Id,
-                        SongId = songId
-                    }));
+                    foreach (var addedSongId in album.AddedSongs)
+                        entity.AlbumSongs.Add(new AlbumSong() { SongId = addedSongId });
                 }
 
                 uow.Commit();
@@ -111,7 +117,19 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var query = AlbumSongsQueryFunc();
+                var query = AlbumSongsQuerySongFunc();
+                query.AlbumId = albumId;
+                query.Approved = true;
+
+                return query.Execute();
+            }
+        }
+
+        public IEnumerable<SongInfoDTO> GetAlbumSongInfoes(int albumId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = AlbumSongsQuerySongInfoFunc();
                 query.AlbumId = albumId;
                 query.Approved = true;
 
@@ -145,6 +163,7 @@ namespace BL.Facades
                 var query = AlbumsQueryAlbumFunc();
                 query.CategoryId = categoryId;
                 query.Filter = filter;
+                query.IncludeBandFilter = true;
 
                 return query.Execute();
             }
@@ -154,7 +173,7 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var query = AlbumsQueryUserAlbumFunc();
+                var query = AlbumsQueryAlbumInfoFunc();
                 query.Filter = filter;
                 query.Approved = approved;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BL.DTO
 {
-    public class BandDTO : BandCreateDTO
+    public class BandDTO : BandBaseDTO
     {
         public int Id { get; set; }
 

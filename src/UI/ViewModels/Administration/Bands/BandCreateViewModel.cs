@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace MusicLibrary.ViewModels.Administration
 {
     [Authorize]
-    public class AlbumCreateViewModel : AlbumManagementMasterPageViewModel
+    public class BandCreateViewModel : BandManagementMasterPageViewModel
     {
         public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                Album = new AlbumBaseDTO();
+                Band = new BandBaseDTO();
             }
 
             await base.PreRender();
@@ -23,24 +23,22 @@ namespace MusicLibrary.ViewModels.Administration
 
         public override void SaveChanges()
         {
-            if (!ValidateAlbum())
+            if (!ValidateBand())
                 return;
 
             var role = (UserRole)Enum.Parse(typeof(UserRole), UserRole);
             var success = ExecuteSafely(() =>
             {
-                AlbumFacade.AddAlbum(new AlbumCreateDTO()
+                BandFacade.AddBand(new BandBaseDTO()
                 {
-                    Approved = role != Shared.Enums.UserRole.User ? Album.Approved : false,
-                    BandId = SelectedBandId.Value,
-                    CategoryId = SelectedCategoryId.Value,
-                    Name = Album.Name,
-                    AddedSongs = AddedSongs.Select(x => x.Id)
+                    Approved = role != Shared.Enums.UserRole.User ? Band.Approved : false,
+                    Description = Band.Description,
+                    Name = Band.Name
                 }, Files.Files.LastOrDefault(), FileStorage);
             });
 
             if (success)
-                Context.RedirectToRoute("AlbumsAdmin");
+                Context.RedirectToRoute("BandsAdmin");
         }
     }
 }

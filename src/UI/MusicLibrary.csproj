@@ -237,6 +237,11 @@
     <Compile Include="ViewModels\Administration\Albums\AlbumEditViewModel.cs" />
     <Compile Include="ViewModels\Administration\Albums\AlbumsViewModel.cs" />
     <Compile Include="ViewModels\Administration\Albums\AlbumManagementErrorViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Bands\BandManagementErrorViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Bands\BandCreateViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Bands\BandEditViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Bands\BandManagementMasterPageViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Bands\BandsViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserProfileErrorViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserCollectionViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserReviewsViewModel.cs" />
@@ -316,6 +321,10 @@
     <Content Include="Views\Administration\Albums\albumCreate.dothtml" />
     <None Include="Views\Administration\Albums\albumEdit.dothtml" />
     <None Include="Views\Administration\Albums\albumManagementMasterPage.dotmaster" />
+    <Content Include="Views\Administration\Bands\bands.dothtml" />
+    <Content Include="Views\Administration\Bands\bandManagementMasterPage.dotmaster" />
+    <Content Include="Views\Administration\Bands\bandCreate.dothtml" />
+    <Content Include="Views\Administration\Bands\bandEdit.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

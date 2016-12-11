@@ -307,7 +307,7 @@ body {
   background: url('../Images/btn.png') repeat-x 0 0 #10696E;
   border: none;
   padding: 10px;
-  color: #fff;
+  color: #fff !important;
   cursor: pointer;
   font-size: 0.98em;
 }

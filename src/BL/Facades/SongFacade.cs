@@ -14,7 +14,9 @@ namespace BL.Facades
     {
         public Func<SongRepository> SongRepositoryFunc { get; set; }
 
-        public Func<SongsQuery> SongsQueryFunc { get; set; }
+        public Func<SongsQuery<SongDTO>> SongsQuerySongFunc { get; set; }
+
+        public Func<SongsQuery<SongInfoDTO>> SongsQuerySongInfoFunc { get; set; }
 
         public SongDTO AddSong(SongCreateDTO song, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
@@ -56,7 +58,16 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var query = SongsQueryFunc();
+                var query = SongsQuerySongFunc();
+                return query.Execute();
+            }
+        }
+
+        public IEnumerable<SongInfoDTO> GetSongInfoes()
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = SongsQuerySongInfoFunc();
                 return query.Execute();
             }
         }

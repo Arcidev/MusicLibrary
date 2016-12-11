@@ -1,0 +1,56 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.BandManagementMasterPageViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="admin-edit">
+        <div class="avatar">
+            <div class="grid-img1">
+                <img class="logo-img" src="{value: ImageFileName}" alt="{value: Band.Name}" />
+            </div>
+            <div class="action-buttons">
+                <dot:FileUpload AllowMultipleFiles="false" UploadedFiles="{value: Files}" SuccessMessageText="" NumberOfFilesIndicatorText="" UploadButtonText="{resource: Resource.Upload}" UploadCompleted="{command: UploadedImage()}" />
+                <dot:LinkButton Text="{resource: Resource.Reset}" Click="{command: ResetImage()}" />
+            </div>
+        </div>
+        <table DataContext="{value: Band}">
+            <tr>
+                <td><dot:Literal Text="{resource: Resource.Name}" /></td>
+                <td><dot:TextBox Text="{value: Name}" /></td>
+                <td />
+                <td />
+            </tr>
+            <tr class="error-message" DataContext="{value: _root.BandManagementErrorViewModel}" Visible="{value: NameError != null}">
+                <td colspan="2">{{value: NameError}}</td>
+            </tr>
+            <tr>
+                <td><dot:Literal Text="{resource: Resource.Description}" /></td>
+                <td colspan="2"><dot:TextBox Type="MultiLine" Text="{value: Description}" /></td>
+            </tr>
+            <tr class="error-message" DataContext="{value: _root.BandManagementErrorViewModel}" Visible="{value: DescriptionError != null}">
+                <td colspan="3">{{value: DescriptionError}}</td>
+            </tr>
+            <tr>
+                <td><dot:Literal Text="{resource: Resource.Approved}" /></td>
+                <td colspan="3"><dot:CheckBox Enabled="{value: _root.UserRole != "User"}" Checked="{value: Approved}" /></td>
+            </tr>
+            <tr class="submit-row">
+                <td colspan="4" align="center">
+                    <dot:Button class="submit-button" Text="{resource: Resource.SaveChanges}" Click="{command: _root.SaveChanges()}" />
+                    <dot:RouteLink class="submit-button" Text="{resource: Resource.Cancel}" RouteName="BandsAdmin" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <dot:UpdateProgress>
+                        <cc:LoadingAnimation>
+                        </cc:LoadingAnimation>
+                    </dot:UpdateProgress>
+                </td>
+            </tr>
+        </table>
+    </div>
+</dot:Content>

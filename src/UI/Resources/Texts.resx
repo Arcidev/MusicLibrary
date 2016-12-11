@@ -297,4 +297,16 @@
   <data name="DisapproveSelected" xml:space="preserve">
     <value>Disapprove selected</value>
   </data>
+  <data name="CreateBand" xml:space="preserve">
+    <value>Create band</value>
+  </data>
+  <data name="DescriptionRequired" xml:space="preserve">
+    <value>Description is required!</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
 </root>

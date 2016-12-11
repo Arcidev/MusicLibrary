@@ -185,12 +185,23 @@ div .review-img {
 
             td {
                 width: 20%;
+                vertical-align: top;
                 input[type=text], input[type=password], select {
                     padding: 4px;
                     width: 200px;
                 }
+
+                textarea {
+                    width: 100%;
+                    resize: vertical;
+                    height: 100px;
+                }
             }
         }
+    }
+
+     a {
+        color: black;
     }
 
     .avatar {
@@ -210,12 +221,12 @@ div .review-img {
             :first-child {
                 margin-top: 25px;
             }
-
-            a {
-                color: black;
-            }
         }
     }
+}
+
+.item-removed {
+    text-decoration: line-through;
 }
 
 .user-reviews {

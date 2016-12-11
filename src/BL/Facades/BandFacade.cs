@@ -18,7 +18,9 @@ namespace BL.Facades
 
         public Func<BandReviewRepository> BandReviewRepositoryFunc { get; set; }
 
-        public Func<BandsQuery> BandsQueryFunc { get; set; }
+        public Func<BandsQuery<BandDTO>> BandsQueryBandFunc { get; set; }
+
+        public Func<BandsQuery<BandInfoDTO>> BandsQueryBandInfoFunc { get; set; }
 
         public Func<BandAlbumsQuery> BandAlbumsQueryFunc { get; set; }
 
@@ -39,7 +41,20 @@ namespace BL.Facades
             }
         }
 
-        public BandDTO AddBand(BandCreateDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public void ApproveBands(IEnumerable<int> bandIds, bool approved)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = BandRepositoryFunc();
+                var bands = repo.GetByIds(bandIds);
+                foreach (var band in bands)
+                    band.Approved = approved;
+
+                uow.Commit();
+            }
+        }
+
+        public BandDTO AddBand(BandBaseDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
@@ -52,6 +67,30 @@ namespace BL.Facades
 
                 uow.Commit();
                 return Mapper.Map<BandDTO>(entity);
+            }
+        }
+
+        public void EditBand(BandEditDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = BandRepositoryFunc();
+                var entity = repo.GetById(band.Id);
+                Mapper.Map(band, entity);
+                SetImageFile(entity, file, storage);
+
+                uow.Commit();
+            }
+        }
+
+        public void LoadBands(GridViewDataSet<BandInfoDTO> dataSet, string filter = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = BandsQueryBandInfoFunc();
+                query.Filter = filter;
+
+                FillDataSet(dataSet, query);
             }
         }
 
@@ -73,7 +112,8 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var query = BandsQueryFunc();
+                var query = BandsQueryBandFunc();
+                query.Approved = true;
                 return query.Execute();
             }
         }
