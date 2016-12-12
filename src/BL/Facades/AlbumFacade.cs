@@ -30,6 +30,8 @@ namespace BL.Facades
 
         public Func<AlbumsQuery<AlbumInfoDTO>> AlbumsQueryAlbumInfoFunc { get; set; }
 
+        public Func<AlbumsQuery<AlbumBandInfoDTO>> AlbumsQueryAlbumBandInfoFunc { get; set; }
+
         public Func<AlbumReviewRepository> AlbumReviewRepositoryFunc { get; set; }
 
         public Func<AlbumReviewsQuery> AlbumReviewsQueryFunc { get; set; }
@@ -125,6 +127,18 @@ namespace BL.Facades
             }
         }
 
+        public IEnumerable<AlbumBandInfoDTO> GetAlbumBandInfoes(int? songId = null)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = AlbumsQueryAlbumBandInfoFunc();
+                query.Approved = true;
+                query.SongId = songId;
+
+                return query.Execute();
+            }
+        }
+
         public IEnumerable<SongInfoDTO> GetAlbumSongInfoes(int albumId)
         {
             using (var uow = UowProviderFunc().Create())
@@ -164,6 +178,7 @@ namespace BL.Facades
                 query.CategoryId = categoryId;
                 query.Filter = filter;
                 query.IncludeBandFilter = true;
+                query.Approved = true;
 
                 return query.Execute();
             }

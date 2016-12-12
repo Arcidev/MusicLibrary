@@ -1,0 +1,5 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.SongCreateViewModel, MusicLibrary
+@masterPage Views/Administration/Songs/songManagementMasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="AlbumsContent">
+</dot:Content>

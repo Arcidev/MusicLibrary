@@ -192,6 +192,12 @@ div .review-img img {
 .admin-edit .avatar .action-buttons :first-child {
   margin-top: 25px;
 }
+.admin-edit .audio {
+  margin: 10px;
+}
+.admin-edit .audio .action-buttons > div {
+  display: inline;
+}
 .item-removed {
   text-decoration: line-through;
 }
@@ -239,6 +245,10 @@ div .review-img img {
 .admin-table th:last-child,
 .admin-table td:last-child {
   padding-right: 5px;
+}
+.admin-table th,
+.admin-table td {
+  padding: 0 2px;
 }
 .admin-table a {
   color: black;

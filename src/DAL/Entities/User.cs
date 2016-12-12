@@ -30,6 +30,6 @@ namespace DAL.Entities
         public int? ImageStorageFileId { get; set; }
 
         [ForeignKey(nameof(ImageStorageFileId))]
-        public StorageFile ImageStorageFile { get; set; }
+        public virtual StorageFile ImageStorageFile { get; set; }
     }
 }

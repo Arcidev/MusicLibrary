@@ -190,6 +190,7 @@
     <Compile Include="Configuration\AutoMapper.cs" />
     <Compile Include="DTO\Album\AlbumCreateDTO.cs" />
     <Compile Include="DTO\Album\AlbumEditDTO.cs" />
+    <Compile Include="DTO\Album\AlbumBandInfoDTO.cs" />
     <Compile Include="DTO\Album\AlbumInfoDTO.cs" />
     <Compile Include="DTO\Album\AlbumReviewCreateDTO.cs" />
     <Compile Include="DTO\Album\UserAlbumCreateDTO.cs" />
@@ -206,8 +207,10 @@
     <Compile Include="DTO\Reviews\ReviewEditDTO.cs" />
     <Compile Include="DTO\Reviews\ReviewDTO.cs" />
     <Compile Include="DTO\SliderImage\SliderImageEditDTO.cs" />
-    <Compile Include="DTO\Song\SongInfoDTO.cs" />
     <Compile Include="DTO\Song\SongCreateDTO.cs" />
+    <Compile Include="DTO\Song\SongEditDTO.cs" />
+    <Compile Include="DTO\Song\SongInfoDTO.cs" />
+    <Compile Include="DTO\Song\SongBaseDTO.cs" />
     <Compile Include="DTO\StorageFileDTO.cs" />
     <Compile Include="DTO\Band\BandDTO.cs" />
     <Compile Include="DTO\SliderImage\SliderImageDTO.cs" />
@@ -216,6 +219,7 @@
     <Compile Include="DTO\User\UserAlbumReviewDTO.cs" />
     <Compile Include="DTO\User\UserCreateDTO.cs" />
     <Compile Include="DTO\User\UserBaseDTO.cs" />
+    <Compile Include="DTO\User\UserInfoDTO.cs" />
     <Compile Include="DTO\User\UserEditDTO.cs" />
     <Compile Include="DTO\User\UserDTO.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
@@ -234,6 +238,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\BandInfoesQuery.cs" />
     <Compile Include="Queries\IsInUserAlbumCollectionQuery.cs" />
+    <Compile Include="Queries\UsersQuery.cs" />
     <Compile Include="Queries\UserBandReviewsQuery.cs" />
     <Compile Include="Queries\UserAlbumReviewsQuery.cs" />
     <Compile Include="Queries\BandMembersQuery.cs" />

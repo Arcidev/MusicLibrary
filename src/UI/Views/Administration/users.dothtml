@@ -1,0 +1,34 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.UsersViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <dot:GridView class="admin-table" DataSource="{value: Users}" InlineEditing="true">
+        <Columns>
+            <dot:GridViewTextColumn Width="250px" IsEditable="false" ValueBinding="{value: Email}" HeaderText="{resource: Resource.Email}" AllowSorting="true" />
+            <dot:GridViewTextColumn Width="150px" ValueBinding="{value: FirstName}" HeaderText="{resource: Resource.FirstName}" AllowSorting="true" />
+            <dot:GridViewTextColumn Width="150px" ValueBinding="{value: LastName}" HeaderText="{resource: Resource.LastName}" AllowSorting="true" />
+            <dot:GridViewTemplateColumn Width="100px" HeaderText="{resource: Resource.UserRole}" AllowSorting="true">
+                <ContentTemplate>
+                    <dot:Literal Text="{value: UserRole}" />
+                </ContentTemplate>
+                <EditTemplate>
+                    <dot:ComboBox SelectedValue="{value: _root.SelectedUserRole}" DataSource="{value: _root.UserRoles}" />
+                </EditTemplate>
+            </dot:GridViewTemplateColumn>
+            <dot:GridViewTemplateColumn>
+                <ContentTemplate>
+                    <dot:LinkButton Text="{resource: Resource.Edit}" Click="{command: _root.Edit(_this)}" />
+                </ContentTemplate>
+                <EditTemplate>
+                    <dot:LinkButton Text="{resource: Resource.Save}" Click="{command: _root.Update(_this)}" />
+                    <dot:LinkButton Text="{resource: Resource.Cancel}" Click="{command: _root.CancelEdit()}" />
+                </EditTemplate>
+            </dot:GridViewTemplateColumn>
+        </Columns>
+    </dot:GridView>
+    <dot:DataPager DataSet="{value: Users}" class="pager" />
+</dot:Content>

@@ -242,6 +242,11 @@
     <Compile Include="ViewModels\Administration\Bands\BandEditViewModel.cs" />
     <Compile Include="ViewModels\Administration\Bands\BandManagementMasterPageViewModel.cs" />
     <Compile Include="ViewModels\Administration\Bands\BandsViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Songs\SongCreateViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Songs\SongEditViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Songs\SongManagementMasterPageViewModel.cs" />
+    <Compile Include="ViewModels\Administration\Songs\SongsViewModel.cs" />
+    <Compile Include="ViewModels\Administration\UsersViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserProfileErrorViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserCollectionViewModel.cs" />
     <Compile Include="ViewModels\Administration\UserReviewsViewModel.cs" />
@@ -325,6 +330,11 @@
     <Content Include="Views\Administration\Bands\bandManagementMasterPage.dotmaster" />
     <Content Include="Views\Administration\Bands\bandCreate.dothtml" />
     <Content Include="Views\Administration\Bands\bandEdit.dothtml" />
+    <Content Include="Views\Administration\Songs\songs.dothtml" />
+    <Content Include="Views\Administration\Songs\songManagementMasterPage.dotmaster" />
+    <Content Include="Views\Administration\Songs\songEdit.dothtml" />
+    <Content Include="Views\Administration\Songs\songCreate.dothtml" />
+    <Content Include="Views\Administration\users.dothtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

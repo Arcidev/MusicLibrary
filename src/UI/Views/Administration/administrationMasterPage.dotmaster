@@ -33,6 +33,13 @@
                                 <dot:RouteLink Visible="{value: UserRole == "SuperUser" || UserRole == "Admin"}" Enabled="{value: ActiveAdminPage != "Bands"}" Text="{resource: Resource.Bands}" RouteName="BandsAdmin" />
                                 <dot:RouteLink Visible="{value: UserRole == "User"}" Enabled="{value: ActiveAdminPage != "Bands"}" Text="{resource: Resource.CreateBand}" RouteName="BandCreate" />
                             </li>
+                            <li class="{value: ActiveAdminPage == "Songs" ? "sidebar-active" : ""}">
+                                <dot:RouteLink Visible="{value: UserRole == "SuperUser" || UserRole == "Admin"}" Enabled="{value: ActiveAdminPage != "Songs"}" Text="{resource: Resource.Songs}" RouteName="SongsAdmin" />
+                                <dot:RouteLink Visible="{value: UserRole == "User"}" Enabled="{value: ActiveAdminPage != "Songs"}" Text="{resource: Resource.CreateSong}" RouteName="SongCreate" />
+                            </li>
+                            <li class="{value: ActiveAdminPage == "Users" ? "sidebar-active" : ""}">
+                                <dot:RouteLink Visible="{value: UserRole == "Admin"}" Enabled="{value: ActiveAdminPage != "Users"}" Text="{resource: Resource.Users}" RouteName="Users" />
+                            </li>
                         </ul>
                     </div>
                 </div>

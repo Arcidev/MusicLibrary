@@ -36,6 +36,10 @@ namespace MusicLibrary
             config.RouteTable.Add("BandsAdmin", "administration/bands", "Views/Administration/Bands/bands.dothtml");
             config.RouteTable.Add("BandEdit", "administration/band/{bandId}/edit", "Views/Administration/Bands/bandEdit.dothtml");
             config.RouteTable.Add("BandCreate", "administration/band/create", "Views/Administration/Bands/bandCreate.dothtml");
+            config.RouteTable.Add("SongsAdmin", "administration/songs", "Views/Administration/Songs/songs.dothtml");
+            config.RouteTable.Add("SongEdit", "administration/song/{songId}/edit", "Views/Administration/Songs/songEdit.dothtml");
+            config.RouteTable.Add("SongCreate", "administration/song/create", "Views/Administration/Songs/songCreate.dothtml");
+            config.RouteTable.Add("Users", "administration/users", "Views/Administration/users.dothtml");
             config.RouteTable.Add("TempFilePresenter", "files/{FileId}/{FileExtension}", null, null, WindsorBootstrap.Resolve<TempFilePresenter>);
         }
 

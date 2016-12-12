@@ -1,0 +1,68 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.SongManagementMasterPageViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="admin-edit">
+        <div class="audio">
+            <audio class="audio-player" src="{value: SongFileName }" type="audio/mpeg" id="audioElementId" controls preload="auto">
+                {{resource: Resource.AudioUnsupported}}
+            </audio>
+            <div class="action-buttons">
+                <dot:FileUpload UploadErrorMessageText="" AllowMultipleFiles="false" UploadedFiles="{value: Files}" SuccessMessageText="" NumberOfFilesIndicatorText="" UploadButtonText="{resource: Resource.Upload}" UploadCompleted="{command: UploadedSong()}" />
+                <dot:LinkButton Text="{resource: Resource.Reset}" Click="{command: ResetSong()}" />
+            </div>
+        </div>
+        <table>
+            <tr>
+                <td><dot:Literal Text="{resource: Resource.Name}" /></td>
+                <td><dot:TextBox Text="{value: Song.Name}" /></td>
+                <td><dot:Literal Text="{resource: Resource.YoutubeURL}" /></td>
+                <td><dot:TextBox Text="{value: Song.YoutubeUrlParam}" /></td>
+            </tr>
+            <tr class="error-message" DataContext="{value: _root.SongNameError}" Visible="{value: _root.SongNameError != null}">
+                <td colspan="2">{{value: _root.SongNameError}}</td>
+            </tr>
+            <tr>
+                <td><dot:Literal Text="{resource: Resource.Approved}" /></td>
+                <td colspan="3"><dot:CheckBox Enabled="{value: _root.UserRole != "User"}" Checked="{value: Song.Approved}" /></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <dot:ContentPlaceHolder ID="AlbumsContent" />
+                    <dot:Repeater DataSource="{value: AddedAlbums}" WrapperTagName="div" RenderSettings.Mode="Server" PostBack.Update="true">
+                        <div>
+                            <dot:LinkButton Click="{command: _root.RemoveAddedAlbum(AlbumId)}">
+                                <img width="16" height="16" src="/Content/Images/minus.png" />
+                            </dot:LinkButton>
+                            <dot:Literal Text="{value: BandAlbumName}" />
+                        </div>
+                    </dot:Repeater>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <dot:ComboBox DisplayMember="BandAlbumName" ValueMember="AlbumId" DataSource="{value: AlbumInfoes}" SelectedValue="{value: SelectedAlbumId}" />
+                    <dot:LinkButton Text="{resource: Resource.Add}" Click="{command: AddAlbum()}" />
+                </td>
+            </tr>
+            <tr class="submit-row">
+                <td colspan="4" align="center">
+                    <dot:Button class="submit-button" Text="{resource: Resource.SaveChanges}" Click="{command: _root.SaveChanges()}" />
+                    <dot:RouteLink class="submit-button" Text="{resource: Resource.Cancel}" RouteName="SongsAdmin" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <dot:UpdateProgress>
+                        <cc:LoadingAnimation>
+                        </cc:LoadingAnimation>
+                    </dot:UpdateProgress>
+                </td>
+            </tr>
+        </table>
+    </div>
+</dot:Content>

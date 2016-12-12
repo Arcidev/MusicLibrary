@@ -10,6 +10,8 @@ namespace BL.Queries
 
         public int? CategoryId { get; set; }
 
+        public int? SongId { get; set; }
+
         public string Filter { get; set; }
 
         public bool? Approved { get; set; }
@@ -31,6 +33,9 @@ namespace BL.Queries
                 if (IncludeBandFilter)
                     query = query.Where(x => x.Band.Name.Contains(Filter));
             }
+
+            if (SongId.HasValue)
+                query = query.Where(x => x.AlbumSongs.Any(y => y.SongId == SongId.Value));
 
             return query.ProjectTo<T>();
         }

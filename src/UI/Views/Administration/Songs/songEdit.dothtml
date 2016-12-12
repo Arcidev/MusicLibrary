@@ -1,0 +1,16 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.SongEditViewModel, MusicLibrary
+@masterPage Views/Administration/Songs/songManagementMasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="AlbumsContent">
+    <dot:Repeater DataSource="{value: SongAlbums}" WrapperTagName="div" RenderSettings.Mode="Server" PostBack.Update="true">
+        <div>
+            <dot:LinkButton Visible="{value: !Removed}" Click="{command: _root.SetRemovedAlbum(_this, true)}">
+                <img width="16" height="16" src="/Content/Images/minus.png" />
+            </dot:LinkButton>
+            <dot:LinkButton Visible="{value: Removed}" Click="{command: _root.SetRemovedAlbum(_this, false)}">
+                <img width="16" height="16" src="/Content/Images/plus.png" />
+            </dot:LinkButton>
+            <dot:Literal class="{value: Removed ? "item-removed" : ""}" Text="{value: BandAlbumName}" />
+        </div>
+    </dot:Repeater>
+</dot:Content>

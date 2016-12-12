@@ -1,0 +1,31 @@
+﻿@viewModel MusicLibrary.ViewModels.Administration.SongsViewModel, MusicLibrary
+@masterPage Views/Administration/administrationMasterPage.dotmaster
+@import Resource = MusicLibrary.Resources.Texts
+
+<dot:Content ContentPlaceHolderID="HeaderContent">
+</dot:Content>
+
+<dot:Content ContentPlaceHolderID="PageContent">
+    <div class="admin-buttons">
+        <dot:RouteLink class="submit-button" RouteName="SongCreate" Text="{resource: Resource.CreateSong}" />
+        <dot:Button class="submit-button" Click="{command: ApproveSelected()}" Text="{resource: Resource.ApproveSelected}" />
+        <dot:Button class="submit-button" Click="{command: DisapproveSelected()}" Text="{resource: Resource.DisapproveSelected}" />
+    </div>
+    <dot:GridView class="admin-table" DataSource="{value: Songs}">
+        <Columns>
+            <dot:GridViewTemplateColumn>
+                <ContentTemplate>
+                    <dot:CheckBox CheckedItems="{value: _root.SelectedSongIds}" CheckedValue="{value: Id}" />
+                </ContentTemplate>
+            </dot:GridViewTemplateColumn>
+            <dot:GridViewTextColumn Width="300px" ValueBinding="{value: Name}" HeaderText="{resource: Resource.BandName}" AllowSorting="true" />
+            <dot:GridViewCheckBoxColumn SortExpression="Approved" ValueBinding="{value: Approved}" HeaderText="{resource: Resource.Approved}" AllowSorting="true" />
+            <dot:GridViewTemplateColumn>
+                <ContentTemplate>
+                    <dot:RouteLink Text="{resource: Resource.Edit}" RouteName="SongEdit" Param-SongId="{value: Id}"/>
+                </ContentTemplate>
+            </dot:GridViewTemplateColumn>
+        </Columns>
+    </dot:GridView>
+    <dot:DataPager DataSet="{value: Songs}" class="pager" />
+</dot:Content>

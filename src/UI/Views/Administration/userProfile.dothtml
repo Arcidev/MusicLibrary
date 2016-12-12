@@ -12,7 +12,7 @@
                 <img class="logo-img" src="{value: ImageFileName}" alt="{value: User.FullName}" />
             </div>
             <div class="action-buttons">
-                <dot:FileUpload AllowMultipleFiles="false" UploadedFiles="{value: Files}" SuccessMessageText="" NumberOfFilesIndicatorText="" UploadButtonText="{resource: Resource.Upload}" UploadCompleted="{command: UploadedImage()}" />
+                <dot:FileUpload UploadErrorMessageText="" AllowMultipleFiles="false" UploadedFiles="{value: Files}" SuccessMessageText="" NumberOfFilesIndicatorText="" UploadButtonText="{resource: Resource.Upload}" UploadCompleted="{command: UploadedImage()}" />
                 <dot:LinkButton Text="{resource: Resource.Reset}" Click="{command: ResetImage()}" />
             </div>
         </div>

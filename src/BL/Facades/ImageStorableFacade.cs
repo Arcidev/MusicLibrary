@@ -12,6 +12,9 @@ namespace BL.Facades
         {
             if (file != null && storage != null)
             {
+                if (entity.ImageStorageFile != null)
+                    StorageFileFacade.Value.DeleteFile(entity.ImageStorageFile.Id);
+
                 var fileName = StorageFileFacade.Value.SaveFile(file, storage);
                 entity.ImageStorageFile = new StorageFile()
                 {

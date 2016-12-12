@@ -268,6 +268,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create song.
+        /// </summary>
+        public static string CreateSong {
+            get {
+                return ResourceManager.GetString("CreateSong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
@@ -583,6 +592,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Songs.
+        /// </summary>
+        public static string Songs {
+            get {
+                return ResourceManager.GetString("Songs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit review.
         /// </summary>
         public static string SubmitReview {
@@ -628,11 +646,38 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User role.
+        /// </summary>
+        public static string UserRole {
+            get {
+                return ResourceManager.GetString("UserRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password must contain a number, small and big letter and be at least 6 characters long!.
         /// </summary>
         public static string WeakPassword {
             get {
                 return ResourceManager.GetString("WeakPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Youtube URL.
+        /// </summary>
+        public static string YoutubeURL {
+            get {
+                return ResourceManager.GetString("YoutubeURL", resourceCulture);
             }
         }
     }

@@ -11,6 +11,7 @@ namespace BL.Configuration
             Mapper.Initialize(config =>
             {
                 config.CreateMap<User, UserDTO>();
+                config.CreateMap<User, UserInfoDTO>();
                 config.CreateMap<UserCreateDTO, User>();
                 config.CreateMap<UserEditDTO, User>();
 
@@ -26,6 +27,10 @@ namespace BL.Configuration
                 config.CreateMap<SliderImage, SliderImageDTO>();
                 config.CreateMap<SliderImageEditDTO, SliderImage>();
 
+                config.CreateMap<Album, AlbumBandInfoDTO>()
+                    .ForMember(target => target.AlbumId, action => action.MapFrom(source => source.Id))
+                    .ForMember(target => target.AlbumName, action => action.MapFrom(source => source.Name))
+                    .ForMember(target => target.BandName, action => action.MapFrom(source => source.Band.Name));
                 config.CreateMap<Album, AlbumInfoDTO>()
                     .ForMember(target => target.AlbumId, action => action.MapFrom(source => source.Id))
                     .ForMember(target => target.BandName, action => action.MapFrom(source => source.Band.Name))
@@ -42,6 +47,7 @@ namespace BL.Configuration
                 config.CreateMap<Song, SongDTO>();
                 config.CreateMap<Song, SongInfoDTO>();
                 config.CreateMap<SongCreateDTO, Song>();
+                config.CreateMap<SongEditDTO, Song>();
 
                 config.CreateMap<AlbumReview, ReviewDTO>()
                     .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))

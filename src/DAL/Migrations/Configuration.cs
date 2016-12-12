@@ -3,6 +3,7 @@ using DAL.Entities;
 using System;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace DAL.Migrations
 {
@@ -29,6 +30,9 @@ namespace DAL.Migrations
 
             if (context.Songs.Any())
                 context.Songs.RemoveRange(context.Songs);
+
+            if (context.Users.Any())
+                context.Users.RemoveRange(context.Users);
 
             var rock = new Category()
             {
@@ -688,6 +692,42 @@ namespace DAL.Migrations
                     Description = "Nu Metal"
                 }
             });
+
+            var password = CreateHash("Pa$$w0rd");
+            context.Users.Add(new User()
+            {
+                Email = "user@admin.com",
+                FirstName = "User",
+                LastName = "Admin",
+                PasswordHash = password.Item1,
+                PasswordSalt = password.Item2,
+                UserRole = Shared.Enums.UserRole.Admin
+            });
+
+            context.Users.Add(new User()
+            {
+                Email = "user@superuser.com",
+                FirstName = "Super",
+                LastName = "User",
+                PasswordHash = password.Item1,
+                PasswordSalt = password.Item2,
+                UserRole = Shared.Enums.UserRole.SuperUser
+            });
+        }
+
+        private const int PBKDF2IterCount = 100000;
+        private const int PBKDF2SubkeyLength = 160 / 8;
+        private const int saltSize = 128 / 8;
+
+        private Tuple<string, string> CreateHash(string password)
+        {
+            using (var deriveBytes = new Rfc2898DeriveBytes(password, saltSize, PBKDF2IterCount))
+            {
+                byte[] salt = deriveBytes.Salt;
+                byte[] subkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
+
+                return Tuple.Create(Convert.ToBase64String(subkey), Convert.ToBase64String(salt));
+            }
         }
     }
 }

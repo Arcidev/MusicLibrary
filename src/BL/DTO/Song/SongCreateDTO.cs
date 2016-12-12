@@ -1,12 +1,9 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace BL.DTO
 {
-    public class SongCreateDTO
+    public class SongCreateDTO : SongBaseDTO
     {
-        public string Name { get; set; }
-
-        public bool Approved { get; set; }
-
-        public string YoutubeUrlParam { get; set; }
+        public IEnumerable<int> AddedAlbums { get; set; }
     }
 }

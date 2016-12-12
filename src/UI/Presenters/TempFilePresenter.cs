@@ -16,7 +16,6 @@ namespace MusicLibrary.Presenters
 
             using (file)
             {
-                context.OwinContext.Response.ContentType = $"image/fileExtension";
                 context.OwinContext.Response.Headers["Content-Disposition"] = $"attachment; filename=temp.{fileExtension}";
                 await file.CopyToAsync(context.OwinContext.Response.Body);
             }

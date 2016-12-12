@@ -2,7 +2,7 @@
 
 namespace BL.DTO
 {
-    public class SongDTO : SongCreateDTO
+    public class SongDTO : SongBaseDTO
     {
         public int Id { get; set; }
 

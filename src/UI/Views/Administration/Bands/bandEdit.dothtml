@@ -1,3 +1,2 @@
 ﻿@viewModel MusicLibrary.ViewModels.Administration.BandEditViewModel, MusicLibrary
 @masterPage Views/Administration/Bands/bandManagementMasterPage.dotmaster
-@import Resource = MusicLibrary.Resources.Texts

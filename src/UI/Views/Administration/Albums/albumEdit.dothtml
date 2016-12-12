@@ -1,6 +1,5 @@
 ﻿@viewModel MusicLibrary.ViewModels.Administration.AlbumEditViewModel, MusicLibrary
 @masterPage Views/Administration/Albums/albumManagementMasterPage.dotmaster
-@import Resource = MusicLibrary.Resources.Texts
 
 <dot:Content ContentPlaceHolderID="SongsContent">
     <dot:Repeater DataSource="{value: AlbumSongs}" WrapperTagName="div" RenderSettings.Mode="Server" PostBack.Update="true">

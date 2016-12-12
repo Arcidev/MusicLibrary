@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using BL.DTO;
+using BL.Queries;
 using BL.Repositories;
 using BL.Resources;
 using DAL.Entities;
+using DotVVM.Framework.Controls;
 using DotVVM.Framework.Storage;
 using Riganti.Utils.Infrastructure.Core;
 using System;
@@ -19,6 +21,8 @@ namespace BL.Facades
         private const int saltSize = 128 / 8;
 
         public Func<UserRepository> UserRepositoryFunc { get; set; }
+
+        public Func<UsersQuery> UsersQueryFunc { get; set; }
 
         public async Task<UserDTO> AddUserAsync(UserCreateDTO user)
         {
@@ -63,12 +67,12 @@ namespace BL.Facades
             }
         }
 
-        public async Task<UserDTO> GetUser(int id)
+        public UserDTO GetUser(int id)
         {
             using (var uow = UowProviderFunc().Create())
             {
                 var repo = UserRepositoryFunc();
-                var user = await repo.GetByIdAsync(id);
+                var user = repo.GetById(id);
                 IsNotNull(user, ErrorMessages.UserNotExist);
 
                 return Mapper.Map<UserDTO>(user);
@@ -84,14 +88,8 @@ namespace BL.Facades
                 if (entity == null)
                     throw new UIException(ErrorMessages.UserNotExist);
 
-                if (file != null && storage != null)
-                {
-                    if (entity.ImageStorageFileId.HasValue)
-                        StorageFileFacade.Value.DeleteFile(entity.ImageStorageFileId.Value);
-
-                    SetImageFile(entity, file, storage);
-                }
-
+                SetImageFile(entity, file, storage);
+                
                 Mapper.Map(user, entity);
                 if (!string.IsNullOrEmpty(user.Password))
                 {
@@ -112,6 +110,17 @@ namespace BL.Facades
                 repo.Delete(id);
 
                 uow.Commit();
+            }
+        }
+
+        public void LoadUserInfoes(GridViewDataSet<UserInfoDTO> dataSet, string filter)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var query = UsersQueryFunc();
+                query.Filter = filter;
+
+                FillDataSet(dataSet, query);
             }
         }
 

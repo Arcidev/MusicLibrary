@@ -37,13 +37,13 @@ namespace MusicLibrary.ViewModels.Administration
             if (!Context.IsPostBack)
             {
                 ActiveAdminPage = "UserProfile";
-                await LoadUser();
+                LoadUser();
             }
 
             await base.PreRender();
         }
 
-        public async Task SaveChanges()
+        public void SaveChanges()
         {
             UserProfileErrorViewModel = new UserProfileErrorViewModel();
 
@@ -65,11 +65,11 @@ namespace MusicLibrary.ViewModels.Administration
             if (UserProfileErrorViewModel.ContainsError)
                 return;
 
-            await ExecuteSafelyAsync(async () =>
+            ExecuteSafely(() =>
             {
                 User.Password = Password;
                 UserFacade.EditUser(User, Files.Files.LastOrDefault(), FileStorage);
-                await LoadUser();
+                LoadUser();
                 Files.Clear();
             });
         }
@@ -97,9 +97,9 @@ namespace MusicLibrary.ViewModels.Administration
             return Regex.Match(Password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$").Success;
         }
 
-        private async Task LoadUser()
+        private void LoadUser()
         {
-            User = await UserFacade.GetUser(int.Parse(UserId));
+            User = UserFacade.GetUser(int.Parse(UserId));
             ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : "";
         }
     }

@@ -289,4 +289,19 @@
   <data name="Add" xml:space="preserve">
     <value>Přidat</value>
   </data>
+  <data name="CreateSong" xml:space="preserve">
+    <value>Vytvořit píseň</value>
+  </data>
+  <data name="Songs" xml:space="preserve">
+    <value>Písně</value>
+  </data>
+  <data name="YoutubeURL" xml:space="preserve">
+    <value>Youtube URL</value>
+  </data>
+  <data name="UserRole" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Uživatelé</value>
+  </data>
 </root>

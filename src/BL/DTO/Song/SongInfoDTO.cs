@@ -7,6 +7,8 @@ namespace BL.DTO
 
         public string Name { get; set; }
 
+        public bool Approved { get; set; }
+
         public bool Removed { get; set; }
 
         public override bool Equals(object obj)

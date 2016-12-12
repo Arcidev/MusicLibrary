@@ -23,6 +23,6 @@ namespace DAL.Entities
         public string YoutubeUrlParam { get; set; }
 
         [ForeignKey(nameof(AudioStorageFileId))]
-        public StorageFile AudioStorageFile { get; set; }
+        public virtual StorageFile AudioStorageFile { get; set; }
     }
 }

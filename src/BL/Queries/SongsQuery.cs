@@ -8,9 +8,21 @@ namespace BL.Queries
     {
         public SongsQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
+        public string Filter { get; set; }
+
+        public bool? Approved { get; set; }
+
         protected override IQueryable<T> GetQueryable()
         {
-            return Context.Songs.Where(x => x.Approved).ProjectTo<T>();
+            var query = Context.Songs.AsQueryable();
+
+            if (!string.IsNullOrEmpty(Filter))
+                query = query.Where(x => x.Name.Contains(Filter));
+
+            if (Approved.HasValue)
+                query = query.Where(x => x.Approved == Approved.Value);
+
+            return query.ProjectTo<T>();
         }
     }
 }

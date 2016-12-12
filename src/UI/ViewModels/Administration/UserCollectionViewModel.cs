@@ -42,7 +42,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public async Task Update(AlbumInfoDTO userAlbum)
         {
-            await ExecuteSafelyAsync(async () =>
+            var success = await ExecuteSafelyAsync(async () =>
             {
                 if (userAlbum.HasInCollection)
                 {
@@ -58,7 +58,8 @@ namespace MusicLibrary.ViewModels.Administration
                 await AlbumFacade.RemoveAlbumFromUserCollection(int.Parse(UserId), userAlbum.AlbumId);
             });
 
-            CancelEdit();
+            if (success)
+                CancelEdit();
         }
 
         public void CancelEdit()
