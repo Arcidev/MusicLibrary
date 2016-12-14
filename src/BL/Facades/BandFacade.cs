@@ -9,6 +9,7 @@ using DotVVM.Framework.Storage;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BL.Facades
 {
@@ -128,7 +129,7 @@ namespace BL.Facades
 
                 var dto = Mapper.Map<BandDTO>(entity);
                 if (includeAlbums)
-                    dto.Albums = Mapper.Map<IEnumerable<AlbumDTO>>(entity.Albums);
+                    dto.Albums = Mapper.Map<IEnumerable<AlbumDTO>>(entity.Albums.Where(x => x.Approved));
 
                 if (includeMembers)
                     dto.Members = GetBandMembers(entity.Id);
