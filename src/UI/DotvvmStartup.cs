@@ -52,34 +52,34 @@ namespace MusicLibrary
         {
             config.Resources.Register("templateStyle-css", new StylesheetResource()
             {
-                Url = "~/Content/Styles/templateStyle.min.css"
+                Location = new RemoteResourceLocation("~/Content/Styles/templateStyle.min.css")
             });
             config.Resources.Register("style-css", new StylesheetResource()
             {
-                Url = "~/Content/Styles/style.min.css"
+                Location =  new RemoteResourceLocation("~/Content/Styles/style.min.css")
             });
             config.Resources.Register("modernizr", new ScriptResource()
             {
-                Url = "~/Content/Scripts/modernizr.custom.53451.js"
+                Location = new RemoteResourceLocation("~/Content/Scripts/modernizr.custom.53451.js")
             });
             config.Resources.Register("jquery-gallery", new ScriptResource()
             {
-                Url = "~/Content/Scripts/jquery.gallery.js",
+                Location = new RemoteResourceLocation("~/Content/Scripts/jquery.gallery.js"),
                 Dependencies = new[] { "jquery", "modernizr" }
             });
             config.Resources.Register("jquery-slider", new ScriptResource()
             {
-                Url = "~/Content/Scripts/jquery-slider.js",
+                Location = new RemoteResourceLocation("~/Content/Scripts/jquery-slider.js"),
                 Dependencies = new[] { "jquery" }
             });
             config.Resources.Register("index", new ScriptResource()
             {
-                Url = "~/Content/Scripts/index.js",
+                Location = new RemoteResourceLocation("~/Content/Scripts/index.js"),
                 Dependencies = new[] { "jquery-gallery" }
             });
             config.Resources.Register("stars", new ScriptResource()
             {
-                Url = "~/Content/Scripts/stars.js",
+                Location = new RemoteResourceLocation("~/Content/Scripts/stars.js"),
                 Dependencies = new[] { "jquery" }
             });
         }

@@ -7,7 +7,7 @@ namespace MusicLibrary.Presenters
 {
     public class TempFilePresenter : IDotvvmPresenter
     {
-        public async Task ProcessRequest(DotvvmRequestContext context)
+        public async Task ProcessRequest(IDotvvmRequestContext context)
         {
             var fileId = new Guid(context.Parameters["FileId"].ToString());
             var fileExtension = context.Parameters["FileExtension"].ToString();
@@ -16,8 +16,8 @@ namespace MusicLibrary.Presenters
 
             using (file)
             {
-                context.OwinContext.Response.Headers["Content-Disposition"] = $"attachment; filename=temp.{fileExtension}";
-                await file.CopyToAsync(context.OwinContext.Response.Body);
+                context.GetOwinContext().Response.Headers["Content-Disposition"] = $"attachment; filename=temp.{fileExtension}";
+                await file.CopyToAsync(context.GetOwinContext().Response.Body);
             }
         }
     }

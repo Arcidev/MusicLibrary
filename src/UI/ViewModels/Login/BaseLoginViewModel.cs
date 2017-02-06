@@ -1,5 +1,6 @@
 using BL.DTO;
 using BL.Facades;
+using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 using MusicLibrary.Identity;
 using System.Security.Claims;
@@ -19,7 +20,7 @@ namespace MusicLibrary.ViewModels.Login
             var claimsIdentity = new ClaimsIdentity(new UserIdentity(user.FullName));
             claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
             claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, user.UserRole.ToString()));
-            Context.OwinContext.Authentication.SignIn(claimsIdentity);
+            Context.GetAuthentication().SignIn(claimsIdentity);
         }
 	}
 }

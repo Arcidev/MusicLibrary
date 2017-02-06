@@ -1,10 +1,10 @@
 using BL.Configuration;
-using Castle.Windsor;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
-using DotVVM.Framework.ViewModel.Serialization;
 using DotVVM.Framework.Storage;
+using DotVVM.Framework.ViewModel.Serialization;
 using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.Security.Cookies;
@@ -76,10 +76,11 @@ namespace MusicLibrary
 
         private DotvvmConfiguration InitDotvvm(IAppBuilder app)
         {
-            var config = app.UseDotVVM<DotvvmStartup>(ApplicationPhysicalPath);
-
-            config.ServiceLocator.RegisterSingleton<IViewModelLoader>(() => new WindsorViewModelLoader(WindsorBootstrap.container));
-            config.ServiceLocator.RegisterSingleton<IUploadedFileStorage>(() => new FileSystemUploadedFileStorage(Path.Combine(ApplicationPhysicalPath, "Temp"), TimeSpan.FromMinutes(30)));
+            var config = app.UseDotVVM<DotvvmStartup>(ApplicationPhysicalPath, options: options =>
+            {
+                options.Services.AddSingleton<IViewModelLoader>(serviceProvider => new WindsorViewModelLoader(WindsorBootstrap.container, serviceProvider));
+                options.Services.AddSingleton<IUploadedFileStorage>(serviceProvider => new FileSystemUploadedFileStorage(Path.Combine(ApplicationPhysicalPath, "Temp"), TimeSpan.FromMinutes(30)));
+            });
 
             return config;
         }

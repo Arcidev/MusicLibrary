@@ -18,10 +18,10 @@ namespace MusicLibrary.ViewModels.Login
 
             if (success)
             {
-                object returnUrl;
+                string returnUrl;
                 if (Context.Query.TryGetValue("ReturnUrl", out returnUrl))
                 {
-                    Context.RedirectToUrl(returnUrl.ToString());
+                    Context.RedirectToUrl(returnUrl);
                     return;
                 }
                 Context.RedirectToRoute("Index");

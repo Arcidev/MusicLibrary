@@ -8,7 +8,7 @@ namespace MusicLibrary.AppStart
     {
         private readonly WindsorContainer container;
 
-        public WindsorViewModelLoader(WindsorContainer container)
+        public WindsorViewModelLoader(WindsorContainer container, IServiceProvider serviceProvider) : base(serviceProvider)
         {
             this.container = container;
         }

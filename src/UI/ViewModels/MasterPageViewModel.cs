@@ -1,3 +1,4 @@
+using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 using Microsoft.AspNet.Identity;
 using Riganti.Utils.Infrastructure.Core;
@@ -8,17 +9,17 @@ namespace MusicLibrary.ViewModels
 {
 	public abstract class MasterPageViewModel : DotvvmViewModelBase
 	{
-        public string UserId { get { return Context.OwinContext.Authentication.User.Identity.GetUserId(); } }
+        public string UserId { get { return Context.GetAuthentication().User.Identity.GetUserId(); } }
 
         public string ActivePage { get; protected set; }
 
-        public bool IsUserLoggedIn { get { return Context.OwinContext.Authentication.User.Identity.IsAuthenticated; } }
+        public bool IsUserLoggedIn { get { return Context.GetAuthentication().User.Identity.IsAuthenticated; } }
 
         public string SearchString { get; set; }
 
         public void SignOut()
         {
-            Context.OwinContext.Authentication.SignOut();
+            Context.GetAuthentication().SignOut();
             Context.RedirectToRoute("Index");
         }
 

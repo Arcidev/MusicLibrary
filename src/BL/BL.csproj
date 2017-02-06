@@ -42,12 +42,12 @@
       <HintPath>..\packages\Castle.Windsor.3.4.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DotVVM.Core, Version=1.0.5.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.Core.1.0.5.0\lib\net451\DotVVM.Core.dll</HintPath>
+    <Reference Include="DotVVM.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.Core.1.1.0-rc3\lib\net451\DotVVM.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DotVVM.Framework, Version=1.0.5.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.1.0.5.0\lib\net451\DotVVM.Framework.dll</HintPath>
+    <Reference Include="DotVVM.Framework, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.1.1.0-rc3\lib\net451\DotVVM.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -64,6 +64,14 @@
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.CSharp, Version=1.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.3.2\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.1.0.0\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
