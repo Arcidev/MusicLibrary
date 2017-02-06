@@ -11,7 +11,7 @@ namespace BL.Queries
 
         protected override IQueryable<AlbumDTO> GetQueryable()
         {
-            return Context.Albums.Where(x => x.Approved).OrderByDescending(x => x.Reviews.Average(y => (int)y.Quality)).ProjectTo<AlbumDTO>();
+            return Context.Albums.Where(x => x.Approved).OrderByDescending(x => x.AverageQuality).ProjectTo<AlbumDTO>();
         }
     }
 }

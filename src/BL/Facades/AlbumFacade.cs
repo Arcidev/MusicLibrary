@@ -226,6 +226,9 @@ namespace BL.Facades
                 repo.Insert(entity);
 
                 uow.Commit();
+
+                UpdateAlbumQuality(review.AlbumId);
+                uow.Commit();
             }
         }
 
@@ -254,6 +257,9 @@ namespace BL.Facades
                 Mapper.Map(editedReview, entity);
                 entity.EditDate = DateTime.Now;
 
+                uow.Commit();
+
+                UpdateAlbumQuality(entity.AlbumId);
                 uow.Commit();
             }
         }
@@ -354,6 +360,21 @@ namespace BL.Facades
                 query.UserId = userId;
 
                 return query.Execute();
+            }
+        }
+
+        private void UpdateAlbumQuality(int albumId)
+        {
+            using (var uow = UowProviderFunc().Create())
+            {
+                var repo = AlbumReviewRepositoryFunc();
+                var averageQuality = repo.GetAlbumAverageQuality(albumId);
+
+                var albumRepo = AlbumRepositoryFunc();
+                var album = albumRepo.GetById(albumId);
+                album.AverageQuality = Convert.ToDecimal(averageQuality);
+
+                uow.Commit();
             }
         }
     }

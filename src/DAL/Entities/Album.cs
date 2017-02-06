@@ -24,6 +24,8 @@ namespace DAL.Entities
 
         public int CategoryId { get; set; }
 
+        public decimal AverageQuality { get; set; }
+
         [ForeignKey(nameof(CategoryId))]
         public virtual Category Category { get; set; }
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace BL.DTO
 {
     public class AlbumBaseDTO
