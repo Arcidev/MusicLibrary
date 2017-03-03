@@ -78,12 +78,11 @@ namespace MusicLibrary
         {
             var config = app.UseDotVVM<DotvvmStartup>(ApplicationPhysicalPath, options: options =>
             {
-                options.Services.AddSingleton<IViewModelLoader>(serviceProvider => new WindsorViewModelLoader(WindsorBootstrap.container, serviceProvider));
+                options.Services.AddSingleton<IViewModelLoader>(serviceProvider => new WindsorViewModelLoader(WindsorBootstrap.container));
                 options.Services.AddSingleton<IUploadedFileStorage>(serviceProvider => new FileSystemUploadedFileStorage(Path.Combine(ApplicationPhysicalPath, "Temp"), TimeSpan.FromMinutes(30)));
             });
 
             return config;
         }
-
     }
 }
