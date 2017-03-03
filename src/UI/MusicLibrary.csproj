@@ -316,6 +316,7 @@
     <Content Include="Views\index.dothtml" />
     <Content Include="packages.config" />
     <Content Include="Views\masterPage.dotmaster" />
+    <EmbeddedResource Include="Resources\Texts.es-ES.resx" />
     <EmbeddedResource Include="Resources\Texts.cs-CZ.resx" />
     <EmbeddedResource Include="Resources\Texts.sk-SK.resx" />
     <Content Include="Content\Styles\style.less" />

@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SignIn" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrarse
+</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Índex</value>
+  </data>
+  <data name="Bands" xml:space="preserve">
+    <value>Bandas</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categorías</value>
+  </data>
+  <data name="FeaturedAlbums" xml:space="preserve">
+    <value>Álbumes destacados</value>
+  </data>
+  <data name="RecentlyAdded" xml:space="preserve">
+    <value>Recientemente añadido</value>
+  </data>
+  <data name="Albums" xml:space="preserve">
+    <value>Álbumes</value>
+  </data>
+  <data name="Album" xml:space="preserve">
+    <value>Álbum</value>
+  </data>
+  <data name="MoreBandAlbums" xml:space="preserve">
+    <value>Más álbumes de este banda</value>
+  </data>
+  <data name="AudioUnsupported" xml:space="preserve">
+    <value>Su navegador no admite el elemento de audio.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="PasswordAgain" xml:space="preserve">
+    <value>Contraseña de nuevo</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>¡La dirección de correo electrónico es obligatoria!</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>¡El nombre es obligatorio!</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>¡El apellido es obligatorio!</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>¡La dirección de correo electrónico no es válida!</value>
+  </data>
+  <data name="WeakPassword" xml:space="preserve">
+    <value>¡La contraseña debe contener un número, letra pequeña y grande y tener por lo menos 6 caracteres de largo!</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>¡Las contraseñas no coinciden!</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="Band" xml:space="preserve">
+    <value>Banda</value>
+  </data>
+  <data name="BandAlbums" xml:space="preserve">
+    <value>Álbumes de la banda</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="UserCollection" xml:space="preserve">
+    <value>Mi colección</value>
+  </data>
+  <data name="UserCollectionEmpty" xml:space="preserve">
+    <value>No has añadido ninguna música a tu colección.</value>
+  </data>
+  <data name="AddToCollection" xml:space="preserve">
+    <value>Añadir a mi colección</value>
+  </data>
+  <data name="RemoveFromCollection" xml:space="preserve">
+    <value>Eliminar de mi colección</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reseñas</value>
+  </data>
+  <data name="AddReview" xml:space="preserve">
+    <value>Añadir reseña</value>
+  </data>
+  <data name="ReviewQualityRequired" xml:space="preserve">
+    <value>¡La calificación de álbum es obligatoria!</value>
+  </data>
+  <data name="ReviewTextRequired" xml:space="preserve">
+    <value>¡El texto de la reseña es obligatorio!</value>
+  </data>
+  <data name="UserNotLoggedIn" xml:space="preserve">
+    <value>¡Necesitas estar logueado para realizar esta acción!</value>
+  </data>
+  <data name="SubmitReview" xml:space="preserve">
+    <value>Enviar reseña</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Miembros</value>
+  </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administración</value>
+  </data>
+  <data name="MyProfile" xml:space="preserve">
+    <value>Mi perfil</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Guardar cambios</value>
+  </data>
+  <data name="MyReviews" xml:space="preserve">
+    <value>Mis reseñas</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Subir</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reiniciar</value>
+  </data>
+  <data name="BandReviews" xml:space="preserve">
+    <value>Reseñas de bandas</value>
+  </data>
+  <data name="AlbumReviews" xml:space="preserve">
+    <value>Reseñas de álbumes</value>
+  </data>
+  <data name="AlbumName" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="BandName" xml:space="preserve">
+    <value>Banda</value>
+  </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="HasInCollection" xml:space="preserve">
+    <value>En la colección</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Aprobado</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>¡El nombre es obligatorio!</value>
+  </data>
+  <data name="BandRequired" xml:space="preserve">
+    <value>¡La banda es obligatoria!</value>
+  </data>
+  <data name="CategoryRequired" xml:space="preserve">
+    <value>¡La categoría es obligatoria!</value>
+  </data>
+  <data name="CreateAlbum" xml:space="preserve">
+    <value>Crear albúm</value>
+  </data>
+  <data name="ApproveSelected" xml:space="preserve">
+    <value>Aprobar seleccionados</value>
+  </data>
+  <data name="DisapproveSelected" xml:space="preserve">
+    <value>Desaprobar seleccionados</value>
+  </data>
+  <data name="CreateBand" xml:space="preserve">
+    <value>Crear banda</value>
+  </data>
+  <data name="DescriptionRequired" xml:space="preserve">
+    <value>¡La descripción es obligatoria!</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="CreateSong" xml:space="preserve">
+    <value>Crear canción</value>
+  </data>
+  <data name="Songs" xml:space="preserve">
+    <value>Canciones</value>
+  </data>
+  <data name="YoutubeURL" xml:space="preserve">
+    <value>Youtube URL</value>
+  </data>
+  <data name="UserRole" xml:space="preserve">
+    <value>Rol de usuario</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Usuarios</value>
+  </data>
+</root>
