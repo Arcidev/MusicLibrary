@@ -52,34 +52,34 @@ namespace MusicLibrary
         {
             config.Resources.Register("templateStyle-css", new StylesheetResource()
             {
-                Location = new RemoteResourceLocation("~/Content/Styles/templateStyle.min.css")
+                Location = new UrlResourceLocation("~/Content/Styles/templateStyle.min.css")
             });
             config.Resources.Register("style-css", new StylesheetResource()
             {
-                Location =  new RemoteResourceLocation("~/Content/Styles/style.min.css")
+                Location =  new UrlResourceLocation("~/Content/Styles/style.min.css")
             });
             config.Resources.Register("modernizr", new ScriptResource()
             {
-                Location = new RemoteResourceLocation("~/Content/Scripts/modernizr.custom.53451.js")
+                Location = new UrlResourceLocation("~/Content/Scripts/modernizr.custom.53451.js")
             });
             config.Resources.Register("jquery-gallery", new ScriptResource()
             {
-                Location = new RemoteResourceLocation("~/Content/Scripts/jquery.gallery.js"),
+                Location = new UrlResourceLocation("~/Content/Scripts/jquery.gallery.js"),
                 Dependencies = new[] { "jquery", "modernizr" }
             });
             config.Resources.Register("jquery-slider", new ScriptResource()
             {
-                Location = new RemoteResourceLocation("~/Content/Scripts/jquery-slider.js"),
+                Location = new UrlResourceLocation("~/Content/Scripts/jquery-slider.js"),
                 Dependencies = new[] { "jquery" }
             });
             config.Resources.Register("index", new ScriptResource()
             {
-                Location = new RemoteResourceLocation("~/Content/Scripts/index.js"),
+                Location = new UrlResourceLocation("~/Content/Scripts/index.js"),
                 Dependencies = new[] { "jquery-gallery" }
             });
             config.Resources.Register("stars", new ScriptResource()
             {
-                Location = new RemoteResourceLocation("~/Content/Scripts/stars.js"),
+                Location = new UrlResourceLocation("~/Content/Scripts/stars.js"),
                 Dependencies = new[] { "jquery" }
             });
         }

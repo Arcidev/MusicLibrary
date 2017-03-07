@@ -25,9 +25,15 @@ namespace MusicLibrary.ViewModels
         {
             Reviews = new GridViewDataSet<ReviewDTO>()
             {
-                PageSize = 10,
-                SortDescending = true,
-                SortExpression = nameof(ReviewDTO.EditDate)
+                PagingOptions = new PagingOptions()
+                {
+                    PageSize = 10
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortDescending = true,
+                    SortExpression = nameof(ReviewDTO.EditDate)
+                }
             };
         }
 

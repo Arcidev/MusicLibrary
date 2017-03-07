@@ -1,6 +1,7 @@
 ﻿using System;
 using Castle.Windsor;
 using DotVVM.Framework.ViewModel.Serialization;
+using DotVVM.Framework.Hosting;
 
 namespace MusicLibrary.AppStart
 {
@@ -13,7 +14,7 @@ namespace MusicLibrary.AppStart
             this.container = container;
         }
 
-        protected override object CreateViewModelInstance(Type viewModelType)
+        protected override object CreateViewModelInstance(Type viewModelType, IDotvvmRequestContext context)
         {
             return container.Resolve(viewModelType);
         }

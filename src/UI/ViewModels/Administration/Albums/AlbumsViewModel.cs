@@ -22,7 +22,17 @@ namespace MusicLibrary.ViewModels.Administration
 
         public AlbumsViewModel()
         {
-            Albums = new GridViewDataSet<AlbumInfoDTO>() { PageSize = 20, SortExpression = nameof(AlbumInfoDTO.AlbumName) };
+            Albums = new GridViewDataSet<AlbumInfoDTO>()
+            {
+                PagingOptions = new PagingOptions()
+                {
+                    PageSize = 20
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortExpression = nameof(AlbumInfoDTO.AlbumName)
+                }
+            };
         }
 
         public override async Task PreRender()

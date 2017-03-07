@@ -31,7 +31,21 @@ namespace MusicLibrary.ViewModels.Administration
         public UsersViewModel()
         {
             UserRoles = Enum.GetNames(typeof(UserRole));
-            Users = new GridViewDataSet<UserInfoDTO>() { PageSize = 20, SortExpression = nameof(UserInfoDTO.Email), PrimaryKeyPropertyName = nameof(UserInfoDTO.Id) };
+            Users = new GridViewDataSet<UserInfoDTO>()
+            {
+                PagingOptions = new PagingOptions()
+                {
+                    PageSize = 20
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortExpression = nameof(UserInfoDTO.Email)
+                },
+                RowEditOptions = new RowEditOptions()
+                {
+                    PrimaryKeyPropertyName = nameof(UserInfoDTO.Id)
+                }
+            };
         }
 
         public override async Task PreRender()
@@ -48,7 +62,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public void Edit(UserInfoDTO user)
         {
-            Users.EditRowId = user.Id;
+            Users.RowEditOptions.EditRowId = user.Id;
             SelectedUserRole = user.UserRole.ToString();
         }
 
@@ -76,7 +90,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public void CancelEdit()
         {
-            Users.EditRowId = null;
+            Users.RowEditOptions.EditRowId = null;
             SelectedUserRole = null;
         }
     }

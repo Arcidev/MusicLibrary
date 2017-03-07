@@ -35,8 +35,30 @@ namespace MusicLibrary.ViewModels.Administration
 
         public UserReviewsViewModel()
         {
-            AlbumReviews = new GridViewDataSet<UserAlbumReviewDTO>() { PageSize = 10, SortDescending = true, SortExpression = nameof(UserAlbumReviewDTO.EditDate) };
-            BandReviews = new GridViewDataSet<UserBandReviewDTO>() { PageSize = 10, SortDescending = true, SortExpression = nameof(UserAlbumReviewDTO.EditDate) };
+            AlbumReviews = new GridViewDataSet<UserAlbumReviewDTO>()
+            {
+                PagingOptions = new PagingOptions()
+                {
+                    PageSize = 10
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortDescending = true,
+                    SortExpression = nameof(UserAlbumReviewDTO.EditDate)
+                }
+            };
+            BandReviews = new GridViewDataSet<UserBandReviewDTO>()
+            {
+                PagingOptions = new PagingOptions()
+                {
+                    PageSize = 10
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortDescending = true,
+                    SortExpression = nameof(UserBandReviewDTO.EditDate)
+                }
+            };
         }
 
         public override async Task PreRender()

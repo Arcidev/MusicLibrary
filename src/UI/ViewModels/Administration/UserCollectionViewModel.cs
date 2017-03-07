@@ -19,7 +19,21 @@ namespace MusicLibrary.ViewModels.Administration
 
         public UserCollectionViewModel()
         {
-            UserCollection = new GridViewDataSet<AlbumInfoDTO>() { PageSize = 20, SortExpression = nameof(AlbumInfoDTO.AlbumName), PrimaryKeyPropertyName = nameof(AlbumInfoDTO.AlbumId) };
+            UserCollection = new GridViewDataSet<AlbumInfoDTO>()
+            {
+                PagingOptions = new PagingOptions()
+                {
+                    PageSize = 20
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortExpression = nameof(AlbumInfoDTO.AlbumName)
+                },
+                RowEditOptions = new RowEditOptions()
+                {
+                    PrimaryKeyPropertyName = nameof(AlbumInfoDTO.AlbumId)
+                }
+            };
         }
 
         public override async Task PreRender()
@@ -37,7 +51,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public void Edit(int id)
         {
-            UserCollection.EditRowId = id;
+            UserCollection.RowEditOptions.EditRowId = id;
         }
 
         public async Task Update(AlbumInfoDTO userAlbum)
@@ -64,7 +78,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public void CancelEdit()
         {
-            UserCollection.EditRowId = null;
+            UserCollection.RowEditOptions.EditRowId = null;
         }
     }
 }
