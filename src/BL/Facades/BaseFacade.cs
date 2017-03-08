@@ -16,13 +16,13 @@ namespace BL.Facades
 
         protected void FillDataSet<T>(GridViewDataSet<T> dataSet, IQuery<T> query)
         {
-            query.Skip = dataSet.PageIndex * dataSet.PageSize;
-            query.Take = dataSet.PageSize;
+            query.Skip = dataSet.PagingOptions.PageIndex * dataSet.PagingOptions.PageSize;
+            query.Take = dataSet.PagingOptions.PageSize;
 
             query.SortCriteria.Clear();
-            query.AddSortCriteria(dataSet.SortExpression, dataSet.SortDescending ? SortDirection.Descending : SortDirection.Ascending);
+            query.AddSortCriteria(dataSet.SortingOptions.SortExpression, dataSet.SortingOptions.SortDescending ? SortDirection.Descending : SortDirection.Ascending);
 
-            dataSet.TotalItemsCount = query.GetTotalRowCount();
+            dataSet.PagingOptions.TotalItemsCount = query.GetTotalRowCount();
             dataSet.Items = query.Execute();
         }
     }
