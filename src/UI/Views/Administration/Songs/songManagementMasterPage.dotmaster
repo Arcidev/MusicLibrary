@@ -45,7 +45,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <dot:ComboBox DisplayMember="BandAlbumName" ValueMember="AlbumId" DataSource="{value: AlbumInfoes}" SelectedValue="{value: SelectedAlbumId}" />
+                    <dot:ComboBox ItemTextBinding="{value: BandAlbumName}" ItemValueBinding="{value: AlbumId}" DataSource="{value: AlbumInfoes}" SelectedValue="{value: SelectedAlbumId}" />
                     <dot:LinkButton Text="{resource: Resource.Add}" Click="{command: AddAlbum()}" />
                 </td>
             </tr>

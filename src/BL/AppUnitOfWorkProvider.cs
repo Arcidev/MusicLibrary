@@ -9,7 +9,7 @@ namespace BL
     {
         public AppUnitOfWorkProvider(IUnitOfWorkRegistry registry, Func<DbContext> dbContextFactory) : base(registry, dbContextFactory) { }
 
-        protected override EntityFrameworkUnitOfWork CreateUnitOfWork(Func<DbContext> dbContextFactory, DbContextOptions options)
+        protected override EntityFrameworkUnitOfWork<DbContext> CreateUnitOfWork(Func<DbContext> dbContextFactory, DbContextOptions options)
         {
             return new AppUnitOfWork(this, dbContextFactory, options);
         }

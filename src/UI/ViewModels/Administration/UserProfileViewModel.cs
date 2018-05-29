@@ -15,7 +15,7 @@ namespace MusicLibrary.ViewModels.Administration
     [Authorize]
     public class UserProfileViewModel : AdministrationMasterPageViewModel
     {
-        private IUploadedFileStorage FileStorage { get { return Context.Configuration.ServiceLocator.GetService<IUploadedFileStorage>(); } }
+        private IUploadedFileStorage FileStorage => (IUploadedFileStorage)Context.Configuration.ServiceProvider.GetService(typeof(IUploadedFileStorage));
 
         [Bind(Direction.None)]
         public UserFacade UserFacade { get; set; }

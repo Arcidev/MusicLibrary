@@ -16,7 +16,12 @@ namespace MusicLibrary.ViewModels.Administration
             if (!Context.IsPostBack)
             {
                 var band = BandFacade.GetBand(int.Parse(Context.Parameters["BandId"].ToString()), true, true);
-                Band = band;
+                Band = new BandBaseDTO()
+                {
+                    Approved = band.Approved,
+                    Description = band.Description,
+                    Name = band.Name
+                };
                 OriginalImageFileName = band.ImageStorageFile?.FileName;
                 ResetImage();
             }

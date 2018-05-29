@@ -9,11 +9,11 @@ namespace MusicLibrary.ViewModels
 {
 	public abstract class MasterPageViewModel : DotvvmViewModelBase
 	{
-        public string UserId { get { return Context.GetAuthentication().User.Identity.GetUserId(); } }
+        public string UserId => Context.GetAuthentication().User.Identity.GetUserId();
 
         public string ActivePage { get; protected set; }
 
-        public bool IsUserLoggedIn { get { return Context.GetAuthentication().User.Identity.IsAuthenticated; } }
+        public bool IsUserLoggedIn => Context.GetAuthentication().User.Identity.IsAuthenticated;
 
         public string SearchString { get; set; }
 

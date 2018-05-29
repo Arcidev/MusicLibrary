@@ -22,7 +22,7 @@
                 <td><dot:TextBox Text="{value: Album.Name}" /></td>
                 <td><dot:Literal Text="{resource: Resource.BandName}" /></td>
                 <td>
-                    <dot:ComboBox DisplayMember="Name" ValueMember="Id" DataSource="{value: BandInfoes}" SelectedValue="{value: SelectedBandId}"  />
+                    <dot:ComboBox ItemTextBinding="{value: Name}" ItemValueBinding="{value: Id}" DataSource="{value: BandInfoes}" SelectedValue="{value: SelectedBandId}"  />
                 </td>
             </tr>
             <tr class="error-message" DataContext="{value: AlbumManagementErrorViewModel}" Visible="{value: NameError != null || BandError != null}">
@@ -34,7 +34,7 @@
                 <td><dot:CheckBox Enabled="{value: UserRole != "User"}" Checked="{value: Album.Approved}" /></td>
                 <td><dot:Literal Text="{resource: Resource.CategoryName}" /></td>
                 <td>
-                    <dot:ComboBox DisplayMember="NameLocalized" ValueMember="Id" DataSource="{value: _root.Categories}" SelectedValue="{value: _root.SelectedCategoryId}" />
+                    <dot:ComboBox ItemTextBinding="{value: NameLocalized}" ItemValueBinding="{value: Id}" DataSource="{value: _root.Categories}" SelectedValue="{value: _root.SelectedCategoryId}" />
                 </td>
             </tr>
             <tr class="error-message" DataContext="{value: AlbumManagementErrorViewModel}" Visible="{value: CategoryError != null}">
@@ -56,7 +56,7 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <dot:ComboBox DisplayMember="Name" ValueMember="Id" DataSource="{value: SongInfoes}" SelectedValue="{value: SelectedSongId}" />
+                    <dot:ComboBox ItemTextBinding="{value: Name}" ItemValueBinding="{value: Id}" DataSource="{value: SongInfoes}" SelectedValue="{value: SelectedSongId}" />
                     <dot:LinkButton Text="{resource: Resource.Add}" Click="{command: AddSong()}" />
                 </td>
             </tr>

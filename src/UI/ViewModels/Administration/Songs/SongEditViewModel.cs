@@ -18,11 +18,15 @@ namespace MusicLibrary.ViewModels.Administration
         {
             if (!Context.IsPostBack)
             {
-                var songId = int.Parse(Context.Parameters["SongId"].ToString());
-                var song = SongFacade.GetSong(songId);
-                Song = song;
+                var song = SongFacade.GetSong(int.Parse(Context.Parameters["SongId"].ToString()));
+                Song = new SongBaseDTO()
+                {
+                    Approved = song.Approved,
+                    Name = song.Name,
+                    YoutubeUrlParam = song.YoutubeUrlParam
+                };
                 OriginalAudioFileName = song.AudioStorageFile?.FileName;
-                SongAlbums = AlbumFacade.GetAlbumBandInfoes(songId).ToList();
+                SongAlbums = AlbumFacade.GetAlbumBandInfoes(song.Id).ToList();
                 ResetSong();
             }
 

@@ -7,7 +7,7 @@ namespace MusicLibrary.ViewModels.Administration
     [Authorize]
     public class AdministrationMasterPageViewModel : MasterPageViewModel
     {
-        public string UserRole { get { return Context.GetAuthentication().User.FindFirst(ClaimTypes.Role).Value; } }
+        public string UserRole => Context.GetAuthentication().User.FindFirst(ClaimTypes.Role).Value;
 
         public string ActiveAdminPage { get; set; }
     }

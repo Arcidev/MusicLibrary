@@ -7,7 +7,7 @@ namespace BL.Repositories
 {
     public class UserRepository : BaseRepository<User, int>
     {
-        public UserRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public UserRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
 
         public async Task<User> GetByEmailAsync(string email)
         {

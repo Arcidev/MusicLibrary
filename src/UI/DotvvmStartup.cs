@@ -1,11 +1,17 @@
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.ResourceManagement;
+using DotVVM.Framework.Storage;
+using DotVVM.Framework.ViewModel.Serialization;
+using Microsoft.Extensions.DependencyInjection;
 using MusicLibrary.AppStart;
 using MusicLibrary.Presenters;
+using System;
+using System.IO;
+using System.Web.Hosting;
 
 namespace MusicLibrary
 {
-    public class DotvvmStartup : IDotvvmStartup
+    public class DotvvmStartup : IDotvvmStartup, IDotvvmServiceConfigurator
     {
         // For more information about this class, visit https://dotvvm.com/docs/tutorials/basics-project-structure
         public void Configure(DotvvmConfiguration config, string applicationPath)
@@ -13,6 +19,12 @@ namespace MusicLibrary
             ConfigureRoutes(config, applicationPath);
             ConfigureControls(config, applicationPath);
             ConfigureResources(config, applicationPath);
+        }
+
+        public void ConfigureServices(IDotvvmServiceCollection options)
+        {
+            options.Services.AddSingleton<IViewModelLoader>(serviceProvider => new WindsorViewModelLoader(WindsorBootstrap.container));
+            options.Services.AddSingleton<IUploadedFileStorage>(serviceProvider => new FileSystemUploadedFileStorage(Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Temp"), TimeSpan.FromMinutes(30)));
         }
 
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
@@ -40,7 +52,7 @@ namespace MusicLibrary
             config.RouteTable.Add("SongEdit", "administration/song/{songId}/edit", "Views/Administration/Songs/songEdit.dothtml");
             config.RouteTable.Add("SongCreate", "administration/song/create", "Views/Administration/Songs/songCreate.dothtml");
             config.RouteTable.Add("Users", "administration/users", "Views/Administration/users.dothtml");
-            config.RouteTable.Add("TempFilePresenter", "files/{FileId}/{FileExtension}", null, null, WindsorBootstrap.Resolve<TempFilePresenter>);
+            config.RouteTable.Add("TempFilePresenter", "files/{FileId}/{FileExtension}", serviceProvider => WindsorBootstrap.Resolve<TempFilePresenter>());
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
@@ -61,6 +73,10 @@ namespace MusicLibrary
             config.Resources.Register("modernizr", new ScriptResource()
             {
                 Location = new UrlResourceLocation("~/Content/Scripts/modernizr.custom.53451.js")
+            });
+            config.Resources.Register("jquery", new ScriptResource()
+            {
+                Location = new UrlResourceLocation("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
             });
             config.Resources.Register("jquery-gallery", new ScriptResource()
             {

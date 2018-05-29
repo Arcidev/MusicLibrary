@@ -6,7 +6,7 @@ namespace BL.Repositories
 {
     public class AlbumReviewRepository : BaseRepository<AlbumReview, int>
     {
-        public AlbumReviewRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public AlbumReviewRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
 
         public double GetAlbumAverageQuality(int albumId)
         {

@@ -5,6 +5,6 @@ namespace BL.Repositories
 {
     public class CategoryRepository : BaseRepository<Category, int>
     {
-        public CategoryRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public CategoryRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
     }
 }

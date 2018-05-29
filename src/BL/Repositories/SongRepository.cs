@@ -5,6 +5,6 @@ namespace BL.Repositories
 {
     public class SongRepository : BaseRepository<Song, int>
     {
-        public SongRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public SongRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
     }
 }

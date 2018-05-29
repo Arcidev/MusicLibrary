@@ -19,7 +19,7 @@ namespace BL.Facades
             query.Skip = dataSet.PagingOptions.PageIndex * dataSet.PagingOptions.PageSize;
             query.Take = dataSet.PagingOptions.PageSize;
 
-            query.SortCriteria.Clear();
+            query.ClearSortCriteria();
             query.AddSortCriteria(dataSet.SortingOptions.SortExpression, dataSet.SortingOptions.SortDescending ? SortDirection.Descending : SortDirection.Ascending);
 
             dataSet.PagingOptions.TotalItemsCount = query.GetTotalRowCount();

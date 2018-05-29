@@ -18,13 +18,18 @@ namespace MusicLibrary.ViewModels.Administration
         {
             if (!Context.IsPostBack)
             {
-                var albumId = int.Parse(Context.Parameters["AlbumId"].ToString());
-                var album = AlbumFacade.GetAlbum(albumId, false, false);
-                Album = album;
+                var album = AlbumFacade.GetAlbum(int.Parse(Context.Parameters["AlbumId"].ToString()), false, false);
+                Album = new AlbumBaseDTO()
+                {
+                    Approved = album.Approved,
+                    BandId = album.BandId,
+                    CategoryId = album.CategoryId,
+                    Name = album.Name
+                };
                 OriginalImageFileName = album.ImageStorageFile?.FileName;
                 SelectedBandId = album.BandId;
                 SelectedCategoryId = album.CategoryId;
-                AlbumSongs = AlbumFacade.GetAlbumSongInfoes(albumId).ToList();
+                AlbumSongs = AlbumFacade.GetAlbumSongInfoes(album.Id).ToList();
                 ResetImage();
             }
 

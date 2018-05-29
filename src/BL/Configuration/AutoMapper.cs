@@ -6,8 +6,15 @@ namespace BL.Configuration
 {
     public static class AutoMapper
     {
+        private static bool isInitialized;
+
         public static void Init()
         {
+            if (isInitialized)
+                return;
+
+            isInitialized = true;
+
             Mapper.Initialize(config =>
             {
                 config.CreateMap<User, UserDTO>();

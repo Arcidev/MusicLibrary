@@ -5,6 +5,6 @@ namespace BL.Repositories
 {
     public class StorageFileRepository : BaseRepository<StorageFile, int>
     {
-        public StorageFileRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public StorageFileRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
     }
 }

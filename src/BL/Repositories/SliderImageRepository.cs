@@ -5,6 +5,6 @@ namespace BL.Repositories
 {
     public class SliderImageRepository : BaseRepository<SliderImage, int>
     {
-        public SliderImageRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public SliderImageRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
     }
 }

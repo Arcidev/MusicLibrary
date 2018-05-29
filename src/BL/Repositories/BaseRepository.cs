@@ -8,6 +8,6 @@ namespace BL.Repositories
     {
         protected new MusicLibraryDbContext Context => (MusicLibraryDbContext)base.Context;
 
-        public BaseRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public BaseRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
     }
 }

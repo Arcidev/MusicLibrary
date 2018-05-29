@@ -1,18 +1,13 @@
 using BL.Configuration;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
-using DotVVM.Framework.Storage;
-using DotVVM.Framework.ViewModel.Serialization;
 using Microsoft.AspNet.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.StaticFiles;
 using MusicLibrary.AppStart;
 using Owin;
-using System;
-using System.IO;
 using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
@@ -63,9 +58,6 @@ namespace MusicLibrary
 
             // use DotVVM
             var dotvvmConfiguration = InitDotvvm(app);
-#if DEBUG
-            dotvvmConfiguration.Debug = true;
-#endif
 
             // use static files
             app.UseStaticFiles(new StaticFileOptions()
@@ -76,11 +68,7 @@ namespace MusicLibrary
 
         private DotvvmConfiguration InitDotvvm(IAppBuilder app)
         {
-            var config = app.UseDotVVM<DotvvmStartup>(ApplicationPhysicalPath, options: options =>
-            {
-                options.Services.AddSingleton<IViewModelLoader>(serviceProvider => new WindsorViewModelLoader(WindsorBootstrap.container));
-                options.Services.AddSingleton<IUploadedFileStorage>(serviceProvider => new FileSystemUploadedFileStorage(Path.Combine(ApplicationPhysicalPath, "Temp"), TimeSpan.FromMinutes(30)));
-            });
+            var config = app.UseDotVVM<DotvvmStartup>(ApplicationPhysicalPath);
 
             return config;
         }

@@ -7,7 +7,7 @@ namespace BL.Repositories
 {
     public class AlbumSongRepository : BaseRepository<AlbumSong, int>
     {
-        public AlbumSongRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public AlbumSongRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
 
         public void DeleteByAlbumIds(IEnumerable<int> albumIds)
         {

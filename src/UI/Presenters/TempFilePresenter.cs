@@ -11,7 +11,7 @@ namespace MusicLibrary.Presenters
         {
             var fileId = new Guid(context.Parameters["FileId"].ToString());
             var fileExtension = context.Parameters["FileExtension"].ToString();
-            var fileStorage = context.Configuration.ServiceLocator.GetService<IUploadedFileStorage>();
+            var fileStorage = (IUploadedFileStorage)context.Configuration.ServiceProvider.GetService(typeof(IUploadedFileStorage));
             var file = fileStorage.GetFile(fileId);
 
             using (file)

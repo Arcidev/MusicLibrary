@@ -13,7 +13,7 @@ namespace MusicLibrary.ViewModels.Administration
 {
     public abstract class SongManagementMasterPageViewModel : AdministrationMasterPageViewModel
     {
-        protected IUploadedFileStorage FileStorage { get { return Context.Configuration.ServiceLocator.GetService<IUploadedFileStorage>(); } }
+        protected IUploadedFileStorage FileStorage => (IUploadedFileStorage)Context.Configuration.ServiceProvider.GetService(typeof(IUploadedFileStorage));
 
         [Bind(Direction.None)]
         public SongFacade SongFacade { get; set; }

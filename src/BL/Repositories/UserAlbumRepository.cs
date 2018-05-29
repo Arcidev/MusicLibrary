@@ -7,7 +7,7 @@ namespace BL.Repositories
 {
     public class UserAlbumRepository : BaseRepository<UserAlbum, int>
     {
-        public UserAlbumRepository(IUnitOfWorkProvider provider) : base(provider) { }
+        public UserAlbumRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
 
         public async Task<UserAlbum> GetUserAlbum(int userId, int albumId)
         {
