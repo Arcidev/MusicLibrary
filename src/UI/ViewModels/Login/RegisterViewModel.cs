@@ -1,5 +1,4 @@
 using BL.DTO;
-using DotVVM.Framework.ViewModel;
 using MusicLibrary.Resources;
 using Shared.Enums;
 using System;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Login
 {
-	public class RegisterViewModel : BaseLoginViewModel
+    public class RegisterViewModel : BaseLoginViewModel
     {
         public RegisterErrorViewModel RegisterErrorViewModel { get; set; }
 

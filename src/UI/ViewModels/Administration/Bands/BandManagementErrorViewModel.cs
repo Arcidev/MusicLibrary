@@ -1,7 +1,7 @@
 
 namespace MusicLibrary.ViewModels.Administration
 {
-	public class BandManagementErrorViewModel
+    public class BandManagementErrorViewModel
     {
         public string NameError { get; set; }
 

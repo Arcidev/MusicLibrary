@@ -7,8 +7,8 @@ using System.Security.Claims;
 
 namespace MusicLibrary.ViewModels.Login
 {
-	public class BaseLoginViewModel : MasterPageViewModel
-	{
+    public class BaseLoginViewModel : MasterPageViewModel
+    {
         [Bind(Direction.None)]
         public UserFacade UserFacade { get; set; }
 
@@ -22,5 +22,5 @@ namespace MusicLibrary.ViewModels.Login
             claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, user.UserRole.ToString()));
             Context.GetAuthentication().SignIn(claimsIdentity);
         }
-	}
+    }
 }

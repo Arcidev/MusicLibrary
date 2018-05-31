@@ -1,7 +1,7 @@
 
 namespace MusicLibrary.ViewModels.Login
 {
-	public class RegisterErrorViewModel
+    public class RegisterErrorViewModel
     {
         public string FirstNameError { get; set; }
 

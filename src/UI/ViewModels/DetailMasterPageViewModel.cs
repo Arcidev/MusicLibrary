@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels
 {
-	public abstract class DetailMasterPageViewModel : ContentMasterPageViewModel
+    public abstract class DetailMasterPageViewModel : ContentMasterPageViewModel
     {
         public GridViewDataSet<ReviewDTO> Reviews { get; set; }
 

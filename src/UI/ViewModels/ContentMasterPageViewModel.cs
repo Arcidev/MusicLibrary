@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels
 {
-	public abstract class ContentMasterPageViewModel : MasterPageViewModel
+    public abstract class ContentMasterPageViewModel : MasterPageViewModel
     {
         [Bind(Direction.None)]
         public CategoryFacade CategoryFacade { get; set; }

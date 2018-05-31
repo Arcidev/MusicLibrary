@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Login
 {
-	public class LoginViewModel : BaseLoginViewModel
+    public class LoginViewModel : BaseLoginViewModel
     {
         public string Email { get; set; }
 
@@ -27,5 +27,5 @@ namespace MusicLibrary.ViewModels.Login
                 Context.RedirectToRoute("Index");
             }
         }
-	}
+    }
 }
