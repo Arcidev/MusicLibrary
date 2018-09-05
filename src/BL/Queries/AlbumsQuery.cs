@@ -28,11 +28,7 @@ namespace BL.Queries
                 query = query.Where(x => x.CategoryId == CategoryId.Value);
 
             if (!string.IsNullOrEmpty(Filter))
-            {
-                query = query.Where(x => x.Name.Contains(Filter));
-                if (IncludeBandFilter)
-                    query = query.Where(x => x.Band.Name.Contains(Filter));
-            }
+                query = query.Where(x => x.Name.Contains(Filter) || (IncludeBandFilter && x.Band.Name.Contains(Filter)));
 
             if (SongId.HasValue)
                 query = query.Where(x => x.AlbumSongs.Any(y => y.SongId == SongId.Value));
