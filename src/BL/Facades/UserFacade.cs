@@ -124,14 +124,14 @@ namespace BL.Facades
             }
         }
 
-        private Tuple<string, string> CreateHash(string password)
+        private (string, string) CreateHash(string password)
         {
             using (var deriveBytes = new Rfc2898DeriveBytes(password, saltSize, PBKDF2IterCount))
             {
                 byte[] salt = deriveBytes.Salt;
                 byte[] subkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
 
-                return Tuple.Create(Convert.ToBase64String(subkey), Convert.ToBase64String(salt));
+                return (Convert.ToBase64String(subkey), Convert.ToBase64String(salt));
             }
         }
 
