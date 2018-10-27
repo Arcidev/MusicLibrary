@@ -7,75 +7,79 @@ namespace BL.Configuration
     public static class AutoMapper
     {
         private static bool isInitialized;
+        private static readonly object locker = new object();
 
         public static void Init()
         {
             if (isInitialized)
                 return;
 
-            isInitialized = true;
-
-            Mapper.Initialize(config =>
+            lock (locker)
             {
-                config.CreateMap<User, UserDTO>();
-                config.CreateMap<User, UserInfoDTO>();
-                config.CreateMap<UserCreateDTO, User>();
-                config.CreateMap<UserEditDTO, User>();
+                isInitialized = true;
 
-                config.CreateMap<StorageFile, StorageFileDTO>();
+                Mapper.Initialize(config =>
+                {
+                    config.CreateMap<User, UserDTO>();
+                    config.CreateMap<User, UserInfoDTO>();
+                    config.CreateMap<UserCreateDTO, User>();
+                    config.CreateMap<UserEditDTO, User>();
 
-                config.CreateMap<Band, BandInfoDTO>();
-                config.CreateMap<Band, BandDTO>()
-                    .ForMember(target => target.Albums, action => action.Ignore());
-                config.CreateMap<BandBaseDTO, Band>();
+                    config.CreateMap<StorageFile, StorageFileDTO>();
 
-                config.CreateMap<Artist, ArtistDTO>();
+                    config.CreateMap<Band, BandInfoDTO>();
+                    config.CreateMap<Band, BandDTO>()
+                        .ForMember(target => target.Albums, action => action.Ignore());
+                    config.CreateMap<BandBaseDTO, Band>();
 
-                config.CreateMap<SliderImage, SliderImageDTO>();
-                config.CreateMap<SliderImageEditDTO, SliderImage>();
+                    config.CreateMap<Artist, ArtistDTO>();
 
-                config.CreateMap<Album, AlbumBandInfoDTO>()
-                    .ForMember(target => target.AlbumId, action => action.MapFrom(source => source.Id))
-                    .ForMember(target => target.AlbumName, action => action.MapFrom(source => source.Name))
-                    .ForMember(target => target.BandName, action => action.MapFrom(source => source.Band.Name));
-                config.CreateMap<Album, AlbumInfoDTO>()
-                    .ForMember(target => target.AlbumId, action => action.MapFrom(source => source.Id))
-                    .ForMember(target => target.BandName, action => action.MapFrom(source => source.Band.Name))
-                    .ForMember(target => target.Category, action => action.MapFrom(source => source.Category))
-                    .ForMember(target => target.AlbumName, action => action.MapFrom(source => source.Name));
-                config.CreateMap<Album, AlbumDTO>()
-                    .ForMember(target => target.Band, action => action.Ignore());
-                config.CreateMap<AlbumCreateDTO, Album>();
-                config.CreateMap<AlbumEditDTO, Album>();
+                    config.CreateMap<SliderImage, SliderImageDTO>();
+                    config.CreateMap<SliderImageEditDTO, SliderImage>();
 
-                config.CreateMap<Category, CategoryDTO>();
-                config.CreateMap<CategoryDTO, Category>();
+                    config.CreateMap<Album, AlbumBandInfoDTO>()
+                        .ForMember(target => target.AlbumId, action => action.MapFrom(source => source.Id))
+                        .ForMember(target => target.AlbumName, action => action.MapFrom(source => source.Name))
+                        .ForMember(target => target.BandName, action => action.MapFrom(source => source.Band.Name));
+                    config.CreateMap<Album, AlbumInfoDTO>()
+                        .ForMember(target => target.AlbumId, action => action.MapFrom(source => source.Id))
+                        .ForMember(target => target.BandName, action => action.MapFrom(source => source.Band.Name))
+                        .ForMember(target => target.Category, action => action.MapFrom(source => source.Category))
+                        .ForMember(target => target.AlbumName, action => action.MapFrom(source => source.Name));
+                    config.CreateMap<Album, AlbumDTO>()
+                        .ForMember(target => target.Band, action => action.Ignore());
+                    config.CreateMap<AlbumCreateDTO, Album>();
+                    config.CreateMap<AlbumEditDTO, Album>();
 
-                config.CreateMap<Song, SongDTO>();
-                config.CreateMap<Song, SongInfoDTO>();
-                config.CreateMap<SongCreateDTO, Song>();
-                config.CreateMap<SongEditDTO, Song>();
+                    config.CreateMap<Category, CategoryDTO>();
+                    config.CreateMap<CategoryDTO, Category>();
 
-                config.CreateMap<AlbumReview, ReviewDTO>()
-                    .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
-                    .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
-                    .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
-                config.CreateMap<AlbumReviewCreateDTO, AlbumReview>();
+                    config.CreateMap<Song, SongDTO>();
+                    config.CreateMap<Song, SongInfoDTO>();
+                    config.CreateMap<SongCreateDTO, Song>();
+                    config.CreateMap<SongEditDTO, Song>();
 
-                config.CreateMap<BandReview, ReviewDTO>()
-                    .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
-                    .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
-                    .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
-                config.CreateMap<BandReviewCreateDTO, BandReview>();
+                    config.CreateMap<AlbumReview, ReviewDTO>()
+                        .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
+                        .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
+                        .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
+                    config.CreateMap<AlbumReviewCreateDTO, AlbumReview>();
 
-                config.CreateMap<UserAlbumCreateDTO, UserAlbum>();
+                    config.CreateMap<BandReview, ReviewDTO>()
+                        .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
+                        .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
+                        .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
+                    config.CreateMap<BandReviewCreateDTO, BandReview>();
 
-                config.CreateMap<AlbumReview, UserAlbumReviewDTO>();
-                config.CreateMap<BandReview, UserBandReviewDTO>();
+                    config.CreateMap<UserAlbumCreateDTO, UserAlbum>();
 
-                config.CreateMap<ReviewEditDTO, BandReview>();
-                config.CreateMap<ReviewEditDTO, AlbumReview>();
-            });
+                    config.CreateMap<AlbumReview, UserAlbumReviewDTO>();
+                    config.CreateMap<BandReview, UserBandReviewDTO>();
+
+                    config.CreateMap<ReviewEditDTO, BandReview>();
+                    config.CreateMap<ReviewEditDTO, AlbumReview>();
+                });
+            }
         }
     }
 }

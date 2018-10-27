@@ -10,15 +10,13 @@ namespace MusicLibrary.WebApi
     {
         public SongFacade SongFacade { get; set; }
 
-        [HttpGet]
-        [ActionName("list")]
+        [HttpGet, ActionName("list")]
         public IEnumerable<SongViewModel> GetSongs()
         {
             return SongFacade.GetSongs().ToSongViewModel();
         }
 
-        [HttpGet]
-        [ActionName("get")]
+        [HttpGet, ActionName("get")]
         public SongViewModel GetSong(int id)
         {
             return SongFacade.GetSong(id).ToSongViewModel();

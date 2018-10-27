@@ -9,7 +9,7 @@ namespace BL.Tests
     [TestClass]
     public class UserTests : TestBase
     {
-        public UserFacade UserFacade { get { return Container.Resolve<UserFacade>(); } }
+        public UserFacade UserFacade => Container.Resolve<UserFacade>();
 
         [TestMethod]
         public async Task TestCRUDOperations()

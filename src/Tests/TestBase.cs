@@ -10,7 +10,7 @@ namespace BL.Tests
     [TestClass]
     public abstract class TestBase
     {
-        public WindsorContainer Container { get; set; }
+        public WindsorContainer Container { get; private set; }
 
         [TestInitialize]
         public void TestsInit()

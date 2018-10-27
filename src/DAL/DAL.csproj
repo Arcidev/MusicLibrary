@@ -36,11 +36,11 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Riganti.Utils.Infrastructure.Core, Version=2.1.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Riganti.Utils.Infrastructure.Core.2.1.13\lib\net461\Riganti.Utils.Infrastructure.Core.dll</HintPath>
+    <Reference Include="Riganti.Utils.Infrastructure.Core, Version=2.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Riganti.Utils.Infrastructure.Core.2.2.3\lib\net461\Riganti.Utils.Infrastructure.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Riganti.Utils.Infrastructure.EntityFramework, Version=2.1.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Riganti.Utils.Infrastructure.EntityFramework.2.1.13\lib\net461\Riganti.Utils.Infrastructure.EntityFramework.dll</HintPath>
+    <Reference Include="Riganti.Utils.Infrastructure.EntityFramework, Version=2.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Riganti.Utils.Infrastructure.EntityFramework.2.2.3\lib\net461\Riganti.Utils.Infrastructure.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

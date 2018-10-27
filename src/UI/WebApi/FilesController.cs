@@ -11,8 +11,7 @@ namespace MusicLibrary.WebApi
     {
         public StorageFileFacade StorageFileFacade { get; set; }
        
-        [HttpGet]
-        [ActionName("download")]
+        [HttpGet, ActionName("download")]
         public HttpResponseMessage DownloadFile(int id)
         {
             var file = StorageFileFacade.GetFile(id);

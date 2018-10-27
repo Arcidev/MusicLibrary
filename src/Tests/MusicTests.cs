@@ -10,15 +10,15 @@ namespace BL.Tests
     [TestClass]
     public class MusicTests : TestBase
     {
-        public UserFacade UserFacade { get { return Container.Resolve<UserFacade>(); } }
+        public UserFacade UserFacade => Container.Resolve<UserFacade>();
 
-        public AlbumFacade AlbumFacade { get { return Container.Resolve<AlbumFacade>(); } }
+        public AlbumFacade AlbumFacade => Container.Resolve<AlbumFacade>();
 
-        public BandFacade BandFacade { get { return Container.Resolve<BandFacade>(); } }
+        public BandFacade BandFacade => Container.Resolve<BandFacade>();
 
-        public SongFacade SongFacade { get { return Container.Resolve<SongFacade>(); } }
+        public SongFacade SongFacade => Container.Resolve<SongFacade>();
 
-        public CategoryFacade CategoryFacade { get { return Container.Resolve<CategoryFacade>(); } }
+        public CategoryFacade CategoryFacade => Container.Resolve<CategoryFacade>();
 
         [TestInitialize]
         public void Init()

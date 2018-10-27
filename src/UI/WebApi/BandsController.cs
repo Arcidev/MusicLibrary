@@ -10,22 +10,19 @@ namespace MusicLibrary.WebApi
     {
         public BandFacade BandFacade { get; set; }
 
-        [HttpGet]
-        [ActionName("albums")]
+        [HttpGet, ActionName("albums")]
         public IEnumerable<AlbumViewModel> GetBandAlbums(int id)
         {
             return BandFacade.GetBandAlbums(id, null, null, true).ToAlbumViewModel();
         }
 
-        [HttpGet]
-        [ActionName("list")]
+        [HttpGet, ActionName("list")]
         public IEnumerable<BandViewModel> GetBands()
         {
             return BandFacade.GetBands().ToBandViewModel();
         }
 
-        [HttpGet]
-        [ActionName("get")]
+        [HttpGet, ActionName("get")]
         public BandViewModel GetBand(int id)
         {
             return BandFacade.GetBand(id, false, false).ToBandViewModel();
