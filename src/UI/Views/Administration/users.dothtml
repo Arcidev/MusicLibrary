@@ -11,7 +11,7 @@
             <dot:GridViewTextColumn Width="250px" IsEditable="false" ValueBinding="{value: Email}" HeaderText="{resource: Resource.Email}" AllowSorting="true" />
             <dot:GridViewTextColumn Width="150px" ValueBinding="{value: FirstName}" HeaderText="{resource: Resource.FirstName}" AllowSorting="true" />
             <dot:GridViewTextColumn Width="150px" ValueBinding="{value: LastName}" HeaderText="{resource: Resource.LastName}" AllowSorting="true" />
-            <dot:GridViewTemplateColumn Width="100px" HeaderText="{resource: Resource.UserRole}" AllowSorting="true">
+            <dot:GridViewTemplateColumn SortExpression="UserRole" Width="100px" HeaderText="{resource: Resource.UserRole}" AllowSorting="true">
                 <ContentTemplate>
                     <dot:Literal Text="{value: UserRole}" />
                 </ContentTemplate>
