@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using BL.Resources;
 using DotVVM.Framework.Controls;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BL.Facades
 {

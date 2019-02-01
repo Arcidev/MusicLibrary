@@ -254,10 +254,13 @@ namespace BL.Facades
                 if (entity.CreatedById != editedReview.CreatedById)
                     throw new UIException(ErrorMessages.NotUserReview);
 
+                var qualityUpdated = editedReview.Quality != entity.Quality;
                 Mapper.Map(editedReview, entity);
                 entity.EditDate = DateTime.Now;
-
                 uow.Commit();
+
+                if (!qualityUpdated)
+                    return;
 
                 UpdateAlbumQuality(entity.AlbumId);
                 uow.Commit();

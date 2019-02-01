@@ -32,9 +32,9 @@ namespace BL.Facades
                     throw new UIException(ErrorMessages.EmailAlreadyUsed);
 
                 var entity = Mapper.Map<User>(user);
-                var password = CreateHash(user.Password);
-                entity.PasswordHash = password.Item1;
-                entity.PasswordSalt = password.Item2;
+                var (hash, salt) = CreateHash(user.Password);
+                entity.PasswordHash = hash;
+                entity.PasswordSalt = salt;
 
                 var repo = UserRepositoryFunc();
                 repo.Insert(entity);
@@ -84,18 +84,15 @@ namespace BL.Facades
             using (var uow = UowProviderFunc().Create())
             {
                 var repo = UserRepositoryFunc();
-                var entity = repo.GetById(user.Id);
-                if (entity == null)
-                    throw new UIException(ErrorMessages.UserNotExist);
-
+                var entity = repo.GetById(user.Id) ?? throw new UIException(ErrorMessages.UserNotExist);
                 SetImageFile(entity, file, storage);
                 
                 Mapper.Map(user, entity);
                 if (!string.IsNullOrEmpty(user.Password))
                 {
-                    var password = CreateHash(user.Password);
-                    entity.PasswordHash = password.Item1;
-                    entity.PasswordSalt = password.Item2;
+                    var (hash, salt) = CreateHash(user.Password);
+                    entity.PasswordHash = hash;
+                    entity.PasswordSalt = salt;
                 }
 
                 uow.Commit();
@@ -124,12 +121,12 @@ namespace BL.Facades
             }
         }
 
-        private (string, string) CreateHash(string password)
+        private (string hash, string salt) CreateHash(string password)
         {
             using (var deriveBytes = new Rfc2898DeriveBytes(password, saltSize, PBKDF2IterCount))
             {
-                byte[] salt = deriveBytes.Salt;
-                byte[] subkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
+                var salt = deriveBytes.Salt;
+                var subkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
 
                 return (Convert.ToBase64String(subkey), Convert.ToBase64String(salt));
             }
@@ -137,12 +134,12 @@ namespace BL.Facades
 
         private bool VerifyHashedPassword(string hashedPassword, string salt, string password)
         {
-            byte[] hashedPasswordBytes = Convert.FromBase64String(hashedPassword);
-            byte[] saltBytes = Convert.FromBase64String(salt);
+            var hashedPasswordBytes = Convert.FromBase64String(hashedPassword);
+            var saltBytes = Convert.FromBase64String(salt);
 
             using (var deriveBytes = new Rfc2898DeriveBytes(password, saltBytes, PBKDF2IterCount))
             {
-                byte[] generatedSubkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
+                var generatedSubkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
                 return hashedPasswordBytes.SequenceEqual(generatedSubkey);
             }
         }
