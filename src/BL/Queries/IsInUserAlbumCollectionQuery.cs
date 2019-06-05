@@ -10,7 +10,7 @@ namespace BL.Queries
 
         public IEnumerable<int> AlbumIds { get; set; }
 
-        public IsInUserAlbumCollectionQuery(IUnitOfWorkProvider provider) : base(provider) { }
+        public IsInUserAlbumCollectionQuery(IUnitOfWorkProvider provider) : base(provider, null) { }
 
         protected override IQueryable<int> GetQueryable()
         {

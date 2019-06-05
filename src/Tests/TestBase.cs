@@ -1,5 +1,4 @@
-﻿using BL.Configuration;
-using BL.Installers;
+﻿using BL.Installers;
 using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
@@ -10,18 +9,17 @@ namespace BL.Tests
     [TestClass]
     public abstract class TestBase
     {
-        public WindsorContainer Container { get; private set; }
+        public IWindsorContainer Container { get; private set; }
 
         [TestInitialize]
         public void TestsInit()
         {
-            AutoMapper.Init();
-
-            Container = new WindsorContainer();
-            Container.AddFacility<TypedFactoryFacility>();
-            Container.Install(FromAssembly.InThisApplication());
-            Container.Install(new FacadesInstaller());
-            Container.Install(new ServicesInstaller());
+            Container = new WindsorContainer()
+                .AddFacility<TypedFactoryFacility>()
+                .Install(FromAssembly.InThisApplication())
+                .Install(new AutoMapperInstaller())
+                .Install(new ServicesInstaller())
+                .Install(new FacadesInstaller());
         }
     }
 }

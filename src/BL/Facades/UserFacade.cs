@@ -24,6 +24,8 @@ namespace BL.Facades
 
         public Func<UsersQuery> UsersQueryFunc { get; set; }
 
+        public Func<IMapper> MapperInstance { get; set; }
+
         public async Task<UserDTO> AddUserAsync(UserCreateDTO user)
         {
             using (var uow = UowProviderFunc().Create())
@@ -31,7 +33,7 @@ namespace BL.Facades
                 if (await GetUserByEmailAsync(user.Email) != null)
                     throw new UIException(ErrorMessages.EmailAlreadyUsed);
 
-                var entity = Mapper.Map<User>(user);
+                var entity = MapperInstance().Map<User>(user);
                 var (hash, salt) = CreateHash(user.Password);
                 entity.PasswordHash = hash;
                 entity.PasswordSalt = salt;
@@ -41,7 +43,7 @@ namespace BL.Facades
 
                 uow.Commit();
 
-                return Mapper.Map<UserDTO>(entity);
+                return MapperInstance().Map<UserDTO>(entity);
             }
         }
 
@@ -51,7 +53,7 @@ namespace BL.Facades
             IsNotNull(user, ErrorMessages.VerificationFailed);
 
             if (VerifyHashedPassword(user.PasswordHash, user.PasswordSalt, password))
-                return Mapper.Map<UserDTO>(user);
+                return MapperInstance().Map<UserDTO>(user);
 
             throw new UIException(ErrorMessages.VerificationFailed);
         }
@@ -63,7 +65,7 @@ namespace BL.Facades
                 var repo = UserRepositoryFunc();
                 var user = await repo.GetByEmailAsync(email);
 
-                return user != null ? Mapper.Map<UserDTO>(user) : null;
+                return user != null ? MapperInstance().Map<UserDTO>(user) : null;
             }
         }
 
@@ -75,7 +77,7 @@ namespace BL.Facades
                 var user = repo.GetById(id);
                 IsNotNull(user, ErrorMessages.UserNotExist);
 
-                return Mapper.Map<UserDTO>(user);
+                return MapperInstance().Map<UserDTO>(user);
             }
         }
 
@@ -87,7 +89,7 @@ namespace BL.Facades
                 var entity = repo.GetById(user.Id) ?? throw new UIException(ErrorMessages.UserNotExist);
                 SetImageFile(entity, file, storage);
                 
-                Mapper.Map(user, entity);
+                MapperInstance().Map(user, entity);
                 if (!string.IsNullOrEmpty(user.Password))
                 {
                     var (hash, salt) = CreateHash(user.Password);

@@ -99,7 +99,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         private void LoadUser()
         {
-            User = UserFacade.GetUser(int.Parse(UserId));
+            User = UserFacade.GetUser(UserId);
             ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : "";
         }
     }

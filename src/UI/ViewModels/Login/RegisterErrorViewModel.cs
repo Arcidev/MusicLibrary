@@ -13,16 +13,6 @@ namespace MusicLibrary.ViewModels.Login
 
         public string PasswordAgainError { get; set; }
 
-        public bool ContainsError
-        {
-            get
-            {
-                return FirstNameError != null ||
-                    LastNameError != null ||
-                    EmailError != null ||
-                    PasswordError != null ||
-                    PasswordAgainError != null;
-            }
-        }
+        public bool ContainsError => FirstNameError != null || LastNameError != null || EmailError != null || PasswordError != null || PasswordAgainError != null;
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
@@ -10,7 +11,7 @@ namespace BL.Queries
 
         public bool? Approved { get; set; }
 
-        public AlbumSongsQuery(IUnitOfWorkProvider provider) : base(provider) { }
+        public AlbumSongsQuery(IUnitOfWorkProvider provider, IConfigurationProvider config) : base(provider, config) { }
 
         protected override IQueryable<T> GetQueryable()
         {
@@ -18,7 +19,7 @@ namespace BL.Queries
             if (Approved.HasValue)
                 query = query.Where(x => x.Approved == Approved.Value);
 
-            return query.ProjectTo<T>();
+            return query.ProjectTo<T>(mapperConfig);
         }
     }
 }

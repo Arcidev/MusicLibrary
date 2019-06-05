@@ -21,7 +21,7 @@ namespace MusicLibrary.ViewModels
             if (!Context.IsPostBack)
             {
                 ActivePage = "UserCollection";
-                Albums = AlbumFacade.GetUserAlbums(int.Parse(UserId)).Chunk(5);
+                Albums = AlbumFacade.GetUserAlbums(UserId).Chunk(5);
             }
 
             return base.PreRender();

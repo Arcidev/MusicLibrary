@@ -24,7 +24,7 @@ namespace BL.Installers
                 Classes.FromAssemblyContaining<AppUnitOfWorkProvider>().BasedOn(typeof(IRepository<,>)).LifestyleTransient(),
 
                 Component.For(typeof(IRepository<,>)).ImplementedBy(typeof(EntityFrameworkRepository<,>)).LifestyleTransient()
-          );
+            );
         }
     }
 }

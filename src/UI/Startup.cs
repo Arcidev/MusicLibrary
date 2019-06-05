@@ -1,4 +1,3 @@
-using BL.Configuration;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
 using Microsoft.AspNet.Identity;
@@ -24,14 +23,11 @@ namespace MusicLibrary
         {
             var applicationPhysicalPath = HostingEnvironment.ApplicationPhysicalPath;
 
-            // automapper
-            AutoMapper.Init();
-
             // IoC/DI
             WindsorBootstrap.SetupContainer(app);
 
             // register WebApi Factory
-            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new WindsorWebApiComposer(WindsorBootstrap.container));
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new WindsorWebApiComposer(WindsorBootstrap.Container));
             GlobalConfiguration.Configure(config =>
             {
                 config.MapHttpAttributeRoutes();
@@ -57,7 +53,7 @@ namespace MusicLibrary
             });
 
             // use DotVVM
-            var dotvvmConfiguration = InitDotvvm(app);
+            InitDotvvm(app);
 
             // use static files
             app.UseStaticFiles(new StaticFileOptions()
@@ -68,9 +64,7 @@ namespace MusicLibrary
 
         private DotvvmConfiguration InitDotvvm(IAppBuilder app)
         {
-            var config = app.UseDotVVM<DotvvmStartup>(ApplicationPhysicalPath);
-
-            return config;
+            return app.UseDotVVM<DotvvmStartup>(ApplicationPhysicalPath);
         }
     }
 }

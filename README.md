@@ -2,7 +2,11 @@
 This project is a part of PV226 C# course in Masaryk University.
 
 ## Build Status
-[![Build status](https://ci.appveyor.com/api/projects/status/y8x7fs479jlj8spa?svg=true)](https://ci.appveyor.com/project/Arcidev/musiclibrary) (MSVC15)
+[![Build status](https://img.shields.io/appveyor/ci/Arcidev/musiclibrary.svg?logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/Arcidev/musiclibrary)
+[![Test status](https://img.shields.io/appveyor/tests/Arcidev/musiclibrary.svg?logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/Arcidev/musiclibrary/build/tests)
+
+## Copyright
+[![License](https://img.shields.io/github/license/Arcidev/MusicLibrary.svg?style=flat-square)](LICENSE)
 
 ## Requirements
 [DotVVM](https://www.dotvvm.com/)

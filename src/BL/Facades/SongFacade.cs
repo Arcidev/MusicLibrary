@@ -22,11 +22,13 @@ namespace BL.Facades
 
         public Func<AlbumSongRepository> AlbumSongRepositoryFunc { get; set; }
 
+        public Func<IMapper> MapperInstance { get; set; }
+
         public SongDTO AddSong(SongCreateDTO song, UploadedFile audioFile = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var entity = Mapper.Map<Song>(song);
+                var entity = MapperInstance().Map<Song>(song);
                 entity.CreateDate = DateTime.Now;
 
                 SetAudioFile(entity, audioFile, storage);
@@ -48,7 +50,7 @@ namespace BL.Facades
 
                 uow.Commit();
 
-                return Mapper.Map<SongDTO>(entity);
+                return MapperInstance().Map<SongDTO>(entity);
             }
         }
 
@@ -60,7 +62,7 @@ namespace BL.Facades
                 var entity = repo.GetById(song.Id);
                 IsNotNull(entity, ErrorMessages.SongNotExist);
 
-                Mapper.Map(song, entity);
+                MapperInstance().Map(song, entity);
                 SetAudioFile(entity, audioFile, storage);
 
                 var albumSongRepo = AlbumSongRepositoryFunc();
@@ -129,7 +131,7 @@ namespace BL.Facades
                 var repo = SongRepositoryFunc();
                 var entity = repo.GetById(id);
                 IsNotNull(entity, ErrorMessages.SongNotExist);
-                return Mapper.Map<SongDTO>(entity);
+                return MapperInstance().Map<SongDTO>(entity);
             }
         }
 

@@ -13,7 +13,7 @@ namespace BL.Installers
             container.Register(
                 Component.For<ILazyComponentLoader>().ImplementedBy<LazyOfTComponentLoader>(),
                 Classes.FromThisAssembly().BasedOn<BaseFacade>().LifestyleTransient()
-                );
+            );
         }
     }
 }

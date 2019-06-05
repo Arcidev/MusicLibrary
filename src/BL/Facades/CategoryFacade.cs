@@ -17,16 +17,18 @@ namespace BL.Facades
 
         public Func<CategoryRepository> CategoryRepositoryFunc { get; set; }
 
+        public Func<IMapper> MapperInstance { get; set; }
+
         public CategoryDTO AddCategory(CategoryDTO category)
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var entity = Mapper.Map<Category>(category);
+                var entity = MapperInstance().Map<Category>(category);
                 var repo = CategoryRepositoryFunc();
                 repo.Insert(entity);
 
                 uow.Commit();
-                return Mapper.Map<CategoryDTO>(entity);
+                return MapperInstance().Map<CategoryDTO>(entity);
             }
         }
 
@@ -47,7 +49,7 @@ namespace BL.Facades
                 var entity = repo.GetById(id);
                 IsNotNull(entity, ErrorMessages.CategoryNotExist);
 
-                return Mapper.Map<CategoryDTO>(entity);
+                return MapperInstance().Map<CategoryDTO>(entity);
             }
         }
 
@@ -57,10 +59,10 @@ namespace BL.Facades
             {
                 var repo = CategoryRepositoryFunc();
                 var entity = repo.GetById(category.Id);
-                Mapper.Map(category, entity);
+                MapperInstance().Map(category, entity);
 
                 uow.Commit();
-                return Mapper.Map<CategoryDTO>(entity); 
+                return MapperInstance().Map<CategoryDTO>(entity); 
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
@@ -6,7 +7,7 @@ namespace BL.Queries
 {
     public class SongsQuery<T> : AppQuery<T>
     {
-        public SongsQuery(IUnitOfWorkProvider provider) : base(provider) { }
+        public SongsQuery(IUnitOfWorkProvider provider, IConfigurationProvider config) : base(provider, config) { }
 
         public string Filter { get; set; }
 
@@ -22,7 +23,7 @@ namespace BL.Queries
             if (Approved.HasValue)
                 query = query.Where(x => x.Approved == Approved.Value);
 
-            return query.ProjectTo<T>();
+            return query.ProjectTo<T>(mapperConfig);
         }
     }
 }

@@ -7,12 +7,6 @@ namespace MusicLibrary.ViewModels.Administration
 
         public string DescriptionError { get; set; }
 
-        public bool ContainsError
-        {
-            get
-            {
-                return NameError != null || DescriptionError != null;
-            }
-        }
+        public bool ContainsError => NameError != null || DescriptionError != null;
     }
 }

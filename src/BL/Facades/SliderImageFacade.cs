@@ -15,6 +15,8 @@ namespace BL.Facades
 
         public Func<SliderImageRepository> SliderImageRepositoryFunc { get; set; }
 
+        public Func<IMapper> MapperInstance { get; set; }
+
         public IEnumerable<SliderImageDTO> GetImages()
         {
             using (var uow = UowProviderFunc().Create())
@@ -28,14 +30,14 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var entity = Mapper.Map<SliderImage>(sliderImage);
+                var entity = MapperInstance().Map<SliderImage>(sliderImage);
                 SetImageFile(entity, file, storage);
 
                 var repo = SliderImageRepositoryFunc();
                 repo.Insert(entity);
 
                 uow.Commit();
-                return Mapper.Map<SliderImageDTO>(entity);
+                return MapperInstance().Map<SliderImageDTO>(entity);
             }
         }
     }

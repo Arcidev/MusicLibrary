@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
@@ -6,7 +7,7 @@ namespace BL.Queries
 {
     public class AlbumsQuery<T> : AppQuery<T>
     {
-        public AlbumsQuery(IUnitOfWorkProvider provider) : base(provider) { }
+        public AlbumsQuery(IUnitOfWorkProvider provider, IConfigurationProvider config) : base(provider, config) { }
 
         public int? CategoryId { get; set; }
 
@@ -33,7 +34,7 @@ namespace BL.Queries
             if (SongId.HasValue)
                 query = query.Where(x => x.AlbumSongs.Any(y => y.SongId == SongId.Value));
 
-            return query.ProjectTo<T>();
+            return query.ProjectTo<T>(mapperConfig);
         }
     }
 }

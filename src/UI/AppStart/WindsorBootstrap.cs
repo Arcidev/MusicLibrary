@@ -10,23 +10,24 @@ namespace MusicLibrary.AppStart
 {
     internal static class WindsorBootstrap
     {
-        internal static WindsorContainer container;
+        internal static IWindsorContainer Container { get; private set; }
 
         internal static void SetupContainer(IAppBuilder app)
         {
-            container = new WindsorContainer();
-            container.AddFacility<TypedFactoryFacility>();
-            container.Install(FromAssembly.InThisApplication());
-            container.Register(Component.For<IAppBuilder>().Instance(app));
+            Container = new WindsorContainer();
+            Container.AddFacility<TypedFactoryFacility>();
+            Container.Install(FromAssembly.InThisApplication());
+            Container.Register(Component.For<IAppBuilder>().Instance(app));
 
-            container.Install(new FacadesInstaller());
-            container.Install(new ServicesInstaller());
-            container.Install(new WebApiInstaller());
+            Container.Install(new AutoMapperInstaller());
+            Container.Install(new ServicesInstaller());
+            Container.Install(new FacadesInstaller());
+            Container.Install(new WebApiInstaller());
         }
 
         internal static T Resolve<T>()
         {
-            return container.Resolve<T>();
+            return Container.Resolve<T>();
         }
     }
 }

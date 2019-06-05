@@ -62,7 +62,7 @@ namespace MusicLibrary.ViewModels
             {
                 GetEditReviewAction()(ReviewEditId ?? 0, new ReviewEditDTO()
                 {
-                    CreatedById = int.Parse(UserId),
+                    CreatedById = UserId,
                     Quality = (Quality)int.Parse(ReviewQuality),
                     Text = ReviewText
                 });
@@ -103,8 +103,7 @@ namespace MusicLibrary.ViewModels
                 return false;
             }
 
-            int userId;
-            if (!int.TryParse(UserId, out userId))
+            if (UserId == 0)
             {
                 ReviewErrorMessage = Texts.UserNotLoggedIn;
                 return false;

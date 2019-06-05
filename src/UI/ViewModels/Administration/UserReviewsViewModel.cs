@@ -68,7 +68,7 @@ namespace MusicLibrary.ViewModels.Administration
                 ActiveAdminPage = "UserReviews";
             }
 
-            var userId = int.Parse(UserId);
+            var userId = UserId;
             AlbumFacade.LoadUserReviews(userId, AlbumReviews);
             BandFacade.LoadUserReviews(userId, BandReviews);
 
@@ -117,7 +117,7 @@ namespace MusicLibrary.ViewModels.Administration
             {
                 action(id, new ReviewEditDTO()
                 {
-                    CreatedById = int.Parse(UserId),
+                    CreatedById = UserId,
                     Quality = (Quality)int.Parse(EditReviewQuality),
                     Text = EditReviewText
                 });

@@ -38,8 +38,8 @@ namespace MusicLibrary.ViewModels.Album
                 OtherBandAlbums = BandFacade.GetBandAlbums(Album.BandId, Album.Id, 6, true);
                 HasOtherBandAlbums = OtherBandAlbums.Any();
 
-                int userId;
-                if (int.TryParse(UserId, out userId))
+                var userId = UserId;
+                if (userId > 0)
                     HasInCollection = await AlbumFacade.HasUserInCollection(userId, albumId);
             }
 
@@ -65,7 +65,7 @@ namespace MusicLibrary.ViewModels.Album
                 await AlbumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO()
                 {
                     AlbumId = id,
-                    UserId = int.Parse(UserId)
+                    UserId = UserId
                 });
 
                 HasInCollection = true;
@@ -76,7 +76,7 @@ namespace MusicLibrary.ViewModels.Album
         {
             await ExecuteSafelyAsync(async () =>
             {
-                await AlbumFacade.RemoveAlbumFromUserCollection(int.Parse(UserId), id);
+                await AlbumFacade.RemoveAlbumFromUserCollection(UserId, id);
 
                 HasInCollection = false;
             });
@@ -93,7 +93,7 @@ namespace MusicLibrary.ViewModels.Album
                 AlbumFacade.AddReview(new AlbumReviewCreateDTO()
                 {
                     AlbumId = albumId,
-                    CreatedById = int.Parse(UserId),
+                    CreatedById = UserId,
                     Quality = (Quality)int.Parse(ReviewQuality),
                     Text = ReviewText
                 });

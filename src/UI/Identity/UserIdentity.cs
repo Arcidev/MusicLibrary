@@ -5,10 +5,7 @@ namespace MusicLibrary.Identity
 {
     public class UserIdentity : IIdentity
     {
-        public string AuthenticationType
-        {
-            get { return DefaultAuthenticationTypes.ApplicationCookie; }
-        }
+        public string AuthenticationType => DefaultAuthenticationTypes.ApplicationCookie;
 
         public bool IsAuthenticated { get; set; }
 

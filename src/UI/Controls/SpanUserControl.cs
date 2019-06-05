@@ -6,7 +6,7 @@ namespace UI.Controls
     {
         public SpanUserControl()
         {
-            this.TagName = "span";
+            TagName = "span";
         }
     }
 }

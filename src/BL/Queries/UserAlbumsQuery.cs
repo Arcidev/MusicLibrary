@@ -1,4 +1,5 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BL.DTO;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace BL.Queries
     {
         public int UserId { get; set; }
 
-        public UserAlbumsQuery(IUnitOfWorkProvider provider) : base(provider) { }
+        public UserAlbumsQuery(IUnitOfWorkProvider provider, IConfigurationProvider config) : base(provider, config) { }
 
         protected override IQueryable<AlbumDTO> GetQueryable()
         {
-            return Context.UserAlbums.Where(x => x.UserId == UserId).Select(x => x.Album).ProjectTo<AlbumDTO>();
+            return Context.UserAlbums.Where(x => x.UserId == UserId).Select(x => x.Album).ProjectTo<AlbumDTO>(mapperConfig);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace MusicLibrary.AppStart
 {
     public class ViewModelInstaller : IWindsorInstaller
     {
-
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
@@ -19,7 +18,7 @@ namespace MusicLibrary.AppStart
                 Classes.FromThisAssembly()
                     .BasedOn<IDotvvmPresenter>()
                     .LifestyleTransient()
-                );
+            );
         }
     }
 }

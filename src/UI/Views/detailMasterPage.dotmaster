@@ -73,7 +73,7 @@
                                                 <dot:Literal class="error-message" Text="{value: _root.ReviewErrorMessage}" />
                                             </li>
                                             <li>
-                                                <dot:LinkButton Visible="{value: _root.ReviewEditId != Id && _root.UserId == CreatedById.ToString()}" Text="Edit" Click="{command: _root.Edit(_this)}" />
+                                                <dot:LinkButton Visible="{value: _root.ReviewEditId != Id && _root.UserId == CreatedById}" Text="Edit" Click="{command: _root.Edit(_this)}" />
                                                 <dot:LinkButton Visible="{value: _root.ReviewEditId == Id}" Text="Save" Click="{command: _root.EditReview()}" />
                                                 <dot:LinkButton Visible="{value: _root.ReviewEditId == Id}" Text="Cancel" Click="{command: _root.CancelEdit()}" />
                                             </li>

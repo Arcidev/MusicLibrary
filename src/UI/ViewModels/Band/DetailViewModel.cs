@@ -39,11 +39,10 @@ namespace MusicLibrary.ViewModels.Band
 
             ExecuteSafely(() =>
             {
-                var bandId = int.Parse(Context.Parameters["BandId"].ToString());
                 BandFacade.AddReview(new BandReviewCreateDTO()
                 {
-                    BandId = bandId,
-                    CreatedById = int.Parse(UserId),
+                    BandId = int.Parse(Context.Parameters["BandId"].ToString()),
+                    CreatedById = UserId,
                     Quality = (Quality)int.Parse(ReviewQuality),
                     Text = ReviewText
                 });

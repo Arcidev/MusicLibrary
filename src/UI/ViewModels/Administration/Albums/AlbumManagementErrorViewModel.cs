@@ -9,14 +9,6 @@ namespace MusicLibrary.ViewModels.Administration
 
         public string CategoryError { get; set; }
 
-        public bool ContainsError
-        {
-            get
-            {
-                return NameError != null ||
-                    BandError != null ||
-                    CategoryError != null;
-            }
-        }
+        public bool ContainsError => NameError != null || BandError != null || CategoryError != null;
     }
 }

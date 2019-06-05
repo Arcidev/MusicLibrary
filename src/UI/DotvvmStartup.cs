@@ -16,18 +16,18 @@ namespace MusicLibrary
         // For more information about this class, visit https://dotvvm.com/docs/tutorials/basics-project-structure
         public void Configure(DotvvmConfiguration config, string applicationPath)
         {
-            ConfigureRoutes(config, applicationPath);
-            ConfigureControls(config, applicationPath);
-            ConfigureResources(config, applicationPath);
+            ConfigureRoutes(config);
+            ConfigureControls(config);
+            ConfigureResources(config);
         }
 
         public void ConfigureServices(IDotvvmServiceCollection options)
         {
-            options.Services.AddSingleton<IViewModelLoader>(serviceProvider => new WindsorViewModelLoader(WindsorBootstrap.container));
+            options.Services.AddSingleton<IViewModelLoader>(serviceProvider => new WindsorViewModelLoader(WindsorBootstrap.Container));
             options.Services.AddSingleton<IUploadedFileStorage>(serviceProvider => new FileSystemUploadedFileStorage(Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Temp"), TimeSpan.FromMinutes(30)));
         }
 
-        private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
+        private void ConfigureRoutes(DotvvmConfiguration config)
         {
             config.RouteTable.Add("Index", "", "Views/index.dothtml");
             config.RouteTable.Add("AlbumDetail", "album/{AlbumId}/detail", "Views/Album/detail.dothtml");
@@ -55,12 +55,12 @@ namespace MusicLibrary
             config.RouteTable.Add("TempFilePresenter", "files/{FileId}/{FileExtension}", serviceProvider => WindsorBootstrap.Resolve<TempFilePresenter>());
         }
 
-        private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
+        private void ConfigureControls(DotvvmConfiguration config)
         {
             config.Markup.AddMarkupControl("cc", "LoadingAnimation", "Controls/LoadingAnimation.dotcontrol");
         }
 
-        private void ConfigureResources(DotvvmConfiguration config, string applicationPath)
+        private void ConfigureResources(DotvvmConfiguration config)
         {
             config.Resources.Register("templateStyle-css", new StylesheetResource()
             {
