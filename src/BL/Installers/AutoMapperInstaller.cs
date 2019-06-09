@@ -74,7 +74,7 @@ namespace BL.Installers
 
             container.Register(
                 Component.For<IConfigurationProvider>().Instance(autoMapperConfig).LifestyleSingleton(),
-                Component.For<IMapper>().ImplementedBy<Mapper>().LifestyleTransient()
+                Component.For<IMapper>().ImplementedBy<Mapper>().LifestyleSingleton()
             );
         }
     }

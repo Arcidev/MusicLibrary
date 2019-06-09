@@ -33,7 +33,7 @@ namespace BL.Facades
 
         public Func<BandInfoesQuery> BandInfoesQueryFunc { get; set; }
 
-        public Func<IMapper> MapperInstance { get; set; }
+        public IMapper Mapper { get; set; }
 
         public IEnumerable<BandInfoDTO> GetBandInfoes()
         {
@@ -61,7 +61,7 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var entity = MapperInstance().Map<Band>(band);
+                var entity = Mapper.Map<Band>(band);
                 entity.CreateDate = DateTime.Now;
                 SetImageFile(entity, file, storage);
 
@@ -69,7 +69,7 @@ namespace BL.Facades
                 repo.Insert(entity);
 
                 uow.Commit();
-                return MapperInstance().Map<BandDTO>(entity);
+                return Mapper.Map<BandDTO>(entity);
             }
         }
 
@@ -79,7 +79,7 @@ namespace BL.Facades
             {
                 var repo = BandRepositoryFunc();
                 var entity = repo.GetById(band.Id);
-                MapperInstance().Map(band, entity);
+                Mapper.Map(band, entity);
                 SetImageFile(entity, file, storage);
 
                 uow.Commit();
@@ -129,9 +129,9 @@ namespace BL.Facades
                 var entity = repo.GetById(id);
                 IsNotNull(entity, ErrorMessages.BandNotExist);
 
-                var dto = MapperInstance().Map<BandDTO>(entity);
+                var dto = Mapper.Map<BandDTO>(entity);
                 if (includeAlbums)
-                    dto.Albums = MapperInstance().Map<IEnumerable<AlbumDTO>>(entity.Albums.Where(x => x.Approved));
+                    dto.Albums = Mapper.Map<IEnumerable<AlbumDTO>>(entity.Albums.Where(x => x.Approved));
 
                 if (includeMembers)
                     dto.Members = GetBandMembers(entity.Id);
@@ -185,7 +185,7 @@ namespace BL.Facades
                 if (entity.CreatedById != editedReview.CreatedById)
                     throw new UIException(ErrorMessages.NotUserReview);
 
-                MapperInstance().Map(editedReview, entity);
+                Mapper.Map(editedReview, entity);
                 entity.EditDate = DateTime.Now;
 
                 uow.Commit();
@@ -196,7 +196,7 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var entity = MapperInstance().Map<BandReview>(review);
+                var entity = Mapper.Map<BandReview>(review);
                 entity.CreateDate = DateTime.Now;
                 entity.EditDate = DateTime.Now;
 

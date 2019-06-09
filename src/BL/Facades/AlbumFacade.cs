@@ -46,13 +46,13 @@ namespace BL.Facades
 
         public Func<IsInUserAlbumCollectionQuery> IsInUserAlbumCollectionQueryFunc { get; set; }
 
-        public Func<IMapper> MapperInstance { get; set; }
+        public IMapper Mapper { get; set; }
 
         public AlbumDTO AddAlbum(AlbumCreateDTO album, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var entity = MapperInstance().Map<Album>(album);
+                var entity = Mapper.Map<Album>(album);
                 entity.CreateDate = DateTime.Now;
                 SetImageFile(entity, file, storage);
 
@@ -68,7 +68,7 @@ namespace BL.Facades
                 repo.Insert(entity);
 
                 uow.Commit();
-                return MapperInstance().Map<AlbumDTO>(entity);
+                return Mapper.Map<AlbumDTO>(entity);
             }
         }
 
@@ -93,7 +93,7 @@ namespace BL.Facades
                 var entity = repo.GetById(album.Id);
                 IsNotNull(entity, ErrorMessages.AlbumNotExist);
 
-                MapperInstance().Map(album, entity);
+                Mapper.Map(album, entity);
                 SetImageFile(entity, imageFile, storage);
                 
                 if (album.RemovedSongs != null)
@@ -161,9 +161,9 @@ namespace BL.Facades
                 var entity = repo.GetById(id);
                 IsNotNull(entity, ErrorMessages.AlbumNotExist);
 
-                var dto = MapperInstance().Map<AlbumDTO>(entity);
+                var dto = Mapper.Map<AlbumDTO>(entity);
                 if (includeBandInfo)
-                    dto.Band = MapperInstance().Map<BandDTO>(entity.Band);
+                    dto.Band = Mapper.Map<BandDTO>(entity.Band);
 
                 if (includeSongs)
                     dto.Songs = GetAlbumSongs(entity.Id);
@@ -220,7 +220,7 @@ namespace BL.Facades
         {
             using (var uow = UowProviderFunc().Create())
             {
-                var entity = MapperInstance().Map<AlbumReview>(review);
+                var entity = Mapper.Map<AlbumReview>(review);
                 entity.CreateDate = DateTime.Now;
                 entity.EditDate = DateTime.Now;
 
@@ -257,7 +257,7 @@ namespace BL.Facades
                     throw new UIException(ErrorMessages.NotUserReview);
 
                 var qualityUpdated = editedReview.Quality != entity.Quality;
-                MapperInstance().Map(editedReview, entity);
+                Mapper.Map(editedReview, entity);
                 entity.EditDate = DateTime.Now;
                 uow.Commit();
 
@@ -325,7 +325,7 @@ namespace BL.Facades
                 if (await repo.GetUserAlbum(userAlbum.UserId, userAlbum.AlbumId) != null)
                     return;
 
-                var entity = MapperInstance().Map<UserAlbum>(userAlbum);
+                var entity = Mapper.Map<UserAlbum>(userAlbum);
                 repo.Insert(entity);
 
                 uow.Commit();

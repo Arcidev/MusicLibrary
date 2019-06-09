@@ -14,7 +14,7 @@ namespace BL.Facades
     {
         public Func<StorageFileRepository> StorageFileRepositoryFunc { get; set; }
 
-        public Func<IMapper> MapperInstance { get; set; }
+        public IMapper Mapper { get; set; }
 
         public StorageFileDTO AddFile(UploadedFile file, IUploadedFileStorage storage)
         {
@@ -31,7 +31,7 @@ namespace BL.Facades
                 repo.Insert(entity);
                 uow.Commit();
 
-                return MapperInstance().Map<StorageFileDTO>(entity);
+                return Mapper.Map<StorageFileDTO>(entity);
             }
         }
 
@@ -70,7 +70,7 @@ namespace BL.Facades
                 var storageFile = repo.GetById(id);
                 IsNotNull(storageFile, ErrorMessages.FileNotExist);
 
-                return MapperInstance().Map<StorageFileDTO>(storageFile);
+                return Mapper.Map<StorageFileDTO>(storageFile);
             }
         }
 
