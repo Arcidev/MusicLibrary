@@ -13,16 +13,12 @@ namespace BL.DTO
 
         public override bool Equals(object obj)
         {
-            var songInfo = obj as SongInfoDTO;
-            if (songInfo == null)
+            if (!(obj is SongInfoDTO songInfo))
                 return false;
 
             return Id == songInfo.Id;
         }
 
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+        public override int GetHashCode() => Id.GetHashCode();
     }
 }

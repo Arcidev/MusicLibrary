@@ -11,20 +11,16 @@ namespace BL.DTO
 
         public bool Removed { get; set; }
 
-        public string BandAlbumName { get { return $"{BandName} - {AlbumName}"; } }
+        public string BandAlbumName => $"{BandName} - {AlbumName}";
 
         public override bool Equals(object obj)
         {
-            var info = obj as AlbumBandInfoDTO;
-            if (info == null)
+            if (!(obj is AlbumBandInfoDTO info))
                 return false;
 
             return AlbumId == info.AlbumId;
         }
 
-        public override int GetHashCode()
-        {
-            return AlbumId.GetHashCode();
-        }
+        public override int GetHashCode() => AlbumId.GetHashCode();
     }
 }

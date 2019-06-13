@@ -9,7 +9,7 @@ namespace BL.DTO
 
         public string LastName { get; set; }
 
-        public string FullName { get { return $"{FirstName} {LastName}"; } }
+        public string FullName => $"{FirstName} {LastName}";
 
         public bool Approved { get; set; }
     }

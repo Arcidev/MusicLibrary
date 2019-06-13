@@ -13,6 +13,6 @@ namespace BL.DTO
 
         public StorageFileDTO ImageStorageFile { get; set; }
 
-        public string FullName { get { return $"{FirstName} {LastName}"; } }
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

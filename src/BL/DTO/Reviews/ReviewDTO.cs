@@ -14,10 +14,10 @@ namespace BL.DTO
 
         public string CreatedByLastName { get; set; }
 
-        public string CreatedByFullName { get { return $"{CreatedByFirstName} {CreatedByLastName}"; } }
+        public string CreatedByFullName => $"{CreatedByFirstName} {CreatedByLastName}";
 
         public string CreatedByImageStorageFileName { get; set; }
 
-        public int QualityInt { get { return (int)Quality; } }
+        public int QualityInt => (int)Quality;
     }
 }
