@@ -25,14 +25,16 @@ namespace DAL.Migrations
             {
                 Name = "Rock",
                 Name_csCZ = "Rock",
-                Name_skSK = "Rock"
+                Name_skSK = "Rock",
+                Name_esES = "Rock"
             };
 
             var metal = new Category()
             {
                 Name = "Metal",
                 Name_csCZ = "Metal",
-                Name_skSK = "Metal"
+                Name_skSK = "Metal",
+                Name_esES = "Metal"
             };
             context.Categories.AddOrUpdate(new[] { rock, metal });
 

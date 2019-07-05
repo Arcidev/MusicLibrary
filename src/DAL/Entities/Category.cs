@@ -17,5 +17,8 @@ namespace DAL.Entities
 
         [MaxLength(100)]
         public string Name_csCZ { get; set; }
+
+        [MaxLength(100)]
+        public string Name_esES { get; set; }
     }
 }

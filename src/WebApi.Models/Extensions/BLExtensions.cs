@@ -65,7 +65,8 @@ namespace WebApi.Models.Extensions
                 Id = category.Id,
                 Name = category.Name,
                 Name_csCZ = category.Name_csCZ,
-                Name_skSK = category.Name_skSK
+                Name_skSK = category.Name_skSK,
+                Name_esES = category.Name_esES
             };
         }
 

@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201702061936248_AlbumAddedAverageQuality.Designer.cs">
       <DependentUpon>201702061936248_AlbumAddedAverageQuality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907052104567_EsTranslationToCategory.cs" />
+    <Compile Include="Migrations\201907052104567_EsTranslationToCategory.Designer.cs">
+      <DependentUpon>201907052104567_EsTranslationToCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Context\MusicLibraryDbContext.cs" />
     <Compile Include="Entities\Album.cs" />
@@ -140,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201702061936248_AlbumAddedAverageQuality.resx">
       <DependentUpon>201702061936248_AlbumAddedAverageQuality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907052104567_EsTranslationToCategory.resx">
+      <DependentUpon>201907052104567_EsTranslationToCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />

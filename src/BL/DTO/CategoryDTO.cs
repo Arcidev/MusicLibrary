@@ -13,6 +13,8 @@ namespace BL.DTO
 
         public string Name_csCZ { get; set; }
 
+        public string Name_esES { get; set; }
+
         public string NameLocalized
         {
             get
@@ -23,6 +25,8 @@ namespace BL.DTO
                         return Name_skSK ?? Name;
                     case "cs-CZ":
                         return Name_csCZ ?? Name;
+                    case "es-ES":
+                        return Name_esES ?? Name;
                     default:
                         return Name;
                 }

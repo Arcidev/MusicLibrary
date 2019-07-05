@@ -10,5 +10,7 @@ namespace WebApi.Models
         public string Name_skSK { get; set; }
 
         public string Name_csCZ { get; set; }
+
+        public string Name_esES { get; set; }
     }
 }
