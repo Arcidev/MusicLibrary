@@ -53,6 +53,7 @@ namespace MusicLibrary
             config.RouteTable.Add("SongCreate", "administration/song/create", "Views/Administration/Songs/songCreate.dothtml");
             config.RouteTable.Add("Users", "administration/users", "Views/Administration/users.dothtml");
             config.RouteTable.Add("TempFilePresenter", "files/{FileId}/{FileExtension}", serviceProvider => WindsorBootstrap.Resolve<TempFilePresenter>());
+            config.RouteTable.Add("IdenticonPresenter", "identicon/{Identicon}", serviceProvider => WindsorBootstrap.Resolve<IdenticonPresenter>());
         }
 
         private void ConfigureControls(DotvvmConfiguration config)

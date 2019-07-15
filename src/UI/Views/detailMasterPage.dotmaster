@@ -48,7 +48,7 @@
                             <dot:Repeater DataSource="{value: Reviews}" RenderWrapperTag="true" WrapperTagName="div" RenderSettings.Mode="Server" PostBack.Update="true">
                                 <div class="image group">
                                     <div class="grid-img1 review-img">
-                                        <img class="logo-img" src="{value: CreatedByImageStorageFileName != null ? "/SavedFiles/" + CreatedByImageStorageFileName : "" }" alt="{value: CreatedByFullName}" />
+                                        <img class="logo-img" src="{value: CreatedByImageStorageFileName != null ? "/SavedFiles/" + CreatedByImageStorageFileName : "/identicon/" + CreatedByFullName }" alt="{value: CreatedByFullName}" />
                                     </div>
                                     <div class="para review">
                                         <dot:Literal Visible="{value: _root.ReviewEditId != Id}" Text="{value: Text}" />

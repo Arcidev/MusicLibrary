@@ -85,7 +85,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public void ResetImage()
         {
-            ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : "";
+            ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : $"/identicon/{User.FullName}";
             Files.Clear();
         }
 
@@ -100,7 +100,7 @@ namespace MusicLibrary.ViewModels.Administration
         private void LoadUser()
         {
             User = UserFacade.GetUser(UserId);
-            ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : "";
+            ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : $"/identicon/{User.FullName}";
         }
     }
 }
