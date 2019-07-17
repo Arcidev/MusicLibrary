@@ -10,64 +10,74 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Music Library</title>
-    <dot:RequiredResource Name="templateStyle-css" />
-    <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
-    <dot:ContentPlaceHolder ID="HeaderContent" />
-</head>
-<body>
-    <div class="menu-bg">
-        <div class="wrap">
-            <div class="menu">
-                <ul class="nav" RenderSettings.Mode="Server">
-                    <li class-active="{value: ActivePage == "Index"}">
-                        <dot:RouteLink RouteName="Index" Text="{resource: Resource.Home}" />
-                    </li>
-                    <li class-active="{value: ActivePage == "Bands"}"><dot:RouteLink RouteName="Bands">{{resource: Resource.Bands}}</dot:RouteLink></li>
-                    <li class-active="{value: ActivePage == "Albums"}"><dot:RouteLink RouteName="Albums">{{resource: Resource.Albums}}</dot:RouteLink></li>
-                    <li Visible="{value: IsUserLoggedIn}" class-active="{value: ActivePage == "UserCollection"}"><dot:RouteLink RouteName="UserCollection">{{resource: Resource.UserCollection}}</dot:RouteLink></li>
-                </ul>
-            </div>
-            <div class="soc-icons">
-                <ul Visible="{value: !IsUserLoggedIn}">
-                    <li><dot:RouteLink RouteName="Register">{{resource: Resource.Register}} &nbsp;</dot:RouteLink></li>
-                    <li><dot:RouteLink RouteName="Login">{{resource: Resource.SignIn}}</dot:RouteLink></li>
-                </ul>
-                <ul Visible="{value: IsUserLoggedIn}">
-                    <li><dot:RouteLink RouteName="UserProfile">{{resource: Resource.Administration}} &nbsp;</dot:RouteLink></li>
-                    <li><dot:LinkButton Click="{command: SignOut()}" Text="{resource: Resource.SignOut}" class="header-item button-right" />  </li>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
-    <div class="header-bg">
-        <div class="wrap">
-            <div class="header">
-                <div class="logo">
-                    <dot:RouteLink RouteName="Index"><img src="/Content/Images/logo.png" alt="" title="logo"></dot:RouteLink>
-                    <a href="index.html"></a>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <title>Music Library</title>
+        <dot:RequiredResource Name="jquery" />
+        <dot:RequiredResource Name="templateStyle-css" />
+        <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+        <dot:ContentPlaceHolder ID="HeaderContent" />
+    </head>
+    <body>
+        <div class="menu-bg">
+            <div class="wrap">
+                <div class="menu">
+                    <ul class="nav" RenderSettings.Mode="Server">
+                        <li class-active="{value: ActivePage == "Index"}">
+                            <dot:RouteLink RouteName="Index" Text="{resource: Resource.Home}" />
+                        </li>
+                        <li class-active="{value: ActivePage == "Bands"}"><dot:RouteLink RouteName="Bands">{{resource: Resource.Bands}}</dot:RouteLink></li>
+                        <li class-active="{value: ActivePage == "Albums"}"><dot:RouteLink RouteName="Albums">{{resource: Resource.Albums}}</dot:RouteLink></li>
+                        <li Visible="{value: IsUserLoggedIn}" class-active="{value: ActivePage == "UserCollection"}"><dot:RouteLink RouteName="UserCollection">{{resource: Resource.UserCollection}}</dot:RouteLink></li>
+                    </ul>
                 </div>
-                <div class="foot-search">
-                    <dot:TextBox placeholder="{resource: Resource.Search + "..."}" Text="{value: SearchString}" />
-                    <dot:RouteLink class="submit-button" Text="{resource: Resource.Search}" RouteName="AlbumsFiltered" param-Filter="{value: SearchString}" />
+                <div class="soc-icons">
+                    <ul Visible="{value: !IsUserLoggedIn}">
+                        <li><dot:RouteLink RouteName="Register">{{resource: Resource.Register}} &nbsp;</dot:RouteLink></li>
+                        <li><dot:RouteLink RouteName="Login">{{resource: Resource.SignIn}}</dot:RouteLink></li>
+                    </ul>
+                    <ul Visible="{value: IsUserLoggedIn}">
+                        <li><dot:RouteLink RouteName="UserProfile">{{resource: Resource.Administration}} &nbsp;</dot:RouteLink></li>
+                        <li><dot:LinkButton Click="{command: SignOut()}" Text="{resource: Resource.SignOut}" class="header-item button-right" />  </li>
+                    </ul>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
-    </div>
-
-    <dot:ContentPlaceHolder ID="PageContent" />
-
-    <div class="footer1-bg">
-        <div class="wrap">
-            <div class="copy">
-                <p>© 2013 All rights Reserved | Design by &nbsp;<a href="http://w3layouts.com">W3Layouts</a></p>
+        <div class="header-bg">
+            <div class="wrap">
+                <div class="header">
+                    <div class="logo">
+                        <dot:RouteLink RouteName="Index"><img src="/Content/Images/logo.png" alt="" title="logo"></dot:RouteLink>
+                        <a href="index.html"></a>
+                    </div>
+                    <div class="foot-search">
+                        <dot:TextBox UpdateTextAfterKeydown="true" ID="SearchInput" placeholder="{resource: Resource.Search + "..."}" Text="{value: SearchString}" />
+                        <dot:RouteLink ID="SearchButton" class="submit-button" Text="{resource: Resource.Search}" RouteName="AlbumsFiltered" param-Filter="{value: SearchString}" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+
+        <dot:ContentPlaceHolder ID="PageContent" />
+
+        <div class="footer1-bg">
+            <div class="wrap">
+                <div class="copy">
+                    <p>© 2013 All rights Reserved | Design by &nbsp;<a href="http://w3layouts.com">W3Layouts</a></p>
+                </div>
+            </div>
+        </div>
+    </body>
+<dot:InlineScript>
+    dotvvm.events.init.subscribe(function () {
+        $("#SearchInput").on("keypress", function (e) {
+            if (e.which == 13) {
+                $("#SearchButton")[0].click();
+            }
+        });
+    });
+</dot:InlineScript>
 </html>

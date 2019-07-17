@@ -14,7 +14,7 @@
                         <dot:Literal Text="{resource: Resource.Email}" />
                     </td>
                     <td>
-                        <dot:TextBox Text="{value: Email}" />
+                        <dot:TextBox Text="{value: Email}" Type="Email" />
                     </td>
                 </tr>
                 <tr>
@@ -32,7 +32,7 @@
                 </tr>
                 <tr class="submit-row">
                     <td colspan="2" align="center">
-                        <dot:Button class="submit-button" Text="{resource: Resource.SignIn}" Click="{command: SignIn()}" />
+                        <dot:Button ID="SubmitButton" class="submit-button" Text="{resource: Resource.SignIn}" Click="{command: SignIn()}" />
                     </td>
                 </tr>
                 <tr>
@@ -46,4 +46,13 @@
             </tbody>
         </table>
     </div>
+    <dot:InlineScript>
+        dotvvm.events.init.subscribe(function () {
+            $(".login-form").on("keypress", function (e) {
+                if(e.which == 13) {
+                    $("#SubmitButton").click();
+                }
+            });
+        });
+    </dot:InlineScript>
 </dot:Content>
