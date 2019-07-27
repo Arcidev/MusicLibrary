@@ -1,4 +1,4 @@
 # Ignore external libraries from statistics
-src/UI/Content/Styles/templateStyle* linguist-vendored
-src/UI/Content/Scripts/jquery.gallery.js linguist-vendored
-src/UI/Content/Scripts/modernizr.custom.53451.js linguist-vendored
+src/MusicLibrary/wwwroot/Content/Styles/templateStyle* linguist-vendored
+src/MusicLibrary/wwwroot/Content/Scripts/jquery.gallery.js linguist-vendored
+src/MusicLibrary/wwwroot/Content/Scripts/modernizr.custom.53451.js linguist-vendored
