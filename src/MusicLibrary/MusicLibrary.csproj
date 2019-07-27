@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+    <Target Name="WorkaroundNetStandard" AfterTargets="ResolvePackageAssets">
+      <ItemGroup>
+        <TransitiveFrameworkReference Remove="NETStandard.Library" />
+      </ItemGroup>
+    </Target>
+    <ItemGroup>
+        <!--Include Views-->
+        <Content Include="**/*.dothtml" Exclude="obj/**/*.*;bin/**/*.*">
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </Content>
+        <!--Include MasterPage Views-->
+        <Content Include="**/*.dotmaster" Exclude="obj/**/*.*;bin/**/*.*">
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </Content>
+        <!--Include Custom Control Views-->
+        <Content Include="**/*.dotcontrol" Exclude="obj/**/*.*;bin/**/*.*">
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Remove="Views\Administration\Albums\albumEdit.dothtml" />
+      <Content Remove="Views\Administration\Albums\albumManagementMasterPage.dotmaster" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="wwwroot\Content\Images\btn.png" />
+        <None Remove="wwwroot\Content\Images\header.png" />
+        <None Remove="wwwroot\Content\Images\logo.png" />
+        <None Remove="wwwroot\Content\Images\minus.png" />
+        <None Remove="wwwroot\Content\Images\nav-bg.png" />
+        <None Remove="wwwroot\Content\Images\play.png" />
+        <None Remove="wwwroot\Content\Images\plus.png" />
+        <None Remove="wwwroot\Content\Images\stars.png" />
+        <None Remove="wwwroot\Content\Images\youtube.ico" />
+        <None Remove="wwwroot\Content\Scripts\index.js" />
+        <None Remove="wwwroot\Content\Scripts\jquery.gallery.js" />
+        <None Remove="wwwroot\Content\Scripts\modernizr.custom.53451.js" />
+        <None Remove="wwwroot\Content\Scripts\stars.js" />
+        <None Remove="wwwroot\Content\Styles\style.css" />
+        <None Remove="wwwroot\Content\Styles\style.less" />
+        <None Remove="wwwroot\Content\Styles\style.min.css" />
+        <None Remove="wwwroot\Content\Styles\templateStyle.css" />
+        <None Remove="wwwroot\Content\Styles\templateStyle.less" />
+        <None Remove="wwwroot\Content\Styles\templateStyle.min.css" />
+        <None Remove="Controls\LoadingAnimation.dotcontrol" />
+        <None Remove="dotvvm_serialized_config.json.tmp" />
+        <None Remove="Views\Administration\administrationMasterPage.dotmaster" />
+        <None Remove="Views\Administration\Albums\albumCreate.dothtml" />
+        <None Remove="Views\Administration\Albums\albums.dothtml" />
+        <None Remove="Views\Administration\Bands\bandCreate.dothtml" />
+        <None Remove="Views\Administration\Bands\bandEdit.dothtml" />
+        <None Remove="Views\Administration\Bands\bandManagementMasterPage.dotmaster" />
+        <None Remove="Views\Administration\Bands\bands.dothtml" />
+        <None Remove="Views\Administration\Songs\songCreate.dothtml" />
+        <None Remove="Views\Administration\Songs\songEdit.dothtml" />
+        <None Remove="Views\Administration\Songs\songManagementMasterPage.dotmaster" />
+        <None Remove="Views\Administration\Songs\songs.dothtml" />
+        <None Remove="Views\Administration\userCollection.dothtml" />
+        <None Remove="Views\Administration\userProfile.dothtml" />
+        <None Remove="Views\Administration\userReviews.dothtml" />
+        <None Remove="Views\Administration\users.dothtml" />
+        <None Remove="Views\albums.dothtml" />
+        <None Remove="Views\Album\detail.dothtml" />
+        <None Remove="Views\bands.dothtml" />
+        <None Remove="Views\Band\detail.dothtml" />
+        <None Remove="Views\contentMasterPage.dotmaster" />
+        <None Remove="Views\detailMasterPage.dotmaster" />
+        <None Remove="Views\index.dothtml" />
+        <None Remove="Views\Login\login.dothtml" />
+        <None Remove="Views\Login\register.dothtml" />
+        <None Remove="Views\masterPage.dotmaster" />
+        <None Remove="Views\userCollection.dothtml" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+        <PackageReference Include="DotVVM.AspNetCore" Version="2.3.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview7.19362.6">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0-preview7.19362.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+        <PackageReference Include="NIdenticon" Version="1.3.1" />
+
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
+      <ProjectReference Include="..\WebApiModels\WebApiModels.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Update="Resources\Texts.Designer.cs">
+        <DependentUpon>Texts.resx</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <Content Update="wwwroot\Content\Styles\style.css">
+        <DependentUpon>style.less</DependentUpon>
+      </Content>
+      <Content Update="wwwroot\Content\Styles\style.min.css">
+        <DependentUpon>style.css</DependentUpon>
+      </Content>
+      <Content Update="wwwroot\Content\Styles\templateStyle.css">
+        <DependentUpon>templateStyle.less</DependentUpon>
+      </Content>
+      <Content Update="wwwroot\Content\Styles\templateStyle.min.css">
+        <DependentUpon>templateStyle.css</DependentUpon>
+      </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Texts.resx">
+        <LastGenOutput>Texts.Designer.cs</LastGenOutput>
+        <Generator>PublicResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
+    </ItemGroup>
+</Project>

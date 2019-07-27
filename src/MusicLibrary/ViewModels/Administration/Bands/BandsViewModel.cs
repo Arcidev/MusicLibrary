@@ -1,0 +1,62 @@
+using BusinessLayer.DTO;
+using BusinessLayer.Facades;
+using DotVVM.Framework.Controls;
+using DotVVM.Framework.Runtime.Filters;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace MusicLibrary.ViewModels.Administration
+{
+    [Authorize(Roles = nameof(Shared.Enums.UserRole.SuperUser) + ", " + nameof(Shared.Enums.UserRole.Admin))]
+    public class BandsViewModel : AdministrationMasterPageViewModel
+    {
+        private readonly BandFacade bandFacade;
+
+        public IList<int> SelectedBandIds { get; set; } = new List<int>();
+
+        public GridViewDataSet<BandInfoDTO> Bands { get; set; }
+
+        public string Filter { get; set; }
+
+        public BandsViewModel(BandFacade bandFacade)
+        {
+            this.bandFacade = bandFacade;
+
+            Bands = new GridViewDataSet<BandInfoDTO>()
+            {
+                PagingOptions = new PagingOptions()
+                {
+                    PageSize = 20
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortExpression = nameof(BandInfoDTO.Name)
+                }
+            };
+        }
+
+        public override async Task PreRender()
+        {
+            if (!Context.IsPostBack)
+            {
+                ActiveAdminPage = "Bands";
+            }
+
+            bandFacade.LoadBands(Bands, Filter);
+
+            await base.PreRender();
+        }
+
+        public void ApproveSelected()
+        {
+            bandFacade.ApproveBands(SelectedBandIds, true);
+            SelectedBandIds.Clear();
+        }
+
+        public void DisapproveSelected()
+        {
+            bandFacade.ApproveBands(SelectedBandIds, false);
+            SelectedBandIds.Clear();
+        }
+    }
+}
