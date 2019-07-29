@@ -122,7 +122,7 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
       </EmbeddedResource>
     </ItemGroup>
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' == 'Windows_NT'">
       <Exec Command="If not exist &quot;$(ProjectDir)\wwwroot\SavedFiles\andragona-fight-for-your-praise.mp3&quot; (&#xD;&#xA;powershell -command &quot;&amp; { (New-Object Net.WebClient).DownloadFile('http://bandzone.cz/track/download/588724', '$(ProjectDir)\wwwroot\SavedFiles\andragona-fight-for-your-praise.mp3') }&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;If not exist &quot;$(ProjectDir)\wwwroot\SavedFiles\andragona-miss-you.mp3&quot; (&#xD;&#xA;powershell -command &quot;&amp; { (New-Object Net.WebClient).DownloadFile('http://bandzone.cz/track/download/588725', '$(ProjectDir)\wwwroot\SavedFiles\andragona-miss-you.mp3') }&quot;&#xD;&#xA;)" />
     </Target>
 </Project>
