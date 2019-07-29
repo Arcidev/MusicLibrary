@@ -22,6 +22,7 @@
         </Content>
     </ItemGroup>
     <ItemGroup>
+      <Content Remove="compilerconfig.json" />
       <Content Remove="Views\Administration\Albums\albumEdit.dothtml" />
       <Content Remove="Views\Administration\Albums\albumManagementMasterPage.dotmaster" />
     </ItemGroup>
@@ -75,6 +76,9 @@
         <None Remove="Views\userCollection.dothtml" />
     </ItemGroup>
     <ItemGroup>
+      <None Include="compilerconfig.json" />
+    </ItemGroup>
+    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
         <PackageReference Include="DotVVM.AspNetCore" Version="2.3.0" />
@@ -118,4 +122,7 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
       </EmbeddedResource>
     </ItemGroup>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="If not exist &quot;$(ProjectDir)\wwwroot\SavedFiles\andragona-fight-for-your-praise.mp3&quot; (&#xD;&#xA;powershell -command &quot;&amp; { (New-Object Net.WebClient).DownloadFile('http://bandzone.cz/track/download/588724', '$(ProjectDir)\wwwroot\SavedFiles\andragona-fight-for-your-praise.mp3') }&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;If not exist &quot;$(ProjectDir)\wwwroot\SavedFiles\andragona-miss-you.mp3&quot; (&#xD;&#xA;powershell -command &quot;&amp; { (New-Object Net.WebClient).DownloadFile('http://bandzone.cz/track/download/588725', '$(ProjectDir)\wwwroot\SavedFiles\andragona-miss-you.mp3') }&quot;&#xD;&#xA;)" />
+    </Target>
 </Project>

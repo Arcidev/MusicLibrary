@@ -41,6 +41,7 @@
 }
 .audio-player {
   width: 457px;
+  outline: none;
 }
 span.stars,
 span.stars span {
