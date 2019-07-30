@@ -2,65 +2,35 @@ using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using MusicLibrary.Resources;
 using Shared.Enums;
-using System;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Login
 {
     public class RegisterViewModel : BaseLoginViewModel
     {
-        public RegisterErrorViewModel RegisterErrorViewModel { get; set; }
-
+        [Required(ErrorMessageResourceName = nameof(Texts.FirstNameRequired), ErrorMessageResourceType = typeof(Texts))]
         public string FirstName { get; set; }
 
+        [Required(ErrorMessageResourceName = nameof(Texts.LastNameRequired), ErrorMessageResourceType = typeof(Texts))]
         public string LastName { get; set; }
 
+        [Required(ErrorMessageResourceName = nameof(Texts.EmailRequired), ErrorMessageResourceType = typeof(Texts))]
+        [EmailAddress(ErrorMessageResourceName = nameof(Texts.InvalidEmail), ErrorMessageResourceType = typeof(Texts))]
         public string Email { get; set; }
 
+        [Required(ErrorMessageResourceName = nameof(Texts.PasswordRequired), ErrorMessageResourceType = typeof(Texts))]
+        [MinLength(6, ErrorMessageResourceName = nameof(Texts.WeakPassword), ErrorMessageResourceType = typeof(Texts))]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$", ErrorMessageResourceName = nameof(Texts.WeakPassword), ErrorMessageResourceType = typeof(Texts))]
         public string Password { get; set; }
 
+        [Compare(nameof(Password), ErrorMessageResourceName = nameof(Texts.PasswordMismatch), ErrorMessageResourceType = typeof(Texts))]
         public string PasswordAgain { get; set; }
 
         public RegisterViewModel(UserFacade userFacade) : base(userFacade) { }
 
         public async Task Register()
         {
-            RegisterErrorViewModel = new RegisterErrorViewModel();
-
-            if (string.IsNullOrWhiteSpace(FirstName))
-                RegisterErrorViewModel.FirstNameError = Texts.FirstNameRequired;
-
-            if (string.IsNullOrWhiteSpace(LastName))
-                RegisterErrorViewModel.LastNameError = Texts.LastNameRequired;
-
-            if (string.IsNullOrWhiteSpace(Email))
-                RegisterErrorViewModel.EmailError = Texts.EmailRequired;
-            else
-            {
-                try
-                {
-                    new MailAddress(Email);
-                }
-                catch(Exception)
-                {
-                    RegisterErrorViewModel.EmailError = Texts.InvalidEmail;
-                }
-            }
-
-            if (!IsStrongPassword())
-                RegisterErrorViewModel.PasswordError = Texts.WeakPassword;
-
-            if (!string.IsNullOrEmpty(Password) || !string.IsNullOrEmpty(PasswordAgain))
-            {
-                if (Password != PasswordAgain)
-                    RegisterErrorViewModel.PasswordAgainError = Texts.PasswordMismatch;
-            }
-
-            if (RegisterErrorViewModel.ContainsError)
-                return;
-
             var success = await ExecuteSafelyAsync(async () =>
             {
                 var user = userFacade.AddUser(new UserCreateDTO()
@@ -77,14 +47,6 @@ namespace MusicLibrary.ViewModels.Login
 
             if (success)
                 Context.RedirectToRoute("Index");
-        }
-
-        private bool IsStrongPassword()
-        {
-            if (string.IsNullOrWhiteSpace(Password) || Password.Length < 6)
-                return false;
-
-            return Regex.Match(Password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$").Success;
         }
     }
 }

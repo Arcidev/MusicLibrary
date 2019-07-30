@@ -9,7 +9,7 @@ namespace BusinessLayer
     /// <summary>
     /// Application's implementation of UoW provider
     /// </summary>
-    public class AppUnitOfWorkProvider : EntityFrameworkUnitOfWorkProvider
+    internal class AppUnitOfWorkProvider : EntityFrameworkUnitOfWorkProvider
     {
         /// <summary>
         /// Creates new instance of UoW provider

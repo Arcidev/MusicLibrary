@@ -9,7 +9,7 @@ namespace BusinessLayer
     /// <summary>
     /// Application's implementation of UoW
     /// </summary>
-    public class AppUnitOfWork : EntityFrameworkUnitOfWork
+    internal class AppUnitOfWork : EntityFrameworkUnitOfWork
     {
         /// <summary>
         /// Creates new instance of UoW

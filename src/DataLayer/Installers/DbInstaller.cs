@@ -24,7 +24,7 @@ namespace DataLayer.Installers
                 throw new ArgumentException(nameof(connectionString));
 
             return services.AddDbContext<MusicLibraryDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient)
-                .AddTransient<Func<DbContext>>(provider => () => provider.GetService<MusicLibraryDbContext>());
+                .AddSingleton<Func<DbContext>>(provider => () => provider.GetService<MusicLibraryDbContext>());
         }
     }
 }

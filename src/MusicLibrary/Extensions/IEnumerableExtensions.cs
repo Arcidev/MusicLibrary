@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BusinessLayer.Extensions
+namespace MusicLibrary.Extensions
 {
     public static class IEnumerableExtensions
     {

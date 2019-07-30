@@ -304,4 +304,7 @@
   <data name="Users" xml:space="preserve">
     <value>Užívatelia</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Pole heslo je povinné!</value>
+  </data>
 </root>

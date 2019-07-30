@@ -15,9 +15,7 @@
                     </td>
                     <td>
                         <dot:TextBox Text="{value: FirstName}" />
-                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: FirstNameError != null}">
-                            <dot:Literal Text="{value: FirstNameError}"/>
-                        </div>
+                        <dot:Validator InvalidCssClass="error-message" ShowErrorMessageText="true" Value="{value: FirstName}" />
                     </td>
                 </tr>
                 <tr>
@@ -26,9 +24,7 @@
                     </td>
                     <td>
                         <dot:TextBox Text="{value: LastName}" />
-                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: LastNameError != null}">
-                            <dot:Literal Text="{value: LastNameError}" />
-                        </div>
+                        <dot:Validator InvalidCssClass="error-message" ShowErrorMessageText="true" Value="{value: LastName}" />
                     </td>
                 </tr>
                 <tr>
@@ -37,9 +33,7 @@
                     </td>
                     <td>
                         <dot:TextBox Text="{value: Email}" />
-                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: EmailError != null}">
-                            <dot:Literal Text="{value: EmailError}" />
-                        </div>
+                        <dot:Validator InvalidCssClass="error-message" ShowErrorMessageText="true" Value="{value: Email}" />
                     </td>
                 </tr>
                 <tr>
@@ -48,9 +42,7 @@
                     </td>
                     <td>
                         <dot:TextBox Text="{value: Password}" Type="Password" />
-                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: PasswordError != null}">
-                            <dot:Literal Text="{value: PasswordError}" />
-                        </div>
+                        <dot:Validator InvalidCssClass="error-message" ShowErrorMessageText="true" Value="{value: Password}" />
                     </td>
                 </tr>
                 <tr>
@@ -59,9 +51,7 @@
                     </td>
                     <td>
                         <dot:TextBox Text="{value: PasswordAgain}" Type="Password" />
-                        <div class="error-message" DataContext="{value: RegisterErrorViewModel}" Visible="{value: PasswordAgainError != null}">
-                            <dot:Literal Text="{value: PasswordAgainError}" />
-                        </div>
+                        <dot:Validator InvalidCssClass="error-message" ShowErrorMessageText="true" Value="{value: PasswordAgain}" />
                     </td>
                 </tr>
                 <tr Visible="{value: ErrorMessage != null}">

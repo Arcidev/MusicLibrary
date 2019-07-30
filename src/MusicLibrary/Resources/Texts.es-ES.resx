@@ -305,4 +305,7 @@
   <data name="Users" xml:space="preserve">
     <value>Usuarios</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>¡Se requiere contraseña!</value>
+  </data>
 </root>

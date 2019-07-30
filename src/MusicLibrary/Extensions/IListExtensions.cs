@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BusinessLayer.Extensions
+namespace MusicLibrary.Extensions
 {
     public static class IListExtensions
     {
