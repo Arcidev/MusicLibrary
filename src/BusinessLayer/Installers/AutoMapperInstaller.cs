@@ -64,13 +64,13 @@ namespace BusinessLayer.Installers
                 config.CreateMap<AlbumReview, ReviewDTO>()
                     .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
                     .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
-                    .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
+                    .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile.FileName));
                 config.CreateMap<AlbumReviewCreateDTO, AlbumReview>();
 
                 config.CreateMap<BandReview, ReviewDTO>()
                     .ForMember(target => target.CreatedByFirstName, action => action.MapFrom(source => source.CreatedBy.FirstName))
                     .ForMember(target => target.CreatedByLastName, action => action.MapFrom(source => source.CreatedBy.LastName))
-                    .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile != null ? source.CreatedBy.ImageStorageFile.FileName : null));
+                    .ForMember(target => target.CreatedByImageStorageFileName, action => action.MapFrom(source => source.CreatedBy.ImageStorageFile.FileName));
                 config.CreateMap<BandReviewCreateDTO, BandReview>();
 
                 config.CreateMap<UserAlbumCreateDTO, UserAlbum>();
