@@ -93,7 +93,7 @@ namespace MusicLibrary
                 Dependencies = new[] { "jquery" }
             });
         }
-		public void ConfigureServices(IDotvvmServiceCollection options)
+        public void ConfigureServices(IDotvvmServiceCollection options)
         {
             options.Services.ConfigureAutoMapper()
                 .ConfigureServices()
@@ -108,6 +108,6 @@ namespace MusicLibrary
             }
 
             options.AddDefaultTempStorages("temp");
-		}
+        }
     }
 }
