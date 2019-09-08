@@ -81,14 +81,14 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-        <PackageReference Include="DotVVM.AspNetCore" Version="2.3.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview7.19362.6">
+        <PackageReference Include="DotVVM.AspNetCore" Version="2.3.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview9.19423.6">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0-preview7.19362.4" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0-preview9.19423.4" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
-        <PackageReference Include="NIdenticon" Version="1.3.1" />
+        <PackageReference Include="NIdenticon" Version="1.4.0" />
 
     </ItemGroup>
     <ItemGroup>
