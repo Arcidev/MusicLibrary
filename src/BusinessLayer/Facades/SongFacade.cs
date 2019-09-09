@@ -26,8 +26,7 @@ namespace BusinessLayer.Facades
             Func<SongsQuery<SongInfoDTO>> songsQuerySongInfoFunc,
             IMapper mapper,
             Lazy<StorageFileFacade> storageFileFacase,
-            Func<IUnitOfWorkProvider> uowProvider
-            ) : base(mapper, storageFileFacase, uowProvider)
+            Func<IUnitOfWorkProvider> uowProvider) : base(mapper, storageFileFacase, uowProvider)
         {
             this.songRepositoryFunc = songRepositoryFunc;
             this.albumSongRepositoryFunc = albumSongRepositoryFunc;

@@ -25,8 +25,8 @@ namespace BusinessLayer.Facades
         public UserFacade(Func<UserRepository> userRepositoryFunc,
             Func<UsersQuery> usersQueryFunc,
             IMapper mapper,
-            Lazy<StorageFileFacade> storageFileFacade
-            , Func<IUnitOfWorkProvider> uowProviderFunc) : base(mapper, storageFileFacade, uowProviderFunc)
+            Lazy<StorageFileFacade> storageFileFacade,
+            Func<IUnitOfWorkProvider> uowProviderFunc) : base(mapper, storageFileFacade, uowProviderFunc)
         {
             this.userRepositoryFunc = userRepositoryFunc;
             this.usersQueryFunc = usersQueryFunc;

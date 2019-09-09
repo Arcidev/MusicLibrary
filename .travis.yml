@@ -7,7 +7,7 @@ git:
 addons:
   snaps: 
   - name: dotnet-sdk
-    classic: true
+    confinement: classic
     channel: latest/beta
   
 script:
