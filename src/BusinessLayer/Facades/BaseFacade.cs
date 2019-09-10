@@ -27,8 +27,11 @@ namespace BusinessLayer.Facades
             query.Skip = dataSet.PagingOptions.PageIndex * dataSet.PagingOptions.PageSize;
             query.Take = dataSet.PagingOptions.PageSize;
 
-            query.ClearSortCriteria();
-            query.AddSortCriteria(dataSet.SortingOptions.SortExpression, dataSet.SortingOptions.SortDescending ? SortDirection.Descending : SortDirection.Ascending);
+            if (dataSet.SortingOptions?.SortExpression != null)
+            {
+                query.ClearSortCriteria();
+                query.AddSortCriteria(dataSet.SortingOptions.SortExpression, dataSet.SortingOptions.SortDescending ? SortDirection.Descending : SortDirection.Ascending);
+            }
 
             dataSet.PagingOptions.TotalItemsCount = query.GetTotalRowCount();
             dataSet.Items = query.Execute();

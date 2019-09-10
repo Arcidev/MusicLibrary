@@ -14,7 +14,7 @@ namespace BusinessLayer.Queries
 
         protected override IQueryable<UserAlbumReviewDTO> GetQueryable()
         {
-            return Context.AlbumReviews.Where(x => x.CreatedById == UserId).ProjectTo<UserAlbumReviewDTO>(mapperConfig);
+            return Context.AlbumReviews.Where(x => x.CreatedById == UserId).OrderByDescending(x => x.EditDate).ProjectTo<UserAlbumReviewDTO>(mapperConfig);
         }
     }
 }

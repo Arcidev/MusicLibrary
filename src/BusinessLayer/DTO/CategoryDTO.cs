@@ -19,17 +19,13 @@ namespace BusinessLayer.DTO
         {
             get
             {
-                switch(Thread.CurrentThread.CurrentCulture.Name)
+                return Thread.CurrentThread.CurrentCulture.Name switch
                 {
-                    case "sk-Sk":
-                        return Name_skSK ?? Name;
-                    case "cs-CZ":
-                        return Name_csCZ ?? Name;
-                    case "es-ES":
-                        return Name_esES ?? Name;
-                    default:
-                        return Name;
-                }
+                    "sk-Sk" => Name_skSK ?? Name,
+                    "cs-CZ" => Name_csCZ ?? Name,
+                    "es-ES" => Name_esES ?? Name,
+                    _ => Name,
+                };
             }
         }
     }
