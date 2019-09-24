@@ -8,7 +8,7 @@ addons:
   snaps: 
   - name: dotnet-sdk
     confinement: classic
-    channel: latest/beta
+    channel: latest
   
 script:
   - sudo snap alias dotnet-sdk.dotnet dotnet
