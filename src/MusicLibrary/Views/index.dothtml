@@ -3,7 +3,7 @@
 @import Resource = MusicLibrary.Resources.Texts
 
 <dot:Content ContentPlaceHolderID="HeaderContent">
-    <dot:RequiredResource Name="index" />
+    <dot:RequiredResource Name="jquery-gallery" />
     <dot:RequiredResource Name="style-css" />
 </dot:Content>
 
@@ -70,4 +70,11 @@
             </div>
         </div>
     </div>
+	<dot:InlineScript>
+        dotvvm.events.init.subscribe(function () {
+            $("#dg-container").gallery({
+				autoplay: true
+			});
+        });
+    </dot:InlineScript>
 </dot:Content>

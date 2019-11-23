@@ -82,11 +82,6 @@ namespace MusicLibrary
                 Location = new UrlResourceLocation("~/Content/Scripts/jquery-slider.js"),
                 Dependencies = new[] { "jquery" }
             });
-            config.Resources.Register("index", new ScriptResource()
-            {
-                Location = new UrlResourceLocation("~/Content/Scripts/index.js"),
-                Dependencies = new[] { "jquery-gallery" }
-            });
             config.Resources.Register("stars", new ScriptResource()
             {
                 Location = new UrlResourceLocation("~/Content/Scripts/stars.js"),

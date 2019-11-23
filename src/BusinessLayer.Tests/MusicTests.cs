@@ -29,14 +29,11 @@ namespace BL.Tests
             });
 
             var category = CategoryFacade.GetCategories().FirstOrDefault(x => x.Name == "Test Category");
-            if (category == null)
+            category ??= CategoryFacade.AddCategory(new CategoryDTO()
             {
-                category = CategoryFacade.AddCategory(new CategoryDTO()
-                {
-                    Name = "Test Category"
-                });
-            }
-
+                Name = "Test Category"
+            });
+         
             var albumFacade = AlbumFacade;
             var album1 = albumFacade.AddAlbum(new AlbumCreateDTO()
             {
@@ -54,16 +51,13 @@ namespace BL.Tests
             });
 
             var user = UserFacade.GetUserByEmail("albumtest@mail.sk");
-            if (user == null)
+            user ??= UserFacade.AddUser(new UserCreateDTO()
             {
-                user = UserFacade.AddUser(new UserCreateDTO()
-                {
-                    Email = "albumtest@mail.sk",
-                    FirstName = "test",
-                    LastName = "test",
-                    Password = "abcd"
-                });
-            }
+                Email = "albumtest@mail.sk",
+                FirstName = "test",
+                LastName = "test",
+                Password = "abcd"
+            });
 
             var positiveReview = new AlbumReviewCreateDTO()
             {
