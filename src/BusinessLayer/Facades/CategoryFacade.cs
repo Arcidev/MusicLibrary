@@ -7,6 +7,7 @@ using DataLayer.Entities;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Facades
 {
@@ -27,61 +28,62 @@ namespace BusinessLayer.Facades
             this.categoryAlbumsQueryFunc = categoryAlbumsQueryFunc;
         }
 
-        public CategoryDTO AddCategory(CategoryDTO category)
+        public async Task<CategoryDTO> AddCategoryAsync(CategoryDTO category)
         {
             using var uow = uowProviderFunc().Create();
             var entity = mapper.Map<Category>(category);
             var repo = categoryRepositoryFunc();
             repo.Insert(entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
             return mapper.Map<CategoryDTO>(entity);
         }
 
-        public IEnumerable<CategoryDTO> GetCategories()
+        public async Task<IEnumerable<CategoryDTO>> GetCategoriesAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = categoriesQueryFunc();
-            return query.Execute();
+
+            return await query.ExecuteAsync();
         }
 
-        public CategoryDTO GetCategory(int id)
+        public async Task<CategoryDTO> GetCategoryAsync(int id)
         {
             using var uow = uowProviderFunc().Create();
             var repo = categoryRepositoryFunc();
-            var entity = repo.GetById(id);
+            var entity = await repo.GetByIdAsync(id);
             IsNotNull(entity, ErrorMessages.CategoryNotExist);
 
             return mapper.Map<CategoryDTO>(entity);
         }
 
-        public CategoryDTO EditCategory(CategoryDTO category)
+        public async Task<CategoryDTO> EditCategoryAsync(CategoryDTO category)
         {
             using var uow = uowProviderFunc().Create();
             var repo = categoryRepositoryFunc();
-            var entity = repo.GetById(category.Id);
+            var entity = await repo.GetByIdAsync(category.Id);
             mapper.Map(category, entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
             return mapper.Map<CategoryDTO>(entity);
         }
 
-        public void DeleteCategory(int id)
+        public async Task DeleteCategoryAsync(int id)
         {
             using var uow = uowProviderFunc().Create();
             var repo = categoryRepositoryFunc();
             repo.Delete(id);
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public IEnumerable<AlbumDTO> GetAlbumsByCategory(int categoryId)
+        public async Task<IEnumerable<AlbumDTO>> GetAlbumsByCategoryAsync(int categoryId)
         {
             using var uow = uowProviderFunc().Create();
             var query = categoryAlbumsQueryFunc();
             query.CategoryId = categoryId;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
     }
 }

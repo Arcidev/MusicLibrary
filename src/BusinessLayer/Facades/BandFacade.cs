@@ -10,6 +10,7 @@ using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Facades
 {
@@ -49,59 +50,59 @@ namespace BusinessLayer.Facades
             this.bandInfoesQueryFunc = bandInfoesQueryFunc;
         }
 
-        public IEnumerable<BandInfoDTO> GetBandInfoes()
+        public async Task<IEnumerable<BandInfoDTO>> GetBandInfoesAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = bandInfoesQueryFunc();
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public void ApproveBands(IEnumerable<int> bandIds, bool approved)
+        public async Task ApproveBandsAsync(IEnumerable<int> bandIds, bool approved)
         {
             using var uow = uowProviderFunc().Create();
             var repo = bandRepositoryFunc();
-            var bands = repo.GetByIds(bandIds);
+            var bands = await repo.GetByIdsAsync(bandIds);
             foreach (var band in bands)
                 band.Approved = approved;
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public BandDTO AddBand(BandBaseDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public async Task<BandDTO> AddBandAsync(BandBaseDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
             var entity = mapper.Map<Band>(band);
             entity.CreateDate = DateTime.Now;
-            SetImageFile(entity, file, storage);
+            await SetImageFileAsync(entity, file, storage);
 
             var repo = bandRepositoryFunc();
             repo.Insert(entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
             return mapper.Map<BandDTO>(entity);
         }
 
-        public void EditBand(BandEditDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public async Task EditBandAsync(BandEditDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
             var repo = bandRepositoryFunc();
-            var entity = repo.GetById(band.Id);
+            var entity = await repo.GetByIdAsync(band.Id);
             mapper.Map(band, entity);
-            SetImageFile(entity, file, storage);
+            await SetImageFileAsync(entity, file, storage);
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public void LoadBands(GridViewDataSet<BandInfoDTO> dataSet, string filter = null)
+        public async Task LoadBandsAsync(GridViewDataSet<BandInfoDTO> dataSet, string filter = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = bandsQueryBandInfoFunc();
             query.Filter = filter;
 
-            FillDataSet(dataSet, query);
+            await FillDataSetAsync(dataSet, query);
         }
 
-        public IEnumerable<AlbumDTO> GetBandAlbums(int bandId, int? excludeAlbumId = null, int? count = null, bool? approved = null)
+        public async Task<IEnumerable<AlbumDTO>> GetBandAlbumsAsync(int bandId, int? excludeAlbumId = null, int? count = null, bool? approved = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = bandAlbumsQueryFunc();
@@ -110,22 +111,23 @@ namespace BusinessLayer.Facades
             query.Approved = approved;
             query.Take = count;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public IEnumerable<BandDTO> GetBands()
+        public async Task<IEnumerable<BandDTO>> GetBandsAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = bandsQueryBandFunc();
             query.Approved = true;
-            return query.Execute();
+
+            return await query.ExecuteAsync();
         }
 
-        public BandDTO GetBand(int id, bool includeAlbums = true, bool includeMembers = true)
+        public async Task<BandDTO> GetBandAsync(int id, bool includeAlbums = true, bool includeMembers = true)
         {
             using var uow = uowProviderFunc().Create();
             var repo = bandRepositoryFunc();
-            var entity = repo.GetById(id);
+            var entity = await repo.GetByIdAsync(id);
             IsNotNull(entity, ErrorMessages.BandNotExist);
 
             var dto = mapper.Map<BandDTO>(entity);
@@ -133,44 +135,44 @@ namespace BusinessLayer.Facades
                 dto.Albums = mapper.Map<IEnumerable<AlbumDTO>>(entity.Albums.Where(x => x.Approved));
 
             if (includeMembers)
-                dto.Members = GetBandMembers(entity.Id);
+                dto.Members = await GetBandMembersAsync(entity.Id);
 
             return dto;
         }
 
-        public IEnumerable<ArtistDTO> GetBandMembers(int bandId)
+        public async Task<IEnumerable<ArtistDTO>> GetBandMembersAsync(int bandId)
         {
             using var uow = uowProviderFunc().Create();
             var query = bandMembersQueryFunc();
             query.BandId = bandId;
             query.Approved = true;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public void LoadReviews(int bandId, GridViewDataSet<ReviewDTO> dataSet)
+        public async Task LoadReviewsAsync(int bandId, GridViewDataSet<ReviewDTO> dataSet)
         {
             using var uow = uowProviderFunc().Create();
             var query = bandReviewsQueryFunc();
             query.BandId = bandId;
 
-            FillDataSet(dataSet, query);
+            await FillDataSetAsync(dataSet, query);
         }
 
-        public void LoadUserReviews(int userId, GridViewDataSet<UserBandReviewDTO> dataSet)
+        public async Task LoadUserReviewsAsync(int userId, GridViewDataSet<UserBandReviewDTO> dataSet)
         {
             using var uow = uowProviderFunc().Create();
             var query = userBandReviewsQueryFunc();
             query.UserId = userId;
 
-            FillDataSet(dataSet, query);
+            await FillDataSetAsync(dataSet, query);
         }
 
-        public void EditUserReview(int reviewId, ReviewEditDTO editedReview)
+        public async Task EditUserReviewAsync(int reviewId, ReviewEditDTO editedReview)
         {
             using var uow = uowProviderFunc().Create();
             var repo = bandReviewRepositoryFunc();
-            var entity = repo.GetById(reviewId);
+            var entity = await repo.GetByIdAsync(reviewId);
             IsNotNull(entity, ErrorMessages.ReviewNotExist);
 
             if (entity.CreatedById != editedReview.CreatedById)
@@ -179,10 +181,10 @@ namespace BusinessLayer.Facades
             mapper.Map(editedReview, entity);
             entity.EditDate = DateTime.Now;
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public void AddReview(BandReviewCreateDTO review)
+        public async Task AddReviewAsync(BandReviewCreateDTO review)
         {
             using var uow = uowProviderFunc().Create();
             var entity = mapper.Map<BandReview>(review);
@@ -192,7 +194,7 @@ namespace BusinessLayer.Facades
             var repo = bandReviewRepositoryFunc();
             repo.Insert(entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
     }
 }

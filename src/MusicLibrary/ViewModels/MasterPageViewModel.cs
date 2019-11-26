@@ -24,26 +24,6 @@ namespace MusicLibrary.ViewModels
             Context.RedirectToRoute("Index");
         }
 
-        protected bool ExecuteSafely(Action action, Action successCallback = null, Action<UIException> failureCallback = null, Action<Exception> totalFailureCallback = null)
-        {
-            try
-            {
-                action();
-                successCallback?.Invoke();
-                return true;
-            }
-            catch (UIException ex)
-            {
-                failureCallback?.Invoke(ex);
-            }
-            catch (Exception ex)
-            {
-                totalFailureCallback?.Invoke(ex);
-            }
-
-            return false;
-        }
-
         protected async Task<bool> ExecuteSafelyAsync(Func<Task> action, Action successCallback = null, Action<UIException> failureCallback = null, Action<Exception> totalFailureCallback = null)
         {
             try

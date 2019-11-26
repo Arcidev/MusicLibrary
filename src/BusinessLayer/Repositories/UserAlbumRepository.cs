@@ -1,6 +1,7 @@
 ﻿using DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using Riganti.Utils.Infrastructure.Core;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Repositories
 {
@@ -8,9 +9,9 @@ namespace BusinessLayer.Repositories
     {
         public UserAlbumRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
 
-        public UserAlbum GetUserAlbum(int userId, int albumId)
+        public async Task<UserAlbum> GetUserAlbumAsync(int userId, int albumId)
         {
-            return Context.UserAlbums.FirstOrDefault(x => x.AlbumId == albumId && x.UserId == userId);
+            return await Context.UserAlbums.FirstOrDefaultAsync(x => x.AlbumId == albumId && x.UserId == userId);
         }
     }
 }

@@ -29,19 +29,18 @@ namespace MusicLibrary.ViewModels
             this.albumFacade = albumFacade;
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
                 ActivePage = "Index";
-                SliderImages = sliderImageFacade.GetImages().ToList();
-                new Random().Shuffle(SliderImages);
-                Categories = categoryFacade.GetCategories();
-                RecentlyAddedAlbums = albumFacade.GetRecentAlbums(5);
-                FeaturedAlbums = albumFacade.GetFeaturedAlbums(5);
+                await Task.WhenAll(Task.Run(async () => { SliderImages = (await sliderImageFacade.GetImages()).ToList(); new Random().Shuffle(SliderImages); }),
+                    Task.Run(async () => Categories = await categoryFacade.GetCategoriesAsync()),
+                    Task.Run(async () => RecentlyAddedAlbums = await albumFacade.GetRecentAlbumsAsync(5)),
+                    Task.Run(async () => FeaturedAlbums = await albumFacade.GetFeaturedAlbumsAsync(5)));
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
     }
 }

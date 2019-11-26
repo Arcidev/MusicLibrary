@@ -19,15 +19,15 @@ namespace MusicLibrary.ViewModels
             this.albumFacade = albumFacade;
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
                 ActivePage = "UserCollection";
-                Albums = albumFacade.GetUserAlbums(UserId).Chunk(5);
+                Albums = (await albumFacade.GetUserAlbumsAsync(UserId)).Chunk(5);
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
     }
 }

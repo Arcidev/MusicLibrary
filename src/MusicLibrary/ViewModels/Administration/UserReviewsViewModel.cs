@@ -58,9 +58,8 @@ namespace MusicLibrary.ViewModels.Administration
             }
 
             var userId = UserId;
-            albumFacade.LoadUserReviews(userId, AlbumReviews);
-            bandFacade.LoadUserReviews(userId, BandReviews);
 
+            await Task.WhenAll(albumFacade.LoadUserReviewsAsync(userId, AlbumReviews), bandFacade.LoadUserReviewsAsync(userId, BandReviews));
             await base.PreRender();
         }
 
@@ -78,14 +77,14 @@ namespace MusicLibrary.ViewModels.Administration
             AlbumReviewEditId = review.Id;
         }
 
-        public void EditBandReview()
+        public async Task EditBandReview()
         {
-            EditReview(BandReviewEditId ?? 0, bandFacade.EditUserReview);
+            await EditReview(BandReviewEditId ?? 0, bandFacade.EditUserReviewAsync);
         }
 
-        public void EditAlbumReview()
+        public async Task EditAlbumReview()
         {
-            EditReview(AlbumReviewEditId ?? 0, albumFacade.EditUserReview);
+            await EditReview(AlbumReviewEditId ?? 0, albumFacade.EditUserReviewAsync);
         }
 
         public void CancelEdit()
@@ -94,7 +93,7 @@ namespace MusicLibrary.ViewModels.Administration
             AlbumReviewEditId = null;
         }
 
-        private void EditReview(int id, Action<int, ReviewEditDTO> action)
+        private async Task EditReview(int id, Func<int, ReviewEditDTO, Task> action)
         {
             if (string.IsNullOrEmpty(EditReviewText))
             {
@@ -102,9 +101,9 @@ namespace MusicLibrary.ViewModels.Administration
                 return;
             }
 
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
-                action(id, new ReviewEditDTO()
+                await action(id, new ReviewEditDTO()
                 {
                     CreatedById = UserId,
                     Quality = (Quality)int.Parse(EditReviewQuality),

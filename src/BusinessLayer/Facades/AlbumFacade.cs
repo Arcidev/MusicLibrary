@@ -10,6 +10,7 @@ using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Facades
 {
@@ -67,12 +68,12 @@ namespace BusinessLayer.Facades
             this.isInUserAlbumCollectionQueryFunc = isInUserAlbumCollectionQueryFunc;
         }
 
-        public AlbumDTO AddAlbum(AlbumCreateDTO album, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public async Task<AlbumDTO> AddAlbumAsync(AlbumCreateDTO album, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
             var entity = mapper.Map<Album>(album);
             entity.CreateDate = DateTime.Now;
-            SetImageFile(entity, file, storage);
+            await SetImageFileAsync(entity, file, storage);
 
             if (album.AddedSongs != null)
             {
@@ -85,30 +86,30 @@ namespace BusinessLayer.Facades
             var repo = albumRepositoryFunc();
             repo.Insert(entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
             return mapper.Map<AlbumDTO>(entity);
         }
 
-        public void ApproveAlbums(IEnumerable<int> albumIds, bool approved)
+        public async Task ApproveAlbumsAsync(IEnumerable<int> albumIds, bool approved)
         {
             using var uow = uowProviderFunc().Create();
             var repo = albumRepositoryFunc();
-            var albums = repo.GetByIds(albumIds);
+            var albums = await repo.GetByIdsAsync(albumIds);
             foreach (var album in albums)
                 album.Approved = approved;
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public void EditAlbum(AlbumEditDTO album, UploadedFile imageFile = null, IUploadedFileStorage storage = null)
+        public async Task EditAlbumAsync(AlbumEditDTO album, UploadedFile imageFile = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
             var repo = albumRepositoryFunc();
-            var entity = repo.GetById(album.Id);
+            var entity = await repo.GetByIdAsync(album.Id);
             IsNotNull(entity, ErrorMessages.AlbumNotExist);
 
             mapper.Map(album, entity);
-            SetImageFile(entity, imageFile, storage);
+            await SetImageFileAsync(entity, imageFile, storage);
 
             if (album.RemovedSongs != null)
             {
@@ -127,44 +128,44 @@ namespace BusinessLayer.Facades
                     entity.AlbumSongs.Add(new AlbumSong() { SongId = addedSongId });
             }
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public IEnumerable<SongDTO> GetAlbumSongs(int albumId)
+        public async Task<IEnumerable<SongDTO>> GetAlbumSongsAsync(int albumId)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumSongsQuerySongFunc();
             query.AlbumId = albumId;
             query.Approved = true;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public IEnumerable<AlbumBandInfoDTO> GetAlbumBandInfoes(int? songId = null)
+        public async Task<IEnumerable<AlbumBandInfoDTO>> GetAlbumBandInfoesAsync(int? songId = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumsQueryAlbumBandInfoFunc();
             query.Approved = true;
             query.SongId = songId;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public IEnumerable<SongInfoDTO> GetAlbumSongInfoes(int albumId)
+        public async Task<IEnumerable<SongInfoDTO>> GetAlbumSongInfoesAsync(int albumId)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumSongsQuerySongInfoFunc();
             query.AlbumId = albumId;
             query.Approved = true;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public AlbumDTO GetAlbum(int id, bool includeBandInfo = true, bool includeSongs = true)
+        public async Task<AlbumDTO> GetAlbumAsync(int id, bool includeBandInfo = true, bool includeSongs = true)
         {
             using var uow = uowProviderFunc().Create();
             var repo = albumRepositoryFunc();
-            var entity = repo.GetById(id);
+            var entity = await repo.GetByIdAsync(id);
             IsNotNull(entity, ErrorMessages.AlbumNotExist);
 
             var dto = mapper.Map<AlbumDTO>(entity);
@@ -172,12 +173,12 @@ namespace BusinessLayer.Facades
                 dto.Band = mapper.Map<BandDTO>(entity.Band);
 
             if (includeSongs)
-                dto.Songs = GetAlbumSongs(entity.Id);
+                dto.Songs = await GetAlbumSongsAsync(entity.Id);
 
             return dto;
         }
 
-        public IEnumerable<AlbumDTO> GetAlbums(int? categoryId = null, string filter = null)
+        public async Task<IEnumerable<AlbumDTO>> GetAlbumsAsync(int? categoryId = null, string filter = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumsQueryAlbumFunc();
@@ -186,27 +187,27 @@ namespace BusinessLayer.Facades
             query.IncludeBandFilter = true;
             query.Approved = true;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public void LoadAlbums(GridViewDataSet<AlbumInfoDTO> dataSet, string filter = null, bool? approved = null)
+        public async Task LoadAlbumsAsync(GridViewDataSet<AlbumInfoDTO> dataSet, string filter = null, bool? approved = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumsQueryAlbumInfoFunc();
             query.Filter = filter;
             query.Approved = approved;
 
-            FillDataSet(dataSet, query);
+            await FillDataSetAsync(dataSet, query);
         }
 
-        public void LoadUserAlbumsCollection(int userId, GridViewDataSet<AlbumInfoDTO> dataSet, string filter = null)
+        public async Task LoadUserAlbumsCollectionAsync(int userId, GridViewDataSet<AlbumInfoDTO> dataSet, string filter = null)
         {
-            LoadAlbums(dataSet, filter, true);
+            await LoadAlbumsAsync(dataSet, filter, true);
             using var uow = uowProviderFunc().Create();
             var collectionQuery = isInUserAlbumCollectionQueryFunc();
             collectionQuery.UserId = userId;
             collectionQuery.AlbumIds = dataSet.Items.Select(x => x.AlbumId);
-            var collection = collectionQuery.Execute();
+            var collection = await collectionQuery.ExecuteAsync();
 
             foreach (var album in dataSet.Items)
             {
@@ -215,7 +216,7 @@ namespace BusinessLayer.Facades
             }
         }
 
-        public void AddReview(AlbumReviewCreateDTO review)
+        public async Task AddReviewAsync(AlbumReviewCreateDTO review)
         {
             using var uow = uowProviderFunc().Create();
             var entity = mapper.Map<AlbumReview>(review);
@@ -225,26 +226,26 @@ namespace BusinessLayer.Facades
             var repo = albumReviewRepositoryFunc();
             repo.Insert(entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
 
-            UpdateAlbumQuality(review.AlbumId);
-            uow.Commit();
+            await UpdateAlbumQualityAsync(review.AlbumId);
+            await uow.CommitAsync();
         }
 
-        public void LoadReviews(int albumId, GridViewDataSet<ReviewDTO> dataSet)
+        public async Task LoadReviewsAsync(int albumId, GridViewDataSet<ReviewDTO> dataSet)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumReviewsQueryFunc();
             query.AlbumId = albumId;
 
-            FillDataSet(dataSet, query);
+            await FillDataSetAsync(dataSet, query);
         }
 
-        public void EditUserReview(int reviewId, ReviewEditDTO editedReview)
+        public async Task EditUserReviewAsync(int reviewId, ReviewEditDTO editedReview)
         {
             using var uow = uowProviderFunc().Create();
             var repo = albumReviewRepositoryFunc();
-            var entity = repo.GetById(reviewId);
+            var entity = await repo.GetByIdAsync(reviewId);
             IsNotNull(entity, ErrorMessages.ReviewNotExist);
 
             if (entity.CreatedById != editedReview.CreatedById)
@@ -253,25 +254,25 @@ namespace BusinessLayer.Facades
             var qualityUpdated = editedReview.Quality != entity.Quality;
             mapper.Map(editedReview, entity);
             entity.EditDate = DateTime.Now;
-            uow.Commit();
+            await uow.CommitAsync();
 
             if (!qualityUpdated)
                 return;
 
-            UpdateAlbumQuality(entity.AlbumId);
-            uow.Commit();
+            await UpdateAlbumQualityAsync(entity.AlbumId);
+            await uow.CommitAsync();
         }
 
-        public void LoadUserReviews(int userId, GridViewDataSet<UserAlbumReviewDTO> dataSet)
+        public async Task LoadUserReviewsAsync(int userId, GridViewDataSet<UserAlbumReviewDTO> dataSet)
         {
             using var uow = uowProviderFunc().Create();
             var query = userAlbumReviewsQueryFunc();
             query.UserId = userId;
 
-            FillDataSet(dataSet, query);
+            await FillDataSetAsync(dataSet, query);
         }
 
-        public void AddSongToAlbum(int albumId, int songId)
+        public async Task AddSongToAlbumAsync(int albumId, int songId)
         {
             using var uow = uowProviderFunc().Create();
             var repo = albumSongRepositoryFunc();
@@ -281,81 +282,81 @@ namespace BusinessLayer.Facades
                 SongId = songId
             });
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public IEnumerable<AlbumDTO> GetRecentAlbums(int count)
+        public async Task<IEnumerable<AlbumDTO>> GetRecentAlbumsAsync(int count)
         {
             using var uow = uowProviderFunc().Create();
             var query = recentlyAddedAlbumsQueryFunc();
             query.Take = count;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public IEnumerable<AlbumDTO> GetFeaturedAlbums(int count)
+        public async Task<IEnumerable<AlbumDTO>> GetFeaturedAlbumsAsync(int count)
         {
             using var uow = uowProviderFunc().Create();
             var query = featuredAlbumsQueryFunc();
             query.Take = count;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public void AddAlbumToUserCollection(UserAlbumCreateDTO userAlbum)
+        public async Task AddAlbumToUserCollectionAsync(UserAlbumCreateDTO userAlbum)
         {
             using var uow = uowProviderFunc().Create();
             var repo = userAlbumRepositoryFunc();
-            if (repo.GetUserAlbum(userAlbum.UserId, userAlbum.AlbumId) != null)
+            if (await repo.GetUserAlbumAsync(userAlbum.UserId, userAlbum.AlbumId) != null)
                 return;
 
             var entity = mapper.Map<UserAlbum>(userAlbum);
             repo.Insert(entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public void RemoveAlbumFromUserCollection(int userId, int albumId)
+        public async Task RemoveAlbumFromUserCollectionAsync(int userId, int albumId)
         {
             using var uow = uowProviderFunc().Create();
             var repo = userAlbumRepositoryFunc();
-            var entity = repo.GetUserAlbum(userId, albumId);
+            var entity = await repo.GetUserAlbumAsync(userId, albumId);
             if (entity == null)
                 return;
 
             repo.Delete(entity);
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public bool HasUserInCollection(int userId, int albumId)
+        public async Task<bool> HasUserInCollectionAsync(int userId, int albumId)
         {
             using var uow = uowProviderFunc().Create();
             var repo = userAlbumRepositoryFunc();
-            var entity = repo.GetUserAlbum(userId, albumId);
+            var entity = await repo.GetUserAlbumAsync(userId, albumId);
 
             return entity != null;
         }
 
-        public IEnumerable<AlbumDTO> GetUserAlbums(int userId)
+        public async Task<IEnumerable<AlbumDTO>> GetUserAlbumsAsync(int userId)
         {
             using var uow = uowProviderFunc().Create();
             var query = userAlbumsQueryFunc();
             query.UserId = userId;
 
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        private void UpdateAlbumQuality(int albumId)
+        private async Task UpdateAlbumQualityAsync(int albumId)
         {
             using var uow = uowProviderFunc().Create();
             var repo = albumReviewRepositoryFunc();
-            var averageQuality = repo.GetAlbumAverageQuality(albumId);
+            var averageQuality = await repo.GetAlbumAverageQualityAsync(albumId);
 
             var albumRepo = albumRepositoryFunc();
-            var album = albumRepo.GetById(albumId);
+            var album = await albumRepo.GetByIdAsync(albumId);
             album.AverageQuality = Convert.ToDecimal(averageQuality);
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
     }
 }

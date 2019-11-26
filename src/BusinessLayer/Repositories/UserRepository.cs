@@ -1,6 +1,7 @@
 ﻿using DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using Riganti.Utils.Infrastructure.Core;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Repositories
 {
@@ -8,9 +9,9 @@ namespace BusinessLayer.Repositories
     {
         public UserRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
 
-        public User GetByEmail(string email)
+        public async Task<User> GetByEmailAsync(string email)
         {
-            return Context.Users.FirstOrDefault(x => x.Email == email);
+            return await Context.Users.FirstOrDefaultAsync(x => x.Email == email);
         }
     }
 }

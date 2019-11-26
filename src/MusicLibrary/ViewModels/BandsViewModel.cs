@@ -16,15 +16,15 @@ namespace MusicLibrary.ViewModels
             this.bandFacade = bandFacade;
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
                 ActivePage = "Bands";
-                Bands = bandFacade.GetBands();
+                Bands = await bandFacade.GetBandsAsync();
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
     }
 }

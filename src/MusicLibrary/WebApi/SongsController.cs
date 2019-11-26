@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Facades;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WebApiModels;
 using WebApiModels.Extensions;
 
@@ -18,15 +19,15 @@ namespace MusicLibrary.WebApi
         }
 
         [HttpGet]
-        public IEnumerable<SongViewModel> GetSongs()
+        public async Task<IEnumerable<SongViewModel>> GetSongs()
         {
-            return songFacade.GetSongs().ToSongViewModel();
+            return (await songFacade.GetSongsAsync()).ToSongViewModel();
         }
 
         [HttpGet("{id}")]
-        public SongViewModel GetSong(int id)
+        public async Task<SongViewModel> GetSong(int id)
         {
-            return songFacade.GetSong(id).ToSongViewModel();
+            return (await songFacade.GetSongAsync(id)).ToSongViewModel();
         }
     }
 }

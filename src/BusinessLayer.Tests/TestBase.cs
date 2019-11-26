@@ -19,7 +19,6 @@ namespace BL.Tests
                 .ConfigureServices()
                 .ConfigureFacades()
                 .BuildServiceProvider();
-
         }
     }
 }

@@ -49,18 +49,20 @@ namespace MusicLibrary.ViewModels.Administration
             this.songFacade = songFacade;
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
                 ActiveAdminPage = "Albums";
-                BandInfoes = bandFacade.GetBandInfoes();
-                Categories = categoryFacade.GetCategories();
-                SongInfoes = songFacade.GetSongInfoes().ToList();
+
+                await Task.WhenAll(Task.Run(async () => BandInfoes = await bandFacade.GetBandInfoesAsync()),
+                    Task.Run(async () => Categories = await categoryFacade.GetCategoriesAsync()),
+                    Task.Run(async () => SongInfoes = (await songFacade.GetSongInfoesAsync()).ToList()));
+
                 OnSongsLoaded();
             }
             
-            return base.PreRender();
+            await base.PreRender();
         }
 
         public void AddSong()
@@ -104,7 +106,7 @@ namespace MusicLibrary.ViewModels.Administration
             Files.Clear();
         }
 
-        public abstract void SaveChanges();
+        public abstract Task SaveChanges();
 
         protected virtual void OnSongsLoaded() { }
 

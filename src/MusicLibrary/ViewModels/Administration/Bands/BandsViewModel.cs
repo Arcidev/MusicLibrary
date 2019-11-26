@@ -42,20 +42,19 @@ namespace MusicLibrary.ViewModels.Administration
                 ActiveAdminPage = "Bands";
             }
 
-            bandFacade.LoadBands(Bands, Filter);
-
+            await bandFacade.LoadBandsAsync(Bands, Filter);
             await base.PreRender();
         }
 
-        public void ApproveSelected()
+        public async Task ApproveSelected()
         {
-            bandFacade.ApproveBands(SelectedBandIds, true);
+            await bandFacade.ApproveBandsAsync(SelectedBandIds, true);
             SelectedBandIds.Clear();
         }
 
-        public void DisapproveSelected()
+        public async Task DisapproveSelected()
         {
-            bandFacade.ApproveBands(SelectedBandIds, false);
+            await bandFacade.ApproveBandsAsync(SelectedBandIds, false);
             SelectedBandIds.Clear();
         }
     }

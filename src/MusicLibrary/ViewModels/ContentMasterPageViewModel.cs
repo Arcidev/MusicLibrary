@@ -16,14 +16,14 @@ namespace MusicLibrary.ViewModels
             this.categoryFacade = categoryFacade;
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                Categories = categoryFacade.GetCategories();
+                Categories = await categoryFacade.GetCategoriesAsync();
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
     }
 }

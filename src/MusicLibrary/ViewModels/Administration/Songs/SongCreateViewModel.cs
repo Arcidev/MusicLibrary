@@ -23,15 +23,15 @@ namespace MusicLibrary.ViewModels.Administration
             await base.PreRender();
         }
 
-        public override void SaveChanges()
+        public override async Task SaveChanges()
         {
             if (!ValidateSong())
                 return;
 
             var role = (UserRole)Enum.Parse(typeof(UserRole), UserRole);
-            var success = ExecuteSafely(() =>
+            var success = await ExecuteSafelyAsync(async () =>
             {
-                songFacade.AddSong(new SongCreateDTO()
+                await songFacade.AddSongAsync(new SongCreateDTO()
                 {
                     Approved = role != Shared.Enums.UserRole.User ? Song.Approved : false,
                     Name = Song.Name,

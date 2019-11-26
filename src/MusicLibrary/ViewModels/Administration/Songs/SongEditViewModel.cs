@@ -16,11 +16,11 @@ namespace MusicLibrary.ViewModels.Administration
 
         public SongEditViewModel(AlbumFacade albumFacade, SongFacade songFacade) : base(albumFacade, songFacade) { }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                var song = songFacade.GetSong(int.Parse(Context.Parameters["SongId"].ToString()));
+                var song = await songFacade.GetSongAsync(int.Parse(Context.Parameters["SongId"].ToString()));
                 Song = new SongBaseDTO()
                 {
                     Approved = song.Approved,
@@ -28,11 +28,11 @@ namespace MusicLibrary.ViewModels.Administration
                     YoutubeUrlParam = song.YoutubeUrlParam
                 };
                 OriginalAudioFileName = song.AudioStorageFile?.FileName;
-                SongAlbums = albumFacade.GetAlbumBandInfoes(song.Id).ToList();
+                SongAlbums = (await albumFacade.GetAlbumBandInfoesAsync(song.Id)).ToList();
                 ResetSong();
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
 
         public override void ResetSong()
@@ -41,14 +41,14 @@ namespace MusicLibrary.ViewModels.Administration
             Files.Clear();
         }
 
-        public override void SaveChanges()
+        public override async Task SaveChanges()
         {
             if (!ValidateSong())
                 return;
 
-            var success = ExecuteSafely(() =>
+            var success = await ExecuteSafelyAsync(async () =>
             {
-                songFacade.EditSong(new SongEditDTO()
+                await songFacade.EditSongAsync(new SongEditDTO()
                 {
                     Id = int.Parse(Context.Parameters["SongId"].ToString()),
                     Approved = Song.Approved,

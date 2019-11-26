@@ -10,6 +10,7 @@ using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Facades
 {
@@ -32,12 +33,12 @@ namespace BusinessLayer.Facades
             this.usersQueryFunc = usersQueryFunc;
         }
 
-        public UserDTO AddUser(UserCreateDTO user)
+        public async Task<UserDTO> AddUserAsync(UserCreateDTO user)
         {
-            using var uow = uowProviderFunc().Create();
-            if (GetUserByEmail(user.Email) != null)
+            if (await GetUserByEmailAsync(user.Email) != null)
                 throw new UIException(ErrorMessages.EmailAlreadyUsed);
 
+            using var uow = uowProviderFunc().Create();
             var entity = mapper.Map<User>(user);
             var (hash, salt) = CreateHash(user.Password);
             entity.PasswordHash = hash;
@@ -46,14 +47,14 @@ namespace BusinessLayer.Facades
             var repo = userRepositoryFunc();
             repo.Insert(entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
 
             return mapper.Map<UserDTO>(entity);
         }
 
-        public UserDTO VerifyAndGetUser(string email, string password)
+        public async Task<UserDTO> VerifyAndGetUserAsync(string email, string password)
         {
-            var user = GetUserByEmail(email);
+            var user = await GetUserByEmailAsync(email);
             IsNotNull(user, ErrorMessages.VerificationFailed);
 
             if (VerifyHashedPassword(user.PasswordHash, user.PasswordSalt, password))
@@ -62,31 +63,31 @@ namespace BusinessLayer.Facades
             throw new UIException(ErrorMessages.VerificationFailed);
         }
 
-        public UserDTO GetUserByEmail(string email)
+        public async Task<UserDTO> GetUserByEmailAsync(string email)
         {
             using var uow = uowProviderFunc().Create();
             var repo = userRepositoryFunc();
-            var user = repo.GetByEmail(email);
+            var user = await repo.GetByEmailAsync(email);
 
             return user != null ? mapper.Map<UserDTO>(user) : null;
         }
 
-        public UserDTO GetUser(int id)
+        public async Task<UserDTO> GetUserAsync(int id)
         {
             using var uow = uowProviderFunc().Create();
             var repo = userRepositoryFunc();
-            var user = repo.GetById(id);
+            var user = await repo.GetByIdAsync(id);
             IsNotNull(user, ErrorMessages.UserNotExist);
 
             return mapper.Map<UserDTO>(user);
         }
 
-        public void EditUser(UserEditDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
+        public async Task EditUserAsync(UserEditDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
             var repo = userRepositoryFunc();
-            var entity = repo.GetById(user.Id) ?? throw new UIException(ErrorMessages.UserNotExist);
-            SetImageFile(entity, file, storage);
+            var entity = await repo.GetByIdAsync(user.Id) ?? throw new UIException(ErrorMessages.UserNotExist);
+            await SetImageFileAsync(entity, file, storage);
 
             mapper.Map(user, entity);
             if (!string.IsNullOrEmpty(user.Password))
@@ -96,25 +97,25 @@ namespace BusinessLayer.Facades
                 entity.PasswordSalt = salt;
             }
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public void DeleteUser(int id)
+        public async Task DeleteUserAsync(int id)
         {
             using var uow = uowProviderFunc().Create();
             var repo = userRepositoryFunc();
             repo.Delete(id);
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public void LoadUserInfoes(GridViewDataSet<UserInfoDTO> dataSet, string filter)
+        public async Task LoadUserInfoesAsync(GridViewDataSet<UserInfoDTO> dataSet, string filter)
         {
             using var uow = uowProviderFunc().Create();
             var query = usersQueryFunc();
             query.Filter = filter;
 
-            FillDataSet(dataSet, query);
+            await FillDataSetAsync(dataSet, query);
         }
 
         private (string hash, string salt) CreateHash(string password)

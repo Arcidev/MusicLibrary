@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Facades;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MusicLibrary.WebApi
 {
@@ -16,9 +17,9 @@ namespace MusicLibrary.WebApi
         }
 
         [HttpGet("{id}")]
-        public FileStreamResult DownloadFile(int id)
+        public async Task<FileStreamResult> DownloadFile(int id)
         {
-            var file = storageFileFacade.GetFile(id);
+            var file = await storageFileFacade.GetFileAsync(id);
             var stream = new FileStream(Path.Combine(storageFileFacade.GetUploadPath(), file.FileName), FileMode.Open);
 
             return File(stream, "application/octet-stream", file.DisplayName);

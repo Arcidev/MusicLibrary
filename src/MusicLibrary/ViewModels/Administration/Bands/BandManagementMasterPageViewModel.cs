@@ -53,7 +53,7 @@ namespace MusicLibrary.ViewModels.Administration
             Files.Clear();
         }
 
-        public abstract void SaveChanges();
+        public abstract Task SaveChanges();
 
         protected bool ValidateBand()
         {

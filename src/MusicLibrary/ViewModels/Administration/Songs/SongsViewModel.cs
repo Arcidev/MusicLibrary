@@ -42,20 +42,19 @@ namespace MusicLibrary.ViewModels.Administration
                 ActiveAdminPage = "Songs";
             }
 
-            songFacade.LoadSongInfoes(Songs, Filter);
-
+            await songFacade.LoadSongInfoesAsync(Songs, Filter);
             await base.PreRender();
         }
 
-        public void ApproveSelected()
+        public async Task ApproveSelected()
         {
-            songFacade.ApproveSongs(SelectedSongIds, true);
+            await songFacade.ApproveSongsAsync(SelectedSongIds, true);
             SelectedSongIds.Clear();
         }
 
-        public void DisapproveSelected()
+        public async Task DisapproveSelected()
         {
-            songFacade.ApproveSongs(SelectedSongIds, false);
+            await songFacade.ApproveSongsAsync(SelectedSongIds, false);
             SelectedSongIds.Clear();
         }
     }

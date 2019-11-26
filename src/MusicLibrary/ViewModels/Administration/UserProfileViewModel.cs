@@ -40,13 +40,13 @@ namespace MusicLibrary.ViewModels.Administration
             if (!Context.IsPostBack)
             {
                 ActiveAdminPage = "UserProfile";
-                LoadUser();
+                await LoadUser();
             }
 
             await base.PreRender();
         }
 
-        public void SaveChanges()
+        public async Task SaveChanges()
         {
             UserProfileErrorViewModel = new UserProfileErrorViewModel();
 
@@ -68,11 +68,11 @@ namespace MusicLibrary.ViewModels.Administration
             if (UserProfileErrorViewModel.ContainsError)
                 return;
 
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
                 User.Password = Password;
-                userFacade.EditUser(User, Files.Files.LastOrDefault(), FileStorage);
-                LoadUser();
+                await userFacade.EditUserAsync(User, Files.Files.LastOrDefault(), FileStorage);
+                await LoadUser();
                 Files.Clear();
             });
         }
@@ -100,9 +100,9 @@ namespace MusicLibrary.ViewModels.Administration
             return Regex.Match(Password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$").Success;
         }
 
-        private void LoadUser()
+        private async Task LoadUser()
         {
-            User = userFacade.GetUser(UserId);
+            User = await userFacade.GetUserAsync(UserId);
             ImageFileName = User.ImageStorageFile != null ? $"/SavedFiles/{User.ImageStorageFile.FileName}" : $"/api/identicon/{User.FullName}";
         }
     }

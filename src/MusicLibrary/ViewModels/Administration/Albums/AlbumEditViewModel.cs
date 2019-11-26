@@ -20,7 +20,7 @@ namespace MusicLibrary.ViewModels.Administration
         {
             if (!Context.IsPostBack)
             {
-                var album = albumFacade.GetAlbum(int.Parse(Context.Parameters["AlbumId"].ToString()), false, false);
+                var album = await albumFacade.GetAlbumAsync(int.Parse(Context.Parameters["AlbumId"].ToString()), false, false);
                 Album = new AlbumBaseDTO()
                 {
                     Approved = album.Approved,
@@ -31,7 +31,7 @@ namespace MusicLibrary.ViewModels.Administration
                 OriginalImageFileName = album.ImageStorageFile?.FileName;
                 SelectedBandId = album.BandId;
                 SelectedCategoryId = album.CategoryId;
-                AlbumSongs = albumFacade.GetAlbumSongInfoes(album.Id).ToList();
+                AlbumSongs = (await albumFacade.GetAlbumSongInfoesAsync(album.Id)).ToList();
                 ResetImage();
             }
 
@@ -44,14 +44,14 @@ namespace MusicLibrary.ViewModels.Administration
             Files.Clear();
         }
 
-        public override void SaveChanges()
+        public override async Task SaveChanges()
         {
             if (!ValidateAlbum())
                 return;
 
-            var success = ExecuteSafely(() =>
+            var success = await ExecuteSafelyAsync(async () =>
             {
-                albumFacade.EditAlbum(new AlbumEditDTO()
+                await albumFacade.EditAlbumAsync(new AlbumEditDTO()
                 {
                     Id = int.Parse(Context.Parameters["AlbumId"].ToString()),
                     Approved = Album.Approved,

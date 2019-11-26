@@ -37,16 +37,16 @@ namespace MusicLibrary.ViewModels.Administration
             this.songFacade = songFacade;
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
                 ActiveAdminPage = "Songs";
-                AlbumInfoes = albumFacade.GetAlbumBandInfoes().ToList();
+                AlbumInfoes = (await albumFacade.GetAlbumBandInfoesAsync()).ToList();
                 OnAlbumInfoesLoaded();
             }
             
-            return base.PreRender();
+            await base.PreRender();
         }
 
         public void AddAlbum()
@@ -90,7 +90,7 @@ namespace MusicLibrary.ViewModels.Administration
             Files.Clear();
         }
 
-        public abstract void SaveChanges();
+        public abstract Task SaveChanges();
 
         protected virtual void OnAlbumInfoesLoaded() { }
 

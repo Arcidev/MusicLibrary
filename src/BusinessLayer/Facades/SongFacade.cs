@@ -10,6 +10,7 @@ using BusinessLayer.Resources;
 using DotVVM.Framework.Controls;
 using System.Linq;
 using Riganti.Utils.Infrastructure.Core;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Facades
 {
@@ -34,13 +35,13 @@ namespace BusinessLayer.Facades
             this.songsQuerySongInfoFunc = songsQuerySongInfoFunc;
         }
 
-        public SongDTO AddSong(SongCreateDTO song, UploadedFile audioFile = null, IUploadedFileStorage storage = null)
+        public async Task<SongDTO> AddSongAsync(SongCreateDTO song, UploadedFile audioFile = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
             var entity = mapper.Map<Song>(song);
             entity.CreateDate = DateTime.Now;
 
-            SetAudioFile(entity, audioFile, storage);
+            await SetAudioFile(entity, audioFile, storage);
 
             if (song.AddedAlbums != null && song.AddedAlbums.Any())
             {
@@ -57,20 +58,20 @@ namespace BusinessLayer.Facades
                 repo.Insert(entity);
             }
 
-            uow.Commit();
+            await uow.CommitAsync();
 
             return mapper.Map<SongDTO>(entity);
         }
 
-        public void EditSong(SongEditDTO song, UploadedFile audioFile = null, IUploadedFileStorage storage = null)
+        public async Task EditSongAsync(SongEditDTO song, UploadedFile audioFile = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
             var repo = songRepositoryFunc();
-            var entity = repo.GetById(song.Id);
+            var entity = await repo.GetByIdAsync(song.Id);
             IsNotNull(entity, ErrorMessages.SongNotExist);
 
             mapper.Map(song, entity);
-            SetAudioFile(entity, audioFile, storage);
+            await SetAudioFile(entity, audioFile, storage);
 
             var albumSongRepo = albumSongRepositoryFunc();
             if (song.RemovedAlbums != null)
@@ -85,69 +86,70 @@ namespace BusinessLayer.Facades
                 }));
             }
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public void DeleteSong(int id)
+        public async Task DeleteSongAsync(int id)
         {
             using var uow = uowProviderFunc().Create();
             var repo = songRepositoryFunc();
             repo.Delete(id);
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        public IEnumerable<SongDTO> GetSongs()
+        public async Task<IEnumerable<SongDTO>> GetSongsAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = songsQuerySongFunc();
             query.Approved = true;
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public IEnumerable<SongInfoDTO> GetSongInfoes()
+        public async Task<IEnumerable<SongInfoDTO>> GetSongInfoesAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = songsQuerySongInfoFunc();
             query.Approved = true;
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public void LoadSongInfoes(GridViewDataSet<SongInfoDTO> dataSet, string filter = null)
+        public async Task LoadSongInfoesAsync(GridViewDataSet<SongInfoDTO> dataSet, string filter = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = songsQuerySongInfoFunc();
             query.Filter = filter;
 
-            FillDataSet(dataSet, query);
+            await FillDataSetAsync(dataSet, query);
         }
 
-        public SongDTO GetSong(int id)
+        public async Task<SongDTO> GetSongAsync(int id)
         {
             using var uow = uowProviderFunc().Create();
             var repo = songRepositoryFunc();
-            var entity = repo.GetById(id);
+            var entity = await repo.GetByIdAsync(id);
             IsNotNull(entity, ErrorMessages.SongNotExist);
+
             return mapper.Map<SongDTO>(entity);
         }
 
-        public void ApproveSongs(IEnumerable<int> songIds, bool approved)
+        public async Task ApproveSongsAsync(IEnumerable<int> songIds, bool approved)
         {
             using var uow = uowProviderFunc().Create();
             var repo = songRepositoryFunc();
-            var songs = repo.GetByIds(songIds);
+            var songs = await repo.GetByIdsAsync(songIds);
             foreach (var song in songs)
                 song.Approved = approved;
 
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
-        private void SetAudioFile(Song entity, UploadedFile file, IUploadedFileStorage storage)
+        private async Task SetAudioFile(Song entity, UploadedFile file, IUploadedFileStorage storage)
         {
             if (file != null && storage != null)
             {
                 if (entity.AudioStorageFileId.HasValue)
-                    storageFileFacade.Value.DeleteFile(entity.AudioStorageFileId.Value);
+                    await storageFileFacade.Value.DeleteFileAsync(entity.AudioStorageFileId.Value);
 
                 var fileName = storageFileFacade.Value.SaveFile(file, storage);
                 entity.AudioStorageFile = new StorageFile()

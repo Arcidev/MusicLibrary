@@ -19,7 +19,7 @@ namespace MusicLibrary.ViewModels.Login
         {
             var success = await ExecuteSafelyAsync(async () =>
             {
-                var user = userFacade.VerifyAndGetUser(Email, Password);
+                var user = await userFacade.VerifyAndGetUserAsync(Email, Password);
                 await SignUserIn(user);
             }, failureCallback: (ex) => ErrorMessage = ex.Message);
 

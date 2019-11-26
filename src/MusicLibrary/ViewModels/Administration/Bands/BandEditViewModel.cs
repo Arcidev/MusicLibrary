@@ -17,7 +17,7 @@ namespace MusicLibrary.ViewModels.Administration
         {
             if (!Context.IsPostBack)
             {
-                var band = bandFacade.GetBand(int.Parse(Context.Parameters["BandId"].ToString()), true, true);
+                var band = await bandFacade.GetBandAsync(int.Parse(Context.Parameters["BandId"].ToString()), true, true);
                 Band = new BandBaseDTO()
                 {
                     Approved = band.Approved,
@@ -37,14 +37,14 @@ namespace MusicLibrary.ViewModels.Administration
             Files.Clear();
         }
 
-        public override void SaveChanges()
+        public override async Task SaveChanges()
         {
             if (!ValidateBand())
                 return;
 
-            var success = ExecuteSafely(() =>
+            var success = await ExecuteSafelyAsync(async () =>
             {
-                bandFacade.EditBand(new BandEditDTO()
+                await bandFacade.EditBandAsync(new BandEditDTO()
                 {
                     Id = int.Parse(Context.Parameters["BandId"].ToString()),
                     Approved = Band.Approved,

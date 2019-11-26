@@ -70,11 +70,11 @@
             </div>
         </div>
     </div>
-	<dot:InlineScript>
+    <dot:InlineScript>
         dotvvm.events.init.subscribe(function () {
             $("#dg-container").gallery({
-				autoplay: true
-			});
+                autoplay: true
+            });
         });
     </dot:InlineScript>
 </dot:Content>

@@ -7,6 +7,7 @@ using DotVVM.Framework.Storage;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Facades
 {
@@ -21,7 +22,7 @@ namespace BusinessLayer.Facades
             this.storageFileRepositoryFunc = storageFileRepositoryFunc;
         }
 
-        public StorageFileDTO AddFile(UploadedFile file, IUploadedFileStorage storage)
+        public async Task<StorageFileDTO> AddFileAsync(UploadedFile file, IUploadedFileStorage storage)
         {
             using var uow = uowProviderFunc().Create();
             var fileName = SaveFile(file, storage);
@@ -33,16 +34,16 @@ namespace BusinessLayer.Facades
 
             var repo = storageFileRepositoryFunc();
             repo.Insert(entity);
-            uow.Commit();
+            await uow.CommitAsync();
 
             return mapper.Map<StorageFileDTO>(entity);
         }
 
-        public void DeleteFile(int fileId)
+        public async Task DeleteFileAsync(int fileId)
         {
             using var uow = uowProviderFunc().Create();
             var repo = storageFileRepositoryFunc();
-            var storageFile = repo.GetById(fileId);
+            var storageFile = await repo.GetByIdAsync(fileId);
             IsNotNull(storageFile, ErrorMessages.FileNotExist);
 
             var targetPath = Path.Combine(GetUploadPath(), storageFile.FileName);
@@ -50,7 +51,7 @@ namespace BusinessLayer.Facades
                 File.Delete(targetPath);
 
             repo.Delete(storageFile);
-            uow.Commit();
+            await uow.CommitAsync();
         }
 
         public string SaveFile(UploadedFile file, IUploadedFileStorage storage)
@@ -63,11 +64,11 @@ namespace BusinessLayer.Facades
             return fileName;
         }
 
-        public StorageFileDTO GetFile(int id)
+        public async Task<StorageFileDTO> GetFileAsync(int id)
         {
             using var uow = uowProviderFunc().Create();
             var repo = storageFileRepositoryFunc();
-            var storageFile = repo.GetById(id);
+            var storageFile = await repo.GetByIdAsync(id);
             IsNotNull(storageFile, ErrorMessages.FileNotExist);
 
             return mapper.Map<StorageFileDTO>(storageFile);

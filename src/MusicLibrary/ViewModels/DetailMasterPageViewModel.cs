@@ -38,11 +38,10 @@ namespace MusicLibrary.ViewModels
             };
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
-            LoadReviews();
-
-            return base.PreRender();
+            await LoadReviews();
+            await base.PreRender();
         }
 
         public void Edit(ReviewDTO review)
@@ -54,14 +53,14 @@ namespace MusicLibrary.ViewModels
             ReviewQuality = review.QualityInt.ToString();
         }
 
-        public void EditReview()
+        public async Task EditReview()
         {
             if (!ValidateReview())
                 return;
 
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
-                GetEditReviewAction()(ReviewEditId ?? 0, new ReviewEditDTO()
+                await GetEditReviewAction()(ReviewEditId ?? 0, new ReviewEditDTO()
                 {
                     CreatedById = UserId,
                     Quality = (Quality)int.Parse(ReviewQuality),
@@ -84,11 +83,11 @@ namespace MusicLibrary.ViewModels
             ReviewEditId = null;
         }
 
-        public abstract void AddReview();
+        public abstract Task AddReview();
 
-        protected abstract void LoadReviews();
+        protected abstract Task LoadReviews();
 
-        protected abstract Action<int, ReviewEditDTO> GetEditReviewAction();
+        protected abstract Func<int, ReviewEditDTO, Task> GetEditReviewAction();
 
         protected bool ValidateReview()
         {

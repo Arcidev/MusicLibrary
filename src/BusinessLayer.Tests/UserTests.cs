@@ -2,6 +2,7 @@
 using BusinessLayer.Facades;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Enums;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace BL.Tests
@@ -11,7 +12,7 @@ namespace BL.Tests
         private static UserFacade UserFacade => services.GetRequiredService<UserFacade>();
 
         [Fact]
-        public void TestCRUDOperations()
+        public async Task TestCRUDOperations()
         {
             var userFacade = UserFacade;
             var user = new UserCreateDTO()
@@ -23,24 +24,24 @@ namespace BL.Tests
                 UserRole = UserRole.Admin
             };
 
-            userFacade.AddUser(user);
+            await userFacade.AddUserAsync(user);
 
-            var dto = userFacade.VerifyAndGetUser("test@mail.sk", "123");
+            var dto = await userFacade.VerifyAndGetUserAsync("test@mail.sk", "123");
             Assert.Equal("Test", dto.FirstName);
 
             dto.FirstName = "Test2";
-            userFacade.EditUser(dto);
+            await userFacade.EditUserAsync(dto);
 
-            dto = userFacade.VerifyAndGetUser("test@mail.sk", "123");
+            dto = await userFacade.VerifyAndGetUserAsync("test@mail.sk", "123");
             Assert.Equal("Test2", dto.FirstName);
-            userFacade.DeleteUser(dto.Id);
+            await userFacade.DeleteUserAsync(dto.Id);
         }
 
         [Fact]
-        public void TestNotExistingUserGet()
+        public async Task TestNotExistingUserGet()
         {
             var userFacade = UserFacade;
-            Assert.Null(userFacade.GetUserByEmail("notexisting@mail.sk"));
+            Assert.Null(await userFacade.GetUserByEmailAsync("notexisting@mail.sk"));
         }
     }
 }

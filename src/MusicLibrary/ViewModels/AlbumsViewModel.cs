@@ -17,22 +17,22 @@ namespace MusicLibrary.ViewModels
             this.albumFacade = albumFacade;
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
-                int? categoryId = null;
                 if (Context.Parameters.ContainsKey("Filter"))
                     SearchString = Context.Parameters["Filter"].ToString();
 
+                int? categoryId = null;
                 if (Context.Parameters.ContainsKey("CategoryId"))
                     categoryId = int.Parse(Context.Parameters["CategoryId"].ToString());
 
                 ActivePage = "Albums";
-                Albums = albumFacade.GetAlbums(categoryId, SearchString).Chunk(5);
+                Albums = (await albumFacade.GetAlbumsAsync(categoryId, SearchString)).Chunk(5);
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
     }
 }

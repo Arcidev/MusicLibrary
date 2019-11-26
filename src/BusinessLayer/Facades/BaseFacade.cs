@@ -2,6 +2,7 @@
 using DotVVM.Framework.Controls;
 using Riganti.Utils.Infrastructure.Core;
 using System;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Facades
 {
@@ -22,7 +23,7 @@ namespace BusinessLayer.Facades
                 throw new UIException(errorMessage);
         }
 
-        protected void FillDataSet<T>(GridViewDataSet<T> dataSet, IQuery<T> query)
+        protected async Task FillDataSetAsync<T>(GridViewDataSet<T> dataSet, IQuery<T> query)
         {
             query.Skip = dataSet.PagingOptions.PageIndex * dataSet.PagingOptions.PageSize;
             query.Take = dataSet.PagingOptions.PageSize;
@@ -33,8 +34,8 @@ namespace BusinessLayer.Facades
                 query.AddSortCriteria(dataSet.SortingOptions.SortExpression, dataSet.SortingOptions.SortDescending ? SortDirection.Descending : SortDirection.Ascending);
             }
 
-            dataSet.PagingOptions.TotalItemsCount = query.GetTotalRowCount();
-            dataSet.Items = query.Execute();
+            dataSet.PagingOptions.TotalItemsCount = await query.GetTotalRowCountAsync();
+            dataSet.Items = await query.ExecuteAsync();
         }
     }
 }

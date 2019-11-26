@@ -56,8 +56,7 @@ namespace MusicLibrary.ViewModels.Administration
                 ActiveAdminPage = "Users";
             }
 
-            userFacade.LoadUserInfoes(Users, Filter);
-
+            await userFacade.LoadUserInfoesAsync(Users, Filter);
             await base.PreRender();
         }
 
@@ -67,7 +66,7 @@ namespace MusicLibrary.ViewModels.Administration
             SelectedUserRole = user.UserRole.ToString();
         }
 
-        public void Update(UserInfoDTO user)
+        public async Task Update(UserInfoDTO user)
         {
             if (string.IsNullOrEmpty(user.FirstName))
                 ErrorMessage = Texts.FirstNameRequired;
@@ -75,9 +74,9 @@ namespace MusicLibrary.ViewModels.Administration
             if (string.IsNullOrEmpty(user.LastName))
                 ErrorMessage = Texts.LastNameRequired;
 
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
-                userFacade.EditUser(new UserEditDTO()
+                await userFacade.EditUserAsync(new UserEditDTO()
                 {
                     FirstName = user.FirstName,
                     LastName = user.LastName,

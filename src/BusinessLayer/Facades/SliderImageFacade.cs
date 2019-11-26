@@ -7,6 +7,7 @@ using DotVVM.Framework.Storage;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Facades
 {
@@ -25,23 +26,23 @@ namespace BusinessLayer.Facades
             this.sliderImageQueryFunc = sliderImageQueryFunc;
         }
 
-        public IEnumerable<SliderImageDTO> GetImages()
+        public async Task<IEnumerable<SliderImageDTO>> GetImages()
         {
             using var uow = uowProviderFunc().Create();
             var query = sliderImageQueryFunc();
-            return query.Execute();
+            return await query.ExecuteAsync();
         }
 
-        public SliderImageDTO AddSliderImage(SliderImageEditDTO sliderImage, UploadedFile file, IUploadedFileStorage storage)
+        public async Task<SliderImageDTO> AddSliderImage(SliderImageEditDTO sliderImage, UploadedFile file, IUploadedFileStorage storage)
         {
             using var uow = uowProviderFunc().Create();
             var entity = mapper.Map<SliderImage>(sliderImage);
-            SetImageFile(entity, file, storage);
+            await SetImageFileAsync(entity, file, storage);
 
             var repo = sliderImageRepositoryFunc();
             repo.Insert(entity);
 
-            uow.Commit();
+            await uow.CommitAsync();
             return mapper.Map<SliderImageDTO>(entity);
         }
     }

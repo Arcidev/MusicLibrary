@@ -22,27 +22,27 @@ namespace MusicLibrary.ViewModels.Band
             this.bandFacade = bandFacade;
         }
 
-        public override Task PreRender()
+        public override async Task PreRender()
         {
             if (!Context.IsPostBack)
             {
                 int bandId = int.Parse(Context.Parameters["BandId"].ToString());
-                Band = bandFacade.GetBand(bandId);
+                Band = await bandFacade.GetBandAsync(bandId);
                 HasAlbums = Band.Albums.Any();
                 HasMembers = Band.Members.Any();
             }
 
-            return base.PreRender();
+            await base.PreRender();
         }
 
-        public override void AddReview()
+        public override async Task AddReview()
         {
             if (!ValidateReview())
                 return;
 
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
-                bandFacade.AddReview(new BandReviewCreateDTO()
+                await bandFacade.AddReviewAsync(new BandReviewCreateDTO()
                 {
                     BandId = int.Parse(Context.Parameters["BandId"].ToString()),
                     CreatedById = UserId,
@@ -54,14 +54,14 @@ namespace MusicLibrary.ViewModels.Band
             }, failureCallback: (ex) => ReviewErrorMessage = ex.Message);
         }
 
-        protected override void LoadReviews()
+        protected override async Task LoadReviews()
         {
-            bandFacade.LoadReviews(int.Parse(Context.Parameters["BandId"].ToString()), Reviews);
+            await bandFacade.LoadReviewsAsync(int.Parse(Context.Parameters["BandId"].ToString()), Reviews);
         }
 
-        protected override Action<int, ReviewEditDTO> GetEditReviewAction()
+        protected override Func<int, ReviewEditDTO, Task> GetEditReviewAction()
         {
-            return bandFacade.EditUserReview;
+            return bandFacade.EditUserReviewAsync;
         }
     }
 }

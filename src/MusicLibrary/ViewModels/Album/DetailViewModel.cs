@@ -36,13 +36,13 @@ namespace MusicLibrary.ViewModels.Album
             if (!Context.IsPostBack)
             {
                 int albumId = int.Parse(Context.Parameters["AlbumId"].ToString());
-                Album = albumFacade.GetAlbum(albumId);
-                OtherBandAlbums = bandFacade.GetBandAlbums(Album.BandId, Album.Id, 6, true);
+                Album = await albumFacade.GetAlbumAsync(albumId);
+                OtherBandAlbums = await bandFacade.GetBandAlbumsAsync(Album.BandId, Album.Id, 6, true);
                 HasOtherBandAlbums = OtherBandAlbums.Any();
 
                 var userId = UserId;
                 if (userId > 0)
-                    HasInCollection = albumFacade.HasUserInCollection(userId, albumId);
+                    HasInCollection = await albumFacade.HasUserInCollectionAsync(userId, albumId);
             }
 
             await base.PreRender();
@@ -60,11 +60,11 @@ namespace MusicLibrary.ViewModels.Album
             YoutubeUrlParam = song.YoutubeUrlParam != null ? $"https://www.youtube.com/embed/{song.YoutubeUrlParam}" : null;
         }
 
-        public void AddToCollection(int id)
+        public async Task AddToCollection(int id)
         {
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
-                albumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO()
+                await albumFacade.AddAlbumToUserCollectionAsync(new UserAlbumCreateDTO()
                 {
                     AlbumId = id,
                     UserId = UserId
@@ -74,25 +74,25 @@ namespace MusicLibrary.ViewModels.Album
             });
         }
 
-        public void RemoveFromCollection(int id)
+        public async Task RemoveFromCollection(int id)
         {
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
-                albumFacade.RemoveAlbumFromUserCollection(UserId, id);
+                await albumFacade.RemoveAlbumFromUserCollectionAsync(UserId, id);
 
                 HasInCollection = false;
             });
         }
 
-        public override void AddReview()
+        public override async Task AddReview()
         {
             if (!ValidateReview())
                 return;
 
-            ExecuteSafely(() =>
+            await ExecuteSafelyAsync(async () =>
             {
                 var albumId = int.Parse(Context.Parameters["AlbumId"].ToString());
-                albumFacade.AddReview(new AlbumReviewCreateDTO()
+                await albumFacade.AddReviewAsync(new AlbumReviewCreateDTO()
                 {
                     AlbumId = albumId,
                     CreatedById = UserId,
@@ -104,14 +104,14 @@ namespace MusicLibrary.ViewModels.Album
             }, failureCallback: (ex) => ReviewErrorMessage = ex.Message);
         }
 
-        protected override void LoadReviews()
+        protected override async Task LoadReviews()
         {
-            albumFacade.LoadReviews(int.Parse(Context.Parameters["AlbumId"].ToString()), Reviews);
+            await albumFacade.LoadReviewsAsync(int.Parse(Context.Parameters["AlbumId"].ToString()), Reviews);
         }
 
-        protected override Action<int, ReviewEditDTO> GetEditReviewAction()
+        protected override Func<int, ReviewEditDTO, Task> GetEditReviewAction()
         {
-            return albumFacade.EditUserReview;
+            return albumFacade.EditUserReviewAsync;
         }
     }
 }

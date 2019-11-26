@@ -43,8 +43,7 @@ namespace MusicLibrary.ViewModels.Administration
                 ActiveAdminPage = "UserCollection";
             }
 
-            albumFacade.LoadUserAlbumsCollection(UserId, UserCollection, Filter);
-
+            await albumFacade.LoadUserAlbumsCollectionAsync(UserId, UserCollection, Filter);
             await base.PreRender();
         }
 
@@ -53,13 +52,13 @@ namespace MusicLibrary.ViewModels.Administration
             UserCollection.RowEditOptions.EditRowId = id;
         }
 
-        public void Update(AlbumInfoDTO userAlbum)
+        public async Task Update(AlbumInfoDTO userAlbum)
         {
-            var success = ExecuteSafely(() =>
+            var success = await ExecuteSafelyAsync(async () =>
             {
                 if (userAlbum.HasInCollection)
                 {
-                    albumFacade.AddAlbumToUserCollection(new UserAlbumCreateDTO()
+                    await albumFacade.AddAlbumToUserCollectionAsync(new UserAlbumCreateDTO()
                     {
                         AlbumId = userAlbum.AlbumId,
                         UserId = UserId
@@ -68,7 +67,7 @@ namespace MusicLibrary.ViewModels.Administration
                     return;
                 }
 
-                albumFacade.RemoveAlbumFromUserCollection(UserId, userAlbum.AlbumId);
+                await albumFacade.RemoveAlbumFromUserCollectionAsync(UserId, userAlbum.AlbumId);
             });
 
             if (success)

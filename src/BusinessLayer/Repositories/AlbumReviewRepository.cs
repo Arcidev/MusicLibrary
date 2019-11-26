@@ -1,6 +1,8 @@
 ﻿using DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BusinessLayer.Repositories
 {
@@ -8,9 +10,9 @@ namespace BusinessLayer.Repositories
     {
         public AlbumReviewRepository(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeProvider) : base(provider, dateTimeProvider) { }
 
-        public double GetAlbumAverageQuality(int albumId)
+        public async Task<double> GetAlbumAverageQualityAsync(int albumId)
         {
-            return Context.AlbumReviews.Where(x => x.AlbumId == albumId).Average(x => (int)x.Quality);
+            return await Context.AlbumReviews.Where(x => x.AlbumId == albumId).AverageAsync(x => (int)x.Quality);
         }
     }
 }
