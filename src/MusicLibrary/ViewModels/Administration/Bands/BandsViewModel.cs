@@ -12,7 +12,7 @@ namespace MusicLibrary.ViewModels.Administration
     {
         private readonly BandFacade bandFacade;
 
-        public IList<int> SelectedBandIds { get; set; } = new List<int>();
+        public List<int> SelectedBandIds { get; set; } = new List<int>();
 
         public GridViewDataSet<BandInfoDTO> Bands { get; set; }
 

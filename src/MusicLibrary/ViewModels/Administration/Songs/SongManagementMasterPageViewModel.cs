@@ -17,9 +17,9 @@ namespace MusicLibrary.ViewModels.Administration
 
         protected IUploadedFileStorage FileStorage => (IUploadedFileStorage)Context.Configuration.ServiceProvider.GetService(typeof(IUploadedFileStorage));
 
-        public IList<AlbumBandInfoDTO> AddedAlbums { get; set; } = new List<AlbumBandInfoDTO>();
+        public List<AlbumBandInfoDTO> AddedAlbums { get; set; } = new List<AlbumBandInfoDTO>();
 
-        public IList<AlbumBandInfoDTO> AlbumInfoes { get; set; }
+        public List<AlbumBandInfoDTO> AlbumInfoes { get; set; }
 
         public SongBaseDTO Song { get; set; }
 

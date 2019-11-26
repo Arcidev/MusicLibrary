@@ -12,7 +12,7 @@ namespace MusicLibrary.ViewModels.Administration
     {
         public string OriginalAudioFileName { get; set; }
 
-        public IList<AlbumBandInfoDTO> SongAlbums { get; set; }
+        public IEnumerable<AlbumBandInfoDTO> SongAlbums { get; set; }
 
         public SongEditViewModel(AlbumFacade albumFacade, SongFacade songFacade) : base(albumFacade, songFacade) { }
 
@@ -28,7 +28,7 @@ namespace MusicLibrary.ViewModels.Administration
                     YoutubeUrlParam = song.YoutubeUrlParam
                 };
                 OriginalAudioFileName = song.AudioStorageFile?.FileName;
-                SongAlbums = (await albumFacade.GetAlbumBandInfoesAsync(song.Id)).ToList();
+                SongAlbums = await albumFacade.GetAlbumBandInfoesAsync(song.Id);
                 ResetSong();
             }
 

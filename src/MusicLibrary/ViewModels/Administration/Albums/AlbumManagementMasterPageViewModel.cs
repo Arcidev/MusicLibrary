@@ -25,13 +25,13 @@ namespace MusicLibrary.ViewModels.Administration
 
         public AlbumManagementErrorViewModel AlbumManagementErrorViewModel { get; set; }
 
-        public IList<SongInfoDTO> AddedSongs { get; set; } = new List<SongInfoDTO>();
+        public List<SongInfoDTO> AddedSongs { get; set; } = new List<SongInfoDTO>();
 
         public IEnumerable<BandInfoDTO> BandInfoes { get; set; }
 
         public IEnumerable<CategoryDTO> Categories { get; set; }
 
-        public IList<SongInfoDTO> SongInfoes { get; set; }
+        public List<SongInfoDTO> SongInfoes { get; set; }
 
         public string ImageFileName { get; set; }
 

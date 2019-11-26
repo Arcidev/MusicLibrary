@@ -12,7 +12,7 @@ namespace MusicLibrary.ViewModels.Administration
     {
         public string OriginalImageFileName { get; set; }
 
-        public IList<SongInfoDTO> AlbumSongs { get; set; }
+        public IEnumerable<SongInfoDTO> AlbumSongs { get; set; }
 
         public AlbumEditViewModel(CategoryFacade categoryFacade, AlbumFacade albumFacade, BandFacade bandFacade, SongFacade songFacade) : base(categoryFacade, albumFacade, bandFacade, songFacade) { }
 
@@ -31,7 +31,7 @@ namespace MusicLibrary.ViewModels.Administration
                 OriginalImageFileName = album.ImageStorageFile?.FileName;
                 SelectedBandId = album.BandId;
                 SelectedCategoryId = album.CategoryId;
-                AlbumSongs = (await albumFacade.GetAlbumSongInfoesAsync(album.Id)).ToList();
+                AlbumSongs = await albumFacade.GetAlbumSongInfoesAsync(album.Id);
                 ResetImage();
             }
 
