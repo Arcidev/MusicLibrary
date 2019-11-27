@@ -1,7 +1,6 @@
 dist: bionic
 language: csharp
 mono: none
-sudo: required
 git:
   depth: 1
 addons:
