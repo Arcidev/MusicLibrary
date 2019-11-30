@@ -26,7 +26,7 @@ namespace BusinessLayer.Facades
             this.sliderImageQueryFunc = sliderImageQueryFunc;
         }
 
-        public async Task<IEnumerable<SliderImageDTO>> GetImages()
+        public async Task<IList<SliderImageDTO>> GetImages()
         {
             using var uow = uowProviderFunc().Create();
             var query = sliderImageQueryFunc();

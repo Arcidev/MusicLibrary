@@ -57,7 +57,7 @@ namespace MusicLibrary.ViewModels.Administration
 
                 await Task.WhenAll(Task.Run(async () => BandInfoes = await bandFacade.GetBandInfoesAsync()),
                     Task.Run(async () => Categories = await categoryFacade.GetCategoriesAsync()),
-                    Task.Run(async () => SongInfoes = (await songFacade.GetSongInfoesAsync()).ToList()));
+                    Task.Run(async () => { var songInfoes = await songFacade.GetSongInfoesAsync(); SongInfoes = songInfoes as List<SongInfoDTO> ?? songInfoes.ToList(); }));
 
                 OnSongsLoaded();
             }

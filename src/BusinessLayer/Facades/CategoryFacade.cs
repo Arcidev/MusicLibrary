@@ -39,7 +39,7 @@ namespace BusinessLayer.Facades
             return mapper.Map<CategoryDTO>(entity);
         }
 
-        public async Task<IEnumerable<CategoryDTO>> GetCategoriesAsync()
+        public async Task<IList<CategoryDTO>> GetCategoriesAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = categoriesQueryFunc();
@@ -77,7 +77,7 @@ namespace BusinessLayer.Facades
             await uow.CommitAsync();
         }
 
-        public async Task<IEnumerable<AlbumDTO>> GetAlbumsByCategoryAsync(int categoryId)
+        public async Task<IList<AlbumDTO>> GetAlbumsByCategoryAsync(int categoryId)
         {
             using var uow = uowProviderFunc().Create();
             var query = categoryAlbumsQueryFunc();

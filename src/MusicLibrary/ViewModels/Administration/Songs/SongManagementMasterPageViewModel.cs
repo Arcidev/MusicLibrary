@@ -41,8 +41,9 @@ namespace MusicLibrary.ViewModels.Administration
         {
             if (!Context.IsPostBack)
             {
+                var albumInfoes = await albumFacade.GetAlbumBandInfoesAsync();
                 ActiveAdminPage = "Songs";
-                AlbumInfoes = (await albumFacade.GetAlbumBandInfoesAsync()).ToList();
+                AlbumInfoes = albumInfoes as List<AlbumBandInfoDTO> ?? albumInfoes.ToList();
                 OnAlbumInfoesLoaded();
             }
             

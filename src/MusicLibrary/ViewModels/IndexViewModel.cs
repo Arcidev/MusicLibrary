@@ -34,7 +34,7 @@ namespace MusicLibrary.ViewModels
             if (!Context.IsPostBack)
             {
                 ActivePage = "Index";
-                await Task.WhenAll(Task.Run(async () => { SliderImages = (await sliderImageFacade.GetImages()).ToList(); new Random().Shuffle(SliderImages); }),
+                await Task.WhenAll(Task.Run(async () => { SliderImages = await sliderImageFacade.GetImages(); new Random().Shuffle(SliderImages); }),
                     Task.Run(async () => Categories = await categoryFacade.GetCategoriesAsync()),
                     Task.Run(async () => RecentlyAddedAlbums = await albumFacade.GetRecentAlbumsAsync(5)),
                     Task.Run(async () => FeaturedAlbums = await albumFacade.GetFeaturedAlbumsAsync(5)));

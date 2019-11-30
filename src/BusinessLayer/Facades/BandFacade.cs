@@ -50,7 +50,7 @@ namespace BusinessLayer.Facades
             this.bandInfoesQueryFunc = bandInfoesQueryFunc;
         }
 
-        public async Task<IEnumerable<BandInfoDTO>> GetBandInfoesAsync()
+        public async Task<IList<BandInfoDTO>> GetBandInfoesAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = bandInfoesQueryFunc();
@@ -102,7 +102,7 @@ namespace BusinessLayer.Facades
             await FillDataSetAsync(dataSet, query);
         }
 
-        public async Task<IEnumerable<AlbumDTO>> GetBandAlbumsAsync(int bandId, int? excludeAlbumId = null, int? count = null, bool? approved = null)
+        public async Task<IList<AlbumDTO>> GetBandAlbumsAsync(int bandId, int? excludeAlbumId = null, int? count = null, bool? approved = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = bandAlbumsQueryFunc();
@@ -114,7 +114,7 @@ namespace BusinessLayer.Facades
             return await query.ExecuteAsync();
         }
 
-        public async Task<IEnumerable<BandDTO>> GetBandsAsync()
+        public async Task<IList<BandDTO>> GetBandsAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = bandsQueryBandFunc();
@@ -140,7 +140,7 @@ namespace BusinessLayer.Facades
             return dto;
         }
 
-        public async Task<IEnumerable<ArtistDTO>> GetBandMembersAsync(int bandId)
+        public async Task<IList<ArtistDTO>> GetBandMembersAsync(int bandId)
         {
             using var uow = uowProviderFunc().Create();
             var query = bandMembersQueryFunc();

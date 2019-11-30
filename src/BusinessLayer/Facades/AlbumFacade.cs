@@ -131,7 +131,7 @@ namespace BusinessLayer.Facades
             await uow.CommitAsync();
         }
 
-        public async Task<IEnumerable<SongDTO>> GetAlbumSongsAsync(int albumId)
+        public async Task<IList<SongDTO>> GetAlbumSongsAsync(int albumId)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumSongsQuerySongFunc();
@@ -141,7 +141,7 @@ namespace BusinessLayer.Facades
             return await query.ExecuteAsync();
         }
 
-        public async Task<IEnumerable<AlbumBandInfoDTO>> GetAlbumBandInfoesAsync(int? songId = null)
+        public async Task<IList<AlbumBandInfoDTO>> GetAlbumBandInfoesAsync(int? songId = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumsQueryAlbumBandInfoFunc();
@@ -151,7 +151,7 @@ namespace BusinessLayer.Facades
             return await query.ExecuteAsync();
         }
 
-        public async Task<IEnumerable<SongInfoDTO>> GetAlbumSongInfoesAsync(int albumId)
+        public async Task<IList<SongInfoDTO>> GetAlbumSongInfoesAsync(int albumId)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumSongsQuerySongInfoFunc();
@@ -178,7 +178,7 @@ namespace BusinessLayer.Facades
             return dto;
         }
 
-        public async Task<IEnumerable<AlbumDTO>> GetAlbumsAsync(int? categoryId = null, string filter = null)
+        public async Task<IList<AlbumDTO>> GetAlbumsAsync(int? categoryId = null, string filter = null)
         {
             using var uow = uowProviderFunc().Create();
             var query = albumsQueryAlbumFunc();
@@ -285,7 +285,7 @@ namespace BusinessLayer.Facades
             await uow.CommitAsync();
         }
 
-        public async Task<IEnumerable<AlbumDTO>> GetRecentAlbumsAsync(int count)
+        public async Task<IList<AlbumDTO>> GetRecentAlbumsAsync(int count)
         {
             using var uow = uowProviderFunc().Create();
             var query = recentlyAddedAlbumsQueryFunc();
@@ -294,7 +294,7 @@ namespace BusinessLayer.Facades
             return await query.ExecuteAsync();
         }
 
-        public async Task<IEnumerable<AlbumDTO>> GetFeaturedAlbumsAsync(int count)
+        public async Task<IList<AlbumDTO>> GetFeaturedAlbumsAsync(int count)
         {
             using var uow = uowProviderFunc().Create();
             var query = featuredAlbumsQueryFunc();
@@ -337,7 +337,7 @@ namespace BusinessLayer.Facades
             return entity != null;
         }
 
-        public async Task<IEnumerable<AlbumDTO>> GetUserAlbumsAsync(int userId)
+        public async Task<IList<AlbumDTO>> GetUserAlbumsAsync(int userId)
         {
             using var uow = uowProviderFunc().Create();
             var query = userAlbumsQueryFunc();

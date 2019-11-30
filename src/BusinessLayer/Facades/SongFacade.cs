@@ -98,7 +98,7 @@ namespace BusinessLayer.Facades
             await uow.CommitAsync();
         }
 
-        public async Task<IEnumerable<SongDTO>> GetSongsAsync()
+        public async Task<IList<SongDTO>> GetSongsAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = songsQuerySongFunc();
@@ -106,7 +106,7 @@ namespace BusinessLayer.Facades
             return await query.ExecuteAsync();
         }
 
-        public async Task<IEnumerable<SongInfoDTO>> GetSongInfoesAsync()
+        public async Task<IList<SongInfoDTO>> GetSongInfoesAsync()
         {
             using var uow = uowProviderFunc().Create();
             var query = songsQuerySongInfoFunc();

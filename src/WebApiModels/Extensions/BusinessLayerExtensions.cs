@@ -21,7 +21,7 @@ namespace WebApiModels.Extensions
 
         public static IEnumerable<AlbumViewModel> ToAlbumViewModel(this IEnumerable<AlbumDTO> albums)
         {
-            return albums.Select(ToAlbumViewModel).ToList();
+            return albums.Select(ToAlbumViewModel);
         }
 
         public static SongViewModel ToSongViewModel(this SongDTO song)
@@ -38,7 +38,7 @@ namespace WebApiModels.Extensions
 
         public static IEnumerable<SongViewModel> ToSongViewModel(this IEnumerable<SongDTO> songs)
         {
-            return songs.Select(ToSongViewModel).ToList();
+            return songs.Select(ToSongViewModel);
         }
 
         public static BandViewModel ToBandViewModel(this BandDTO band)
@@ -55,7 +55,7 @@ namespace WebApiModels.Extensions
 
         public static IEnumerable<BandViewModel> ToBandViewModel(this IEnumerable<BandDTO> bands)
         {
-            return bands.Select(ToBandViewModel).ToList();
+            return bands.Select(ToBandViewModel);
         }
 
         public static CategoryViewModel ToCategoryViewModel(this CategoryDTO category)
@@ -72,7 +72,7 @@ namespace WebApiModels.Extensions
 
         public static IEnumerable<CategoryViewModel> ToCategoryViewModel(this IEnumerable<CategoryDTO> categories)
         {
-            return categories.Select(ToCategoryViewModel).ToList();
+            return categories.Select(ToCategoryViewModel);
         }
     }
 }
