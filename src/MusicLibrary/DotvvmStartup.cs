@@ -58,7 +58,7 @@ namespace MusicLibrary
         {
             config.Resources.Register("jquery", new ScriptResource
             {
-                Location = new UrlResourceLocation("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+                Location = new UrlResourceLocation("https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
             });
             config.Resources.Register("templateStyle-css", new StylesheetResource()
             {
