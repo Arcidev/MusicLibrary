@@ -1,6 +1,7 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Storage;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace MusicLibrary.ViewModels.Administration
     {
         public string OriginalImageFileName { get; set; }
 
-        public BandEditViewModel(BandFacade bandFacade) : base(bandFacade) { }
+        public BandEditViewModel(BandFacade bandFacade, IUploadedFileStorage uploadedFileStorage) : base(bandFacade, uploadedFileStorage) { }
 
         public override async Task PreRender()
         {
@@ -50,7 +51,7 @@ namespace MusicLibrary.ViewModels.Administration
                     Approved = Band.Approved,
                     Name = Band.Name,
                     Description = Band.Description,
-                }, Files.Files.LastOrDefault(), FileStorage);
+                }, Files.Files.LastOrDefault(), uploadedFileStorage);
             });
 
             if (success)

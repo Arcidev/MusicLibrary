@@ -12,8 +12,7 @@ namespace MusicLibrary.ViewModels.Administration
     public abstract class BandManagementMasterPageViewModel : AdministrationMasterPageViewModel
     {
         protected readonly BandFacade bandFacade;
-
-        protected IUploadedFileStorage FileStorage => (IUploadedFileStorage)Context.Configuration.ServiceProvider.GetService(typeof(IUploadedFileStorage));
+        protected readonly IUploadedFileStorage uploadedFileStorage;
 
         public BandBaseDTO Band { get; set; }
 
@@ -23,9 +22,10 @@ namespace MusicLibrary.ViewModels.Administration
 
         public string ImageFileName { get; set; }
 
-        protected BandManagementMasterPageViewModel(BandFacade bandFacade)
+        protected BandManagementMasterPageViewModel(BandFacade bandFacade, IUploadedFileStorage uploadedFileStorage)
         {
             this.bandFacade = bandFacade;
+            this.uploadedFileStorage = uploadedFileStorage;
         }
 
         public override Task PreRender()

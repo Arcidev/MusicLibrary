@@ -1,6 +1,7 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Storage;
 using Shared.Enums;
 using System;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MusicLibrary.ViewModels.Administration
     [Authorize]
     public class BandCreateViewModel : BandManagementMasterPageViewModel
     {
-        public BandCreateViewModel(BandFacade bandFacade) : base(bandFacade) { }
+        public BandCreateViewModel(BandFacade bandFacade, IUploadedFileStorage uploadedFileStorage) : base(bandFacade, uploadedFileStorage) { }
 
         public override async Task PreRender()
         {
@@ -36,7 +37,7 @@ namespace MusicLibrary.ViewModels.Administration
                     Approved = role != Shared.Enums.UserRole.User ? Band.Approved : false,
                     Description = Band.Description,
                     Name = Band.Name
-                }, Files.Files.LastOrDefault(), FileStorage);
+                }, Files.Files.LastOrDefault(), uploadedFileStorage);
             });
 
             if (success)

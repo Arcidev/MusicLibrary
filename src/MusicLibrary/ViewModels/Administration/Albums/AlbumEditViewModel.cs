@@ -1,6 +1,7 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Storage;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public IEnumerable<SongInfoDTO> AlbumSongs { get; set; }
 
-        public AlbumEditViewModel(CategoryFacade categoryFacade, AlbumFacade albumFacade, BandFacade bandFacade, SongFacade songFacade) : base(categoryFacade, albumFacade, bandFacade, songFacade) { }
+        public AlbumEditViewModel(CategoryFacade categoryFacade, AlbumFacade albumFacade, BandFacade bandFacade, SongFacade songFacade, IUploadedFileStorage uploadedFileStorage) : base(categoryFacade, albumFacade, bandFacade, songFacade, uploadedFileStorage) { }
 
         public override async Task PreRender()
         {
@@ -60,7 +61,7 @@ namespace MusicLibrary.ViewModels.Administration
                     Name = Album.Name,
                     RemovedSongs = AlbumSongs.Where(x => x.Removed).Select(x => x.Id),
                     AddedSongs = AddedSongs.Select(x => x.Id)
-                }, Files.Files.LastOrDefault(), FileStorage);
+                }, Files.Files.LastOrDefault(), uploadedFileStorage);
             });
 
             if (success)

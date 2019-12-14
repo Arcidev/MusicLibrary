@@ -14,8 +14,7 @@ namespace MusicLibrary.ViewModels.Administration
     {
         protected readonly AlbumFacade albumFacade;
         protected readonly SongFacade songFacade;
-
-        protected IUploadedFileStorage FileStorage => (IUploadedFileStorage)Context.Configuration.ServiceProvider.GetService(typeof(IUploadedFileStorage));
+        protected readonly IUploadedFileStorage uploadedFileStorage;
 
         public List<AlbumBandInfoDTO> AddedAlbums { get; set; } = new List<AlbumBandInfoDTO>();
 
@@ -31,10 +30,11 @@ namespace MusicLibrary.ViewModels.Administration
 
         public int? SelectedAlbumId { get; set; }
 
-        protected SongManagementMasterPageViewModel(AlbumFacade albumFacade, SongFacade songFacade)
+        protected SongManagementMasterPageViewModel(AlbumFacade albumFacade, SongFacade songFacade, IUploadedFileStorage uploadedFileStorage)
         {
             this.albumFacade = albumFacade;
             this.songFacade = songFacade;
+            this.uploadedFileStorage = uploadedFileStorage;
         }
 
         public override async Task PreRender()

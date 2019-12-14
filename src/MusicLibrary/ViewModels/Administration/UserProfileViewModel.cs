@@ -16,7 +16,7 @@ namespace MusicLibrary.ViewModels.Administration
     {
         private readonly UserFacade userFacade;
 
-        private IUploadedFileStorage FileStorage => (IUploadedFileStorage)Context.Configuration.ServiceProvider.GetService(typeof(IUploadedFileStorage));
+        private readonly IUploadedFileStorage uploadedFileStorage;
 
         public UserProfileErrorViewModel UserProfileErrorViewModel { get; set; }
 
@@ -30,9 +30,10 @@ namespace MusicLibrary.ViewModels.Administration
 
         public string ImageFileName { get; set; }
 
-        public UserProfileViewModel(UserFacade userFacade)
+        public UserProfileViewModel(UserFacade userFacade, IUploadedFileStorage uploadedFileStorage)
         {
             this.userFacade = userFacade;
+            this.uploadedFileStorage = uploadedFileStorage;
         }
 
         public override async Task PreRender()
@@ -71,7 +72,7 @@ namespace MusicLibrary.ViewModels.Administration
             await ExecuteSafelyAsync(async () =>
             {
                 User.Password = Password;
-                await userFacade.EditUserAsync(User, Files.Files.LastOrDefault(), FileStorage);
+                await userFacade.EditUserAsync(User, Files.Files.LastOrDefault(), uploadedFileStorage);
                 await LoadUser();
                 Files.Clear();
             });

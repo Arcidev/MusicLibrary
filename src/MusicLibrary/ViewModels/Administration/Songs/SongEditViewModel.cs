@@ -1,6 +1,7 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Storage;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public IEnumerable<AlbumBandInfoDTO> SongAlbums { get; set; }
 
-        public SongEditViewModel(AlbumFacade albumFacade, SongFacade songFacade) : base(albumFacade, songFacade) { }
+        public SongEditViewModel(AlbumFacade albumFacade, SongFacade songFacade, IUploadedFileStorage uploadedFileStorage) : base(albumFacade, songFacade, uploadedFileStorage) { }
 
         public override async Task PreRender()
         {
@@ -56,7 +57,7 @@ namespace MusicLibrary.ViewModels.Administration
                     YoutubeUrlParam = ParseYTUrl(),
                     AddedAlbums = AddedAlbums.Select(x => x.AlbumId),
                     RemovedAlbums = SongAlbums.Where(x => x.Removed).Select(x => x.AlbumId)
-                }, Files.Files.LastOrDefault(), FileStorage);
+                }, Files.Files.LastOrDefault(), uploadedFileStorage);
             });
 
             if (success)

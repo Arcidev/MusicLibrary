@@ -1,6 +1,7 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Storage;
 using Shared.Enums;
 using System;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MusicLibrary.ViewModels.Administration
     [Authorize]
     public class SongCreateViewModel : SongManagementMasterPageViewModel
     {
-        public SongCreateViewModel(AlbumFacade albumFacade, SongFacade songFacade) : base(albumFacade, songFacade) { }
+        public SongCreateViewModel(AlbumFacade albumFacade, SongFacade songFacade, IUploadedFileStorage uploadedFileStorage) : base(albumFacade, songFacade, uploadedFileStorage) { }
 
         public override async Task PreRender()
         {
@@ -37,7 +38,7 @@ namespace MusicLibrary.ViewModels.Administration
                     Name = Song.Name,
                     AddedAlbums = AddedAlbums.Select(x => x.AlbumId),
                     YoutubeUrlParam = ParseYTUrl()
-                }, Files.Files.LastOrDefault(), FileStorage);
+                }, Files.Files.LastOrDefault(), uploadedFileStorage);
             });
 
             if (success)
