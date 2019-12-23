@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DataLayer.Entities;
+﻿using DataLayer.Entities;
 using DotVVM.Framework.Storage;
 using Riganti.Utils.Infrastructure.Core;
 using System;
@@ -11,7 +10,7 @@ namespace BusinessLayer.Facades
     {
         protected readonly Lazy<StorageFileFacade> storageFileFacade;
 
-        protected ImageStorableFacade(IMapper mapper, Lazy<StorageFileFacade> storageFileFacade, Func<IUnitOfWorkProvider> uowProviderFunc) : base(mapper, uowProviderFunc)
+        protected ImageStorableFacade(Lazy<StorageFileFacade> storageFileFacade, Func<IUnitOfWorkProvider> uowProviderFunc) : base(uowProviderFunc)
         {
             this.storageFileFacade = storageFileFacade;
         }

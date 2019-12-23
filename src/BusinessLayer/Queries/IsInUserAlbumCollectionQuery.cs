@@ -10,7 +10,7 @@ namespace BusinessLayer.Queries
 
         public IEnumerable<int> AlbumIds { get; set; }
 
-        public IsInUserAlbumCollectionQuery(IUnitOfWorkProvider provider) : base(provider, null) { }
+        public IsInUserAlbumCollectionQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
         protected override IQueryable<int> GetQueryable()
         {

@@ -12,10 +12,11 @@ namespace BL.Tests
 
         static TestBase()
         {
+            MapperInstaller.ConfigureMapper();
+
             services = new ServiceCollection()
                 .AddDbContext<MusicLibraryDbContext>(options => options.UseInMemoryDatabase("TestDB"), ServiceLifetime.Transient, ServiceLifetime.Transient)
                 .AddTransient<Func<DbContext>>(provider => () => provider.GetService<MusicLibraryDbContext>())
-                .ConfigureAutoMapper()
                 .ConfigureServices()
                 .ConfigureFacades()
                 .BuildServiceProvider();

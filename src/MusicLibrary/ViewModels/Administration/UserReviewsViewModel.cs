@@ -39,6 +39,11 @@ namespace MusicLibrary.ViewModels.Administration
                 PagingOptions = new PagingOptions()
                 {
                     PageSize = 10
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortDescending = true,
+                    SortExpression = nameof(UserAlbumReviewDTO.EditDate)
                 }
             };
             BandReviews = new GridViewDataSet<UserBandReviewDTO>()
@@ -46,6 +51,11 @@ namespace MusicLibrary.ViewModels.Administration
                 PagingOptions = new PagingOptions()
                 {
                     PageSize = 10
+                },
+                SortingOptions = new SortingOptions()
+                {
+                    SortDescending = true,
+                    SortExpression = nameof(UserBandReviewDTO.EditDate)
                 }
             };
         }

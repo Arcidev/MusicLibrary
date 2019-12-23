@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
+﻿using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
@@ -7,7 +6,7 @@ namespace BusinessLayer.Queries
 {
     public class BandsQuery<T> : AppQuery<T>
     {
-        public BandsQuery(IUnitOfWorkProvider provider, IConfigurationProvider config) : base(provider, config) { }
+        public BandsQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
         public bool? Approved { get; set; }
 
@@ -22,7 +21,7 @@ namespace BusinessLayer.Queries
             if (!string.IsNullOrEmpty(Filter))
                 query = query.Where(x => x.Name.Contains(Filter));
 
-            return query.ProjectTo<T>(mapperConfig);
+            return query.ProjectToType<T>();
         }
     }
 }

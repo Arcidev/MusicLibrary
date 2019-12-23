@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
 using BusinessLayer.Queries;
 using BusinessLayer.Repositories;
 using BusinessLayer.Resources;
 using DataLayer.Entities;
 using DotVVM.Framework.Controls;
 using DotVVM.Framework.Storage;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Linq;
@@ -25,9 +25,8 @@ namespace BusinessLayer.Facades
 
         public UserFacade(Func<UserRepository> userRepositoryFunc,
             Func<UsersQuery> usersQueryFunc,
-            IMapper mapper,
             Lazy<StorageFileFacade> storageFileFacade,
-            Func<IUnitOfWorkProvider> uowProviderFunc) : base(mapper, storageFileFacade, uowProviderFunc)
+            Func<IUnitOfWorkProvider> uowProviderFunc) : base(storageFileFacade, uowProviderFunc)
         {
             this.userRepositoryFunc = userRepositoryFunc;
             this.usersQueryFunc = usersQueryFunc;
@@ -39,7 +38,7 @@ namespace BusinessLayer.Facades
                 throw new UIException(ErrorMessages.EmailAlreadyUsed);
 
             using var uow = uowProviderFunc().Create();
-            var entity = mapper.Map<User>(user);
+            var entity = user.Adapt<User>();
             var (hash, salt) = CreateHash(user.Password);
             entity.PasswordHash = hash;
             entity.PasswordSalt = salt;
@@ -49,7 +48,7 @@ namespace BusinessLayer.Facades
 
             await uow.CommitAsync();
 
-            return mapper.Map<UserDTO>(entity);
+            return entity.Adapt<UserDTO>();
         }
 
         public async Task<UserDTO> VerifyAndGetUserAsync(string email, string password)
@@ -58,7 +57,7 @@ namespace BusinessLayer.Facades
             IsNotNull(user, ErrorMessages.VerificationFailed);
 
             if (VerifyHashedPassword(user.PasswordHash, user.PasswordSalt, password))
-                return mapper.Map<UserDTO>(user);
+                return user.Adapt<UserDTO>();
 
             throw new UIException(ErrorMessages.VerificationFailed);
         }
@@ -69,7 +68,7 @@ namespace BusinessLayer.Facades
             var repo = userRepositoryFunc();
             var user = await repo.GetByEmailAsync(email);
 
-            return user != null ? mapper.Map<UserDTO>(user) : null;
+            return user?.Adapt<UserDTO>();
         }
 
         public async Task<UserDTO> GetUserAsync(int id)
@@ -79,7 +78,7 @@ namespace BusinessLayer.Facades
             var user = await repo.GetByIdAsync(id);
             IsNotNull(user, ErrorMessages.UserNotExist);
 
-            return mapper.Map<UserDTO>(user);
+            return user.Adapt<UserDTO>();
         }
 
         public async Task EditUserAsync(UserEditDTO user, UploadedFile file = null, IUploadedFileStorage storage = null)
@@ -89,7 +88,7 @@ namespace BusinessLayer.Facades
             var entity = await repo.GetByIdAsync(user.Id) ?? throw new UIException(ErrorMessages.UserNotExist);
             await SetImageFileAsync(entity, file, storage);
 
-            mapper.Map(user, entity);
+            user.Adapt(entity);
             if (!string.IsNullOrEmpty(user.Password))
             {
                 var (hash, salt) = CreateHash(user.Password);

@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
@@ -12,7 +11,7 @@ namespace BusinessLayer.Queries
 
         public bool? Approved { get; set; }
 
-        public BandMembersQuery(IUnitOfWorkProvider provider, IConfigurationProvider config) : base(provider, config) { }
+        public BandMembersQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
         protected override IQueryable<ArtistDTO> GetQueryable()
         {
@@ -20,7 +19,7 @@ namespace BusinessLayer.Queries
             if (Approved.HasValue)
                 query = query.Where(x => x.Approved == Approved.Value);
 
-            return query.ProjectTo<ArtistDTO>(mapperConfig);
+            return query.ProjectToType<ArtistDTO>();
         }
     }
 }

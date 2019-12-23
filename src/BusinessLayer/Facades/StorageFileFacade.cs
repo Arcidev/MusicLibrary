@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
 using BusinessLayer.Repositories;
 using BusinessLayer.Resources;
 using DataLayer.Entities;
 using DotVVM.Framework.Storage;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.IO;
@@ -16,7 +16,7 @@ namespace BusinessLayer.Facades
         private readonly string uploadPath;
         private readonly Func<StorageFileRepository> storageFileRepositoryFunc;
 
-        public StorageFileFacade(IMapper mapper, Func<StorageFileRepository> storageFileRepositoryFunc, Func<IUnitOfWorkProvider> uowProviderFunc) : base(mapper, uowProviderFunc)
+        public StorageFileFacade(Func<StorageFileRepository> storageFileRepositoryFunc, Func<IUnitOfWorkProvider> uowProviderFunc) : base(uowProviderFunc)
         {
             uploadPath = Directory.GetCurrentDirectory() + "\\wwwroot\\SavedFiles";
             this.storageFileRepositoryFunc = storageFileRepositoryFunc;
@@ -36,7 +36,7 @@ namespace BusinessLayer.Facades
             repo.Insert(entity);
             await uow.CommitAsync();
 
-            return mapper.Map<StorageFileDTO>(entity);
+            return entity.Adapt<StorageFileDTO>();
         }
 
         public async Task DeleteFileAsync(int fileId)
@@ -71,7 +71,7 @@ namespace BusinessLayer.Facades
             var storageFile = await repo.GetByIdAsync(id);
             IsNotNull(storageFile, ErrorMessages.FileNotExist);
 
-            return mapper.Map<StorageFileDTO>(storageFile);
+            return storageFile.Adapt<StorageFileDTO>();
         }
 
         public string GetUploadPath()

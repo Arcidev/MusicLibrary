@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
@@ -10,11 +9,11 @@ namespace BusinessLayer.Queries
     {
         public int BandId { get; set; }
 
-        public BandReviewsQuery(IUnitOfWorkProvider provider, IConfigurationProvider config) : base(provider, config) { }
+        public BandReviewsQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
         protected override IQueryable<ReviewDTO> GetQueryable()
         {
-            return Context.BandReviews.Where(x => x.BandId == BandId).ProjectTo<ReviewDTO>(mapperConfig);
+            return Context.BandReviews.Where(x => x.BandId == BandId).ProjectToType<ReviewDTO>();
         }
     }
 }

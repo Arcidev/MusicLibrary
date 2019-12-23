@@ -90,8 +90,8 @@ namespace MusicLibrary
         }
         public void ConfigureServices(IDotvvmServiceCollection options)
         {
-            options.Services.ConfigureAutoMapper()
-                .ConfigureServices()
+            MapperInstaller.ConfigureMapper();
+            options.Services.ConfigureServices()
                 .ConfigureFacades();
 
             var vmType = typeof(IDotvvmViewModel);

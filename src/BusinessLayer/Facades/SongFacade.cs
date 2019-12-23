@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
 using BusinessLayer.Repositories;
 using DataLayer.Entities;
 using DotVVM.Framework.Storage;
@@ -11,6 +10,7 @@ using DotVVM.Framework.Controls;
 using System.Linq;
 using Riganti.Utils.Infrastructure.Core;
 using System.Threading.Tasks;
+using Mapster;
 
 namespace BusinessLayer.Facades
 {
@@ -25,9 +25,8 @@ namespace BusinessLayer.Facades
             Func<AlbumSongRepository> albumSongRepositoryFunc,
             Func<SongsQuery<SongDTO>> songsQuerySongFunc,
             Func<SongsQuery<SongInfoDTO>> songsQuerySongInfoFunc,
-            IMapper mapper,
             Lazy<StorageFileFacade> storageFileFacase,
-            Func<IUnitOfWorkProvider> uowProvider) : base(mapper, storageFileFacase, uowProvider)
+            Func<IUnitOfWorkProvider> uowProvider) : base(storageFileFacase, uowProvider)
         {
             this.songRepositoryFunc = songRepositoryFunc;
             this.albumSongRepositoryFunc = albumSongRepositoryFunc;
@@ -38,7 +37,7 @@ namespace BusinessLayer.Facades
         public async Task<SongDTO> AddSongAsync(SongCreateDTO song, UploadedFile audioFile = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
-            var entity = mapper.Map<Song>(song);
+            var entity = song.Adapt<Song>();
             entity.CreateDate = DateTime.Now;
 
             await SetAudioFile(entity, audioFile, storage);
@@ -60,7 +59,7 @@ namespace BusinessLayer.Facades
 
             await uow.CommitAsync();
 
-            return mapper.Map<SongDTO>(entity);
+            return entity.Adapt<SongDTO>();
         }
 
         public async Task EditSongAsync(SongEditDTO song, UploadedFile audioFile = null, IUploadedFileStorage storage = null)
@@ -70,7 +69,7 @@ namespace BusinessLayer.Facades
             var entity = await repo.GetByIdAsync(song.Id);
             IsNotNull(entity, ErrorMessages.SongNotExist);
 
-            mapper.Map(song, entity);
+            song.Adapt(entity);
             await SetAudioFile(entity, audioFile, storage);
 
             var albumSongRepo = albumSongRepositoryFunc();
@@ -130,7 +129,7 @@ namespace BusinessLayer.Facades
             var entity = await repo.GetByIdAsync(id);
             IsNotNull(entity, ErrorMessages.SongNotExist);
 
-            return mapper.Map<SongDTO>(entity);
+            return entity.Adapt<SongDTO>();
         }
 
         public async Task ApproveSongsAsync(IEnumerable<int> songIds, bool approved)

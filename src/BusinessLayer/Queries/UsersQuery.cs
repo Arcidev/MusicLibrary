@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System.Linq;
 
@@ -10,7 +9,7 @@ namespace BusinessLayer.Queries
     {
         public string Filter { get; set; }
 
-        public UsersQuery(IUnitOfWorkProvider provider, IConfigurationProvider config) : base(provider, config) { }
+        public UsersQuery(IUnitOfWorkProvider provider) : base(provider) { }
 
         protected override IQueryable<UserInfoDTO> GetQueryable()
         {
@@ -18,7 +17,7 @@ namespace BusinessLayer.Queries
             if (!string.IsNullOrEmpty(Filter))
                 query = query.Where(x => x.Email.Contains(Filter) || x.FirstName.Contains(Filter) || x.LastName.Contains(Filter));
 
-            return query.ProjectTo<UserInfoDTO>(mapperConfig);
+            return query.ProjectToType<UserInfoDTO>();
         }
     }
 }

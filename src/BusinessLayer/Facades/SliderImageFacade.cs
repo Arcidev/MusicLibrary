@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
 using BusinessLayer.Queries;
 using BusinessLayer.Repositories;
 using DataLayer.Entities;
 using DotVVM.Framework.Storage;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
@@ -18,9 +18,8 @@ namespace BusinessLayer.Facades
 
         public SliderImageFacade(Func<SliderImageRepository> sliderImageRepositoryFunc,
             Func<SliderImagesQuery> sliderImageQueryFunc,
-            IMapper mapper,
             Lazy<StorageFileFacade> storageFileFacade,
-            Func<IUnitOfWorkProvider> uowProvider) : base(mapper, storageFileFacade, uowProvider)
+            Func<IUnitOfWorkProvider> uowProvider) : base(storageFileFacade, uowProvider)
         {
             this.sliderImageRepositoryFunc = sliderImageRepositoryFunc;
             this.sliderImageQueryFunc = sliderImageQueryFunc;
@@ -36,14 +35,14 @@ namespace BusinessLayer.Facades
         public async Task<SliderImageDTO> AddSliderImage(SliderImageEditDTO sliderImage, UploadedFile file, IUploadedFileStorage storage)
         {
             using var uow = uowProviderFunc().Create();
-            var entity = mapper.Map<SliderImage>(sliderImage);
+            var entity = sliderImage.Adapt<SliderImage>();
             await SetImageFileAsync(entity, file, storage);
 
             var repo = sliderImageRepositoryFunc();
             repo.Insert(entity);
 
             await uow.CommitAsync();
-            return mapper.Map<SliderImageDTO>(entity);
+            return entity.Adapt<SliderImageDTO>();
         }
     }
 }

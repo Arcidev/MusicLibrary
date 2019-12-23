@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
 using BusinessLayer.Queries;
 using BusinessLayer.Repositories;
 using BusinessLayer.Resources;
 using DataLayer.Entities;
 using DotVVM.Framework.Controls;
 using DotVVM.Framework.Storage;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
@@ -47,9 +47,8 @@ namespace BusinessLayer.Facades
             Func<UserAlbumRepository> userAlbumRepositoryFunc,
             Func<UserAlbumsQuery> userAlbumsQueryFunc,
             Func<IsInUserAlbumCollectionQuery> isInUserAlbumCollectionQueryFunc,
-            IMapper mapper,
             Lazy<StorageFileFacade> storageFileFacade,
-            Func<IUnitOfWorkProvider> uowProvider) : base(mapper, storageFileFacade, uowProvider)
+            Func<IUnitOfWorkProvider> uowProvider) : base(storageFileFacade, uowProvider)
         {
             this.recentlyAddedAlbumsQueryFunc = recentlyAddedAlbumsQueryFunc;
             this.featuredAlbumsQueryFunc = featuredAlbumsQueryFunc;
@@ -71,7 +70,7 @@ namespace BusinessLayer.Facades
         public async Task<AlbumDTO> AddAlbumAsync(AlbumCreateDTO album, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
-            var entity = mapper.Map<Album>(album);
+            var entity = album.Adapt<Album>();
             entity.CreateDate = DateTime.Now;
             await SetImageFileAsync(entity, file, storage);
 
@@ -87,7 +86,7 @@ namespace BusinessLayer.Facades
             repo.Insert(entity);
 
             await uow.CommitAsync();
-            return mapper.Map<AlbumDTO>(entity);
+            return entity.Adapt<AlbumDTO>();
         }
 
         public async Task ApproveAlbumsAsync(IEnumerable<int> albumIds, bool approved)
@@ -108,7 +107,7 @@ namespace BusinessLayer.Facades
             var entity = await repo.GetByIdAsync(album.Id);
             IsNotNull(entity, ErrorMessages.AlbumNotExist);
 
-            mapper.Map(album, entity);
+            album.Adapt(entity);
             await SetImageFileAsync(entity, imageFile, storage);
 
             if (album.RemovedSongs != null)
@@ -168,9 +167,9 @@ namespace BusinessLayer.Facades
             var entity = await repo.GetByIdAsync(id);
             IsNotNull(entity, ErrorMessages.AlbumNotExist);
 
-            var dto = mapper.Map<AlbumDTO>(entity);
+            var dto = entity.Adapt<AlbumDTO>();
             if (includeBandInfo)
-                dto.Band = mapper.Map<BandDTO>(entity.Band);
+                dto.Band = entity.Band.Adapt<BandDTO>();
 
             if (includeSongs)
                 dto.Songs = await GetAlbumSongsAsync(entity.Id);
@@ -219,7 +218,7 @@ namespace BusinessLayer.Facades
         public async Task AddReviewAsync(AlbumReviewCreateDTO review)
         {
             using var uow = uowProviderFunc().Create();
-            var entity = mapper.Map<AlbumReview>(review);
+            var entity = review.Adapt<AlbumReview>();
             entity.CreateDate = DateTime.Now;
             entity.EditDate = DateTime.Now;
 
@@ -252,7 +251,7 @@ namespace BusinessLayer.Facades
                 throw new UIException(ErrorMessages.NotUserReview);
 
             var qualityUpdated = editedReview.Quality != entity.Quality;
-            mapper.Map(editedReview, entity);
+            editedReview.Adapt(entity);
             entity.EditDate = DateTime.Now;
             await uow.CommitAsync();
 
@@ -310,7 +309,7 @@ namespace BusinessLayer.Facades
             if (await repo.GetUserAlbumAsync(userAlbum.UserId, userAlbum.AlbumId) != null)
                 return;
 
-            var entity = mapper.Map<UserAlbum>(userAlbum);
+            var entity = userAlbum.Adapt<UserAlbum>();
             repo.Insert(entity);
 
             await uow.CommitAsync();

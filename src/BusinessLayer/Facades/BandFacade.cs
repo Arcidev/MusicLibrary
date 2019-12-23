@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
 using BusinessLayer.Queries;
 using BusinessLayer.Repositories;
 using BusinessLayer.Resources;
 using DataLayer.Entities;
 using DotVVM.Framework.Controls;
 using DotVVM.Framework.Storage;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
@@ -35,9 +35,8 @@ namespace BusinessLayer.Facades
             Func<UserBandReviewsQuery> userBandReviewsQueryFunc,
             Func<BandMembersQuery> bandMembersQueryFunc,
             Func<BandInfoesQuery> bandInfoesQueryFunc,
-            IMapper mapper,
             Lazy<StorageFileFacade> storageFileFacade,
-            Func<IUnitOfWorkProvider> uowProvider) : base(mapper, storageFileFacade, uowProvider)
+            Func<IUnitOfWorkProvider> uowProvider) : base(storageFileFacade, uowProvider)
         {
             this.bandRepositoryFunc = bandRepositoryFunc;
             this.bandReviewRepositoryFunc = bandReviewRepositoryFunc;
@@ -71,7 +70,7 @@ namespace BusinessLayer.Facades
         public async Task<BandDTO> AddBandAsync(BandBaseDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
         {
             using var uow = uowProviderFunc().Create();
-            var entity = mapper.Map<Band>(band);
+            var entity = band.Adapt<Band>();
             entity.CreateDate = DateTime.Now;
             await SetImageFileAsync(entity, file, storage);
 
@@ -79,7 +78,7 @@ namespace BusinessLayer.Facades
             repo.Insert(entity);
 
             await uow.CommitAsync();
-            return mapper.Map<BandDTO>(entity);
+            return entity.Adapt<BandDTO>();
         }
 
         public async Task EditBandAsync(BandEditDTO band, UploadedFile file = null, IUploadedFileStorage storage = null)
@@ -87,7 +86,7 @@ namespace BusinessLayer.Facades
             using var uow = uowProviderFunc().Create();
             var repo = bandRepositoryFunc();
             var entity = await repo.GetByIdAsync(band.Id);
-            mapper.Map(band, entity);
+            band.Adapt(entity);
             await SetImageFileAsync(entity, file, storage);
 
             await uow.CommitAsync();
@@ -130,9 +129,9 @@ namespace BusinessLayer.Facades
             var entity = await repo.GetByIdAsync(id);
             IsNotNull(entity, ErrorMessages.BandNotExist);
 
-            var dto = mapper.Map<BandDTO>(entity);
+            var dto = entity.Adapt<BandDTO>();
             if (includeAlbums)
-                dto.Albums = mapper.Map<IEnumerable<AlbumDTO>>(entity.Albums.Where(x => x.Approved));
+                dto.Albums = entity.Albums.Where(x => x.Approved).Adapt<List<AlbumDTO>>();
 
             if (includeMembers)
                 dto.Members = await GetBandMembersAsync(entity.Id);
@@ -178,7 +177,7 @@ namespace BusinessLayer.Facades
             if (entity.CreatedById != editedReview.CreatedById)
                 throw new UIException(ErrorMessages.NotUserReview);
 
-            mapper.Map(editedReview, entity);
+            editedReview.Adapt(entity);
             entity.EditDate = DateTime.Now;
 
             await uow.CommitAsync();
@@ -187,7 +186,7 @@ namespace BusinessLayer.Facades
         public async Task AddReviewAsync(BandReviewCreateDTO review)
         {
             using var uow = uowProviderFunc().Create();
-            var entity = mapper.Map<BandReview>(review);
+            var entity = review.Adapt<BandReview>();
             entity.CreateDate = DateTime.Now;
             entity.EditDate = DateTime.Now;
 

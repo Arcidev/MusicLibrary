@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using BusinessLayer.DTO;
+﻿using BusinessLayer.DTO;
 using BusinessLayer.Queries;
 using BusinessLayer.Repositories;
 using BusinessLayer.Resources;
 using DataLayer.Entities;
+using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,7 @@ namespace BusinessLayer.Facades
         public CategoryFacade(Func<CategoryRepository> categoryRepositoryFunc,
             Func<CategoriesQuery> categoriesQueryFunc,
             Func<CategoryAlbumsQuery> categoryAlbumsQueryFunc,
-            IMapper mapper,
-            Func<IUnitOfWorkProvider> uowProvider) : base(mapper, uowProvider)
+            Func<IUnitOfWorkProvider> uowProvider) : base(uowProvider)
         {
             this.categoryRepositoryFunc = categoryRepositoryFunc;
             this.categoriesQueryFunc = categoriesQueryFunc;
@@ -31,12 +30,12 @@ namespace BusinessLayer.Facades
         public async Task<CategoryDTO> AddCategoryAsync(CategoryDTO category)
         {
             using var uow = uowProviderFunc().Create();
-            var entity = mapper.Map<Category>(category);
+            var entity = category.Adapt<Category>();
             var repo = categoryRepositoryFunc();
             repo.Insert(entity);
 
             await uow.CommitAsync();
-            return mapper.Map<CategoryDTO>(entity);
+            return entity.Adapt<CategoryDTO>();
         }
 
         public async Task<IList<CategoryDTO>> GetCategoriesAsync()
@@ -54,7 +53,7 @@ namespace BusinessLayer.Facades
             var entity = await repo.GetByIdAsync(id);
             IsNotNull(entity, ErrorMessages.CategoryNotExist);
 
-            return mapper.Map<CategoryDTO>(entity);
+            return entity.Adapt<CategoryDTO>();
         }
 
         public async Task<CategoryDTO> EditCategoryAsync(CategoryDTO category)
@@ -62,10 +61,10 @@ namespace BusinessLayer.Facades
             using var uow = uowProviderFunc().Create();
             var repo = categoryRepositoryFunc();
             var entity = await repo.GetByIdAsync(category.Id);
-            mapper.Map(category, entity);
+            category.Adapt(entity);
 
             await uow.CommitAsync();
-            return mapper.Map<CategoryDTO>(entity);
+            return entity.Adapt<CategoryDTO>();
         }
 
         public async Task DeleteCategoryAsync(int id)
