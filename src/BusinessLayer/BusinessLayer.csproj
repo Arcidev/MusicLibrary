@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotVVM" Version="2.4.0-preview06-final" />
-    <PackageReference Include="DotVVM.Core" Version="2.4.0-preview06-final" />
+    <PackageReference Include="DotVVM" Version="2.4.0" />
+    <PackageReference Include="DotVVM.Core" Version="2.4.0" />
     <PackageReference Include="Mapster" Version="4.1.1" />
     <PackageReference Include="Riganti.Utils.Infrastructure.EntityFrameworkCore" Version="2.3.0" />
   </ItemGroup>
