@@ -101,8 +101,7 @@
     <value>Iniciar sesión</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Registrarse
-</value>
+    <value>Registrarse</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Índex</value>
@@ -307,5 +306,8 @@
   </data>
   <data name="PasswordRequired" xml:space="preserve">
     <value>¡Se requiere contraseña!</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Recuerdame en esta computadora</value>
   </data>
 </root>

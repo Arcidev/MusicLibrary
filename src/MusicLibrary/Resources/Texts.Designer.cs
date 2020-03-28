@@ -511,6 +511,15 @@ namespace MusicLibrary.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remember me on this computer.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove from my collection.
         /// </summary>
         public static string RemoveFromCollection {

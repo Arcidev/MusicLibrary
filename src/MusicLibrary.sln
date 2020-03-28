@@ -13,10 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicLibrary", "MusicLibrar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiModels", "WebApiModels\WebApiModels.csproj", "{7DA9BBA2-8032-485A-9724-30824547AE9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer.Tests", "BusinessLayer.Tests\BusinessLayer.Tests.csproj", "{B5ABC987-7859-4597-AAEC-A0C3AA7CE913}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer.Tests", "BusinessLayer.Tests\BusinessLayer.Tests.csproj", "{B5ABC987-7859-4597-AAEC-A0C3AA7CE913}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Shared\Shared.projitems*{12b00e45-8877-48a1-9a24-06acf5305a8f}*SharedItemsImports = 5
 		Shared\Shared.projitems*{642c65c4-363d-434a-a302-3da4c082e88d}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

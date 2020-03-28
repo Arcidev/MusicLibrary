@@ -17,6 +17,8 @@ namespace MusicLibrary.ViewModels.Login
         [Bind(Direction.ServerToClient)]
         public string ErrorMessage { get; set; }
 
+        public bool RememberMe { get; set; }
+
         public BaseLoginViewModel(UserFacade userFacade)
         {
             this.userFacade = userFacade;
@@ -33,8 +35,8 @@ namespace MusicLibrary.ViewModels.Login
 
             var properties = new AuthenticationProperties()
             {
-                IsPersistent = true,
-                ExpiresUtc = true ? DateTime.UtcNow.AddMonths(1) : (DateTime?)null
+                IsPersistent = RememberMe,
+                ExpiresUtc = RememberMe ? DateTime.UtcNow.AddMonths(1) : (DateTime?)null
             };
 
             await Context.GetAuthentication().SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);

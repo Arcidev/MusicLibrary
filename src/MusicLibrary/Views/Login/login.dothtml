@@ -15,6 +15,7 @@
                     </td>
                     <td>
                         <dot:TextBox Text="{value: Email}" Type="Email" />
+                        <dot:Validator InvalidCssClass="error-message" ShowErrorMessageText="true" Value="{value: Email}" />
                     </td>
                 </tr>
                 <tr>
@@ -23,6 +24,11 @@
                     </td>
                     <td>
                         <dot:TextBox Text="{value: Password}" Type="Password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <dot:Checkbox Checked="{value: RememberMe}" Text="{resource: Resource.RememberMe}" />
                     </td>
                 </tr>
                 <tr Visible="{value: ErrorMessage != null}">
@@ -50,6 +56,7 @@
         dotvvm.events.init.subscribe(function () {
             $(".login-form").on("keypress", function (e) {
                 if(e.which == 13) {
+                    $(":focus").blur();
                     $("#SubmitButton")[0].click();
                 }
             });

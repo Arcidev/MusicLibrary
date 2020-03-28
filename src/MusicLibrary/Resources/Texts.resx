@@ -327,4 +327,7 @@
   <data name="PasswordRequired" xml:space="preserve">
     <value>Password is required!</value>
   </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me on this computer</value>
+  </data>
 </root>

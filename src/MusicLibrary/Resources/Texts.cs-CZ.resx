@@ -307,4 +307,7 @@
   <data name="PasswordRequired" xml:space="preserve">
     <value>Pole heslo je povinné!</value>
   </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Zapamatovat si mě na tomto počítači</value>
+  </data>
 </root>
