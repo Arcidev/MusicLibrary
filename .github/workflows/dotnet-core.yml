@@ -16,12 +16,10 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
-    - name: Open directory
-      run: cd src  
+        dotnet-version: 3.1.101  
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore src/MusicLibrary.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build src/MusicLibrary.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test src/MusicLibrary.sln --no-restore --verbosity normal
