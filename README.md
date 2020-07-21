@@ -3,6 +3,7 @@ Music library is a web application written with DotVVM framework (Asp .Net Core 
 
 ## Build Status
 [![Build status](https://img.shields.io/travis/Arcidev/musiclibrary.svg?logo=travis&style=flat-square)](https://travis-ci.org/Arcidev/MusicLibrary)
+[![Build status](https://img.shields.io/github/workflow/status/Arcidev/musiclibrary/.NET%20Core?logo=github&style=flat-square)](https://github.com/Arcidev/MusicLibrary/actions)
 [![Build status](https://img.shields.io/appveyor/ci/Arcidev/musiclibrary.svg?logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/Arcidev/musiclibrary)
 [![Test status](https://img.shields.io/appveyor/tests/Arcidev/musiclibrary.svg?logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/Arcidev/musiclibrary/build/tests)
 
