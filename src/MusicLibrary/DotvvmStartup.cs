@@ -58,7 +58,7 @@ namespace MusicLibrary
         {
             config.Resources.Register("jquery", new ScriptResource
             {
-                Location = new UrlResourceLocation("https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js")
+                Location = new UrlResourceLocation("https://code.jquery.com/jquery-3.5.1.min.js")
             });
             config.Resources.Register("templateStyle-css", new StylesheetResource()
             {
@@ -88,6 +88,7 @@ namespace MusicLibrary
                 Dependencies = new[] { "jquery" }
             });
         }
+
         public void ConfigureServices(IDotvvmServiceCollection options)
         {
             MapperInstaller.ConfigureMapper();
