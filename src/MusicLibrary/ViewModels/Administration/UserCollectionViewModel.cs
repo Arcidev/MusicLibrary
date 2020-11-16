@@ -19,7 +19,7 @@ namespace MusicLibrary.ViewModels.Administration
         {
             this.albumFacade = albumFacade;
 
-            UserCollection = new GridViewDataSet<AlbumInfoDTO>()
+            UserCollection = new ()
             {
                 PagingOptions = new PagingOptions()
                 {
@@ -58,7 +58,7 @@ namespace MusicLibrary.ViewModels.Administration
             {
                 if (userAlbum.HasInCollection)
                 {
-                    await albumFacade.AddAlbumToUserCollectionAsync(new UserAlbumCreateDTO()
+                    await albumFacade.AddAlbumToUserCollectionAsync(new ()
                     {
                         AlbumId = userAlbum.AlbumId,
                         UserId = UserId

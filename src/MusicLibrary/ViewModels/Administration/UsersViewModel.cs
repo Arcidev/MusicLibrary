@@ -32,7 +32,7 @@ namespace MusicLibrary.ViewModels.Administration
             this.userFacade = userFacade;
 
             UserRoles = Enum.GetNames(typeof(UserRole));
-            Users = new GridViewDataSet<UserInfoDTO>()
+            Users = new ()
             {
                 PagingOptions = new PagingOptions()
                 {
@@ -76,12 +76,12 @@ namespace MusicLibrary.ViewModels.Administration
 
             await ExecuteSafelyAsync(async () =>
             {
-                await userFacade.EditUserAsync(new UserEditDTO()
+                await userFacade.EditUserAsync(new ()
                 {
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Id = user.Id,
-                    UserRole = (UserRole)Enum.Parse(typeof(UserRole), SelectedUserRole)
+                    UserRole = Enum.Parse<UserRole>(SelectedUserRole)
                 });
 
                 CancelEdit();

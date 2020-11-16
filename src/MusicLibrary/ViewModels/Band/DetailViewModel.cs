@@ -42,7 +42,7 @@ namespace MusicLibrary.ViewModels.Band
 
             await ExecuteSafelyAsync(async () =>
             {
-                await bandFacade.AddReviewAsync(new BandReviewCreateDTO()
+                await bandFacade.AddReviewAsync(new ()
                 {
                     BandId = int.Parse(Context.Parameters["BandId"].ToString()),
                     CreatedById = UserId,
@@ -54,14 +54,8 @@ namespace MusicLibrary.ViewModels.Band
             }, failureCallback: (ex) => ReviewErrorMessage = ex.Message);
         }
 
-        protected override async Task LoadReviews()
-        {
-            await bandFacade.LoadReviewsAsync(int.Parse(Context.Parameters["BandId"].ToString()), Reviews);
-        }
+        protected override async Task LoadReviews() => await bandFacade.LoadReviewsAsync(int.Parse(Context.Parameters["BandId"].ToString()), Reviews);
 
-        protected override Func<int, ReviewEditDTO, Task> GetEditReviewAction()
-        {
-            return bandFacade.EditUserReviewAsync;
-        }
+        protected override Func<int, ReviewEditDTO, Task> GetEditReviewAction() => bandFacade.EditUserReviewAsync;
     }
 }

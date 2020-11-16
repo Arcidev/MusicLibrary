@@ -19,7 +19,7 @@ namespace MusicLibrary.ViewModels.Administration
             if (!Context.IsPostBack)
             {
                 var band = await bandFacade.GetBandAsync(int.Parse(Context.Parameters["BandId"].ToString()), true, true);
-                Band = new BandBaseDTO()
+                Band = new ()
                 {
                     Approved = band.Approved,
                     Description = band.Description,
@@ -45,7 +45,7 @@ namespace MusicLibrary.ViewModels.Administration
 
             var success = await ExecuteSafelyAsync(async () =>
             {
-                await bandFacade.EditBandAsync(new BandEditDTO()
+                await bandFacade.EditBandAsync(new ()
                 {
                     Id = int.Parse(Context.Parameters["BandId"].ToString()),
                     Approved = Band.Approved,

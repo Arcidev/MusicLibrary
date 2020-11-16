@@ -52,7 +52,7 @@ namespace MusicLibrary.ViewModels.Administration
 
             var success = await ExecuteSafelyAsync(async () =>
             {
-                await albumFacade.EditAlbumAsync(new AlbumEditDTO()
+                await albumFacade.EditAlbumAsync(new ()
                 {
                     Id = int.Parse(Context.Parameters["AlbumId"].ToString()),
                     Approved = Album.Approved,

@@ -34,7 +34,7 @@ namespace MusicLibrary.ViewModels.Administration
             this.albumFacade = albumFacade;
             this.bandFacade = bandFacade;
 
-            AlbumReviews = new GridViewDataSet<UserAlbumReviewDTO>()
+            AlbumReviews = new ()
             {
                 PagingOptions = new PagingOptions()
                 {
@@ -46,7 +46,7 @@ namespace MusicLibrary.ViewModels.Administration
                     SortExpression = nameof(UserAlbumReviewDTO.EditDate)
                 }
             };
-            BandReviews = new GridViewDataSet<UserBandReviewDTO>()
+            BandReviews = new ()
             {
                 PagingOptions = new PagingOptions()
                 {
@@ -113,7 +113,7 @@ namespace MusicLibrary.ViewModels.Administration
 
             await ExecuteSafelyAsync(async () =>
             {
-                await action(id, new ReviewEditDTO()
+                await action(id, new ()
                 {
                     CreatedById = UserId,
                     Quality = (Quality)int.Parse(EditReviewQuality),

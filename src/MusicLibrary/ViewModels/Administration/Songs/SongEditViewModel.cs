@@ -22,7 +22,7 @@ namespace MusicLibrary.ViewModels.Administration
             if (!Context.IsPostBack)
             {
                 var song = await songFacade.GetSongAsync(int.Parse(Context.Parameters["SongId"].ToString()));
-                Song = new SongBaseDTO()
+                Song = new ()
                 {
                     Approved = song.Approved,
                     Name = song.Name,
@@ -49,7 +49,7 @@ namespace MusicLibrary.ViewModels.Administration
 
             var success = await ExecuteSafelyAsync(async () =>
             {
-                await songFacade.EditSongAsync(new SongEditDTO()
+                await songFacade.EditSongAsync(new ()
                 {
                     Id = int.Parse(Context.Parameters["SongId"].ToString()),
                     Approved = Song.Approved,

@@ -18,7 +18,7 @@ namespace MusicLibrary.ViewModels.Administration
         {
             if (!Context.IsPostBack)
             {
-                Band = new BandBaseDTO();
+                Band = new ();
             }
 
             await base.PreRender();
@@ -29,12 +29,12 @@ namespace MusicLibrary.ViewModels.Administration
             if (!ValidateBand())
                 return;
 
-            var role = (UserRole)Enum.Parse(typeof(UserRole), UserRole);
+            var role = Enum.Parse<UserRole>(UserRole);
             var success = await ExecuteSafelyAsync(async () =>
             {
-                await bandFacade.AddBandAsync(new BandBaseDTO()
+                await bandFacade.AddBandAsync(new ()
                 {
-                    Approved = role != Shared.Enums.UserRole.User ? Band.Approved : false,
+                    Approved = role != Shared.Enums.UserRole.User && Band.Approved,
                     Description = Band.Description,
                     Name = Band.Name
                 }, Files.Files.LastOrDefault(), uploadedFileStorage);

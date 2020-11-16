@@ -21,7 +21,7 @@ namespace MusicLibrary
             ConfigureResources(config);
         }
 
-        private void ConfigureRoutes(DotvvmConfiguration config)
+        private static void ConfigureRoutes(DotvvmConfiguration config)
         {
             config.RouteTable.Add("Index", "", "Views/index.dothtml");
             config.RouteTable.Add("AlbumDetail", "album/{AlbumId}/detail", "Views/Album/detail.dothtml");
@@ -49,12 +49,12 @@ namespace MusicLibrary
             config.RouteTable.Add("TempFilePresenter", "files/{FileId}/{FileExtension}", serviceProvider => serviceProvider.GetRequiredService<TempFilePresenter>());
         }
 
-        private void ConfigureControls(DotvvmConfiguration config)
+        private static void ConfigureControls(DotvvmConfiguration config)
         {
             config.Markup.AddMarkupControl("cc", "LoadingAnimation", "Controls/LoadingAnimation.dotcontrol");
         }
 
-        private void ConfigureResources(DotvvmConfiguration config)
+        private static void ConfigureResources(DotvvmConfiguration config)
         {
             config.Resources.Register("jquery", new ScriptResource
             {

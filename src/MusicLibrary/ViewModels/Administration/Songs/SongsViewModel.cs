@@ -12,7 +12,7 @@ namespace MusicLibrary.ViewModels.Administration
     {
         private readonly SongFacade songFacade;
 
-        public List<int> SelectedSongIds { get; set; } = new List<int>();
+        public List<int> SelectedSongIds { get; set; } = new ();
 
         public GridViewDataSet<SongInfoDTO> Songs { get; set; }
 
@@ -22,7 +22,7 @@ namespace MusicLibrary.ViewModels.Administration
         {
             this.songFacade = songFacade;
 
-            Songs = new GridViewDataSet<SongInfoDTO>()
+            Songs = new ()
             {
                 PagingOptions = new PagingOptions()
                 {

@@ -24,7 +24,7 @@ namespace MusicLibrary.ViewModels
 
         protected DetailMasterPageViewModel(CategoryFacade categoryFacade) : base(categoryFacade)
         {
-            Reviews = new GridViewDataSet<ReviewDTO>()
+            Reviews = new ()
             {
                 PagingOptions = new PagingOptions()
                 {
@@ -60,7 +60,7 @@ namespace MusicLibrary.ViewModels
 
             await ExecuteSafelyAsync(async () =>
             {
-                await GetEditReviewAction()(ReviewEditId ?? 0, new ReviewEditDTO()
+                await GetEditReviewAction()(ReviewEditId ?? 0, new ()
                 {
                     CreatedById = UserId,
                     Quality = (Quality)int.Parse(ReviewQuality),

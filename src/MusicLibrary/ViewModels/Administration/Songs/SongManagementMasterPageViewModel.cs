@@ -16,13 +16,13 @@ namespace MusicLibrary.ViewModels.Administration
         protected readonly SongFacade songFacade;
         protected readonly IUploadedFileStorage uploadedFileStorage;
 
-        public List<AlbumBandInfoDTO> AddedAlbums { get; set; } = new List<AlbumBandInfoDTO>();
+        public List<AlbumBandInfoDTO> AddedAlbums { get; set; } = new ();
 
         public List<AlbumBandInfoDTO> AlbumInfoes { get; set; }
 
         public SongBaseDTO Song { get; set; }
 
-        public UploadedFilesCollection Files { get; set; } = new UploadedFilesCollection();
+        public UploadedFilesCollection Files { get; set; } = new ();
 
         public string SongNameError { get; set; }
 
@@ -82,7 +82,7 @@ namespace MusicLibrary.ViewModels.Administration
             if (file == null)
                 return;
 
-            SongFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName).Substring(1)}";
+            SongFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName)[1..]}";
         }
 
         public virtual void ResetSong()
@@ -106,7 +106,7 @@ namespace MusicLibrary.ViewModels.Administration
             var videoParam = "watch?v=";
             var index = Song.YoutubeUrlParam?.IndexOf(videoParam);
             if (index >= 0)
-                return Song.YoutubeUrlParam.Substring(index.Value + videoParam.Length);
+                return Song.YoutubeUrlParam[(index.Value + videoParam.Length)..];
 
             return Song.YoutubeUrlParam;
         }

@@ -24,7 +24,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public AlbumManagementErrorViewModel AlbumManagementErrorViewModel { get; set; }
 
-        public List<SongInfoDTO> AddedSongs { get; set; } = new List<SongInfoDTO>();
+        public List<SongInfoDTO> AddedSongs { get; set; } = new ();
 
         public IEnumerable<BandInfoDTO> BandInfoes { get; set; }
 
@@ -97,7 +97,7 @@ namespace MusicLibrary.ViewModels.Administration
             if (file == null)
                 return;
 
-            ImageFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName).Substring(1)}";
+            ImageFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName)[1..]}";
         }
 
         public virtual void ResetImage()
@@ -112,7 +112,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         protected bool ValidateAlbum()
         {
-            AlbumManagementErrorViewModel = new AlbumManagementErrorViewModel();
+            AlbumManagementErrorViewModel = new ();
 
             if (string.IsNullOrEmpty(Album.Name))
                 AlbumManagementErrorViewModel.NameError = Texts.NameRequired;

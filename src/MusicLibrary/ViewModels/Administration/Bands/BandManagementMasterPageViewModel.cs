@@ -16,7 +16,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public BandBaseDTO Band { get; set; }
 
-        public UploadedFilesCollection Files { get; set; } = new UploadedFilesCollection();
+        public UploadedFilesCollection Files { get; set; } = new ();
 
         public BandManagementErrorViewModel BandManagementErrorViewModel { get; set; }
 
@@ -44,7 +44,7 @@ namespace MusicLibrary.ViewModels.Administration
             if (file == null)
                 return;
 
-            ImageFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName).Substring(1)}";
+            ImageFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName)[1..]}";
         }
 
         public virtual void ResetImage()
@@ -57,7 +57,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         protected bool ValidateBand()
         {
-            BandManagementErrorViewModel = new BandManagementErrorViewModel();
+            BandManagementErrorViewModel = new ();
 
             if (string.IsNullOrEmpty(Band.Name))
                 BandManagementErrorViewModel.NameError = Texts.NameRequired;

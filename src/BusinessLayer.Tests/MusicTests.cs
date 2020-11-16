@@ -24,7 +24,7 @@ namespace BL.Tests
         public async Task TestFeaturedAlbums()
         {
             var albums = await AlbumFacade.GetFeaturedAlbumsAsync(2);
-            Assert.Equal(2, albums.Count());
+            Assert.Equal(2, albums.Count);
             Assert.Equal("Test album 2", albums.First().Name);
         }
 
@@ -49,7 +49,7 @@ namespace BL.Tests
             var album = (await albumFacade.GetFeaturedAlbumsAsync(1)).First();
             var user = await UserFacade.GetUserByEmailAsync("albumtest@mail.sk");
 
-            await albumFacade.AddAlbumToUserCollectionAsync(new UserAlbumCreateDTO() { AlbumId = album.Id, UserId = user.Id });
+            await albumFacade.AddAlbumToUserCollectionAsync(new () { AlbumId = album.Id, UserId = user.Id });
             var collection = await albumFacade.GetUserAlbumsAsync(user.Id);
             Assert.Single(collection);
             Assert.Equal(album.Id, collection.First().Id);
@@ -75,13 +75,13 @@ namespace BL.Tests
         public async Task TestSongs()
         {
             var songFacade = SongFacade;
-            var song = await songFacade.AddSongAsync(new SongCreateDTO()
+            var song = await songFacade.AddSongAsync(new ()
             {
                 Approved = true,
                 Name = "test song"
             });
 
-            var song2 = await songFacade.AddSongAsync(new SongCreateDTO()
+            var song2 = await songFacade.AddSongAsync(new ()
             {
                 Approved = true,
                 Name = "test song2"
@@ -105,7 +105,7 @@ namespace BL.Tests
         public async Task TestCategories()
         {
             var categoryFacade = CategoryFacade;
-            var category = await categoryFacade.AddCategoryAsync(new CategoryDTO()
+            var category = await categoryFacade.AddCategoryAsync(new ()
             {
                 Name = "Another test category"
             });
@@ -126,7 +126,7 @@ namespace BL.Tests
 
         public async Task InitializeAsync()
         {
-            var band = await BandFacade.AddBandAsync(new BandBaseDTO()
+            var band = await BandFacade.AddBandAsync(new ()
             {
                 Name = "Test Band",
                 Description = "Test Description",
@@ -134,20 +134,20 @@ namespace BL.Tests
             });
 
             var category = (await CategoryFacade.GetCategoriesAsync()).FirstOrDefault(x => x.Name == "Test Category");
-            category ??= await CategoryFacade.AddCategoryAsync(new CategoryDTO()
+            category ??= await CategoryFacade.AddCategoryAsync(new ()
             {
                 Name = "Test Category"
             });
 
             var albumFacade = AlbumFacade;
-            var album1 = await albumFacade.AddAlbumAsync(new AlbumCreateDTO()
+            var album1 = await albumFacade.AddAlbumAsync(new ()
             {
                 Approved = true,
                 BandId = band.Id,
                 CategoryId = category.Id,
                 Name = "Test album 1"
             });
-            var album2 = await albumFacade.AddAlbumAsync(new AlbumCreateDTO()
+            var album2 = await albumFacade.AddAlbumAsync(new ()
             {
                 Approved = true,
                 BandId = band.Id,
@@ -156,7 +156,7 @@ namespace BL.Tests
             });
 
             var user = await UserFacade.GetUserByEmailAsync("albumtest@mail.sk");
-            user ??= await UserFacade.AddUserAsync(new UserCreateDTO()
+            user ??= await UserFacade.AddUserAsync(new ()
             {
                 Email = "albumtest@mail.sk",
                 FirstName = "test",
@@ -176,7 +176,7 @@ namespace BL.Tests
 
             positiveReview.AlbumId = album2.Id;
             await albumFacade.AddReviewAsync(positiveReview);
-            await albumFacade.AddReviewAsync(new AlbumReviewCreateDTO()
+            await albumFacade.AddReviewAsync(new ()
             {
                 AlbumId = album1.Id,
                 Quality = Quality.Trash,

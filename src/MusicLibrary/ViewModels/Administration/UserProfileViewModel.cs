@@ -26,7 +26,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public string PasswordAgain { get; set; }
 
-        public UploadedFilesCollection Files { get; set; } = new UploadedFilesCollection();
+        public UploadedFilesCollection Files { get; set; } = new ();
 
         public string ImageFileName { get; set; }
 
@@ -49,7 +49,7 @@ namespace MusicLibrary.ViewModels.Administration
 
         public async Task SaveChanges()
         {
-            UserProfileErrorViewModel = new UserProfileErrorViewModel();
+            UserProfileErrorViewModel = new ();
 
             if (string.IsNullOrWhiteSpace(User.FirstName))
                 UserProfileErrorViewModel.FirstNameError = Texts.FirstNameRequired;
@@ -84,7 +84,7 @@ namespace MusicLibrary.ViewModels.Administration
             if (file == null)
                 return;
 
-            ImageFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName).Substring(1)}";
+            ImageFileName = $"/files/{file.FileId}/{Path.GetExtension(file.FileName)[1..]}";
         }
 
         public void ResetImage()

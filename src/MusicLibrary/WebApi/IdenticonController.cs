@@ -14,7 +14,7 @@ namespace MusicLibrary.WebApi
         [HttpGet("{name}")]
         public FileStreamResult DownloadFile(string name)
         {
-            var identicon = new IdenticonGenerator("SHA512", new Size(180, 180), Color.Transparent, new Size(8, 8))
+            var identicon = new IdenticonGenerator("SHA512", new (180, 180), Color.Transparent, new (8, 8))
             {
                 DefaultBlockGenerators = IdenticonGenerator.ExtendedBlockGeneratorsConfig,
                 DefaultBrushGenerator = new StaticColorBrushGenerator(Color.Black)

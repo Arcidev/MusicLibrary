@@ -1,5 +1,5 @@
 # MusicLibrary
-Music library is a web application written with DotVVM framework (Asp .Net Core 3.1). Application allows listening to/downloading music and watch music videos embedded from YT which can be assigned to your music collection.
+Music library is a web application written with DotVVM framework (Asp .Net Core 5.0). Application allows listening to/downloading music and watch music videos embedded from YT which can be assigned to your music collection.
 
 ## Build Status
 [![Build status](https://img.shields.io/travis/Arcidev/musiclibrary.svg?logo=travis&style=flat-square)](https://travis-ci.org/Arcidev/MusicLibrary)

@@ -64,7 +64,7 @@ namespace MusicLibrary.ViewModels.Album
         {
             await ExecuteSafelyAsync(async () =>
             {
-                await albumFacade.AddAlbumToUserCollectionAsync(new UserAlbumCreateDTO()
+                await albumFacade.AddAlbumToUserCollectionAsync(new ()
                 {
                     AlbumId = id,
                     UserId = UserId
@@ -92,7 +92,7 @@ namespace MusicLibrary.ViewModels.Album
             await ExecuteSafelyAsync(async () =>
             {
                 var albumId = int.Parse(Context.Parameters["AlbumId"].ToString());
-                await albumFacade.AddReviewAsync(new AlbumReviewCreateDTO()
+                await albumFacade.AddReviewAsync(new ()
                 {
                     AlbumId = albumId,
                     CreatedById = UserId,
@@ -104,14 +104,8 @@ namespace MusicLibrary.ViewModels.Album
             }, failureCallback: (ex) => ReviewErrorMessage = ex.Message);
         }
 
-        protected override async Task LoadReviews()
-        {
-            await albumFacade.LoadReviewsAsync(int.Parse(Context.Parameters["AlbumId"].ToString()), Reviews);
-        }
+        protected override async Task LoadReviews() => await albumFacade.LoadReviewsAsync(int.Parse(Context.Parameters["AlbumId"].ToString()), Reviews);
 
-        protected override Func<int, ReviewEditDTO, Task> GetEditReviewAction()
-        {
-            return albumFacade.EditUserReviewAsync;
-        }
+        protected override Func<int, ReviewEditDTO, Task> GetEditReviewAction() => albumFacade.EditUserReviewAsync;
     }
 }

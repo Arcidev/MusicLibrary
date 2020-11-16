@@ -18,7 +18,7 @@ namespace MusicLibrary.ViewModels.Administration
         {
             if (!Context.IsPostBack)
             {
-                Song = new SongBaseDTO();
+                Song = new ();
             }
 
             await base.PreRender();
@@ -29,12 +29,12 @@ namespace MusicLibrary.ViewModels.Administration
             if (!ValidateSong())
                 return;
 
-            var role = (UserRole)Enum.Parse(typeof(UserRole), UserRole);
+            var role = Enum.Parse<UserRole>(UserRole);
             var success = await ExecuteSafelyAsync(async () =>
             {
-                await songFacade.AddSongAsync(new SongCreateDTO()
+                await songFacade.AddSongAsync(new ()
                 {
-                    Approved = role != Shared.Enums.UserRole.User ? Song.Approved : false,
+                    Approved = role != Shared.Enums.UserRole.User && Song.Approved,
                     Name = Song.Name,
                     AddedAlbums = AddedAlbums.Select(x => x.AlbumId),
                     YoutubeUrlParam = ParseYTUrl()
