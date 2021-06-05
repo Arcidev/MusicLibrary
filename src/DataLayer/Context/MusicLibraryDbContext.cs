@@ -249,66 +249,56 @@ namespace DataLayer.Context
             }, new StorageFile()
             {
                 Id = 11,
-                DisplayName = "andragona-fight-for-your-praise.mp3",
-                FileName = "andragona-fight-for-your-praise.mp3"
-            }, new StorageFile()
-            {
-                Id = 12,
-                DisplayName = "andragona-miss-you.mp3",
-                FileName = "andragona-miss-you.mp3"
-            }, new StorageFile()
-            {
-                Id = 13,
                 DisplayName = "Lindemann_logo.jpg",
                 FileName = "Lindemann_logo.jpg"
             }, new StorageFile()
             {
-                Id = 14,
+                Id = 12,
                 DisplayName = "Lindemann_Skills_in_Pills.jpg",
                 FileName = "Lindemann_Skills_in_Pills.jpg"
             }, new StorageFile()
             {
-                Id = 15,
+                Id = 13,
                 DisplayName = "slipknot_logo.jpg",
                 FileName = "slipknot_logo.jpg"
             }, new StorageFile()
             {
-                Id = 16,
+                Id = 14,
                 DisplayName = "Slipknot.jpg",
                 FileName = "Slipknot.jpg"
             }, new StorageFile()
             {
-                Id = 17,
+                Id = 15,
                 DisplayName = "Slipknot_Taylor.jpg",
                 FileName = "Slipknot_Taylor.jpg"
             }, new StorageFile()
             {
-                Id = 18,
+                Id = 16,
                 DisplayName = "All_Hope_is_Gone.jpg",
                 FileName = "All_Hope_is_Gone.jpg"
             }, new StorageFile()
             {
-                Id = 19,
+                Id = 17,
                 DisplayName = "Slipknot_Iowa.jpg",
                 FileName = "Slipknot_Iowa.jpg"
             }, new StorageFile()
             {
-                Id = 20,
+                Id = 18,
                 DisplayName = "KoRnIssues.jpg",
                 FileName = "KoRnIssues.jpg"
             }, new StorageFile()
             {
-                Id = 21,
+                Id = 19,
                 DisplayName = "Korn_logo.jpg",
                 FileName = "Korn_logo.jpg"
             }, new StorageFile()
             {
-                Id = 22,
+                Id = 20,
                 DisplayName = "korn-5820-1078x516-1471045959.jpg",
                 FileName = "korn-5820-1078x516-1471045959.jpg"
             }, new StorageFile()
             {
-                Id = 23,
+                Id = 21,
                 DisplayName = "OB-UL405_ikorn_G_20120906052811.jpg",
                 FileName = "OB-UL405_ikorn_G_20120906052811.jpg"
             });
@@ -344,12 +334,12 @@ namespace DataLayer.Context
                 Approved = true,
                 CreateDate = DateTime.Now,
                 Description = "Industrial metal",
-                ImageStorageFileId = 13
+                ImageStorageFileId = 11
             }, new Band()
             {
                 Id = 5,
                 Name = "Slipknot",
-                ImageStorageFileId = 15,
+                ImageStorageFileId = 13,
                 Approved = true,
                 CreateDate = DateTime.Now,
                 Description = "Heavy metal"
@@ -359,7 +349,7 @@ namespace DataLayer.Context
                 Name = "Korn",
                 Approved = true,
                 CreateDate = DateTime.Now,
-                ImageStorageFileId = 21,
+                ImageStorageFileId = 19,
                 Description = "Nu Metal"
             });
 
@@ -382,22 +372,22 @@ namespace DataLayer.Context
             {
                 Id = 4,
                 BandId = 5,
-                ImageStorageFileId = 16
+                ImageStorageFileId = 14
             }, new SliderImage()
             {
                 Id = 5,
                 BandId = 5,
-                ImageStorageFileId = 17
+                ImageStorageFileId = 15
             }, new SliderImage()
             {
                 Id = 6,
                 BandId = 6,
-                ImageStorageFileId = 22
+                ImageStorageFileId = 20
             }, new SliderImage()
             {
                 Id = 7,
                 BandId = 6,
-                ImageStorageFileId = 23
+                ImageStorageFileId = 21
             });
 
             builder.Entity<Album>().HasData(new Album()
@@ -442,7 +432,7 @@ namespace DataLayer.Context
                 Name = "Skills in Pills",
                 Approved = true,
                 CreateDate = DateTime.Now,
-                ImageStorageFileId = 14,
+                ImageStorageFileId = 12,
                 CategoryId = 1,
                 BandId = 4
             }, new Album()
@@ -451,7 +441,7 @@ namespace DataLayer.Context
                 Approved = true,
                 CreateDate = DateTime.Now,
                 Name = "All hope is gone",
-                ImageStorageFileId = 18,
+                ImageStorageFileId = 16,
                 CategoryId = 1,
                 BandId = 5
             },
@@ -461,7 +451,7 @@ namespace DataLayer.Context
                 Approved = true,
                 CreateDate = DateTime.Now,
                 Name = "Iowa",
-                ImageStorageFileId = 19,
+                ImageStorageFileId = 17,
                 CategoryId = 1,
                 BandId = 5
             }, new Album()
@@ -470,7 +460,7 @@ namespace DataLayer.Context
                 Name = "Issues",
                 Approved = true,
                 CreateDate = DateTime.Now,
-                ImageStorageFileId = 20,
+                ImageStorageFileId = 18,
                 CategoryId = 1,
                 BandId = 6
             });
@@ -518,16 +508,14 @@ namespace DataLayer.Context
                 Approved = true,
                 CreateDate = DateTime.Now,
                 Name = "Fight for your praise",
-                YoutubeUrlParam = "oy7_bkN5eMU",
-                AudioStorageFileId = 11
+                YoutubeUrlParam = "oy7_bkN5eMU"
             }, new Song()
             {
                 Id = 7,
                 Approved = true,
                 CreateDate = DateTime.Now,
                 Name = "Miss You",
-                YoutubeUrlParam = "b9-fzLvC-bY",
-                AudioStorageFileId = 12
+                YoutubeUrlParam = "b9-fzLvC-bY"
             }, new Song()
             {
                 Id = 8,

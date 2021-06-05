@@ -1,5 +1,5 @@
 ﻿using DataLayer.Entities;
-using DotVVM.Framework.Storage;
+using DotVVM.Core.Storage;
 using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Threading.Tasks;
@@ -22,7 +22,7 @@ namespace BusinessLayer.Facades
                 if (entity.ImageStorageFile != null)
                     await storageFileFacade.Value.DeleteFileAsync(entity.ImageStorageFile.Id);
 
-                var fileName = storageFileFacade.Value.SaveFile(file, storage);
+                var fileName = await storageFileFacade.Value.SaveFileAsync(file, storage);
                 entity.ImageStorageFile = new StorageFile()
                 {
                     DisplayName = file.FileName,

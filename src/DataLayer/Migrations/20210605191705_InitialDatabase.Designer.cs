@@ -10,39 +10,46 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(MusicLibraryDbContext))]
-    [Migration("20190727104431_InitialDatabase")]
+    [Migration("20210605191705_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0-preview7.19362.6")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("DataLayer.Entities.Album", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<bool>("Approved");
+                    b.Property<bool>("Approved")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("AverageQuality")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("BandId");
+                    b.Property<int>("BandId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("CategoryId");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreateDate");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int?>("ImageStorageFileId");
+                    b.Property<int?>("ImageStorageFileId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -62,7 +69,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 1,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(8320),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(9299),
                             ImageStorageFileId = 4,
                             Name = "Mutter"
                         },
@@ -73,7 +80,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 1,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(1983),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1390),
                             ImageStorageFileId = 5,
                             Name = "Liebe ist für alle da"
                         },
@@ -84,7 +91,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 2,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2073),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1403),
                             ImageStorageFileId = 8,
                             Name = "GOT YOUR SIX"
                         },
@@ -95,7 +102,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 3,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2082),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1406),
                             ImageStorageFileId = 10,
                             Name = "End Of The Prophesied Dawn"
                         },
@@ -106,8 +113,8 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 4,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2089),
-                            ImageStorageFileId = 14,
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1410),
+                            ImageStorageFileId = 12,
                             Name = "Skills in Pills"
                         },
                         new
@@ -117,8 +124,8 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 5,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2094),
-                            ImageStorageFileId = 18,
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1413),
+                            ImageStorageFileId = 16,
                             Name = "All hope is gone"
                         },
                         new
@@ -128,8 +135,8 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 5,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2099),
-                            ImageStorageFileId = 19,
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1416),
+                            ImageStorageFileId = 17,
                             Name = "Iowa"
                         },
                         new
@@ -139,8 +146,8 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 6,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2104),
-                            ImageStorageFileId = 20,
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1419),
+                            ImageStorageFileId = 18,
                             Name = "Issues"
                         });
                 });
@@ -149,20 +156,27 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int>("AlbumId");
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreateDate");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("EditDate");
+                    b.Property<DateTime>("EditDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("Quality");
+                    b.Property<int>("Quality")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -177,11 +191,14 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int>("AlbumId");
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("SongId");
+                    b.Property<int>("SongId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -294,17 +311,21 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<bool>("Approved");
+                    b.Property<bool>("Approved")
+                        .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -457,21 +478,27 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<bool>("Approved");
+                    b.Property<bool>("Approved")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("CreateDate");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("ImageStorageFileId");
+                    b.Property<int?>("ImageStorageFileId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -484,7 +511,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 1,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 767, DateTimeKind.Local).AddTicks(5536),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 453, DateTimeKind.Local).AddTicks(2990),
                             Description = "Industrial metal",
                             ImageStorageFileId = 1,
                             Name = "Rammstein"
@@ -493,7 +520,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 2,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1556),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5668),
                             Description = "Heavy metal",
                             ImageStorageFileId = 6,
                             Name = "Five Finger Death Punch"
@@ -502,7 +529,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 3,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1630),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5698),
                             Description = "Power metal",
                             ImageStorageFileId = 9,
                             Name = "Andragona"
@@ -511,27 +538,27 @@ namespace DataLayer.Migrations
                         {
                             Id = 4,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1640),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5703),
                             Description = "Industrial metal",
-                            ImageStorageFileId = 13,
+                            ImageStorageFileId = 11,
                             Name = "Lindemann"
                         },
                         new
                         {
                             Id = 5,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1646),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5706),
                             Description = "Heavy metal",
-                            ImageStorageFileId = 15,
+                            ImageStorageFileId = 13,
                             Name = "Slipknot"
                         },
                         new
                         {
                             Id = 6,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1651),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5709),
                             Description = "Nu Metal",
-                            ImageStorageFileId = 21,
+                            ImageStorageFileId = 19,
                             Name = "Korn"
                         });
                 });
@@ -540,11 +567,14 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int>("ArtistId");
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("BandId");
+                    b.Property<int>("BandId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -687,20 +717,27 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int>("BandId");
+                    b.Property<int>("BandId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreateDate");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("EditDate");
+                    b.Property<DateTime>("EditDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("Quality");
+                    b.Property<int>("Quality")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -715,20 +752,25 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name_csCZ")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name_esES")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name_skSK")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -760,11 +802,14 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int>("BandId");
+                    b.Property<int>("BandId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("ImageStorageFileId");
+                    b.Property<int>("ImageStorageFileId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -797,25 +842,25 @@ namespace DataLayer.Migrations
                         {
                             Id = 4,
                             BandId = 5,
-                            ImageStorageFileId = 16
+                            ImageStorageFileId = 14
                         },
                         new
                         {
                             Id = 5,
                             BandId = 5,
-                            ImageStorageFileId = 17
+                            ImageStorageFileId = 15
                         },
                         new
                         {
                             Id = 6,
                             BandId = 6,
-                            ImageStorageFileId = 22
+                            ImageStorageFileId = 20
                         },
                         new
                         {
                             Id = 7,
                             BandId = 6,
-                            ImageStorageFileId = 23
+                            ImageStorageFileId = 21
                         });
                 });
 
@@ -823,20 +868,26 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<bool>("Approved");
+                    b.Property<bool>("Approved")
+                        .HasColumnType("bit");
 
-                    b.Property<int?>("AudioStorageFileId");
+                    b.Property<int?>("AudioStorageFileId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreateDate");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("YoutubeUrlParam")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -849,7 +900,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 1,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(4518),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(2878),
                             Name = "Ich Will",
                             YoutubeUrlParam = "EOnSh3QlpbQ"
                         },
@@ -857,7 +908,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 2,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6682),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4213),
                             Name = "Feuer Frei!",
                             YoutubeUrlParam = "ZkW-K5RQdzo"
                         },
@@ -865,7 +916,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 3,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6734),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4225),
                             Name = "Haifisch",
                             YoutubeUrlParam = "GukNjYQZW8s"
                         },
@@ -873,7 +924,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 4,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6741),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4228),
                             Name = "Ich Tu Dir Weh",
                             YoutubeUrlParam = "IxuEtL7gxoM"
                         },
@@ -881,7 +932,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 5,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6747),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4231),
                             Name = "Jekyll And Hyde",
                             YoutubeUrlParam = "HCBPmxiVMKk"
                         },
@@ -889,8 +940,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 6,
                             Approved = true,
-                            AudioStorageFileId = 11,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6751),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4233),
                             Name = "Fight for your praise",
                             YoutubeUrlParam = "oy7_bkN5eMU"
                         },
@@ -898,8 +948,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 7,
                             Approved = true,
-                            AudioStorageFileId = 12,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7498),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4236),
                             Name = "Miss You",
                             YoutubeUrlParam = "b9-fzLvC-bY"
                         },
@@ -907,7 +956,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 8,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7540),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4239),
                             Name = "Fish On",
                             YoutubeUrlParam = "eciZWNdkGqs"
                         },
@@ -915,7 +964,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 9,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7547),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4241),
                             Name = "Praise Abort",
                             YoutubeUrlParam = "QWE_M0CX9So"
                         },
@@ -923,7 +972,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 10,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7552),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4244),
                             Name = "Dead Memories",
                             YoutubeUrlParam = "9gsAz6S_zSw"
                         },
@@ -931,7 +980,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 11,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7557),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4247),
                             Name = "Psychosocial",
                             YoutubeUrlParam = "eIf3b6meriM"
                         },
@@ -939,7 +988,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 12,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7561),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4249),
                             Name = "Snuff",
                             YoutubeUrlParam = "LXEKuttVRIo"
                         },
@@ -947,7 +996,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 13,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7568),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4252),
                             Name = "Left Behind",
                             YoutubeUrlParam = "D1jQKpse7Yw"
                         },
@@ -955,7 +1004,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 14,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7573),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4254),
                             Name = "Metabolic",
                             YoutubeUrlParam = "b3FpfQOxiKA"
                         },
@@ -963,7 +1012,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 15,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7578),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4257),
                             Name = "Falling Away from Me",
                             YoutubeUrlParam = "2s3iGpDqQpQ"
                         },
@@ -971,7 +1020,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 16,
                             Approved = true,
-                            CreateDate = new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7582),
+                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4260),
                             Name = "Somebody Someone",
                             YoutubeUrlParam = "FBEE-t-uyI0"
                         });
@@ -981,15 +1030,18 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("FileName")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -1059,78 +1111,66 @@ namespace DataLayer.Migrations
                         new
                         {
                             Id = 11,
-                            DisplayName = "andragona-fight-for-your-praise.mp3",
-                            FileName = "andragona-fight-for-your-praise.mp3"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            DisplayName = "andragona-miss-you.mp3",
-                            FileName = "andragona-miss-you.mp3"
-                        },
-                        new
-                        {
-                            Id = 13,
                             DisplayName = "Lindemann_logo.jpg",
                             FileName = "Lindemann_logo.jpg"
                         },
                         new
                         {
-                            Id = 14,
+                            Id = 12,
                             DisplayName = "Lindemann_Skills_in_Pills.jpg",
                             FileName = "Lindemann_Skills_in_Pills.jpg"
                         },
                         new
                         {
-                            Id = 15,
+                            Id = 13,
                             DisplayName = "slipknot_logo.jpg",
                             FileName = "slipknot_logo.jpg"
                         },
                         new
                         {
-                            Id = 16,
+                            Id = 14,
                             DisplayName = "Slipknot.jpg",
                             FileName = "Slipknot.jpg"
                         },
                         new
                         {
-                            Id = 17,
+                            Id = 15,
                             DisplayName = "Slipknot_Taylor.jpg",
                             FileName = "Slipknot_Taylor.jpg"
                         },
                         new
                         {
-                            Id = 18,
+                            Id = 16,
                             DisplayName = "All_Hope_is_Gone.jpg",
                             FileName = "All_Hope_is_Gone.jpg"
                         },
                         new
                         {
-                            Id = 19,
+                            Id = 17,
                             DisplayName = "Slipknot_Iowa.jpg",
                             FileName = "Slipknot_Iowa.jpg"
                         },
                         new
                         {
-                            Id = 20,
+                            Id = 18,
                             DisplayName = "KoRnIssues.jpg",
                             FileName = "KoRnIssues.jpg"
                         },
                         new
                         {
-                            Id = 21,
+                            Id = 19,
                             DisplayName = "Korn_logo.jpg",
                             FileName = "Korn_logo.jpg"
                         },
                         new
                         {
-                            Id = 22,
+                            Id = 20,
                             DisplayName = "korn-5820-1078x516-1471045959.jpg",
                             FileName = "korn-5820-1078x516-1471045959.jpg"
                         },
                         new
                         {
-                            Id = 23,
+                            Id = 21,
                             DisplayName = "OB-UL405_ikorn_G_20120906052811.jpg",
                             FileName = "OB-UL405_ikorn_G_20120906052811.jpg"
                         });
@@ -1140,31 +1180,39 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("ImageStorageFileId");
+                    b.Property<int?>("ImageStorageFileId")
+                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PasswordSalt")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("UserRole");
+                    b.Property<int>("UserRole")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1202,11 +1250,14 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
-                    b.Property<int>("AlbumId");
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1234,6 +1285,12 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.StorageFile", "ImageStorageFile")
                         .WithMany()
                         .HasForeignKey("ImageStorageFileId");
+
+                    b.Navigation("Band");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("ImageStorageFile");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.AlbumReview", b =>
@@ -1249,6 +1306,10 @@ namespace DataLayer.Migrations
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Album");
+
+                    b.Navigation("CreatedBy");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.AlbumSong", b =>
@@ -1264,6 +1325,10 @@ namespace DataLayer.Migrations
                         .HasForeignKey("SongId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Album");
+
+                    b.Navigation("Song");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Band", b =>
@@ -1271,6 +1336,8 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.StorageFile", "ImageStorageFile")
                         .WithMany()
                         .HasForeignKey("ImageStorageFileId");
+
+                    b.Navigation("ImageStorageFile");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.BandMember", b =>
@@ -1286,6 +1353,10 @@ namespace DataLayer.Migrations
                         .HasForeignKey("BandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Band");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.BandReview", b =>
@@ -1301,6 +1372,10 @@ namespace DataLayer.Migrations
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Band");
+
+                    b.Navigation("CreatedBy");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.SliderImage", b =>
@@ -1316,6 +1391,10 @@ namespace DataLayer.Migrations
                         .HasForeignKey("ImageStorageFileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Band");
+
+                    b.Navigation("ImageStorageFile");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Song", b =>
@@ -1323,6 +1402,8 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.StorageFile", "AudioStorageFile")
                         .WithMany()
                         .HasForeignKey("AudioStorageFileId");
+
+                    b.Navigation("AudioStorageFile");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.User", b =>
@@ -1330,6 +1411,8 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Entities.StorageFile", "ImageStorageFile")
                         .WithMany()
                         .HasForeignKey("ImageStorageFileId");
+
+                    b.Navigation("ImageStorageFile");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.UserAlbum", b =>
@@ -1345,6 +1428,31 @@ namespace DataLayer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Album");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Album", b =>
+                {
+                    b.Navigation("AlbumSongs");
+
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Artist", b =>
+                {
+                    b.Navigation("BandsMember");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Band", b =>
+                {
+                    b.Navigation("Albums");
+
+                    b.Navigation("BandMembers");
+
+                    b.Navigation("SliderImages");
                 });
 #pragma warning restore 612, 618
         }

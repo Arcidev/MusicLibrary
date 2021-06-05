@@ -2,7 +2,7 @@
 using BusinessLayer.Repositories;
 using BusinessLayer.Resources;
 using DataLayer.Entities;
-using DotVVM.Framework.Storage;
+using DotVVM.Core.Storage;
 using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System;
@@ -25,7 +25,7 @@ namespace BusinessLayer.Facades
         public async Task<StorageFileDTO> AddFileAsync(UploadedFile file, IUploadedFileStorage storage)
         {
             using var uow = uowProviderFunc().Create();
-            var fileName = SaveFile(file, storage);
+            var fileName = await SaveFileAsync(file, storage);
             var entity = new StorageFile()
             {
                 DisplayName = file.FileName,
@@ -54,12 +54,12 @@ namespace BusinessLayer.Facades
             await uow.CommitAsync();
         }
 
-        public string SaveFile(UploadedFile file, IUploadedFileStorage storage)
+        public async Task<string> SaveFileAsync(UploadedFile file, IUploadedFileStorage storage)
         {
             var fileName = $"{file.FileId}{Path.GetExtension(file.FileName)}";
             var targetPath = Path.Combine(GetUploadPath(), fileName);
-            storage.SaveAs(file.FileId, targetPath);
-            storage.DeleteFile(file.FileId);
+            await storage.SaveAsAsync(file.FileId, targetPath);
+            await storage.DeleteFileAsync(file.FileId);
 
             return fileName;
         }

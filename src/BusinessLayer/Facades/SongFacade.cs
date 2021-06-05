@@ -1,16 +1,16 @@
 ﻿using BusinessLayer.DTO;
-using BusinessLayer.Repositories;
-using DataLayer.Entities;
-using DotVVM.Framework.Storage;
 using BusinessLayer.Queries;
+using BusinessLayer.Repositories;
+using BusinessLayer.Resources;
+using DataLayer.Entities;
+using DotVVM.Core.Storage;
+using DotVVM.Framework.Controls;
+using Mapster;
+using Riganti.Utils.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
-using BusinessLayer.Resources;
-using DotVVM.Framework.Controls;
 using System.Linq;
-using Riganti.Utils.Infrastructure.Core;
 using System.Threading.Tasks;
-using Mapster;
 
 namespace BusinessLayer.Facades
 {
@@ -150,7 +150,7 @@ namespace BusinessLayer.Facades
                 if (entity.AudioStorageFileId.HasValue)
                     await storageFileFacade.Value.DeleteFileAsync(entity.AudioStorageFileId.Value);
 
-                var fileName = storageFileFacade.Value.SaveFile(file, storage);
+                var fileName = await storageFileFacade.Value.SaveFileAsync(file, storage);
                 entity.AudioStorageFile = new StorageFile()
                 {
                     DisplayName = file.FileName,

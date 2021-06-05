@@ -78,8 +78,8 @@
       <None Include="compilerconfig.json" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="DotVVM.AspNetCore" Version="2.5.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0">
+        <PackageReference Include="DotVVM.AspNetCore" Version="3.0.5" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -118,7 +118,4 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
       </EmbeddedResource>
     </ItemGroup>
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(OS)' == 'Windows_NT'">
-      <Exec Command="If not exist &quot;$(ProjectDir)\wwwroot\SavedFiles\andragona-fight-for-your-praise.mp3&quot; (&#xD;&#xA;powershell -command &quot;&amp; { (New-Object Net.WebClient).DownloadFile('http://bandzone.cz/track/download/588724', '$(ProjectDir)\wwwroot\SavedFiles\andragona-fight-for-your-praise.mp3') }&quot;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;If not exist &quot;$(ProjectDir)\wwwroot\SavedFiles\andragona-miss-you.mp3&quot; (&#xD;&#xA;powershell -command &quot;&amp; { (New-Object Net.WebClient).DownloadFile('http://bandzone.cz/track/download/588725', '$(ProjectDir)\wwwroot\SavedFiles\andragona-miss-you.mp3') }&quot;&#xD;&#xA;)" />
-    </Target>
 </Project>

@@ -2,7 +2,7 @@
 using BusinessLayer.Queries;
 using BusinessLayer.Repositories;
 using DataLayer.Entities;
-using DotVVM.Framework.Storage;
+using DotVVM.Core.Storage;
 using Mapster;
 using Riganti.Utils.Infrastructure.Core;
 using System;

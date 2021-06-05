@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataLayer.Migrations
@@ -12,11 +11,11 @@ namespace DataLayer.Migrations
                 name: "Artists",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(maxLength: 100, nullable: false),
-                    Approved = table.Column<bool>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Approved = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,12 +26,12 @@ namespace DataLayer.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    Name_skSK = table.Column<string>(maxLength: 100, nullable: true),
-                    Name_csCZ = table.Column<string>(maxLength: 100, nullable: true),
-                    Name_esES = table.Column<string>(maxLength: 100, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name_skSK = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Name_csCZ = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Name_esES = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,10 +42,10 @@ namespace DataLayer.Migrations
                 name: "StorageFiles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DisplayName = table.Column<string>(maxLength: 100, nullable: false),
-                    FileName = table.Column<string>(maxLength: 100, nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DisplayName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,13 +56,13 @@ namespace DataLayer.Migrations
                 name: "Bands",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    Description = table.Column<string>(maxLength: 255, nullable: false),
-                    ImageStorageFileId = table.Column<int>(nullable: true),
-                    Approved = table.Column<bool>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    ImageStorageFileId = table.Column<int>(type: "int", nullable: true),
+                    Approved = table.Column<bool>(type: "bit", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,13 +79,13 @@ namespace DataLayer.Migrations
                 name: "Songs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    Approved = table.Column<bool>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    AudioStorageFileId = table.Column<int>(nullable: true),
-                    YoutubeUrlParam = table.Column<string>(maxLength: 50, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Approved = table.Column<bool>(type: "bit", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AudioStorageFileId = table.Column<int>(type: "int", nullable: true),
+                    YoutubeUrlParam = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,15 +102,15 @@ namespace DataLayer.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(maxLength: 100, nullable: false),
-                    FirstName = table.Column<string>(maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(maxLength: 100, nullable: false),
-                    PasswordSalt = table.Column<string>(maxLength: 100, nullable: false),
-                    PasswordHash = table.Column<string>(maxLength: 100, nullable: false),
-                    UserRole = table.Column<int>(nullable: false),
-                    ImageStorageFileId = table.Column<int>(nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PasswordSalt = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserRole = table.Column<int>(type: "int", nullable: false),
+                    ImageStorageFileId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -128,14 +127,14 @@ namespace DataLayer.Migrations
                 name: "Albums",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    ImageStorageFileId = table.Column<int>(nullable: true),
-                    BandId = table.Column<int>(nullable: false),
-                    Approved = table.Column<bool>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ImageStorageFileId = table.Column<int>(type: "int", nullable: true),
+                    BandId = table.Column<int>(type: "int", nullable: false),
+                    Approved = table.Column<bool>(type: "bit", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     AverageQuality = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
@@ -165,10 +164,10 @@ namespace DataLayer.Migrations
                 name: "BandMembers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ArtistId = table.Column<int>(nullable: false),
-                    BandId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ArtistId = table.Column<int>(type: "int", nullable: false),
+                    BandId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -191,10 +190,10 @@ namespace DataLayer.Migrations
                 name: "SliderImages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BandId = table.Column<int>(nullable: false),
-                    ImageStorageFileId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BandId = table.Column<int>(type: "int", nullable: false),
+                    ImageStorageFileId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -217,14 +216,14 @@ namespace DataLayer.Migrations
                 name: "BandReviews",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Text = table.Column<string>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    EditDate = table.Column<DateTime>(nullable: false),
-                    CreatedById = table.Column<int>(nullable: false),
-                    Quality = table.Column<int>(nullable: false),
-                    BandId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BandId = table.Column<int>(type: "int", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedById = table.Column<int>(type: "int", nullable: false),
+                    Quality = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -247,14 +246,14 @@ namespace DataLayer.Migrations
                 name: "AlbumReviews",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Text = table.Column<string>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    EditDate = table.Column<DateTime>(nullable: false),
-                    CreatedById = table.Column<int>(nullable: false),
-                    Quality = table.Column<int>(nullable: false),
-                    AlbumId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlbumId = table.Column<int>(type: "int", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedById = table.Column<int>(type: "int", nullable: false),
+                    Quality = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -277,10 +276,10 @@ namespace DataLayer.Migrations
                 name: "AlbumSongs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AlbumId = table.Column<int>(nullable: false),
-                    SongId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlbumId = table.Column<int>(type: "int", nullable: false),
+                    SongId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -303,10 +302,10 @@ namespace DataLayer.Migrations
                 name: "UserAlbums",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AlbumId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlbumId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -336,11 +335,11 @@ namespace DataLayer.Migrations
                     { 18, true, "Reginald", "Arvizu" },
                     { 17, true, "James", "Shaffer" },
                     { 16, true, "Jonathan", "Davis" },
-                    { 15, true, "Jay", "Weinberg" },
+                    { 14, true, "Alessandro", "Venturella" },
                     { 13, true, "Shawn", "Crahan" },
                     { 12, true, "Craig", "Jones" },
                     { 11, true, "Jim", "Root" },
-                    { 14, true, "Alessandro", "Venturella" },
+                    { 15, true, "Jay", "Weinberg" },
                     { 9, true, "Mick", "Thomson" },
                     { 10, true, "Sid", "Wilson" },
                     { 3, true, "Paul", "Landers" },
@@ -366,20 +365,22 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "Approved", "AudioStorageFileId", "CreateDate", "Name", "YoutubeUrlParam" },
                 values: new object[,]
                 {
-                    { 12, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7561), "Snuff", "LXEKuttVRIo" },
-                    { 16, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7582), "Somebody Someone", "FBEE-t-uyI0" },
-                    { 15, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7578), "Falling Away from Me", "2s3iGpDqQpQ" },
-                    { 14, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7573), "Metabolic", "b3FpfQOxiKA" },
-                    { 13, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7568), "Left Behind", "D1jQKpse7Yw" },
-                    { 10, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7552), "Dead Memories", "9gsAz6S_zSw" },
-                    { 11, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7557), "Psychosocial", "eIf3b6meriM" },
-                    { 8, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7540), "Fish On", "eciZWNdkGqs" },
-                    { 9, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7547), "Praise Abort", "QWE_M0CX9So" },
-                    { 5, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6747), "Jekyll And Hyde", "HCBPmxiVMKk" },
-                    { 4, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6741), "Ich Tu Dir Weh", "IxuEtL7gxoM" },
-                    { 3, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6734), "Haifisch", "GukNjYQZW8s" },
-                    { 2, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6682), "Feuer Frei!", "ZkW-K5RQdzo" },
-                    { 1, true, null, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(4518), "Ich Will", "EOnSh3QlpbQ" }
+                    { 11, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4247), "Psychosocial", "eIf3b6meriM" },
+                    { 16, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4260), "Somebody Someone", "FBEE-t-uyI0" },
+                    { 15, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4257), "Falling Away from Me", "2s3iGpDqQpQ" },
+                    { 14, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4254), "Metabolic", "b3FpfQOxiKA" },
+                    { 13, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4252), "Left Behind", "D1jQKpse7Yw" },
+                    { 12, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4249), "Snuff", "LXEKuttVRIo" },
+                    { 10, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4244), "Dead Memories", "9gsAz6S_zSw" },
+                    { 9, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4241), "Praise Abort", "QWE_M0CX9So" },
+                    { 7, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4236), "Miss You", "b9-fzLvC-bY" },
+                    { 6, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4233), "Fight for your praise", "oy7_bkN5eMU" },
+                    { 5, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4231), "Jekyll And Hyde", "HCBPmxiVMKk" },
+                    { 4, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4228), "Ich Tu Dir Weh", "IxuEtL7gxoM" },
+                    { 3, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4225), "Haifisch", "GukNjYQZW8s" },
+                    { 2, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4213), "Feuer Frei!", "ZkW-K5RQdzo" },
+                    { 1, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(2878), "Ich Will", "EOnSh3QlpbQ" },
+                    { 8, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4239), "Fish On", "eciZWNdkGqs" }
                 });
 
             migrationBuilder.InsertData(
@@ -387,29 +388,34 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "DisplayName", "FileName" },
                 values: new object[,]
                 {
-                    { 15, "slipknot_logo.jpg", "slipknot_logo.jpg" },
-                    { 16, "Slipknot.jpg", "Slipknot.jpg" },
-                    { 17, "Slipknot_Taylor.jpg", "Slipknot_Taylor.jpg" },
-                    { 18, "All_Hope_is_Gone.jpg", "All_Hope_is_Gone.jpg" },
-                    { 21, "Korn_logo.jpg", "Korn_logo.jpg" },
-                    { 20, "KoRnIssues.jpg", "KoRnIssues.jpg" },
-                    { 14, "Lindemann_Skills_in_Pills.jpg", "Lindemann_Skills_in_Pills.jpg" },
-                    { 22, "korn-5820-1078x516-1471045959.jpg", "korn-5820-1078x516-1471045959.jpg" },
-                    { 23, "OB-UL405_ikorn_G_20120906052811.jpg", "OB-UL405_ikorn_G_20120906052811.jpg" },
-                    { 19, "Slipknot_Iowa.jpg", "Slipknot_Iowa.jpg" },
-                    { 13, "Lindemann_logo.jpg", "Lindemann_logo.jpg" },
-                    { 9, "Andragona.jpg", "Andragona.jpg" },
-                    { 11, "andragona-fight-for-your-praise.mp3", "andragona-fight-for-your-praise.mp3" },
-                    { 10, "EndOfTheProphesiedDawn.jpg", "EndOfTheProphesiedDawn.jpg" },
                     { 8, "FFDP-Got-Your-Six-Album-Cover.jpg", "FFDP-Got-Your-Six-Album-Cover.jpg" },
+                    { 13, "slipknot_logo.jpg", "slipknot_logo.jpg" },
+                    { 14, "Slipknot.jpg", "Slipknot.jpg" },
+                    { 15, "Slipknot_Taylor.jpg", "Slipknot_Taylor.jpg" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StorageFiles",
+                columns: new[] { "Id", "DisplayName", "FileName" },
+                values: new object[,]
+                {
+                    { 19, "Korn_logo.jpg", "Korn_logo.jpg" },
+                    { 17, "Slipknot_Iowa.jpg", "Slipknot_Iowa.jpg" },
+                    { 18, "KoRnIssues.jpg", "KoRnIssues.jpg" },
+                    { 12, "Lindemann_Skills_in_Pills.jpg", "Lindemann_Skills_in_Pills.jpg" },
+                    { 16, "All_Hope_is_Gone.jpg", "All_Hope_is_Gone.jpg" },
+                    { 11, "Lindemann_logo.jpg", "Lindemann_logo.jpg" },
                     { 7, "finger_death_punch.jpg", "finger_death_punch.jpg" },
+                    { 9, "Andragona.jpg", "Andragona.jpg" },
+                    { 20, "korn-5820-1078x516-1471045959.jpg", "korn-5820-1078x516-1471045959.jpg" },
                     { 6, "finger_death_punch_logo_1.gif", "finger_death_punch_logo_1.gif" },
                     { 5, "Cover_lifad.png", "Cover_lifad.png" },
                     { 4, "Mutter.jpg", "Mutter.jpg" },
                     { 3, "Rammstein-Till-Lindemann-fire.jpg", "Rammstein-Till-Lindemann-fire.jpg" },
                     { 2, "rammstein_guitar.jpg", "rammstein_guitar.jpg" },
                     { 1, "rammstein_logo.jpg", "rammstein_logo.jpg" },
-                    { 12, "andragona-miss-you.mp3", "andragona-miss-you.mp3" }
+                    { 10, "EndOfTheProphesiedDawn.jpg", "EndOfTheProphesiedDawn.jpg" },
+                    { 21, "OB-UL405_ikorn_G_20120906052811.jpg", "OB-UL405_ikorn_G_20120906052811.jpg" }
                 });
 
             migrationBuilder.InsertData(
@@ -426,21 +432,12 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "Approved", "CreateDate", "Description", "ImageStorageFileId", "Name" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2019, 7, 27, 12, 44, 30, 767, DateTimeKind.Local).AddTicks(5536), "Industrial metal", 1, "Rammstein" },
-                    { 2, true, new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1556), "Heavy metal", 6, "Five Finger Death Punch" },
-                    { 3, true, new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1630), "Power metal", 9, "Andragona" },
-                    { 4, true, new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1640), "Industrial metal", 13, "Lindemann" },
-                    { 5, true, new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1646), "Heavy metal", 15, "Slipknot" },
-                    { 6, true, new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(1651), "Nu Metal", 21, "Korn" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Songs",
-                columns: new[] { "Id", "Approved", "AudioStorageFileId", "CreateDate", "Name", "YoutubeUrlParam" },
-                values: new object[,]
-                {
-                    { 6, true, 11, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(6751), "Fight for your praise", "oy7_bkN5eMU" },
-                    { 7, true, 12, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(7498), "Miss You", "b9-fzLvC-bY" }
+                    { 1, true, new DateTime(2021, 6, 5, 21, 17, 4, 453, DateTimeKind.Local).AddTicks(2990), "Industrial metal", 1, "Rammstein" },
+                    { 2, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5668), "Heavy metal", 6, "Five Finger Death Punch" },
+                    { 3, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5698), "Power metal", 9, "Andragona" },
+                    { 4, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5703), "Industrial metal", 11, "Lindemann" },
+                    { 5, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5706), "Heavy metal", 13, "Slipknot" },
+                    { 6, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5709), "Nu Metal", 19, "Korn" }
                 });
 
             migrationBuilder.InsertData(
@@ -448,14 +445,14 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "Approved", "AverageQuality", "BandId", "CategoryId", "CreateDate", "ImageStorageFileId", "Name" },
                 values: new object[,]
                 {
-                    { 1, true, 0m, 1, 1, new DateTime(2019, 7, 27, 12, 44, 30, 772, DateTimeKind.Local).AddTicks(8320), 4, "Mutter" },
-                    { 8, true, 0m, 6, 1, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2104), 20, "Issues" },
-                    { 6, true, 0m, 5, 1, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2094), 18, "All hope is gone" },
-                    { 5, true, 0m, 4, 1, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2089), 14, "Skills in Pills" },
-                    { 4, true, 0m, 3, 1, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2082), 10, "End Of The Prophesied Dawn" },
-                    { 3, true, 0m, 2, 1, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2073), 8, "GOT YOUR SIX" },
-                    { 7, true, 0m, 5, 1, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(2099), 19, "Iowa" },
-                    { 2, true, 0m, 1, 1, new DateTime(2019, 7, 27, 12, 44, 30, 773, DateTimeKind.Local).AddTicks(1983), 5, "Liebe ist für alle da" }
+                    { 1, true, 0m, 1, 1, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(9299), 4, "Mutter" },
+                    { 8, true, 0m, 6, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1419), 18, "Issues" },
+                    { 6, true, 0m, 5, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1413), 16, "All hope is gone" },
+                    { 5, true, 0m, 4, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1410), 12, "Skills in Pills" },
+                    { 4, true, 0m, 3, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1406), 10, "End Of The Prophesied Dawn" },
+                    { 3, true, 0m, 2, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1403), 8, "GOT YOUR SIX" },
+                    { 7, true, 0m, 5, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1416), 17, "Iowa" },
+                    { 2, true, 0m, 1, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1390), 5, "Liebe ist für alle da" }
                 });
 
             migrationBuilder.InsertData(
@@ -491,13 +488,13 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "BandId", "ImageStorageFileId" },
                 values: new object[,]
                 {
-                    { 6, 6, 22 },
-                    { 4, 5, 16 },
-                    { 5, 5, 17 },
+                    { 6, 6, 20 },
+                    { 4, 5, 14 },
+                    { 5, 5, 15 },
                     { 3, 2, 7 },
                     { 2, 1, 3 },
                     { 1, 1, 2 },
-                    { 7, 6, 23 }
+                    { 7, 6, 21 }
                 });
 
             migrationBuilder.InsertData(
