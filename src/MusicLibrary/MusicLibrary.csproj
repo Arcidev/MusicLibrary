@@ -78,8 +78,8 @@
       <None Include="compilerconfig.json" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="DotVVM.AspNetCore" Version="3.0.5" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
+        <PackageReference Include="DotVVM.AspNetCore" Version="3.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
