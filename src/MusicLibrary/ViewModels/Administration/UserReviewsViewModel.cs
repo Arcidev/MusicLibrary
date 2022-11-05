@@ -1,7 +1,7 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Controls;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Hosting;
 using MusicLibrary.Resources;
 using Shared.Enums;
 using System;
@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Administration
 {
-    [Authorize]
     public class UserReviewsViewModel : AdministrationMasterPageViewModel
     {
         private readonly AlbumFacade albumFacade;
@@ -58,6 +57,12 @@ namespace MusicLibrary.ViewModels.Administration
                     SortExpression = nameof(UserBandReviewDTO.EditDate)
                 }
             };
+        }
+
+        public override async Task Init()
+        {
+            await Context.Authorize();
+            await base.Init();
         }
 
         public override async Task PreRender()

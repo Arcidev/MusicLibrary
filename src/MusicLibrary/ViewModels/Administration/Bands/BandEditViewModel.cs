@@ -1,12 +1,11 @@
 using BusinessLayer.Facades;
 using DotVVM.Core.Storage;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Hosting;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Administration
 {
-    [Authorize(Roles = nameof(Shared.Enums.UserRole.SuperUser) + ", " + nameof(Shared.Enums.UserRole.Admin))]
     public class BandEditViewModel : BandManagementMasterPageViewModel
     {
         public string OriginalImageFileName { get; set; }
@@ -29,6 +28,12 @@ namespace MusicLibrary.ViewModels.Administration
             }
 
             await base.PreRender();
+        }
+
+        public override async Task Init()
+        {
+            await Context.Authorize(new[] { nameof(Shared.Enums.UserRole.SuperUser), nameof(Shared.Enums.UserRole.Admin) });
+            await base.Init();
         }
 
         public override void ResetImage()

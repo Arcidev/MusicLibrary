@@ -53,7 +53,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <a href="index.html"></a>
                     </div>
                     <div class="foot-search">
-                        <dot:TextBox UpdateTextAfterKeydown="true" ID="SearchInput" placeholder="{resource: Resource.Search + "..."}" Text="{value: SearchString}" />
+                        <dot:TextBox UpdateTextOnInput="true" ID="SearchInput" placeholder="{resource: Resource.Search + "..."}" Text="{value: SearchString}" />
                         <dot:RouteLink ID="SearchButton" class="submit-button" Text="{resource: Resource.Search}" RouteName="AlbumsFiltered" param-Filter="{value: SearchString}" />
                     </div>
                     <div class="clear"></div>

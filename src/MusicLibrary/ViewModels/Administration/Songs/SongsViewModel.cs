@@ -1,13 +1,12 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Controls;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Hosting;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Administration
 {
-    [Authorize(Roles = nameof(Shared.Enums.UserRole.SuperUser) + ", " + nameof(Shared.Enums.UserRole.Admin))]
     public class SongsViewModel : AdministrationMasterPageViewModel
     {
         private readonly SongFacade songFacade;
@@ -33,6 +32,12 @@ namespace MusicLibrary.ViewModels.Administration
                     SortExpression = nameof(SongInfoDTO.Name)
                 }
             };
+        }
+
+        public override async Task Init()
+        {
+            await Context.Authorize(new[] { nameof(Shared.Enums.UserRole.SuperUser), nameof(Shared.Enums.UserRole.Admin) });
+            await base.Init();
         }
 
         public override async Task PreRender()

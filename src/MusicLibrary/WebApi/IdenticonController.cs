@@ -1,8 +1,5 @@
-﻿using Devcorner.NIdenticon;
-using Devcorner.NIdenticon.BrushGenerators;
+﻿using Jdenticon;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 
 namespace MusicLibrary.WebApi
@@ -11,21 +8,14 @@ namespace MusicLibrary.WebApi
     [Route("api/[controller]")]
     public class IdenticonController : ControllerBase
     {
-        [HttpGet("{name}")]
-        public FileStreamResult DownloadFile(string name)
+        [HttpGet("{value}")]
+        public FileStreamResult GetIdenticon(string value)
         {
-            var identicon = new IdenticonGenerator("SHA512", new (180, 180), Color.Transparent, new (8, 8))
-            {
-                DefaultBlockGenerators = IdenticonGenerator.ExtendedBlockGeneratorsConfig,
-                DefaultBrushGenerator = new StaticColorBrushGenerator(Color.Black)
-            };
-
-            using var bitmap = identicon.Create(name);
             var ms = new MemoryStream();
-            bitmap.Save(ms, ImageFormat.Png);
+            Identicon.FromValue(value, 180, "SHA512").SaveAsSvg(ms);
             ms.Position = 0;
 
-            return File(ms, "image/png");
+            return File(ms, "image/svg+xml");
         }
     }
 }

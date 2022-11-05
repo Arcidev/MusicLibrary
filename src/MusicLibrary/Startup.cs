@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using DotVVM.Framework.Routing;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Mvc;
 
 namespace MusicLibrary
 {
@@ -23,7 +22,7 @@ namespace MusicLibrary
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(opt => opt.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc(opt => opt.EnableEndpointRouting = false);
             services.AddDataProtection();
             services.AddAuthorization().AddWebEncoders().ConfigureDatabase(configuration.GetConnectionString("MusicLibrary"));
             services.AddDotVVM<DotvvmStartup>();

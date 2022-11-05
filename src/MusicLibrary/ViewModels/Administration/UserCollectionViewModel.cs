@@ -1,12 +1,11 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Controls;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Hosting;
 using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Administration
 {
-    [Authorize]
     public class UserCollectionViewModel : AdministrationMasterPageViewModel
     {
         private readonly AlbumFacade albumFacade;
@@ -34,6 +33,12 @@ namespace MusicLibrary.ViewModels.Administration
                     PrimaryKeyPropertyName = nameof(AlbumInfoDTO.AlbumId)
                 }
             };
+        }
+
+        public override async Task Init()
+        {
+            await Context.Authorize();
+            await base.Init();
         }
 
         public override async Task PreRender()

@@ -2,7 +2,7 @@ using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Core.Storage;
 using DotVVM.Framework.Controls;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Hosting;
 using MusicLibrary.Resources;
 using System.IO;
 using System.Linq;
@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Administration
 {
-    [Authorize]
     public class UserProfileViewModel : AdministrationMasterPageViewModel
     {
         private readonly UserFacade userFacade;
@@ -34,6 +33,12 @@ namespace MusicLibrary.ViewModels.Administration
         {
             this.userFacade = userFacade;
             this.uploadedFileStorage = uploadedFileStorage;
+        }
+
+        public override async Task Init()
+        {
+            await Context.Authorize();
+            await base.Init();
         }
 
         public override async Task PreRender()

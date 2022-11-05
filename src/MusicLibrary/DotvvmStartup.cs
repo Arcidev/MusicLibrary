@@ -58,7 +58,8 @@ namespace MusicLibrary
         {
             config.Resources.Register("jquery", new ScriptResource
             {
-                Location = new UrlResourceLocation("https://code.jquery.com/jquery-3.5.1.min.js")
+                Location = new UrlResourceLocation("https://code.jquery.com/jquery-3.6.1.min.js"),
+                IntegrityHash = "sha384-i61gTtaoovXtAbKjo903+O55Jkn2+RtzHtvNez+yI49HAASvznhe9sZyjaSHTau9"
             });
             config.Resources.Register("templateStyle-css", new StylesheetResource()
             {

@@ -1,6 +1,6 @@
 using BusinessLayer.Facades;
 using DotVVM.Core.Storage;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Hosting;
 using Shared.Enums;
 using System;
 using System.Linq;
@@ -8,10 +8,15 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Administration
 {
-    [Authorize]
     public class AlbumCreateViewModel : AlbumManagementMasterPageViewModel
     {
         public AlbumCreateViewModel(CategoryFacade categoryFacade, AlbumFacade albumFacade, BandFacade bandFacade, SongFacade songFacade, IUploadedFileStorage uploadedFileStorage) : base(categoryFacade, albumFacade, bandFacade, songFacade, uploadedFileStorage) { }
+
+        public override async Task Init()
+        {
+            await Context.Authorize();
+            await base.Init();
+        }
 
         public override async Task PreRender()
         {

@@ -1,13 +1,12 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Hosting;
 using MusicLibrary.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels
 {
-    [Authorize]
     public class UserCollectionViewModel : ContentMasterPageViewModel
     {
         private readonly AlbumFacade albumFacade;
@@ -17,6 +16,12 @@ namespace MusicLibrary.ViewModels
         public UserCollectionViewModel(AlbumFacade albumFacade, CategoryFacade categoryFacade) : base(categoryFacade)
         {
             this.albumFacade = albumFacade;
+        }
+
+        public override async Task Init()
+        {
+            await Context.Authorize();
+            await base.Init();
         }
 
         public override async Task PreRender()

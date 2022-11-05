@@ -1,7 +1,7 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using DotVVM.Framework.Controls;
-using DotVVM.Framework.Runtime.Filters;
+using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 using MusicLibrary.Resources;
 using Shared.Enums;
@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels.Administration
 {
-    [Authorize(Roles = nameof(Shared.Enums.UserRole.Admin))]
     public class UsersViewModel : AdministrationMasterPageViewModel
     {
         private readonly UserFacade userFacade;
@@ -47,6 +46,12 @@ namespace MusicLibrary.ViewModels.Administration
                     PrimaryKeyPropertyName = nameof(UserInfoDTO.Id)
                 }
             };
+        }
+
+        public override async Task Init()
+        {
+            await Context.Authorize(new[] { nameof(Shared.Enums.UserRole.Admin) });
+            await base.Init();
         }
 
         public override async Task PreRender()
