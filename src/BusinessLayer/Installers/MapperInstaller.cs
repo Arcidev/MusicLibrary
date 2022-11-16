@@ -2,7 +2,6 @@
 using DataLayer.Entities;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace BusinessLayer.Installers
 {

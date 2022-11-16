@@ -778,8 +778,8 @@ namespace DataLayer.Context
                 Email = "user@admin.com",
                 FirstName = "User",
                 LastName = "Admin",
-                PasswordHash = "yMn+st3NC0i5gu9gzCF2m5fhR0c=",
-                PasswordSalt = "8RS5ODVNZWaGAGknGUqeiQ==",
+                PasswordHash = "3CehAkxz/wJvTTB2YA/XoE1DeIHWKviWJrC6RZUmLodcIkupRzW3SEOChHW7QchUDAgX1uVrUVEwAeoz3LMLoA==",
+                PasswordSalt = "uLplTPeTOGuBPi4z2vRwhXo5cOaGLLG0NaoiI+fqwLI=",
                 UserRole = Shared.Enums.UserRole.Admin
             }, new User()
             {
@@ -787,8 +787,8 @@ namespace DataLayer.Context
                 Email = "user@superuser.com",
                 FirstName = "Super",
                 LastName = "User",
-                PasswordHash = "yMn+st3NC0i5gu9gzCF2m5fhR0c=",
-                PasswordSalt = "8RS5ODVNZWaGAGknGUqeiQ==",
+                PasswordHash = "3CehAkxz/wJvTTB2YA/XoE1DeIHWKviWJrC6RZUmLodcIkupRzW3SEOChHW7QchUDAgX1uVrUVEwAeoz3LMLoA==",
+                PasswordSalt = "uLplTPeTOGuBPi4z2vRwhXo5cOaGLLG0NaoiI+fqwLI=",
                 UserRole = Shared.Enums.UserRole.SuperUser
             });
         }

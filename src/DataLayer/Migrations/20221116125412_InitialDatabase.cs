@@ -1,10 +1,16 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace DataLayer.Migrations
 {
+    /// <inheritdoc />
     public partial class InitialDatabase : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -29,9 +35,9 @@ namespace DataLayer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Name_skSK = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Name_csCZ = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Name_esES = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    NameskSK = table.Column<string>(name: "Name_skSK", type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    NamecsCZ = table.Column<string>(name: "Name_csCZ", type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    NameesES = table.Column<string>(name: "Name_esES", type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,8 +77,7 @@ namespace DataLayer.Migrations
                         name: "FK_Bands_StorageFiles_ImageStorageFileId",
                         column: x => x.ImageStorageFileId,
                         principalTable: "StorageFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -94,8 +99,7 @@ namespace DataLayer.Migrations
                         name: "FK_Songs_StorageFiles_AudioStorageFileId",
                         column: x => x.AudioStorageFileId,
                         principalTable: "StorageFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -119,8 +123,7 @@ namespace DataLayer.Migrations
                         name: "FK_Users_StorageFiles_ImageStorageFileId",
                         column: x => x.ImageStorageFileId,
                         principalTable: "StorageFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -156,8 +159,7 @@ namespace DataLayer.Migrations
                         name: "FK_Albums_StorageFiles_ImageStorageFileId",
                         column: x => x.ImageStorageFileId,
                         principalTable: "StorageFiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -330,25 +332,25 @@ namespace DataLayer.Migrations
                 values: new object[,]
                 {
                     { 1, true, "Till", "Lindemann" },
-                    { 20, true, "Ray", "Luzier" },
-                    { 19, true, "Brian", "Welch" },
-                    { 18, true, "Reginald", "Arvizu" },
-                    { 17, true, "James", "Shaffer" },
-                    { 16, true, "Jonathan", "Davis" },
-                    { 14, true, "Alessandro", "Venturella" },
-                    { 13, true, "Shawn", "Crahan" },
-                    { 12, true, "Craig", "Jones" },
-                    { 11, true, "Jim", "Root" },
-                    { 15, true, "Jay", "Weinberg" },
-                    { 9, true, "Mick", "Thomson" },
-                    { 10, true, "Sid", "Wilson" },
+                    { 2, true, "Richard", "Kruspe" },
                     { 3, true, "Paul", "Landers" },
                     { 4, true, "Christian", "Lorenz" },
                     { 5, true, "Oliver", "Riedel" },
-                    { 2, true, "Richard", "Kruspe" },
+                    { 6, true, "Christoph", "Schneider" },
                     { 7, true, "Peter", "Tägtgren" },
                     { 8, true, "Corey", "Taylor" },
-                    { 6, true, "Christoph", "Schneider" }
+                    { 9, true, "Mick", "Thomson" },
+                    { 10, true, "Sid", "Wilson" },
+                    { 11, true, "Jim", "Root" },
+                    { 12, true, "Craig", "Jones" },
+                    { 13, true, "Shawn", "Crahan" },
+                    { 14, true, "Alessandro", "Venturella" },
+                    { 15, true, "Jay", "Weinberg" },
+                    { 16, true, "Jonathan", "Davis" },
+                    { 17, true, "James", "Shaffer" },
+                    { 18, true, "Reginald", "Arvizu" },
+                    { 19, true, "Brian", "Welch" },
+                    { 20, true, "Ray", "Luzier" }
                 });
 
             migrationBuilder.InsertData(
@@ -365,22 +367,22 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "Approved", "AudioStorageFileId", "CreateDate", "Name", "YoutubeUrlParam" },
                 values: new object[,]
                 {
-                    { 11, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4247), "Psychosocial", "eIf3b6meriM" },
-                    { 16, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4260), "Somebody Someone", "FBEE-t-uyI0" },
-                    { 15, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4257), "Falling Away from Me", "2s3iGpDqQpQ" },
-                    { 14, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4254), "Metabolic", "b3FpfQOxiKA" },
-                    { 13, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4252), "Left Behind", "D1jQKpse7Yw" },
-                    { 12, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4249), "Snuff", "LXEKuttVRIo" },
-                    { 10, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4244), "Dead Memories", "9gsAz6S_zSw" },
-                    { 9, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4241), "Praise Abort", "QWE_M0CX9So" },
-                    { 7, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4236), "Miss You", "b9-fzLvC-bY" },
-                    { 6, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4233), "Fight for your praise", "oy7_bkN5eMU" },
-                    { 5, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4231), "Jekyll And Hyde", "HCBPmxiVMKk" },
-                    { 4, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4228), "Ich Tu Dir Weh", "IxuEtL7gxoM" },
-                    { 3, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4225), "Haifisch", "GukNjYQZW8s" },
-                    { 2, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4213), "Feuer Frei!", "ZkW-K5RQdzo" },
-                    { 1, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(2878), "Ich Will", "EOnSh3QlpbQ" },
-                    { 8, true, null, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4239), "Fish On", "eciZWNdkGqs" }
+                    { 1, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8973), "Ich Will", "EOnSh3QlpbQ" },
+                    { 2, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8977), "Feuer Frei!", "ZkW-K5RQdzo" },
+                    { 3, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8979), "Haifisch", "GukNjYQZW8s" },
+                    { 4, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8981), "Ich Tu Dir Weh", "IxuEtL7gxoM" },
+                    { 5, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8983), "Jekyll And Hyde", "HCBPmxiVMKk" },
+                    { 6, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8985), "Fight for your praise", "oy7_bkN5eMU" },
+                    { 7, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8987), "Miss You", "b9-fzLvC-bY" },
+                    { 8, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8989), "Fish On", "eciZWNdkGqs" },
+                    { 9, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8991), "Praise Abort", "QWE_M0CX9So" },
+                    { 10, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8993), "Dead Memories", "9gsAz6S_zSw" },
+                    { 11, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8995), "Psychosocial", "eIf3b6meriM" },
+                    { 12, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8997), "Snuff", "LXEKuttVRIo" },
+                    { 13, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8999), "Left Behind", "D1jQKpse7Yw" },
+                    { 14, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(9001), "Metabolic", "b3FpfQOxiKA" },
+                    { 15, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(9003), "Falling Away from Me", "2s3iGpDqQpQ" },
+                    { 16, true, null, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(9005), "Somebody Someone", "FBEE-t-uyI0" }
                 });
 
             migrationBuilder.InsertData(
@@ -388,33 +390,26 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "DisplayName", "FileName" },
                 values: new object[,]
                 {
+                    { 1, "rammstein_logo.jpg", "rammstein_logo.jpg" },
+                    { 2, "rammstein_guitar.jpg", "rammstein_guitar.jpg" },
+                    { 3, "Rammstein-Till-Lindemann-fire.jpg", "Rammstein-Till-Lindemann-fire.jpg" },
+                    { 4, "Mutter.jpg", "Mutter.jpg" },
+                    { 5, "Cover_lifad.png", "Cover_lifad.png" },
+                    { 6, "finger_death_punch_logo_1.gif", "finger_death_punch_logo_1.gif" },
+                    { 7, "finger_death_punch.jpg", "finger_death_punch.jpg" },
                     { 8, "FFDP-Got-Your-Six-Album-Cover.jpg", "FFDP-Got-Your-Six-Album-Cover.jpg" },
+                    { 9, "Andragona.jpg", "Andragona.jpg" },
+                    { 10, "EndOfTheProphesiedDawn.jpg", "EndOfTheProphesiedDawn.jpg" },
+                    { 11, "Lindemann_logo.jpg", "Lindemann_logo.jpg" },
+                    { 12, "Lindemann_Skills_in_Pills.jpg", "Lindemann_Skills_in_Pills.jpg" },
                     { 13, "slipknot_logo.jpg", "slipknot_logo.jpg" },
                     { 14, "Slipknot.jpg", "Slipknot.jpg" },
-                    { 15, "Slipknot_Taylor.jpg", "Slipknot_Taylor.jpg" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "StorageFiles",
-                columns: new[] { "Id", "DisplayName", "FileName" },
-                values: new object[,]
-                {
-                    { 19, "Korn_logo.jpg", "Korn_logo.jpg" },
+                    { 15, "Slipknot_Taylor.jpg", "Slipknot_Taylor.jpg" },
+                    { 16, "All_Hope_is_Gone.jpg", "All_Hope_is_Gone.jpg" },
                     { 17, "Slipknot_Iowa.jpg", "Slipknot_Iowa.jpg" },
                     { 18, "KoRnIssues.jpg", "KoRnIssues.jpg" },
-                    { 12, "Lindemann_Skills_in_Pills.jpg", "Lindemann_Skills_in_Pills.jpg" },
-                    { 16, "All_Hope_is_Gone.jpg", "All_Hope_is_Gone.jpg" },
-                    { 11, "Lindemann_logo.jpg", "Lindemann_logo.jpg" },
-                    { 7, "finger_death_punch.jpg", "finger_death_punch.jpg" },
-                    { 9, "Andragona.jpg", "Andragona.jpg" },
+                    { 19, "Korn_logo.jpg", "Korn_logo.jpg" },
                     { 20, "korn-5820-1078x516-1471045959.jpg", "korn-5820-1078x516-1471045959.jpg" },
-                    { 6, "finger_death_punch_logo_1.gif", "finger_death_punch_logo_1.gif" },
-                    { 5, "Cover_lifad.png", "Cover_lifad.png" },
-                    { 4, "Mutter.jpg", "Mutter.jpg" },
-                    { 3, "Rammstein-Till-Lindemann-fire.jpg", "Rammstein-Till-Lindemann-fire.jpg" },
-                    { 2, "rammstein_guitar.jpg", "rammstein_guitar.jpg" },
-                    { 1, "rammstein_logo.jpg", "rammstein_logo.jpg" },
-                    { 10, "EndOfTheProphesiedDawn.jpg", "EndOfTheProphesiedDawn.jpg" },
                     { 21, "OB-UL405_ikorn_G_20120906052811.jpg", "OB-UL405_ikorn_G_20120906052811.jpg" }
                 });
 
@@ -423,8 +418,8 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "Email", "FirstName", "ImageStorageFileId", "LastName", "PasswordHash", "PasswordSalt", "UserRole" },
                 values: new object[,]
                 {
-                    { 1, "user@admin.com", "User", null, "Admin", "yMn+st3NC0i5gu9gzCF2m5fhR0c=", "8RS5ODVNZWaGAGknGUqeiQ==", 2 },
-                    { 2, "user@superuser.com", "Super", null, "User", "yMn+st3NC0i5gu9gzCF2m5fhR0c=", "8RS5ODVNZWaGAGknGUqeiQ==", 1 }
+                    { 1, "user@admin.com", "User", null, "Admin", "3CehAkxz/wJvTTB2YA/XoE1DeIHWKviWJrC6RZUmLodcIkupRzW3SEOChHW7QchUDAgX1uVrUVEwAeoz3LMLoA==", "uLplTPeTOGuBPi4z2vRwhXo5cOaGLLG0NaoiI+fqwLI=", 2 },
+                    { 2, "user@superuser.com", "Super", null, "User", "3CehAkxz/wJvTTB2YA/XoE1DeIHWKviWJrC6RZUmLodcIkupRzW3SEOChHW7QchUDAgX1uVrUVEwAeoz3LMLoA==", "uLplTPeTOGuBPi4z2vRwhXo5cOaGLLG0NaoiI+fqwLI=", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -432,12 +427,12 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "Approved", "CreateDate", "Description", "ImageStorageFileId", "Name" },
                 values: new object[,]
                 {
-                    { 1, true, new DateTime(2021, 6, 5, 21, 17, 4, 453, DateTimeKind.Local).AddTicks(2990), "Industrial metal", 1, "Rammstein" },
-                    { 2, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5668), "Heavy metal", 6, "Five Finger Death Punch" },
-                    { 3, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5698), "Power metal", 9, "Andragona" },
-                    { 4, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5703), "Industrial metal", 11, "Lindemann" },
-                    { 5, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5706), "Heavy metal", 13, "Slipknot" },
-                    { 6, true, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5709), "Nu Metal", 19, "Korn" }
+                    { 1, true, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8820), "Industrial metal", 1, "Rammstein" },
+                    { 2, true, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8885), "Heavy metal", 6, "Five Finger Death Punch" },
+                    { 3, true, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8887), "Power metal", 9, "Andragona" },
+                    { 4, true, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8890), "Industrial metal", 11, "Lindemann" },
+                    { 5, true, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8892), "Heavy metal", 13, "Slipknot" },
+                    { 6, true, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8894), "Nu Metal", 19, "Korn" }
                 });
 
             migrationBuilder.InsertData(
@@ -445,14 +440,14 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "Approved", "AverageQuality", "BandId", "CategoryId", "CreateDate", "ImageStorageFileId", "Name" },
                 values: new object[,]
                 {
-                    { 1, true, 0m, 1, 1, new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(9299), 4, "Mutter" },
-                    { 8, true, 0m, 6, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1419), 18, "Issues" },
-                    { 6, true, 0m, 5, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1413), 16, "All hope is gone" },
-                    { 5, true, 0m, 4, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1410), 12, "Skills in Pills" },
-                    { 4, true, 0m, 3, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1406), 10, "End Of The Prophesied Dawn" },
-                    { 3, true, 0m, 2, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1403), 8, "GOT YOUR SIX" },
-                    { 7, true, 0m, 5, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1416), 17, "Iowa" },
-                    { 2, true, 0m, 1, 1, new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1390), 5, "Liebe ist für alle da" }
+                    { 1, true, 0m, 1, 1, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8936), 4, "Mutter" },
+                    { 2, true, 0m, 1, 1, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8941), 5, "Liebe ist für alle da" },
+                    { 3, true, 0m, 2, 1, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8944), 8, "GOT YOUR SIX" },
+                    { 4, true, 0m, 3, 1, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8946), 10, "End Of The Prophesied Dawn" },
+                    { 5, true, 0m, 4, 1, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8948), 12, "Skills in Pills" },
+                    { 6, true, 0m, 5, 1, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8951), 16, "All hope is gone" },
+                    { 7, true, 0m, 5, 1, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8953), 17, "Iowa" },
+                    { 8, true, 0m, 6, 1, new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8955), 18, "Issues" }
                 });
 
             migrationBuilder.InsertData(
@@ -460,27 +455,27 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "ArtistId", "BandId" },
                 values: new object[,]
                 {
-                    { 6, 6, 1 },
-                    { 21, 20, 6 },
-                    { 20, 19, 6 },
-                    { 19, 18, 6 },
-                    { 18, 17, 6 },
-                    { 17, 16, 6 },
-                    { 16, 15, 5 },
-                    { 15, 14, 5 },
-                    { 14, 13, 5 },
-                    { 13, 12, 5 },
-                    { 5, 5, 1 },
-                    { 11, 10, 5 },
-                    { 12, 11, 5 },
-                    { 9, 8, 5 },
                     { 1, 1, 1 },
-                    { 8, 7, 4 },
-                    { 7, 1, 4 },
                     { 2, 2, 1 },
                     { 3, 3, 1 },
                     { 4, 4, 1 },
-                    { 10, 9, 5 }
+                    { 5, 5, 1 },
+                    { 6, 6, 1 },
+                    { 7, 1, 4 },
+                    { 8, 7, 4 },
+                    { 9, 8, 5 },
+                    { 10, 9, 5 },
+                    { 11, 10, 5 },
+                    { 12, 11, 5 },
+                    { 13, 12, 5 },
+                    { 14, 13, 5 },
+                    { 15, 14, 5 },
+                    { 16, 15, 5 },
+                    { 17, 16, 6 },
+                    { 18, 17, 6 },
+                    { 19, 18, 6 },
+                    { 20, 19, 6 },
+                    { 21, 20, 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -488,12 +483,12 @@ namespace DataLayer.Migrations
                 columns: new[] { "Id", "BandId", "ImageStorageFileId" },
                 values: new object[,]
                 {
-                    { 6, 6, 20 },
+                    { 1, 1, 2 },
+                    { 2, 1, 3 },
+                    { 3, 2, 7 },
                     { 4, 5, 14 },
                     { 5, 5, 15 },
-                    { 3, 2, 7 },
-                    { 2, 1, 3 },
-                    { 1, 1, 2 },
+                    { 6, 6, 20 },
                     { 7, 6, 21 }
                 });
 
@@ -623,6 +618,7 @@ namespace DataLayer.Migrations
                 column: "ImageStorageFileId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

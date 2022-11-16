@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(MusicLibraryDbContext))]
@@ -15,16 +17,21 @@ namespace DataLayer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("DataLayer.Entities.Album", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Approved")
                         .HasColumnType("bit");
@@ -67,7 +74,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 1,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(9299),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8936),
                             ImageStorageFileId = 4,
                             Name = "Mutter"
                         },
@@ -78,7 +85,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 1,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1390),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8941),
                             ImageStorageFileId = 5,
                             Name = "Liebe ist für alle da"
                         },
@@ -89,7 +96,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 2,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1403),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8944),
                             ImageStorageFileId = 8,
                             Name = "GOT YOUR SIX"
                         },
@@ -100,7 +107,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 3,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1406),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8946),
                             ImageStorageFileId = 10,
                             Name = "End Of The Prophesied Dawn"
                         },
@@ -111,7 +118,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 4,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1410),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8948),
                             ImageStorageFileId = 12,
                             Name = "Skills in Pills"
                         },
@@ -122,7 +129,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 5,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1413),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8951),
                             ImageStorageFileId = 16,
                             Name = "All hope is gone"
                         },
@@ -133,7 +140,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 5,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1416),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8953),
                             ImageStorageFileId = 17,
                             Name = "Iowa"
                         },
@@ -144,7 +151,7 @@ namespace DataLayer.Migrations
                             AverageQuality = 0m,
                             BandId = 6,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(1419),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8955),
                             ImageStorageFileId = 18,
                             Name = "Issues"
                         });
@@ -154,8 +161,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
@@ -189,8 +197,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");
@@ -309,8 +318,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Approved")
                         .HasColumnType("bit");
@@ -476,8 +486,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Approved")
                         .HasColumnType("bit");
@@ -509,7 +520,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 1,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 453, DateTimeKind.Local).AddTicks(2990),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8820),
                             Description = "Industrial metal",
                             ImageStorageFileId = 1,
                             Name = "Rammstein"
@@ -518,7 +529,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 2,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5668),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8885),
                             Description = "Heavy metal",
                             ImageStorageFileId = 6,
                             Name = "Five Finger Death Punch"
@@ -527,7 +538,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 3,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5698),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8887),
                             Description = "Power metal",
                             ImageStorageFileId = 9,
                             Name = "Andragona"
@@ -536,7 +547,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 4,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5703),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8890),
                             Description = "Industrial metal",
                             ImageStorageFileId = 11,
                             Name = "Lindemann"
@@ -545,7 +556,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 5,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5706),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8892),
                             Description = "Heavy metal",
                             ImageStorageFileId = 13,
                             Name = "Slipknot"
@@ -554,7 +565,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 6,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 455, DateTimeKind.Local).AddTicks(5709),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8894),
                             Description = "Nu Metal",
                             ImageStorageFileId = 19,
                             Name = "Korn"
@@ -565,8 +576,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ArtistId")
                         .HasColumnType("int");
@@ -715,8 +727,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BandId")
                         .HasColumnType("int");
@@ -750,8 +763,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -782,17 +796,17 @@ namespace DataLayer.Migrations
                         {
                             Id = 1,
                             Name = "Metal",
-                            Name_csCZ = "Metal",
-                            Name_esES = "Metal",
-                            Name_skSK = "Metal"
+                            NamecsCZ = "Metal",
+                            NameesES = "Metal",
+                            NameskSK = "Metal"
                         },
                         new
                         {
                             Id = 2,
                             Name = "Rock",
-                            Name_csCZ = "Rock",
-                            Name_esES = "Rock",
-                            Name_skSK = "Rock"
+                            NamecsCZ = "Rock",
+                            NameesES = "Rock",
+                            NameskSK = "Rock"
                         });
                 });
 
@@ -800,8 +814,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BandId")
                         .HasColumnType("int");
@@ -866,8 +881,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Approved")
                         .HasColumnType("bit");
@@ -898,7 +914,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 1,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(2878),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8973),
                             Name = "Ich Will",
                             YoutubeUrlParam = "EOnSh3QlpbQ"
                         },
@@ -906,7 +922,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 2,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4213),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8977),
                             Name = "Feuer Frei!",
                             YoutubeUrlParam = "ZkW-K5RQdzo"
                         },
@@ -914,7 +930,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 3,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4225),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8979),
                             Name = "Haifisch",
                             YoutubeUrlParam = "GukNjYQZW8s"
                         },
@@ -922,7 +938,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 4,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4228),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8981),
                             Name = "Ich Tu Dir Weh",
                             YoutubeUrlParam = "IxuEtL7gxoM"
                         },
@@ -930,7 +946,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 5,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4231),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8983),
                             Name = "Jekyll And Hyde",
                             YoutubeUrlParam = "HCBPmxiVMKk"
                         },
@@ -938,7 +954,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 6,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4233),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8985),
                             Name = "Fight for your praise",
                             YoutubeUrlParam = "oy7_bkN5eMU"
                         },
@@ -946,7 +962,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 7,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4236),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8987),
                             Name = "Miss You",
                             YoutubeUrlParam = "b9-fzLvC-bY"
                         },
@@ -954,7 +970,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 8,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4239),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8989),
                             Name = "Fish On",
                             YoutubeUrlParam = "eciZWNdkGqs"
                         },
@@ -962,7 +978,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 9,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4241),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8991),
                             Name = "Praise Abort",
                             YoutubeUrlParam = "QWE_M0CX9So"
                         },
@@ -970,7 +986,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 10,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4244),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8993),
                             Name = "Dead Memories",
                             YoutubeUrlParam = "9gsAz6S_zSw"
                         },
@@ -978,7 +994,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 11,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4247),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8995),
                             Name = "Psychosocial",
                             YoutubeUrlParam = "eIf3b6meriM"
                         },
@@ -986,7 +1002,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 12,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4249),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8997),
                             Name = "Snuff",
                             YoutubeUrlParam = "LXEKuttVRIo"
                         },
@@ -994,7 +1010,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 13,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4252),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(8999),
                             Name = "Left Behind",
                             YoutubeUrlParam = "D1jQKpse7Yw"
                         },
@@ -1002,7 +1018,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 14,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4254),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(9001),
                             Name = "Metabolic",
                             YoutubeUrlParam = "b3FpfQOxiKA"
                         },
@@ -1010,7 +1026,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 15,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4257),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(9003),
                             Name = "Falling Away from Me",
                             YoutubeUrlParam = "2s3iGpDqQpQ"
                         },
@@ -1018,7 +1034,7 @@ namespace DataLayer.Migrations
                         {
                             Id = 16,
                             Approved = true,
-                            CreateDate = new DateTime(2021, 6, 5, 21, 17, 4, 456, DateTimeKind.Local).AddTicks(4260),
+                            CreateDate = new DateTime(2022, 11, 16, 13, 54, 11, 842, DateTimeKind.Local).AddTicks(9005),
                             Name = "Somebody Someone",
                             YoutubeUrlParam = "FBEE-t-uyI0"
                         });
@@ -1028,8 +1044,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
@@ -1178,8 +1195,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1228,8 +1246,8 @@ namespace DataLayer.Migrations
                             Email = "user@admin.com",
                             FirstName = "User",
                             LastName = "Admin",
-                            PasswordHash = "yMn+st3NC0i5gu9gzCF2m5fhR0c=",
-                            PasswordSalt = "8RS5ODVNZWaGAGknGUqeiQ==",
+                            PasswordHash = "3CehAkxz/wJvTTB2YA/XoE1DeIHWKviWJrC6RZUmLodcIkupRzW3SEOChHW7QchUDAgX1uVrUVEwAeoz3LMLoA==",
+                            PasswordSalt = "uLplTPeTOGuBPi4z2vRwhXo5cOaGLLG0NaoiI+fqwLI=",
                             UserRole = 2
                         },
                         new
@@ -1238,8 +1256,8 @@ namespace DataLayer.Migrations
                             Email = "user@superuser.com",
                             FirstName = "Super",
                             LastName = "User",
-                            PasswordHash = "yMn+st3NC0i5gu9gzCF2m5fhR0c=",
-                            PasswordSalt = "8RS5ODVNZWaGAGknGUqeiQ==",
+                            PasswordHash = "3CehAkxz/wJvTTB2YA/XoE1DeIHWKviWJrC6RZUmLodcIkupRzW3SEOChHW7QchUDAgX1uVrUVEwAeoz3LMLoA==",
+                            PasswordSalt = "uLplTPeTOGuBPi4z2vRwhXo5cOaGLLG0NaoiI+fqwLI=",
                             UserRole = 1
                         });
                 });
@@ -1248,8 +1266,9 @@ namespace DataLayer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AlbumId")
                         .HasColumnType("int");

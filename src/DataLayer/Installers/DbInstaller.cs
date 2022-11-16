@@ -21,7 +21,7 @@ namespace DataLayer.Installers
                 throw new ArgumentNullException(nameof(services));
 
             if (connectionString == null)
-                throw new ArgumentException(nameof(connectionString));
+                throw new ArgumentNullException(nameof(connectionString));
 
             return services.AddDbContext<MusicLibraryDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient)
                 .AddSingleton<Func<DbContext>>(provider => () => provider.GetService<MusicLibraryDbContext>());

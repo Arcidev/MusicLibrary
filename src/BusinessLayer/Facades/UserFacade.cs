@@ -17,8 +17,8 @@ namespace BusinessLayer.Facades
     public class UserFacade : ImageStorableFacade
     {
         private const int PBKDF2IterCount = 100000;
-        private const int PBKDF2SubkeyLength = 160 / 8;
-        private const int saltSize = 128 / 8;
+        private const int PBKDF2SubkeyLength = 512 / 8;
+        private const int saltSize = 256 / 8;
 
         private readonly Func<UserRepository> userRepositoryFunc;
         private readonly Func<UsersQuery> usersQueryFunc;
@@ -117,21 +117,21 @@ namespace BusinessLayer.Facades
             await FillDataSetAsync(dataSet, query);
         }
 
-        private (string hash, string salt) CreateHash(string password)
+        private static (string hash, string salt) CreateHash(string password)
         {
-            using var deriveBytes = new Rfc2898DeriveBytes(password, saltSize, PBKDF2IterCount);
+            using var deriveBytes = new Rfc2898DeriveBytes(password, saltSize, PBKDF2IterCount, HashAlgorithmName.SHA512);
             var salt = deriveBytes.Salt;
             var subkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
 
             return (Convert.ToBase64String(subkey), Convert.ToBase64String(salt));
         }
 
-        private bool VerifyHashedPassword(string hashedPassword, string salt, string password)
+        private static bool VerifyHashedPassword(string hashedPassword, string salt, string password)
         {
             var hashedPasswordBytes = Convert.FromBase64String(hashedPassword);
             var saltBytes = Convert.FromBase64String(salt);
 
-            using var deriveBytes = new Rfc2898DeriveBytes(password, saltBytes, PBKDF2IterCount);
+            using var deriveBytes = new Rfc2898DeriveBytes(password, saltBytes, PBKDF2IterCount, HashAlgorithmName.SHA512);
             var generatedSubkey = deriveBytes.GetBytes(PBKDF2SubkeyLength);
             return hashedPasswordBytes.SequenceEqual(generatedSubkey);
         }

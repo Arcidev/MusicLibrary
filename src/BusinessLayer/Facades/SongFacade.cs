@@ -58,7 +58,6 @@ namespace BusinessLayer.Facades
             }
 
             await uow.CommitAsync();
-
             return entity.Adapt<SongDTO>();
         }
 
@@ -102,6 +101,7 @@ namespace BusinessLayer.Facades
             using var uow = uowProviderFunc().Create();
             var query = songsQuerySongFunc();
             query.Approved = true;
+
             return await query.ExecuteAsync();
         }
 
@@ -110,6 +110,7 @@ namespace BusinessLayer.Facades
             using var uow = uowProviderFunc().Create();
             var query = songsQuerySongInfoFunc();
             query.Approved = true;
+
             return await query.ExecuteAsync();
         }
 

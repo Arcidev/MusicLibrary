@@ -20,7 +20,7 @@ namespace BusinessLayer.Facades
                 throw new UIException(errorMessage);
         }
 
-        protected async Task FillDataSetAsync<T>(GridViewDataSet<T> dataSet, IQuery<T> query)
+        protected static async Task FillDataSetAsync<T>(GridViewDataSet<T> dataSet, IQuery<T> query)
         {
             query.Skip = dataSet.PagingOptions.PageIndex * dataSet.PagingOptions.PageSize;
             query.Take = dataSet.PagingOptions.PageSize;

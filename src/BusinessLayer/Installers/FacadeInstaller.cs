@@ -23,12 +23,9 @@ namespace BusinessLayer.Installers
 
             var baseFacade = typeof(BaseFacade);
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes().Where(t => !t.IsAbstract && baseFacade.IsAssignableFrom(t)))
-            {
                 services.AddScoped(type);
-            }
 
             services.AddScoped(provider => new Lazy<StorageFileFacade>(() => provider.GetRequiredService<StorageFileFacade>()));
-
             return services;
         }
     }

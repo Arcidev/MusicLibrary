@@ -28,9 +28,7 @@ namespace BusinessLayer.Installers
             var baseRepository = typeof(BaseRepository<,>);
             var baseQuery = typeof(AppQuery<>);
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes().Where(t =>  !t.IsAbstract && t.BaseType != null && t.BaseType.IsGenericType && (t.BaseType.GetGenericTypeDefinition() == baseRepository || t.BaseType.GetGenericTypeDefinition() == baseQuery)))
-            {
                 services.AddTransient(type);
-            }
 
             return services.AddSingleton<Func<AlbumRepository>>(provider => () => provider.GetRequiredService<AlbumRepository>())
                 .AddSingleton<Func<AlbumReviewRepository>>(provider => () => provider.GetRequiredService<AlbumReviewRepository>())
