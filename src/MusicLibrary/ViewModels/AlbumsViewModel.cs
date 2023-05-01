@@ -1,7 +1,7 @@
 using BusinessLayer.DTO;
 using BusinessLayer.Facades;
-using MusicLibrary.Extensions;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MusicLibrary.ViewModels
@@ -21,12 +21,12 @@ namespace MusicLibrary.ViewModels
         {
             if (!Context.IsPostBack)
             {
-                if (Context.Parameters.ContainsKey("Filter"))
-                    SearchString = Context.Parameters["Filter"].ToString();
+                if (Context.Parameters.TryGetValue("Filter", out var value))
+                    SearchString = value.ToString();
 
                 int? categoryId = null;
-                if (Context.Parameters.ContainsKey("CategoryId"))
-                    categoryId = int.Parse(Context.Parameters["CategoryId"].ToString());
+                if (Context.Parameters.TryGetValue("CategoryId", out value))
+                    categoryId = int.Parse(value.ToString());
 
                 ActivePage = "Albums";
                 Albums = (await albumFacade.GetAlbumsAsync(categoryId, SearchString)).Chunk(5);
