@@ -80,7 +80,7 @@
     <ItemGroup>
         <PackageReference Include="DotVVM.AspNetCore" Version="4.1.7" />
         <PackageReference Include="Jdenticon-net" Version="3.1.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
