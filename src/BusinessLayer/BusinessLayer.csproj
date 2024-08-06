@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotVVM" Version="4.1.7" />
-    <PackageReference Include="DotVVM.Core" Version="4.1.7" />
-    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="DotVVM" Version="4.2.7" />
+    <PackageReference Include="DotVVM.Core" Version="4.2.7" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Riganti.Utils.Infrastructure.EntityFrameworkCore" Version="2.5.1" />
   </ItemGroup>
 
