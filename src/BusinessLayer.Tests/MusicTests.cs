@@ -1,14 +1,15 @@
 ﻿using BusinessLayer.DTO;
 using BusinessLayer.Facades;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared.Enums;
 using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace BL.Tests
 {
-    public class MusicTests : TestBase, IAsyncLifetime
+    [TestClass]
+    public class MusicTests : TestBase
     {
         private static UserFacade UserFacade => services.GetRequiredService<UserFacade>();
 
@@ -20,29 +21,29 @@ namespace BL.Tests
 
         private static CategoryFacade CategoryFacade => services.GetRequiredService<CategoryFacade>();
 
-        [Fact]
+        [TestMethod]
         public async Task TestFeaturedAlbums()
         {
             var albums = await AlbumFacade.GetFeaturedAlbumsAsync(2);
-            Assert.Equal(2, albums.Count);
-            Assert.Equal("Test album 2", albums.First().Name);
+            Assert.HasCount(2, albums);
+            Assert.AreEqual("Test album 2", albums.First().Name);
         }
 
-        [Fact]
+        [TestMethod]
         public async Task TestGetBands()
         {
             var bands = await BandFacade.GetBandsAsync();
-            Assert.Contains(bands, x => x.Name == "Test Band");
+            Assert.IsTrue(bands.Any(x => x.Name == "Test Band"));
         }
 
-        [Fact]
+        [TestMethod]
         public async Task TestGetCategories()
         {
             var categories = await CategoryFacade.GetCategoriesAsync();
-            Assert.Contains(categories, x => x.Name == "Test Category");
+            Assert.IsTrue(categories.Any(x => x.Name == "Test Category"));
         }
 
-        [Fact]
+        [TestMethod]
         public async Task TestUserCollections()
         {
             var albumFacade = AlbumFacade;
@@ -51,27 +52,27 @@ namespace BL.Tests
 
             await albumFacade.AddAlbumToUserCollectionAsync(new () { AlbumId = album.Id, UserId = user.Id });
             var collection = await albumFacade.GetUserAlbumsAsync(user.Id);
-            Assert.Single(collection);
-            Assert.Equal(album.Id, collection.First().Id);
+            Assert.HasCount(1, collection);
+            Assert.AreEqual(album.Id, collection.First().Id);
         }
 
-        [Fact]
+        [TestMethod]
         public async Task TestGetAlbums()
         {
             var albums = await AlbumFacade.GetAlbumsAsync();
-            Assert.Contains(albums, x => x.Name == "Test album 1");
+            Assert.IsTrue(albums.Any(x => x.Name == "Test album 1"));
         }
 
-        [Fact]
+        [TestMethod]
         public async Task TestGetBandAlbums()
         {
             var bandFacade = BandFacade;
             var band = (await bandFacade.GetBandsAsync()).Last();
             var albums = await BandFacade.GetBandAlbumsAsync(band.Id);
-            Assert.True(albums.All(x => x.BandId == band.Id));
+            Assert.IsTrue(albums.All(x => x.BandId == band.Id));
         }
 
-        [Fact]
+        [TestMethod]
         public async Task TestSongs()
         {
             var songFacade = SongFacade;
@@ -93,15 +94,15 @@ namespace BL.Tests
             await albumFacade.AddSongToAlbumAsync(album.Id, song2.Id);
             album = await albumFacade.GetAlbumAsync(album.Id, includeSongs: true);
 
-            Assert.Equal(2, album.Songs.Count());
+            Assert.AreEqual(2, album.Songs.Count());
             await songFacade.DeleteSongAsync(song.Id);
             await songFacade.DeleteSongAsync(song2.Id);
 
             album = await albumFacade.GetAlbumAsync(album.Id, includeSongs: true);
-            Assert.Empty(album.Songs);
+            Assert.IsEmpty(album.Songs);
         }
 
-        [Fact]
+        [TestMethod]
         public async Task TestCategories()
         {
             var categoryFacade = CategoryFacade;
@@ -111,20 +112,21 @@ namespace BL.Tests
             });
 
             var categories = await categoryFacade.GetCategoriesAsync();
-            Assert.Contains(categories, x => x.Name == "Another test category");
+            Assert.IsTrue(categories.Any(x => x.Name == "Another test category"));
 
             category.Name = "Another test category 2";
             category = await categoryFacade.EditCategoryAsync(category);
             categories = await categoryFacade.GetCategoriesAsync();
-            Assert.DoesNotContain(categories, x => x.Name == "Another test category");
-            Assert.Contains(categories, x => x.Name == "Another test category 2");
+            Assert.IsFalse(categories.Any(x => x.Name == "Another test category"));
+            Assert.IsTrue(categories.Any(x => x.Name == "Another test category 2"));
 
             await categoryFacade.DeleteCategoryAsync(category.Id);
             categories = await categoryFacade.GetCategoriesAsync();
-            Assert.DoesNotContain(categories, x => x.Name == "Another test category 2");
+            Assert.IsFalse(categories.Any(x => x.Name == "Another test category 2"));
         }
 
-        public async Task InitializeAsync()
+        [ClassInitialize]
+        public static async Task InitializeAsync(TestContext testContext)
         {
             var band = await BandFacade.AddBandAsync(new ()
             {
@@ -184,7 +186,5 @@ namespace BL.Tests
                 CreatedById = user.Id
             });
         }
-
-        public Task DisposeAsync() => Task.CompletedTask;
     }
 }
